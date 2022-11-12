@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 import flask
 import json
 from flask_cors import CORS
+import seat_geek
 
 app = Flask(__name__)
 CORS(app)
@@ -12,10 +13,13 @@ def hello():
 
 @app.route("/find-tickets", methods=["GET"])
 def send_tickets():
-    msg = "Finding tickets for " + request.headers['team1'] + " vs " + request.headers['team2'] + "\n"
-    
+    team1 = request.headers['team1']
+    team2 = request.headers['team2']
+    msg = "Found cheaper tickets for " + team1 + " vs " + team2 + "\n"
+    url = seat_geek.find_cheaper_tickets(team1, team2)
     return jsonify({
-        "message": msg
+        "message": msg,
+        "url": url
     })
 
 if __name__ == "__main__":

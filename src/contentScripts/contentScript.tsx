@@ -8,7 +8,8 @@ import Title from '../pages/Title';
 const App: React.FC<{}> = () => {
   const teamsList = [];
   const [foundCheaper, setFoundCheaper] = useState(false);
-  const [props, setProps] = useState('');
+  const [msg, setMsg] = useState('');
+  const [url, setUrl] = useState('');
   useEffect(() => {
     const s: string = document.body.innerText;
     for (const team of NBATeams) {
@@ -23,7 +24,10 @@ const App: React.FC<{}> = () => {
             },
           })
             .then((res) => res.json())
-            .then((data) => setProps((props) => data.message))
+            .then((data) => {
+              setMsg((msg) => data.message);
+              setUrl((url) => data.url);
+            })
             .catch((err) => {
               console.log('Error:', err);
             });
@@ -36,7 +40,8 @@ const App: React.FC<{}> = () => {
     return (
       <div id='spotlight'>
         <Title />
-        <h2>{props.toString()}</h2>
+        <h2>{msg.toString()}</h2>
+        <h3>{url.toString()}</h3>
       </div>
     );
   }
