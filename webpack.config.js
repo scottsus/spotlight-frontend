@@ -7,6 +7,7 @@ module.exports = {
     devtool: 'cheap-module-source-map',
     entry: {
         popup: path.resolve('src/popup/popup.tsx'),
+        options: path.resolve('src/options/options.tsx'),
     },
     module: {
         rules: [
@@ -21,18 +22,14 @@ module.exports = {
         new CopyPlugin({
             patterns: [
                 {
-                    from: path.resolve('src/manifest.json'),
+                    from: path.resolve('src/static'),
                     to: path.resolve('dist'),
                 }
             ]
         }),
-        new HtmlPlugin({
-            title: 'Hello Spotlight Popup',
-            filename: 'popup.html',
-            chunks: [
-                'popup', // a JS file turned into a chunk
-            ]
-        })
+        ...getHtmlPlugins([
+            'popup', 'options',
+        ])
     ],
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
@@ -40,5 +37,21 @@ module.exports = {
     output: {
         filename: '[name].js',
         path: path.resolve(__dirname, 'dist'),
-    }
+    },
+    optimization: {
+        splitChunks: {
+            chunks: 'all',
+        },
+    },
+}
+
+function getHtmlPlugins(chunks) {
+    return chunks.map(chunk => {
+        const name = chunk.charAt(0).toUpperCase() + chunk.slice(1);
+        return new HtmlPlugin({
+            title: `${name} Page`,
+            filename: `${chunk}.html`,
+            chunks: [chunk],
+        })
+    });
 }
