@@ -13,5 +13,14 @@
         "default_title": "Hello Spotlight",
         "default_icon": "spotlight.png"
     },
-    "options_page": "options.html"
+    "options_page": "options.html",
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["contentScript.js"]
+        }
+    ]
 }
