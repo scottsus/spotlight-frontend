@@ -23,8 +23,8 @@ module.exports = {
             },
             {
                 type: 'asset/resource',
-                test: /\.(jpg|jpeg|png|woff|woff2|eot|ttf|svg)$/,
-            }
+                test: /\.(png|jpg|jpeg|gif)$/i,
+            },
         ]
     },
     plugins: [
@@ -49,6 +49,7 @@ module.exports = {
     output: {
         filename: '[name].js',
         path: path.resolve(__dirname, 'dist'),
+        publicPath: '',
     },
     optimization: {
         splitChunks: {
