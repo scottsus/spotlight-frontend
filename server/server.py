@@ -18,5 +18,13 @@ def send_cheaper_tickets():
     print(fullname)
     return jsonify({"message": fullname})
 
+@app.route("/find-tickets", methods=["GET"])
+def send_tickets():
+    print("hit endpoint")
+    msg = "Finding tickets for " + request.headers['team1'] + " vs " + request.headers['team2'] + "\n"
+    return jsonify({
+        "message": msg
+    })
+
 if __name__ == "__main__":
     app.run("localhost", 6969)

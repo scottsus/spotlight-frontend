@@ -1,49 +1,47 @@
+console.log('before imports');
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { createRoot } from 'react-dom/client';
 import './contentScript.css';
 
-const getData = async (res) => {
-  const data = await res.json();
-  console.log(data);
-};
+import NBATeams from '../lib/teams';
+
+console.log('Content script!');
 
 const App: React.FC<{}> = () => {
+  const teamsList = [];
+  const [foundTeams, setFoundTeams] = useState(0);
   const [foundCheaper, setFoundCheaper] = useState(false);
-  const [res, setRes] = useState('');
+  const [props, setProps] = useState('');
   useEffect(() => {
+    console.log('content!');
     const s: string = document.body.innerText;
-
-    if (s.includes('Los Angeles Lakers')) {
-      setFoundCheaper((foundCheaper) => !foundCheaper);
-      fetch('http://localhost:6969/find-cheaper-tickets', {
-        headers: {
-          name: 'Los Angeles Lakers vs Golden State Warriors',
-          website: 'SeatGeek',
-        },
-      })
-        .then((res) => {
-          return res.json();
-        })
-        .then((data) => {
-          setRes((res) => data.message);
-          console.log(data);
-        })
-        .catch((err) => {
-          console.log('ERROR');
-          console.log(err);
-        });
-
-      console.log('Found the lakers!');
+    for (const team of NBATeams) {
+      if (s.includes(team)) {
+        teamsList.push(team);
+        setFoundTeams((foundTeams) => foundTeams + 1);
+        if (foundTeams == 2) {
+          setFoundCheaper((foundCheaper) => true);
+          fetch('http://localhost:6969/find-tickets', {
+            headers: {
+              team1: teamsList[0],
+              team2: teamsList[1],
+            },
+          })
+            .then((res) => res.json())
+            .then((data) => setProps((props) => data.message))
+            .catch((err) => {
+              console.log('Error:', err);
+              return;
+            });
+        }
+      }
     }
   }, []);
-  console.log('found?', foundCheaper);
   if (foundCheaper) {
     return (
       <div id='spotlight'>
-        {/* <img id="image" src="icon.png" /> */}
         <h1>YO SPOTLIGHT!</h1>
-        <h2>{res.toString()}</h2>
+        <h2>{props.toString()}</h2>
       </div>
     );
   }
