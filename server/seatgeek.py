@@ -1,13 +1,17 @@
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from driver import driver
+from driver_options import chrome_options
 from price_parser import Price
 
 # Seat Geek specific Webscraping
-def find_cheaper_tickets(team1, team2):
+def scrape(team1, team2):
     url = 'https://seatgeek.com'
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
     driver.get(url)
     print("Finding cheaper tickets for " + team1 + " vs " + team2 + " from " + url)
 

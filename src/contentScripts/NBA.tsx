@@ -27,7 +27,7 @@ const App = () => {
         teamsList.push(team);
         if (teamsList.length == 2) {
           setFoundCheaper((foundCheaper) => true);
-          fetch('http://localhost:6969/find-tickets', {
+          fetch('http://localhost:6969/find-sports-tickets', {
             headers: {
               team1: teamsList[0],
               team2: teamsList[1],
