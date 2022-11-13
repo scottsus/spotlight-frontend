@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack --watch --progress --config webpack.dev.js",
-    "server": "python server/server.py",
+    "python": "python server/server.py",
     "build": "webpack --watch --progress --config webpack.prod.js"
   },
   "keywords": [],

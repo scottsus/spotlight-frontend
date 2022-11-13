@@ -8,8 +8,41 @@ import Title from '../components/Title';
 import Filters from '../components/Filters';
 import Block from '../components/Block';
 
-const App = () => {
-  console.log('APP');
+const App: React.FC<{}> = () => {
+  const teamsList = [];
+  const [foundCheaper, setFoundCheaper] = useState(false);
+  const [props, setProps] = useState('');
+  useEffect(() => {
+    const s: string = document.body.innerText;
+    for (const team of NBATeams) {
+      if (s.includes(team)) {
+        teamsList.push(team);
+        if (teamsList.length == 2) {
+          setFoundCheaper((foundCheaper) => true);
+          fetch('http://localhost:6969/find-tickets', {
+            headers: {
+              team1: teamsList[0],
+              team2: teamsList[1],
+            },
+          })
+            .then((res) => res.json())
+            .then((data) => setProps((props) => data.message))
+            .catch((err) => {
+              console.log('Error:', err);
+            });
+          break;
+        }
+      }
+    }
+  }, []);
+  if (foundCheaper) {
+    return (
+      <div id='spotlight'>
+        <Title />
+        <h2>{props.toString()}</h2>
+      </div>
+    );
+  }
   return (
     <div id='spotlight'>
       <h1>Image</h1>
