@@ -7,71 +7,58 @@ import Title from '../components/Title';
 import Filters from '../components/Filters';
 import Block from '../components/Block';
 
+interface IBlockItem {
+  name: string;
+  seats: string;
+  price: number;
+  url: string;
+}
+
 const App = () => {
   const teamsList = [];
   const [foundCheaper, setFoundCheaper] = useState(false);
-  const [msg, setMsg] = useState('');
-  const [url, setUrl] = useState('');
-  const data = [
-    {
-      logo: chrome.runtime.getURL('seatgeek.png'),
-      section: 324,
-      row: 7,
-      price: 148,
-    },
-    {
-      logo: chrome.runtime.getURL('ticketmaster.png'),
-      section: 324,
-      row: 8,
-      price: 149,
-    },
-    {
-      logo: chrome.runtime.getURL('tickpick.png'),
-      section: 324,
-      row: 9,
-      price: 150,
-    },
-    {
-      logo: chrome.runtime.getURL('stubhub.png'),
-      section: 324,
-      row: 10,
-      price: 151,
-    },
-  ];
+  const [data, addData] = useState([]);
+  useEffect(() => {
+    const s: string = document.body.innerText;
+    for (const team of NBATeams) {
+      if (s.includes(team)) {
+        teamsList.push(team);
+        if (teamsList.length == 2) {
+          setFoundCheaper((foundCheaper) => true);
+          fetch('http://localhost:6969/find-tickets', {
+            headers: {
+              team1: teamsList[0],
+              team2: teamsList[1],
+            },
+          })
+            .then((res) => res.json())
+            .then((dataArray) => {
+              for (const [_, item] of dataArray.entries()) {
+                const newData = {
+                  name: item['name'],
+                  seats: item['seats'],
+                  price: item['price'],
+                  url: item['url'],
+                };
+                addData((data) => [...data, newData]);
+              }
+            })
+            .catch((err) => {
+              console.log('Error:', err);
+            });
+          break;
+        }
+      }
+    }
+  }, []);
   const blockItems = data.map((block) => (
     <Block
-      logo={block.logo}
-      section={block.section}
-      row={block.row}
+      logo={chrome.runtime.getURL(`${block.name}.png`)}
+      seats={block.seats}
       price={block.price}
+      url={block.url}
     />
   ));
-  // useEffect(() => {
-  //   const s: string = document.body.innerText;
-  //   for (const team of NBATeams) {
-  //     if (s.includes(team)) {
-  //       teamsList.push(team);
-  //       if (teamsList.length == 2) {
-  //         setFoundCheaper((foundCheaper) => true);
-  //         fetch('http://localhost:6969/find-tickets', {
-  //           headers: {
-  //             team1: teamsList[0],
-  //             team2: teamsList[1],
-  //           },
-  //         })
-  //           .then((res) => res.json())
-  //           .then((data) => {
-  //             setMsg((msg) => data.message);
-  //             setUrl((url) => data.url);
-  //           })
-  //           .catch((err) => {
-  //             console.log('Error:', err);
-  //           });
-  //         break;
-  //       }
-  //     }
-  //   }
-  // }, []);
   if (true) {
     return (
       <div style={appStyles}>

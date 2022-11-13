@@ -38,14 +38,14 @@ const App = () => {
       price: 151,
     },
   ];
-  const blockItems = data.map((block) => (
-    <Block
-      logo={block.logo}
-      section={block.section}
-      row={block.row}
-      price={block.price}
-    />
-  ));
+  // const blockItems = data.map((block) => (
+  //   <Block
+  //     name={block.logo}
+  //     seats={block.seats}
+  //     price={block.price}
+  //     url={block.url}
+  //   />
+  // ));
   // useEffect(() => {
   //   const s: string = document.body.innerText;
   //   for (const team of NBATeams) {
@@ -87,7 +87,6 @@ const App = () => {
           time='6:30pm'
         />
         <Filters />
-        <div id='blocks'>{blockItems}</div>
       </div>
     );
   }

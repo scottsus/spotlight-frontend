@@ -24,8 +24,8 @@ def send_tickets():
     response_list = [] # TODO: Make multithreading
     response_list.append(seat_geek.find_cheaper_tickets(team1, team2))
     response_list.append(seat_geek.find_cheaper_tickets(team1, team2))
-    response_list.append(seat_geek.find_cheaper_tickets(team1, team2))
-    response_list.append(seat_geek.find_cheaper_tickets(team1, team2))
+    # response_list.append(seat_geek.find_cheaper_tickets(team1, team2))
+    # response_list.append(seat_geek.find_cheaper_tickets(team1, team2))
     
     dicts = list(map(tuple_to_dict, response_list))
     return json.dumps(dicts)

@@ -1,9 +1,15 @@
 import React from 'react';
 
-const CheckoutButton = () => {
+interface ICheckoutButton {
+  url: string;
+}
+
+const CheckoutButton: React.FC<ICheckoutButton> = ({ url }) => {
   return (
     <div style={checkoutButtonStyles}>
-      <h1>Buy Now</h1>
+      <a href={url}>
+        <h1 style={h1Styles}>Buy Now</h1>
+      </a>
     </div>
   );
 };
@@ -15,12 +21,15 @@ const checkoutButtonStyles: React.CSSProperties = {
   backgroundColor: '#4B3BFF',
   height: '45px',
   width: '120px',
-  color: '#FFFFFF',
-  fontSize: '15px',
-  fontWeight: '400',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
+};
+
+const h1Styles: React.CSSProperties = {
+  color: '#FFFFFF',
+  fontSize: '15px',
+  fontWeight: '400',
 };
 
 export default CheckoutButton;

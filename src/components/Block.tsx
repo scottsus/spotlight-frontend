@@ -2,18 +2,25 @@ import React from 'react';
 import Overview from './Overview';
 import CheckoutButton from './CheckoutButton';
 
-const Block = ({ logo, section, row, price }) => {
+interface IBlock {
+  logo: string;
+  seats: string;
+  price: number;
+  url: string;
+}
+
+const Block: React.FC<IBlock> = ({ logo, seats, price, url }) => {
   return (
     <div style={blockStyle}>
       {/* arrow */}
       <img src={logo} alt='logo' />
-      <Overview section={section} row={row} price={price} />
-      <CheckoutButton />
+      <Overview seats={seats} price={price} />
+      <CheckoutButton url={url} />
     </div>
   );
 };
 
-const blockStyle = {
+const blockStyle: React.CSSProperties = {
   border: '2px solid grey',
   borderRadius: '5px',
   height: '100px',
@@ -22,10 +29,10 @@ const blockStyle = {
   margin: '10px 0px',
 };
 
-const imgStyle = {
+const imgStyle: React.CSSProperties = {
   height: '50px',
   width: '65px',
-  style: 'inline',
+  display: 'inline',
 };
 
 export default Block;
