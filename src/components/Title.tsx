@@ -2,7 +2,7 @@ import React from 'react';
 
 const Title = ({ team1, team2, stadium, city, state, day, date, time }) => {
   return (
-    <div>
+    <div style={titleStyles}>
       <h2 style={h2Style}>
         {team1} vs {team2}
       </h2>
@@ -14,17 +14,23 @@ const Title = ({ team1, team2, stadium, city, state, day, date, time }) => {
   );
 };
 
+const titleStyles = {
+  height: '70px',
+  width: '100%',
+  paddingTop: '20px',
+};
+
 const h2Style = {
   font: 'arial',
   fontSize: '20px',
   fontWeight: 700,
+  marginBottom: '5px',
 };
 
 const h3Style = {
   font: 'arial',
   fontSize: '15px',
   fontWeight: 400,
-  marginTop: '-10px',
 };
 
 const hrStyle = {

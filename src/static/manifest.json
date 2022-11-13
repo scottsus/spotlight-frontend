@@ -18,8 +18,19 @@
     },
     "content_scripts": [
         {
-            "matches": ["*://*.ticketmaster.com/*/event/*"],
-            "js": ["contentScript.js"]
+            "matches": [
+                "*://*.ticketmaster.com/*/event/*",
+                "*://*.seatgeek.com/*/*/nba/r/*",
+                "*://*.stubhub.com/*/event/*",
+                "*://*.tickpick.com/buy*/*"
+            ],
+            "js": ["NBA.js"]
+        },
+        {
+            "matches": [
+                "*://www.google.com/*"
+            ],
+            "js": ["Concerts.js"]
         }
     ],
     "web_accessible_resources": [{ 

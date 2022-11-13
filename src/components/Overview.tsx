@@ -13,17 +13,17 @@ const Overview = ({ section, row, price }) => {
 
 const overviewStyles = {
   display: 'inline',
+  paddingTop: '30px',
 };
 
 const h1Styles = {
   fontSize: '17px',
-  marginBottom: '-3px',
+  fontWeight: 500,
 };
 
 const h2Styles = {
   fontSize: '16px',
   color: '#5647FF',
-  marginTop: '-3px',
 };
 
 export default Overview;

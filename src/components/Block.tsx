@@ -16,7 +16,10 @@ const Block = ({ logo, section, row, price }) => {
 const blockStyle = {
   border: '2px solid grey',
   borderRadius: '5px',
+  height: '100px',
+  width: '100%',
   display: 'flex',
+  margin: '10px 0px',
 };
 
 const imgStyle = {

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
-import './contentScript.css';
 
 import NBATeams from '../lib/teams';
 import Logo from '../components/Logo';
@@ -75,7 +74,7 @@ const App = () => {
   // }, []);
   if (true) {
     return (
-      <div id='spotlight'>
+      <div style={appStyles}>
         <Logo />
         <Title
           team1='Los Angeles Lakers'
@@ -97,6 +96,19 @@ const App = () => {
       <h1>Could not find cheaper tix 🙏🙏</h1>
     </div>
   );
+};
+
+const appStyles = {
+  backgroundColor: '#FFFFFF',
+  color: 'black',
+  // position: 'absolute',
+  left: '53%',
+  top: '1%',
+  width: '500px',
+  height: '650px',
+  zIndex: '1000',
+  borderRadius: '10px',
+  padding: '20px',
 };
 
 const div = document.createElement('div');

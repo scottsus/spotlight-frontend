@@ -8,15 +8,15 @@ const CheckoutButton = () => {
   );
 };
 
-const checkoutButtonStyles = {
+const checkoutButtonStyles: React.CSSProperties = {
   marginTop: '25px',
-  marginLeft: '5px',
+  marginLeft: '10px',
   borderRadius: '10px',
   backgroundColor: '#4B3BFF',
   height: '45px',
-  width: '150px',
+  width: '120px',
   color: '#FFFFFF',
-  fontSize: '9px',
+  fontSize: '15px',
   fontWeight: '400',
   display: 'flex',
   justifyContent: 'center',
