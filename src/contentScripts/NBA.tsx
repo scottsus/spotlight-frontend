@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Triangle } from 'react-loader-spinner';
 
@@ -15,22 +15,36 @@ interface IBlockItem {
   url: string;
 }
 
-const App = () => {
-  const teamsList = [];
-  const [foundCheaper, setFoundCheaper] = useState(false);
-  const [data, addData] = useState([]);
-  const [loader, setLoader] = useState(true);
+const App: React.FC = () => {
+  const [data, addData] = useState<IBlockItem[]>([]);
+  const [loader, setLoader] = useState<boolean>(true);
+  const teams = useRef<string[]>([]);
+  const addTeam = (NBATeam) => {
+    teams.current.push(NBATeam);
+  };
+  const blockItems = data.map((block) => (
+    <Block
+      logo={chrome.runtime.getURL(`${block.name}.png`)}
+      seats={block.seats}
+      price={block.price}
+      url={block.url}
+    />
+  ));
+
   useEffect(() => {
-    const s: string = document.body.innerText;
-    for (const team of NBATeams) {
-      if (s.includes(team)) {
-        teamsList.push(team);
-        if (teamsList.length == 2) {
-          setFoundCheaper((foundCheaper) => true);
+    const fullDocumentText: string = document.body.innerText;
+    const truncatedDocText: string = fullDocumentText.substring(0, 200);
+    console.log(truncatedDocText);
+    for (const NBATeam of NBATeams) {
+      if (truncatedDocText.includes(NBATeam)) {
+        console.log(NBATeam);
+        addTeam(NBATeam);
+        // addTeams((teams) => [...teams, NBATeam]);
+        if (teams.current.length == 2) {
           fetch('http://localhost:6969/find-sports-tickets', {
             headers: {
-              team1: teamsList[0],
-              team2: teamsList[1],
+              team1: teams.current[0],
+              team2: teams.current[1],
             },
           })
             .then((res) => res.json())
@@ -54,14 +68,7 @@ const App = () => {
       }
     }
   }, []);
-  const blockItems = data.map((block) => (
-    <Block
-      logo={chrome.runtime.getURL(`${block.name}.png`)}
-      seats={block.seats}
-      price={block.price}
-      url={block.url}
-    />
-  ));
+
   if (loader) {
     return (
       <div style={loaderStyles}>
@@ -70,12 +77,13 @@ const App = () => {
       </div>
     );
   }
+  // TODO: Venue Data
   return (
     <div style={appStyles}>
       <Logo />
       <Title
-        team1='Los Angeles Lakers'
-        team2='Winnipeg Jets'
+        team1={teams.current[0]}
+        team2={teams.current[1]}
         stadium='SoFi Stadium'
         city='Inglewood'
         state='CA'
@@ -126,8 +134,4 @@ const div = document.createElement('div');
 document.body.appendChild(div);
 
 const root = createRoot(div);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+root.render(<App />);
