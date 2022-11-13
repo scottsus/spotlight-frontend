@@ -22,8 +22,8 @@ module.exports = {
                 test: /\.css$/i,
             },
             {
+                type: 'asset/resource',
                 test: /\.(jpg|jpeg|png|woff|woff2|eot|ttf|svg)$/,
-                type: 'asset/resource'
             },
         ]
     },
@@ -40,7 +40,7 @@ module.exports = {
             ]
         }),
         ...getHtmlPlugins([
-            'popup', 'options', 'contentScript',
+            'popup', 'options',
         ])
     ],
     resolve: {
@@ -49,7 +49,6 @@ module.exports = {
     output: {
         filename: '[name].js',
         path: path.resolve(__dirname, 'dist'),
-        // publicPath: '',
     },
     optimization: {
         splitChunks: {
