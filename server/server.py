@@ -5,9 +5,9 @@ from threading import Thread
 from flask_cors import CORS
 
 import seatgeek
-# import stubhub
-# import ticketmaster
-# import tickpick
+import stubhub
+import ticketmaster
+import tickpick
 
 app = Flask(__name__)
 CORS(app)
@@ -25,9 +25,9 @@ def find_sports_tickets():
     response_list = [None] * 4
     
     t1 = Thread(target=find_cheaper_tickets, args=[response_list, 0, seatgeek.scrape, team1, team2])
-    t2 = Thread(target=find_cheaper_tickets, args=[response_list, 1, seatgeek.scrape, team1, team2])
-    t3 = Thread(target=find_cheaper_tickets, args=[response_list, 2, seatgeek.scrape, team1, team2])
-    t4 = Thread(target=find_cheaper_tickets, args=[response_list, 3, seatgeek.scrape, team1, team2])
+    t2 = Thread(target=find_cheaper_tickets, args=[response_list, 1, stubhub.scrape, team1, team2])
+    t3 = Thread(target=find_cheaper_tickets, args=[response_list, 2, tickpick.scrape, team1, team2])
+    t4 = Thread(target=find_cheaper_tickets, args=[response_list, 3, ticketmaster.scrape, team1, team2])
 
     t1.start()
     t2.start()
