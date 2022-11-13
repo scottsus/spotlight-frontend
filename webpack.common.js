@@ -22,8 +22,8 @@ module.exports = {
                 test: /\.css$/i,
             },
             {
-                type: 'asset/resource',
-                test: /\.(png|jpg|jpeg|gif)$/i,
+                test: /\.(jpg|jpeg|png|woff|woff2|eot|ttf|svg)$/,
+                type: 'asset/resource'
             },
         ]
     },
@@ -40,7 +40,7 @@ module.exports = {
             ]
         }),
         ...getHtmlPlugins([
-            'popup', 'options',
+            'popup', 'options', 'contentScript',
         ])
     ],
     resolve: {
@@ -49,12 +49,12 @@ module.exports = {
     output: {
         filename: '[name].js',
         path: path.resolve(__dirname, 'dist'),
-        publicPath: '',
+        // publicPath: '',
     },
     optimization: {
         splitChunks: {
             chunks(chunk) {
-                return chunk.name !== 'contentScript' && chunk.name !== 'background' && chunk.name != 'popup'
+                return chunk.name !== 'contentScript' && chunk.name != 'popup'
             }
         },
     },

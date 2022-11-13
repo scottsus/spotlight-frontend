@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import './contentScript.css';
-import myImage from '../static/sp.png';
-import sg from './sp.png';
-const sh = require('./sp.png');
 
 import NBATeams from '../lib/teams';
 import Logo from '../components/Logo';
@@ -13,16 +10,14 @@ import Block from '../components/Block';
 
 const App = () => {
   console.log('APP');
-  console.log(sg);
-  console.log(sh);
   return (
     <div id='spotlight'>
       <h1>Image</h1>
-      <img src='sp.png' alt='' />
+      <img src={chrome.runtime.getURL('sp.png')} alt='' />
       <h1>Image2</h1>
-      <img src='spotlight.png' alt='' />
+      <img src={chrome.runtime.getURL('spotlight.png')} alt='' />
       <h1>Image3</h1>
-      <img src='stubhub.png' alt='' />
+      <img src={chrome.runtime.getURL('stubhub.png')} alt='' />
     </div>
   );
 };
