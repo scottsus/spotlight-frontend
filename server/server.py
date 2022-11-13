@@ -16,9 +16,11 @@ def send_tickets():
     team1 = request.headers['team1']
     team2 = request.headers['team2']
     msg = "Found cheaper tickets for " + team1 + " vs " + team2 + "\n"
-    url = seat_geek.find_cheaper_tickets(team1, team2)
+    (name, seats, price, url) = seat_geek.find_cheaper_tickets(team1, team2)
     return jsonify({
-        "message": msg,
+        "name": name,
+        "seats": seats,
+        "price": price,
         "url": url
     })
 

@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from driver import driver
+from price_parser import Price
 
 # Seat Geek specific Webscraping
 def find_cheaper_tickets(team1, team2):
@@ -17,21 +18,47 @@ def find_cheaper_tickets(team1, team2):
 
     WebDriverWait(driver, 10).until(
         EC.element_to_be_clickable(
-            (By.XPATH, "//li[@id='active-result-item']/a/article/div/p[contains(text(), 'at')]"))).click()
+            (By.XPATH, "//li[@id='active-result-item']/a/article/div/p[contains(text(), 'at')]")
+        )
+    ).click()
     # print("After clicking", driver.current_url)
 
     WebDriverWait(driver, 10).until(
         EC.element_to_be_clickable(
-            (By.XPATH, "//div[div/div/h3[contains(text(), 'each')]]"))).click()
+            (By.XPATH, "//div[div/div/h3[contains(text(), 'each')]]")
+        )
+    ).click()
     # print("Done loading page", driver.current_url)
 
     WebDriverWait(driver, 10).until(
         EC.element_to_be_clickable(
-            (By.XPATH, "//div/div/a[span[contains(text(), 'checkout')]]"))).click()
+            (By.XPATH, "//div/div/a[span[contains(text(), 'checkout')]]")
+        )
+    ).click()
     #print("Going to checkout", driver.current_url)
 
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located(
+            (By.XPATH, "//div/div/p[contains(text(), 'Section')]")
+        )
+    )
+    section_span = driver.find_element(By.XPATH, "//div/div/p[contains(text(), 'Section')]")
+    seats = section_span.text
+
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located(
+            (By.XPATH, "//div/div/p[contains(text(), 'each')]")
+        )
+    )
+    priceSpan = driver.find_element(By.XPATH, "//div/div/p[contains(text(), 'each')]")
+    price = extract_price(priceSpan.text)
+
+    print(seats)
+    print(price)
     print("[Checkout Page]:", driver.current_url)
-    return driver.current_url
+    return ("seatgeek", seats, price, driver.current_url)
     driver.close()
 
-find_cheaper_tickets('Los Angeles Clippers', 'Houston Rockets')
+def extract_price(pricestr):
+    price = Price.fromstring(pricestr)
+    return price.amount_text
