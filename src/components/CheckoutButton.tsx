@@ -7,7 +7,7 @@ interface ICheckoutButton {
 const CheckoutButton: React.FC<ICheckoutButton> = ({ url }) => {
   return (
     <div style={checkoutButtonStyles}>
-      <a href={url}>
+      <a href={url} target='_blank'>
         <h1 style={h1Styles}>Buy Now</h1>
       </a>
     </div>
