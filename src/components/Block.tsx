@@ -21,7 +21,7 @@ const blockStyle = {
 
 const imgStyle = {
   height: '50px',
-  width: '50px',
+  width: '65px',
   style: 'inline',
 };
 
