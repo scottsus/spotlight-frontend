@@ -5,7 +5,6 @@ import NBATeams from '../lib/teams';
 import Logo from '../components/Logo';
 import Title from '../components/Title';
 import Filters from '../components/Filters';
-import Block from '../components/Block';
 
 const App = () => {
   const teamsList = [];

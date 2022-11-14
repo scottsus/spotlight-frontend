@@ -1,12 +1,12 @@
-import { IBlock } from "../components/Block";
+import { ICollapsible } from "../components/Collapsible";
 
 interface scrapeInfo {(
   document:string, 
   NBATeams:string[], 
   teams:React.MutableRefObject<string[]>, 
   addTeam:(string)=>void, 
-  data:IBlock[], 
-  addData:React.Dispatch<React.SetStateAction<IBlock[]>>, 
+  data:ICollapsible[], 
+  addData:React.Dispatch<React.SetStateAction<ICollapsible[]>>, 
   setLoader:React.Dispatch<React.SetStateAction<boolean>>):void
 }
 

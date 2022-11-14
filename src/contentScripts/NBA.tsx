@@ -9,24 +9,18 @@ import findSportsTickets from '../lib/findSportsTickets';
 import Logo from '../components/Logo';
 import Title from '../components/Title';
 import Filters from '../components/Filters';
-import Block, { IBlock } from '../components/Block';
+import MainList from '../components/MainList';
+import { ICollapsible } from '../components/Collapsible';
 
 const App: React.FC = () => {
   const [doneWaiting, setDoneWaiting] = useState<boolean>(false);
-  const [data, addData] = useState<IBlock[]>([]);
+  const [data, addData] = useState<ICollapsible[]>([]);
   const [loader, setLoader] = useState<boolean>(true);
   const teams = useRef<string[]>([]);
   const addTeam = (NBATeam) => {
     teams.current.push(NBATeam);
   };
-  const blockItems = data.map((block) => (
-    <Block
-      logo={chrome.runtime.getURL(`${block.logo}.png`)}
-      seats={block.seats}
-      price={block.price}
-      url={block.url}
-    />
-  ));
+
   useEffect(() => {
     const timer = setTimeout(() => {
       findSportsTickets(
@@ -39,7 +33,7 @@ const App: React.FC = () => {
         setLoader
       );
       setDoneWaiting(true);
-    }, 5000); // make sure component renders before scraping
+    }, 1000); // make sure component renders before scraping
     return () => clearTimeout(timer);
   }, []);
 
@@ -68,7 +62,7 @@ const App: React.FC = () => {
           time='6:30pm'
         />
         <Filters />
-        <div id='blocks'>{blockItems}</div>
+        <MainList data={data} />
       </div>
     );
   }

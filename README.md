@@ -30,3 +30,18 @@ Linux
 apt get chromedriver
 apt get google-chrome
 ```
+
+5. Apply Chrome Extension
+
+```
+chrome://extensions => Load Unpacked => spotlight/dist
+```
+
+6. Run Server
+
+```
+npm run server
+```
+
+7. Enjoy!
+   Whenever you're checking out for a ticket at our registered sites, we will scrape other websites to ensure that there is no better deal out there in the market :)
