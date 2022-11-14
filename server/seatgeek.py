@@ -8,7 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from driver_options import chrome_options
 from price_parser import Price
 
-# Seat Geek specific Webscraping
+# Seat Geek specific webscraping
 def scrape(team1, team2):
     url = 'https://seatgeek.com'
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
@@ -54,13 +54,14 @@ def scrape(team1, team2):
             (By.XPATH, "//div/div/p[contains(text(), 'each')]")
         )
     )
-    priceSpan = driver.find_element(By.XPATH, "//div/div/p[contains(text(), 'each')]")
-    price = extract_price(priceSpan.text)
+    price_span = driver.find_element(By.XPATH, "//div/div/p[contains(text(), 'each')]")
+    price = Price.fromstring(price_span.text).amount_text
+    url = driver.current_url
 
     print(seats)
     print(price)
-    return ("seatgeek", seats, price, driver.current_url)
     driver.close()
+    return ("seatgeek", seats, price, url)
 
 def extract_price(pricestr):
     price = Price.fromstring(pricestr)
