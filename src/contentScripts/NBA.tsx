@@ -9,18 +9,11 @@ import findSportsTickets from '../lib/findSportsTickets';
 import Logo from '../components/Logo';
 import Title from '../components/Title';
 import Filters from '../components/Filters';
-import Block from '../components/Block';
-
-export interface IBlockItem {
-  name: string;
-  seats: string;
-  price: number;
-  url: string;
-}
+import Block, { IBlock } from '../components/Block';
 
 const App: React.FC = () => {
   const [doneWaiting, setDoneWaiting] = useState<boolean>(false);
-  const [data, addData] = useState<IBlockItem[]>([]);
+  const [data, addData] = useState<IBlock[]>([]);
   const [loader, setLoader] = useState<boolean>(true);
   const teams = useRef<string[]>([]);
   const addTeam = (NBATeam) => {
@@ -28,7 +21,7 @@ const App: React.FC = () => {
   };
   const blockItems = data.map((block) => (
     <Block
-      logo={chrome.runtime.getURL(`${block.name}.png`)}
+      logo={chrome.runtime.getURL(`${block.logo}.png`)}
       seats={block.seats}
       price={block.price}
       url={block.url}

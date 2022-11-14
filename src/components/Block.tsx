@@ -2,7 +2,7 @@ import React from 'react';
 import Overview from './Overview';
 import CheckoutButton from './CheckoutButton';
 
-interface IBlock {
+export interface IBlock {
   logo: string;
   seats: string;
   price: number;
