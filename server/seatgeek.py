@@ -59,7 +59,6 @@ def scrape(team1, team2):
 
     print(seats)
     print(price)
-    print("[Checkout Page]:", driver.current_url)
     return ("seatgeek", seats, price, driver.current_url)
     driver.close()
 

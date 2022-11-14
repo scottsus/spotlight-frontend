@@ -20,7 +20,7 @@
         {
             "matches": [
                 "*://*.ticketmaster.com/*/event/*",
-                "*://*.seatgeek.com/*/*/nba/r/*",
+                "*://*.seatgeek.com/checkout*",
                 "*://*.stubhub.com/*/event/*",
                 "*://*.tickpick.com/buy*/*"
             ],
