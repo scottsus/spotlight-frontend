@@ -6,15 +6,16 @@ interface IMainList {
 }
 
 const MainList: React.FC<IMainList> = ({ data }) => {
-  const blockItems = data.map((block) => (
+  const collapsibleItems = data.map((collapsible) => (
     <Collapsible
-      logo={chrome.runtime.getURL(`${block.logo}.png`)}
-      seats={block.seats}
-      price={block.price}
-      url={block.url}
+      logo={chrome.runtime.getURL(`${collapsible.logo}.png`)}
+      section={collapsible.section}
+      row={collapsible.row}
+      price={collapsible.price}
+      url={collapsible.url}
     />
   ));
-  return <div>{blockItems}</div>;
+  return <div>{collapsibleItems}</div>;
 };
 
 export default MainList;

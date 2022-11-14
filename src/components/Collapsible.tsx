@@ -11,12 +11,19 @@ import {
 
 export interface ICollapsible {
   logo: string;
-  seats: string;
+  section: string;
+  row: string;
   price: number;
   url: string;
 }
 
-const Collapsible: React.FC<ICollapsible> = ({ logo, seats, price, url }) => {
+const Collapsible: React.FC<ICollapsible> = ({
+  logo,
+  section,
+  row,
+  price,
+  url,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => {
     setIsOpen((isOpen) => !isOpen);
@@ -33,7 +40,7 @@ const Collapsible: React.FC<ICollapsible> = ({ logo, seats, price, url }) => {
         )}
       </button>
       <img style={imgStyle} src={logo} alt='logo' />
-      <Overview seats={seats} price={price} />
+      <Overview section={section} row={row} price={price} />
       <CheckoutButton url={url} />
       {isOpen && <ExpandablePage />}
     </div>

@@ -20,14 +20,17 @@ def hello():
 def find_sports_tickets():
     team1 = request.headers['team1']
     team2 = request.headers['team2']
+    section = request.headers['section']
+    row = request.headers['row']
+    price = request.headers['price']
     msg = "Found cheaper tickets for " + team1 + " vs " + team2 + "\n"
     
     response_list = [None] * 4
     
-    t1 = Thread(target=find_cheaper_tickets, args=[response_list, 0, seatgeek.scrape, team1, team2])
-    t2 = Thread(target=find_cheaper_tickets, args=[response_list, 1, stubhub.scrape, team1, team2])
-    t3 = Thread(target=find_cheaper_tickets, args=[response_list, 2, tickpick.scrape, team1, team2])
-    t4 = Thread(target=find_cheaper_tickets, args=[response_list, 3, ticketmaster.scrape, team1, team2])
+    t1 = Thread(target=find_cheaper_tickets, args=[response_list, 0, stubhub.scrape, team1, team2, section, row, price])
+    t2 = Thread(target=find_cheaper_tickets, args=[response_list, 1, stubhub.scrape, team1, team2, section, row, price])
+    t3 = Thread(target=find_cheaper_tickets, args=[response_list, 2, stubhub.scrape, team1, team2, section, row, price])
+    t4 = Thread(target=find_cheaper_tickets, args=[response_list, 3, stubhub.scrape, team1, team2, section, row, price])
 
     t1.start()
     t2.start()
@@ -40,19 +43,24 @@ def find_sports_tickets():
     t4.join()
     
     dicts = list(map(tuple_to_dict, response_list))
-    return json.dumps(dicts)
+    final_response = [res for res in dicts if res is not None]
+    return json.dumps(final_response)
 
-def find_cheaper_tickets(response_list, index, scrape, team1, team2):
-    response = scrape(team1, team2)
-    response_list[index] = response
+def find_cheaper_tickets(response_list, index, scrape, team1, team2, section, row, price):
+    response = scrape(team1, team2, section, row, price)
+    if response[0] != "":
+        response_list[index] = response
 
 def tuple_to_dict(res):
     with app.app_context():
+        if res == None:
+            return None
         dict = {
             "name": res[0],
-            "seats": res[1],
-            "price": res[2],
-            "url": res[3],
+            "section": res[1],
+            "row": res[2],
+            "price": res[3],
+            "url": res[4],
         }
         return dict
 

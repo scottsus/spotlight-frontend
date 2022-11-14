@@ -1,14 +1,17 @@
 import React from 'react';
 
 interface IOverview {
-  seats: string;
+  section: string;
+  row: string;
   price: number;
 }
 
-const Overview: React.FC<IOverview> = ({ seats, price }) => {
+const Overview: React.FC<IOverview> = ({ section, row, price }) => {
   return (
     <div style={overviewStyles}>
-      <h1 style={h1Styles}>{seats}</h1>
+      <h1 style={h1Styles}>
+        Section {section}, Row {row}
+      </h1>
       <h2 style={h2Styles}>${price} each</h2>
     </div>
   );
