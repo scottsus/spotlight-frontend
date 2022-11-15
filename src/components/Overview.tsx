@@ -12,7 +12,7 @@ const Overview: React.FC<IOverview> = ({ section, row, price }) => {
       <h1 style={h1Styles}>
         Section {section}, Row {row}
       </h1>
-      <h2 style={h2Styles}>${price} each</h2>
+      <h2 style={h2Styles}>${price} total</h2>
     </div>
   );
 };

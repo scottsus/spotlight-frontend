@@ -16,7 +16,7 @@ from price_parser import Price
 import time
 
 # Stubhub specific webscraping
-def scrape(team1, team2, section, row, price):
+def scrape(team1, team2, section, row, price, quantity):
     url = 'https://stubhub.com'
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
     driver.get(url)
@@ -49,6 +49,15 @@ def scrape(team1, team2, section, row, price):
         # print("Chose 1 ticket", driver.current_url)
 
         WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable(
+                (By.XPATH, "//*[name()='g']/*[name()='text'][contains(text(), '" + str(section) + "')]")
+            )
+        ).click()
+        # print("Filtered to particular section", driver.current_url)
+
+        # driver.get(driver.current_url + "&estimatedFees=true")
+
+        WebDriverWait(driver, 10).until(
             EC.presence_of_element_located(
                 (By.XPATH, "//div[div[contains(text(), 'Section') and span[contains(text(), 'Row')]]]")
             )
@@ -60,20 +69,16 @@ def scrape(team1, team2, section, row, price):
         )
 
         for choice in choices:
-            (ok, this_row, this_price) = assess(choice.text, section, row, price)
+            (ok, this_row, this_price) = assess(choice.text, section, row, price, quantity)
             if (ok):
                 choice.click()
                 url = driver.current_url
                 driver.close()
-                print("[FOUND]", "row:", section, this_row, "price:", this_price)
-                return ("stubhub", section, this_row, this_price, url)  
+                print("[FOUND]", "row:", section, this_row, "price:", float(this_price) * int(quantity))
+                return ("stubhub", section, this_row, float(this_price) * int(quantity), url)  
 
-        (this_section, this_row, this_price) = parse_seats(choices[0].text)
-        choices[0].click()
-        url = driver.current_url
-        driver.close()
-        print("[NOT FOUND]", "row:", this_section, this_row, "price:", this_price)
-        return ("stubhub", this_section, this_row, this_price, url)
+        print("[NOT FOUND]")
+        return ("stubhub", 0, 0, 0, 0)
     
     except TimeoutException:
         print("Timeout!")
@@ -90,9 +95,9 @@ def scrape(team1, team2, section, row, price):
     
 
     
-def assess(text, section, row, price):
+def assess(text, section, row, price, quantity):
     (this_section_num, this_row_num, this_price) = parse_seats(text)
-    if this_section_num != int(section) or this_row_num > int(row) or this_price >= float(price):
+    if this_section_num != int(section) or this_row_num > int(row) or this_price * float(quantity) >= float(price):
         return (False, 0, 0)
     return (True, this_row_num, this_price)
 
@@ -100,3 +105,5 @@ def parse_seats(text):
     digits = [int(s) for s in text.split() if s.isdigit()]
     this_price = Price.fromstring(text.split('$')[1]).amount_float
     return (digits[0], digits[1], this_price)
+
+# scrape('Boston Celtics', 'Los Angeles Lakers', 318, 10, 2, 250)

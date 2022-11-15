@@ -23,14 +23,15 @@ def find_sports_tickets():
     section = request.headers['section']
     row = request.headers['row']
     price = request.headers['price']
+    quantity = request.headers['quantity']
     msg = "Found cheaper tickets for " + team1 + " vs " + team2 + "\n"
     
     response_list = [None] * 4
     
-    t1 = Thread(target=find_cheaper_tickets, args=[response_list, 0, stubhub.scrape, team1, team2, section, row, price])
-    t2 = Thread(target=find_cheaper_tickets, args=[response_list, 1, stubhub.scrape, team1, team2, section, row, price])
-    t3 = Thread(target=find_cheaper_tickets, args=[response_list, 2, stubhub.scrape, team1, team2, section, row, price])
-    t4 = Thread(target=find_cheaper_tickets, args=[response_list, 3, stubhub.scrape, team1, team2, section, row, price])
+    t1 = Thread(target=find_cheaper_tickets, args=[response_list, 0, stubhub.scrape, team1, team2, section, row, price, quantity])
+    t2 = Thread(target=find_cheaper_tickets, args=[response_list, 1, stubhub.scrape, team1, team2, section, row, price, quantity])
+    t3 = Thread(target=find_cheaper_tickets, args=[response_list, 2, stubhub.scrape, team1, team2, section, row, price, quantity])
+    t4 = Thread(target=find_cheaper_tickets, args=[response_list, 3, stubhub.scrape, team1, team2, section, row, price, quantity])
 
     t1.start()
     t2.start()
@@ -46,8 +47,8 @@ def find_sports_tickets():
     final_response = [res for res in dicts if res is not None]
     return json.dumps(final_response)
 
-def find_cheaper_tickets(response_list, index, scrape, team1, team2, section, row, price):
-    response = scrape(team1, team2, section, row, price)
+def find_cheaper_tickets(response_list, index, scrape, team1, team2, section, row, price, quantity):
+    response = scrape(team1, team2, section, row, price, quantity)
     if response[0] != "":
         response_list[index] = response
 

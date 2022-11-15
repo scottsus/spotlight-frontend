@@ -24,6 +24,7 @@ const App: React.FC = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       findSportsTickets(
+        document.URL,
         document.body.innerText,
         NBATeams,
         teams,
