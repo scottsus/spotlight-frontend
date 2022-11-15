@@ -44,4 +44,9 @@ npm run server
 ```
 
 7. Enjoy!
-   Whenever you're checking out for a ticket at our registered sites, we will scrape other websites to ensure that there is no better deal out there in the market :)
+
+- Checkout at:
+  - ticketmaster.com
+  - seatgeek.com
+- Scraped from:
+  - stubhub.com
