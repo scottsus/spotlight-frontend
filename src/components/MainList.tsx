@@ -1,5 +1,5 @@
 import React from 'react';
-import Collapsible, { ICollapsible } from './Collapsible';
+import Collapsible, { ICollapsible } from './Collapsible/Collapsible';
 
 interface IMainList {
   data: ICollapsible[];

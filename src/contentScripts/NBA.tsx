@@ -1,19 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Triangle } from 'react-loader-spinner';
 import './NBA.css';
 
 import NBATeams from '../lib/teams';
 import findSportsTickets from '../lib/findSportsTickets';
 
+import PurpleTag from '../components/PurpleTag';
+import XButton from '../components/XButton';
 import Logo from '../components/Logo';
 import Title from '../components/Title';
 import Filters from '../components/Filters';
 import MainList from '../components/MainList';
-import { ICollapsible } from '../components/Collapsible';
+import { ICollapsible } from '../components/Collapsible/Collapsible';
 
 const App: React.FC = () => {
   const [doneWaiting, setDoneWaiting] = useState<boolean>(false);
+  const [tagIsOpened, setTagIsOpened] = useState<boolean>(false);
   const [data, addData] = useState<ICollapsible[]>([]);
   const [loader, setLoader] = useState<boolean>(true);
   const teams = useRef<string[]>([]);
@@ -40,11 +42,10 @@ const App: React.FC = () => {
 
   if (!doneWaiting) {
     // render nothing
-  } else if (loader) {
+  } else if (!tagIsOpened) {
     return (
       <div id='loader'>
-        <Triangle height='80' width='80' color='#4B3BFF' ariaLabel='loading' />
-        <h1 id='loaderh1'>Searching for better deals...</h1>;
+        <PurpleTag tagIsOpened={tagIsOpened} setTagIsOpened={setTagIsOpened} />
       </div>
     );
   } else {
@@ -52,6 +53,7 @@ const App: React.FC = () => {
     return (
       <div id='app'>
         <Logo />
+        <XButton tagIsOpened={tagIsOpened} setTagIsOpened={setTagIsOpened} />
         <Title
           team1={teams.current[0]}
           team2={teams.current[1]}

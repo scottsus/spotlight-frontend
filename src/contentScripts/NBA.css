@@ -11,20 +11,6 @@
     padding: 20px;
 }
 
-#loader {
-    background-color: white;
-    position: absolute;
-    left: 70%;
-    top: 1%;
-    width: 300px;
-    height: 100px;
-    z-index: 1000;
-    border-radius: 10px;
-    padding-left: 10px;
-    display: flex;
-    align-items: center;
-}
-
 #loaderh1 {
     color: #4B3BFF;
     font-size: 20px;

@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import Overview from './Overview';
-import CheckoutButton from './CheckoutButton';
-import ExpandablePage from './ExpandablePage';
+import React from 'react';
+import Overview from '../Overview';
+import CheckoutButton from '../CheckoutButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -9,29 +8,19 @@ import {
   faChevronDown,
 } from '@fortawesome/fontawesome-free-solid';
 
-export interface ICollapsible {
-  logo: string;
-  section: string;
-  row: string;
-  price: number;
-  url: string;
-}
-
-const Collapsible: React.FC<ICollapsible> = ({
+const CollapsibleHeader = ({
+  isOpen,
+  toggle,
   logo,
   section,
   row,
   price,
   url,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggle = () => {
-    setIsOpen((isOpen) => !isOpen);
-  };
   const down = faChevronDown as IconProp;
   const up = faChevronUp as IconProp;
   return (
-    <div style={collapsibleStyle}>
+    <div style={collapsibleHeaderStyles}>
       <button style={buttonStyle} onClick={toggle}>
         {!isOpen ? (
           <FontAwesomeIcon icon={down} />
@@ -42,18 +31,13 @@ const Collapsible: React.FC<ICollapsible> = ({
       <img style={imgStyle} src={logo} alt='logo' />
       <Overview section={section} row={row} price={price} />
       <CheckoutButton url={url} />
-      {isOpen && <ExpandablePage />}
     </div>
   );
 };
 
-const collapsibleStyle: React.CSSProperties = {
-  border: '2px solid grey',
-  borderRadius: '5px',
-  height: '100px',
-  width: '100%',
+const collapsibleHeaderStyles: React.CSSProperties = {
   display: 'flex',
-  margin: '10px 0px',
+  flexDirection: 'row',
 };
 
 const buttonStyle: React.CSSProperties = {
@@ -69,4 +53,4 @@ const imgStyle: React.CSSProperties = {
   display: 'inline',
 };
 
-export default Collapsible;
+export default CollapsibleHeader;

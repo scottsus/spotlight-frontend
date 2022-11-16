@@ -1,4 +1,4 @@
-import { ICollapsible } from "../components/Collapsible";
+import { ICollapsible } from "../components/Collapsible/Collapsible";
 import siteMap, { getNameFromURL } from './siteCheckoutScrape'
 
 interface scrapeInfo {(
