@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack --watch --progress --config webpack.dev.js",
     "build": "webpack --watch --progress --config webpack.prod.js",
-    "server": "python server/server.py"
+    "server": "python server/server.py",
+    "test": "python server/test_server.py"
   },
   "keywords": [],
   "author": "Scott Susanto",
