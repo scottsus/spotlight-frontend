@@ -23,10 +23,10 @@ const seatgeekScrape:(string) => string[] = (text:string) => {
     }
     const sectionNumber = truncate(parts[sIdx + 1]);
     const rowNumber = truncate(parts[rIdx + 1]);
-    const price = parts[pIdx].substring(1);
+    const price = truncate(parts[pIdx].substring(1));
     const quantity = parts[pIdx + 2];
-    check(parts, sectionNumber, rowNumber, price * quantity, quantity);
-    return [sectionNumber, rowNumber, price * quantity, quantity]
+    check(parts, sectionNumber, rowNumber, parseFloat(price) * quantity, quantity);
+    return [sectionNumber, rowNumber, parseFloat(price) * quantity, quantity]
 }
 
 const ticketmasterScrape:(string) => string[] = (text:string) => {
@@ -46,7 +46,7 @@ const ticketmasterScrape:(string) => string[] = (text:string) => {
     }
     const sectionNumber = truncate(parts[sIdx + 1]);
     const rowNumber = truncate(parts[rIdx + 1]);
-    const totalPrice = parts[pIdx].substring(1);
+    const totalPrice = truncate(parts[pIdx].substring(1));
     const quantity = parts[qIdx + 1];
     check(parts, sectionNumber, rowNumber, totalPrice, quantity);
     return [sectionNumber, rowNumber, totalPrice, quantity]
@@ -65,7 +65,10 @@ const parse = (text:string) => {
 }
 
 const truncate = (text:string) => {
-    return text.replace(/\,/g,'')
+    const withoutEndline = text.replace('\n', '')
+    const withoutSpaces = withoutEndline.replace(' ', '')
+    const withoutCommas = withoutSpaces.replace(',', '')
+    return withoutCommas
 }
 
 const check = (parts:string[], sectionNumber:string, rowNumber:string, totalPrice:string | number, quantity:string) => {

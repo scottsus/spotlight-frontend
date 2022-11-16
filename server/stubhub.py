@@ -18,10 +18,10 @@ import time
 # Stubhub specific webscraping
 def scrape(team1, team2, section, row, price, quantity):
     url = 'https://stubhub.com'
+    print("Finding cheaper tickets for " + team1 + " vs " + team2 + " at " + "Section: " 
+    + str(section) + " Row: " + str(row) + " at $" + str(price) + " from " + url + "\n")
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
     driver.get(url)
-    print("Finding cheaper tickets for " + team1 + " vs " + team2 + " at " + "Section: " 
-        + str(section) + " Row: " + str(row) + " at $" + str(price) + " from " + url + "\n")
 
     try:
         search_bar = WebDriverWait(driver, 10).until(
@@ -74,11 +74,11 @@ def scrape(team1, team2, section, row, price, quantity):
                 choice.click()
                 url = driver.current_url
                 driver.close()
-                print("[FOUND]", "row:", section, this_row, "price:", float(this_price) * int(quantity))
+                print("[FOUND]", "section:", section, "row:", this_row, "price:", float(this_price) * int(quantity))
                 return ("stubhub", section, this_row, float(this_price) * int(quantity), url)  
 
         print("[NOT FOUND]")
-        return ("stubhub", 0, 0, 0, 0)
+        return ("", 0, 0, 0, 0)
     
     except TimeoutException:
         print("Timeout!")

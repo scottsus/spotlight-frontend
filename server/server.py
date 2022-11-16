@@ -24,7 +24,6 @@ def find_sports_tickets():
     row = request.headers['row']
     price = request.headers['price']
     quantity = request.headers['quantity']
-    msg = "Found cheaper tickets for " + team1 + " vs " + team2 + "\n"
     
     response_list = [None] * 4
     
