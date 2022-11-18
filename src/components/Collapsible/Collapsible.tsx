@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import CollapsibleHeader from './CollapsibleHeader';
-import ExpandablePage from './CollapsibleChild';
+import CollapsibleChild from './CollapsibleChild';
 
 export interface ICollapsible {
   logo: string;
@@ -32,18 +32,19 @@ const Collapsible: React.FC<ICollapsible> = ({
         price={price}
         url={url}
       />
-      {isOpen && <ExpandablePage />}
+      {isOpen && <CollapsibleChild />}
     </div>
   );
 };
 
 const collapsibleStyle: React.CSSProperties = {
-  border: '2px solid grey',
+  border: '2px solid #DFE0E0',
   borderRadius: '5px',
   height: '100px',
   width: '100%',
   display: 'flex',
   flexDirection: 'column',
+  justifyContent: 'center',
   margin: '10px 0px',
 };
 

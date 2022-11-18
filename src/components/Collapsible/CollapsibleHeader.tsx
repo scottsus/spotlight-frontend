@@ -1,5 +1,5 @@
 import React from 'react';
-import Overview from '../Overview';
+import Overview from './Overview';
 import CheckoutButton from '../CheckoutButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
@@ -38,13 +38,16 @@ const CollapsibleHeader = ({
 const collapsibleHeaderStyles: React.CSSProperties = {
   display: 'flex',
   flexDirection: 'row',
+  justifyContent: 'space-evenly',
+  alignItems: 'center',
 };
 
 const buttonStyle: React.CSSProperties = {
-  height: '10px',
-  border: '2px solid #4B3BFF',
+  height: '25px',
+  border: 'none',
   backgroundColor: '#FFFFFF',
   color: '#4B3BFF',
+  cursor: 'pointer',
 };
 
 const imgStyle: React.CSSProperties = {

@@ -15,8 +15,6 @@ const CheckoutButton: React.FC<ICheckoutButton> = ({ url }) => {
 };
 
 const checkoutButtonStyles: React.CSSProperties = {
-  marginTop: '25px',
-  marginLeft: '10px',
   borderRadius: '10px',
   backgroundColor: '#4B3BFF',
   height: '45px',

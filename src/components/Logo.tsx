@@ -7,9 +7,8 @@ const Logo = () => {
 const logoStyle = {
   color: '#4B3BFF',
   font: 'arial',
-  fontSize: '40px',
+  fontSize: '30px',
   fontWeight: 700,
-  paddingLeft: '20px',
 };
 
 export default Logo;

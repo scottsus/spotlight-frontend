@@ -15,7 +15,11 @@ const MainList: React.FC<IMainList> = ({ data }) => {
       url={collapsible.url}
     />
   ));
-  return <div>{collapsibleItems}</div>;
+  return <div style={mainListStyles}>{collapsibleItems}</div>;
+};
+
+const mainListStyles: React.CSSProperties = {
+  marginTop: '-10px',
 };
 
 export default MainList;

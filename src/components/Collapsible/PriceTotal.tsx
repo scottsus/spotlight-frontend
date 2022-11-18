@@ -18,7 +18,7 @@ const PriceTotal: React.FC<IPriceTotal> = ({
   calculatedTax,
 }) => {
   return (
-    <div>
+    <div style={priceTotalStyles}>
       <h1>Price Total | Ticket Info</h1>
       <h1>Tickets</h1>
       <ItemCost text={`Resale Ticket x ${ticketQty}`} cost={ticketPrice} />
@@ -30,6 +30,10 @@ const PriceTotal: React.FC<IPriceTotal> = ({
       <TotalPrice totalPrice={ticketPrice * ticketQty} />
     </div>
   );
+};
+
+const priceTotalStyles: React.CSSProperties = {
+  backgroundColor: 'blue',
 };
 
 export default PriceTotal;

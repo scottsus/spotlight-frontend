@@ -8,7 +8,9 @@ interface IXButton {
 const XButton = ({ tagIsOpened, setTagIsOpened }) => {
   return (
     <div style={xButtonStyles}>
-      <button onClick={() => setTagIsOpened(false)}>X</button>
+      <button onClick={() => setTagIsOpened(false)} style={buttonStyles}>
+        X
+      </button>
     </div>
   );
 };
@@ -22,6 +24,7 @@ const xButtonStyles: React.CSSProperties = {
 const buttonStyles: React.CSSProperties = {
   border: 'none',
   backgroundColor: '#FFFFFF',
+  cursor: 'pointer',
 };
 
 export default XButton;

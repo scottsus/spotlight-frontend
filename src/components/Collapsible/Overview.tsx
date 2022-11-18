@@ -17,19 +17,21 @@ const Overview: React.FC<IOverview> = ({ section, row, price }) => {
   );
 };
 
-const overviewStyles = {
-  display: 'inline',
-  paddingTop: '30px',
+const overviewStyles: React.CSSProperties = {
+  display: 'flex',
+  flexDirection: 'column',
 };
 
-const h1Styles = {
+const h1Styles: React.CSSProperties = {
   fontSize: '17px',
   fontWeight: 500,
+  margin: '0px 0px',
 };
 
-const h2Styles = {
+const h2Styles: React.CSSProperties = {
   fontSize: '16px',
   color: '#5647FF',
+  margin: '0px 0px',
 };
 
 export default Overview;
