@@ -50,7 +50,7 @@ npm run server
   - seatgeek.com
 - Scraped from:
   - stubhub.com
-  
- ## Progress
- <img width="1235" alt="image" src="https://user-images.githubusercontent.com/88414565/202595860-b6ed4f7c-6d87-4c21-8399-dbc954d5058d.png">
 
+## Progress
+
+![Div Scroll]("./div-scroll.gif")
