@@ -1,11 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PriceTotal from './PriceTotal';
 import TicketInfo from './TicketInfo';
 
-const CollapsibleChild = () => {
+interface ICollapsibleChild {
+  isOpen: boolean;
+}
+
+const CollapsibleChild: React.FC<ICollapsibleChild> = ({ isOpen }) => {
   const [isPriceTotalPage, setIsPriceTotalPage] = useState(true);
+  const [height, setHeight] = useState(0);
+  const [openOverflow, setOpenOverflow] = useState('hidden');
+  useEffect(() => {
+    if (isOpen) {
+      setHeight(300);
+      setOpenOverflow('visible');
+    } else {
+      setHeight(0);
+      setOpenOverflow('hidden');
+    }
+  }, [isOpen]);
   return (
-    <div style={collapsibleChildStyles}>
+    <div
+      style={{
+        ...collapsibleChildStyles,
+        ...{ height: height },
+        ...{ overflow: openOverflow },
+      }}
+    >
       {isPriceTotalPage ? (
         <PriceTotal
           ticketPrice={125}
@@ -22,7 +43,10 @@ const CollapsibleChild = () => {
 };
 
 const collapsibleChildStyles: React.CSSProperties = {
-  backgroundColor: 'red',
+  // backgroundColor: 'red',
+  width: '100%',
+  position: 'static',
+  transition: 'height 0.2s ease-in-out',
 };
 
 export default CollapsibleChild;

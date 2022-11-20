@@ -22,13 +22,15 @@ const totalPriceStyles: React.CSSProperties = {
 const totalStyles: React.CSSProperties = {
   width: '50%',
   textAlign: 'left',
-  paddingLeft: '10px',
+  fontSize: '15px',
+  fontWeight: 600,
 };
 
 const priceStyles: React.CSSProperties = {
   width: '50%',
   textAlign: 'right',
-  paddingRight: '10px',
+  fontSize: '15px',
+  fontWeight: 600,
 };
 
 export default TotalPrice;

@@ -20,6 +20,8 @@ const MainList: React.FC<IMainList> = ({ data }) => {
 
 const mainListStyles: React.CSSProperties = {
   marginTop: '-10px',
+  height: '75%',
+  overflowY: 'scroll',
 };
 
 export default MainList;

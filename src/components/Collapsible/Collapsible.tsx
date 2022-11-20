@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CollapsibleHeader from './CollapsibleHeader';
 import CollapsibleChild from './CollapsibleChild';
 
@@ -18,11 +18,23 @@ const Collapsible: React.FC<ICollapsible> = ({
   url,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [childIsOpen, setChildIsOpen] = useState(false);
+  const [height, setHeight] = useState(100);
   const toggle = () => {
     setIsOpen((isOpen) => !isOpen);
   };
+  useEffect(() => {
+    if (isOpen) {
+      setChildIsOpen(true);
+      setHeight(400);
+    } else {
+      setChildIsOpen(false);
+      setHeight(100);
+    }
+  }, [isOpen]);
+
   return (
-    <div style={collapsibleStyle}>
+    <div style={{ ...collapsibleStyles, ...{ height: height } }}>
       <CollapsibleHeader
         isOpen={isOpen}
         toggle={toggle}
@@ -32,12 +44,12 @@ const Collapsible: React.FC<ICollapsible> = ({
         price={price}
         url={url}
       />
-      {isOpen && <CollapsibleChild />}
+      <CollapsibleChild isOpen={childIsOpen} />
     </div>
   );
 };
 
-const collapsibleStyle: React.CSSProperties = {
+const collapsibleStyles: React.CSSProperties = {
   border: '2px solid #DFE0E0',
   borderRadius: '5px',
   height: '100px',
@@ -46,6 +58,8 @@ const collapsibleStyle: React.CSSProperties = {
   flexDirection: 'column',
   justifyContent: 'center',
   margin: '10px 0px',
+  transition: 'height 0.2s ease-in-out',
+  overflow: 'hidden',
 };
 
 export default Collapsible;

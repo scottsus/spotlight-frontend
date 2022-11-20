@@ -1,4 +1,5 @@
 import React from 'react';
+import Hoverable from '../components/Hoverable';
 
 interface ICheckoutButton {
   url: string;
@@ -6,28 +7,18 @@ interface ICheckoutButton {
 
 const CheckoutButton: React.FC<ICheckoutButton> = ({ url }) => {
   return (
-    <div style={checkoutButtonStyles}>
-      <a href={url} target='_blank'>
+    <div>
+      <Hoverable url={url}>
         <h1 style={h1Styles}>Buy Now</h1>
-      </a>
+      </Hoverable>
     </div>
   );
-};
-
-const checkoutButtonStyles: React.CSSProperties = {
-  borderRadius: '10px',
-  backgroundColor: '#4B3BFF',
-  height: '45px',
-  width: '120px',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
 };
 
 const h1Styles: React.CSSProperties = {
   color: '#FFFFFF',
   fontSize: '15px',
-  fontWeight: '400',
+  fontWeight: '500',
 };
 
 export default CheckoutButton;
