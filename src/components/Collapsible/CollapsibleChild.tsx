@@ -67,7 +67,6 @@ const CollapsibleChild: React.FC<ICollapsibleChild> = ({ isOpen }) => {
 };
 
 const collapsibleChildStyles: React.CSSProperties = {
-  // backgroundColor: 'red',
   width: '100%',
   position: 'static',
   transition: 'height 0.2s ease-in-out',

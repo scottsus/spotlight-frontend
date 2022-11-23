@@ -19,7 +19,7 @@ const MainList: React.FC<IMainList> = ({ data }) => {
 };
 
 const mainListStyles: React.CSSProperties = {
-  marginTop: '-10px',
+  marginTop: '-20px',
   height: '75%',
   overflowY: 'scroll',
 };
