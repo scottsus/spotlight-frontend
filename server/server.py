@@ -16,6 +16,18 @@ CORS(app)
 def hello():
     return flask.jsonify({"greeting": "hello BITCH"})
 
+@app.route("/scrape/ticketmaster")
+def scrape_ticketmaster():
+    (team1, team2, src_section, src_row, src_price, quantity) = get_data_from_req(request)
+    tickets_list = stubhub.scrape(team1, team2, src_section, src_row, src_price, quantity)
+    print(tickets_list)
+    response_list = []
+    for ticket in tickets_list:
+        res = tuple_to_dict(ticket)
+        response_list.append(res)
+    return json.dumps(response_list)
+
+
 @app.route("/find-sports-tickets", methods=["GET"])
 def find_sports_tickets():
     team1 = request.headers['team1']
@@ -51,18 +63,25 @@ def find_cheaper_tickets(response_list, index, scrape, team1, team2, section, ro
     if response[0] != "":
         response_list[index] = response
 
-def tuple_to_dict(res):
+def get_data_from_req(request):
+    team1 = request.headers['team1']
+    team2 = request.headers['team2']
+    section = request.headers['section']
+    row = request.headers['row']
+    total_price = request.headers['price']
+    quantity = request.headers['quantity']
+    return (team1, team2, section, row, total_price, quantity)
+
+def tuple_to_dict(ticket):
     with app.app_context():
-        if res == None:
-            return None
-        dict = {
-            "name": res[0],
-            "section": res[1],
-            "row": res[2],
-            "price": res[3],
-            "url": res[4],
+        res = {
+            "name": ticket[0],
+            "section": ticket[1],
+            "row": ticket[2],
+            "price": ticket[3],
+            "url": ticket[4],
         }
-        return dict
+        return res
 
 if __name__ == "__main__":
     app.run("localhost", 6969)
