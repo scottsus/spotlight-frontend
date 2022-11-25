@@ -22,7 +22,6 @@ const App: React.FC = () => {
   const addTeam = (NBATeam) => {
     teams.current.push(NBATeam);
   };
-
   useEffect(() => {
     const timer = setTimeout(() => {
       findSportsTickets(
