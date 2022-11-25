@@ -59,7 +59,6 @@ interface IFindTicketsFromSite {
 
 const findTicketsFromSite:IFindTicketsFromSite = (site, team1, team2, section, row, price, quantity, addTickets, setIsLoading) => {
   const siteURL = `http://localhost:6969/scrape/${site}`;
-  console.log('fetching from', siteURL)
   fetch(siteURL, {
     headers: {
       team1: team1,
