@@ -1,13 +1,9 @@
 // Mapping each site to its own checkout scraping method
+export interface websiteScrape {
+    (text:string) : string[];
+}
 
-const siteNames = [
-    'seatgeek',
-    'stubhub',
-    'ticketmaster',
-    'tickpick'
-]
-
-const seatgeekScrape:(string) => string[] = (text:string) => {
+export const seatgeekScrape:websiteScrape = (text) => {
     const parts = parse(text);
     let sIdx = 0, rIdx = 0, pIdx = 0, dollarSignCount = 0;
     while (sIdx < parts.length && parts[sIdx] !== 'Section') {
@@ -29,7 +25,7 @@ const seatgeekScrape:(string) => string[] = (text:string) => {
     return [sectionNumber, rowNumber, parseFloat(price) * quantity, quantity]
 }
 
-const ticketmasterScrape:(string) => string[] = (text:string) => {
+export const ticketmasterScrape:websiteScrape = (text) => {
     const parts = parse(text);
     let sIdx = 0, rIdx = 0, pIdx = 0, qIdx = 0;
     while (sIdx < parts.length && parts[sIdx] !== 'Tickets-Sec') {
@@ -78,18 +74,3 @@ const check = (parts:string[], sectionNumber:string, rowNumber:string, totalPric
     console.log('Price:', totalPrice);
     console.log('Quantity:', quantity);
 }
-
-export const getNameFromURL = (url:string) => {
-    for (const siteName of siteNames) {
-        if (url.includes(siteName))
-            return siteName;
-    }
-    return "";
-}
-
-const siteMap = {
-    'seatgeek': seatgeekScrape,
-    'ticketmaster': ticketmasterScrape,
-}
-
-export default siteMap

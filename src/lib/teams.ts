@@ -1,5 +1,5 @@
 // NBA Teams
-export default [
+const teams = [
     'Boston Celtics',
     'Brooklyn Nets',
     'New York Knicks',
@@ -31,3 +31,5 @@ export default [
     'New Orleans Pelicans',
     'San Antonio Spurs',
 ];
+
+export default teams;

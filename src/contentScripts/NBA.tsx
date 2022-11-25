@@ -16,7 +16,7 @@ import Skeletons from '../components/Skeletons';
 
 const App: React.FC = () => {
   const [tagIsOpened, setTagIsOpened] = useState<boolean>(false);
-  const [data, addData] = useState<ICollapsible[]>([]);
+  const [tickets, addTickets] = useState<ICollapsible[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const teams = useRef<string[]>([]);
   const addTeam = (NBATeam) => {
@@ -31,18 +31,15 @@ const App: React.FC = () => {
         NBATeams,
         teams,
         addTeam,
-        data,
-        addData,
+        addTickets,
         setIsLoading
       );
-    }, 1000); // make sure component renders before scraping
+    }, 2000); // make sure component renders before scraping
     return () => clearTimeout(timer);
   }, []);
   if (!tagIsOpened) {
     return (
-      <div id='loader'>
-        <PurpleTag tagIsOpened={tagIsOpened} setTagIsOpened={setTagIsOpened} />
-      </div>
+      <PurpleTag tagIsOpened={tagIsOpened} setTagIsOpened={setTagIsOpened} />
     );
   } else {
     // TODO: Venue Data
@@ -61,7 +58,7 @@ const App: React.FC = () => {
           time='6:30pm'
         />
         <Filters />
-        {isLoading ? <Skeletons /> : <MainList data={data} />}
+        {isLoading ? <Skeletons /> : <MainList tickets={tickets} />}
       </div>
     );
   }

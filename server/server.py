@@ -16,7 +16,7 @@ CORS(app)
 def hello():
     return flask.jsonify({"greeting": "hello BITCH"})
 
-@app.route("/scrape/ticketmaster")
+@app.route("/scrape/stubhub")
 def scrape_ticketmaster():
     (team1, team2, src_section, src_row, src_price, quantity) = get_data_from_req(request)
     tickets_list = stubhub.scrape(team1, team2, src_section, src_row, src_price, quantity)

@@ -2,11 +2,11 @@ import React from 'react';
 import Collapsible, { ICollapsible } from './Collapsible/Collapsible';
 
 interface IMainList {
-  data: ICollapsible[];
+  tickets: ICollapsible[];
 }
 
-const MainList: React.FC<IMainList> = ({ data }) => {
-  const collapsibleItems = data.map((collapsible) => (
+const MainList: React.FC<IMainList> = ({ tickets }) => {
+  const collapsibleItems = tickets.map((collapsible) => (
     <Collapsible
       logo={chrome.runtime.getURL(`${collapsible.logo}.png`)}
       section={collapsible.section}
