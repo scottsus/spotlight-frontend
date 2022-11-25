@@ -9,10 +9,10 @@ interface scrapeInfo {(
   addTeam:(string)=>void, 
   data:ICollapsible[], 
   addData:React.Dispatch<React.SetStateAction<ICollapsible[]>>, 
-  setLoader:React.Dispatch<React.SetStateAction<boolean>>):void
+  setIsLoading:React.Dispatch<React.SetStateAction<boolean>>):void
 }
 
-const findSportsTickets:scrapeInfo = (siteURL, document, NBATeams, teams, addTeam, data, addData, setLoader) => {
+const findSportsTickets:scrapeInfo = (siteURL, document, NBATeams, teams, addTeam, data, addData, setIsLoading) => {
   const truncatedDocText: string = document;
   for (const NBATeam of NBATeams) {
     if (truncatedDocText.includes(NBATeam)) {
@@ -43,7 +43,7 @@ const findSportsTickets:scrapeInfo = (siteURL, document, NBATeams, teams, addTea
               };
               addData((data) => [...data, newData]);
             }
-            setLoader(false);
+            setIsLoading(false);
           })
           .catch((err) => {
             console.log('Error:', err);

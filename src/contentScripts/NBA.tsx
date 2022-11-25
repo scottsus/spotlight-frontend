@@ -12,12 +12,12 @@ import Title from '../components/Title';
 import Filters from '../components/Filters';
 import MainList from '../components/MainList';
 import { ICollapsible } from '../components/Collapsible/Collapsible';
+import Skeletons from '../components/Skeletons';
 
 const App: React.FC = () => {
-  const [doneWaiting, setDoneWaiting] = useState<boolean>(false);
   const [tagIsOpened, setTagIsOpened] = useState<boolean>(false);
   const [data, addData] = useState<ICollapsible[]>([]);
-  const [loader, setLoader] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const teams = useRef<string[]>([]);
   const addTeam = (NBATeam) => {
     teams.current.push(NBATeam);
@@ -33,16 +33,12 @@ const App: React.FC = () => {
         addTeam,
         data,
         addData,
-        setLoader
+        setIsLoading
       );
-      setDoneWaiting(true);
     }, 1000); // make sure component renders before scraping
     return () => clearTimeout(timer);
   }, []);
-
-  if (!doneWaiting) {
-    // render nothing
-  } else if (!tagIsOpened) {
+  if (!tagIsOpened) {
     return (
       <div id='loader'>
         <PurpleTag tagIsOpened={tagIsOpened} setTagIsOpened={setTagIsOpened} />
@@ -65,7 +61,7 @@ const App: React.FC = () => {
           time='6:30pm'
         />
         <Filters />
-        <MainList data={data} />
+        {isLoading ? <Skeletons /> : <MainList data={data} />}
       </div>
     );
   }
