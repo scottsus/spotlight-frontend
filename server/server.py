@@ -12,12 +12,8 @@ import tickpick
 app = Flask(__name__)
 CORS(app)
 
-@app.route("/")
-def hello():
-    return flask.jsonify({"greeting": "hello BITCH"})
-
 @app.route("/scrape/stubhub")
-def scrape_ticketmaster():
+def scrape_stubhub():
     (team1, team2, src_section, src_row, src_price, quantity) = get_data_from_req(request)
     tickets_list = stubhub.scrape(team1, team2, src_section, src_row, src_price, quantity)
     print(tickets_list)
@@ -27,7 +23,23 @@ def scrape_ticketmaster():
         response_list.append(res)
     return json.dumps(response_list)
 
+@app.route("/scrape/ticketmaster")
+def scrape_ticketmaster():
+    # TODO @dennis
+    return
 
+@app.route("/scrape/seatgeek")
+def scrape_seatgeek():
+    # TODO @dennis
+    return
+
+@app.route("/scrape/tickpick")
+def scrape_tickpick():
+    # TODO @dennis
+    return
+
+
+# will be removed by EOD
 @app.route("/find-sports-tickets", methods=["GET"])
 def find_sports_tickets():
     team1 = request.headers['team1']
