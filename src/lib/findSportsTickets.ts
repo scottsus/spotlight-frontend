@@ -1,12 +1,16 @@
-import { ICollapsible } from "../components/Collapsible/Collapsible";
-import { websiteScrape, seatgeekScrape, ticketmasterScrape } from "./siteCheckoutScrape";
+import { ICollapsible } from '../components/Collapsible/Collapsible';
+import { websiteScrape, seatgeekScrape, ticketmasterScrape } from './siteCheckoutScrape';
 
-const siteNames = [
+export const siteNames = [
   'seatgeek',
   'stubhub',
   'ticketmaster',
   'tickpick'
 ]
+
+var numSitesDone = 0;
+// const numTotalSites = siteNames.length;
+const numTotalSites = 1;
 
 interface ICheckoutInfo {
   ( siteURL:string,
@@ -81,10 +85,14 @@ const findTicketsFromSite:IFindTicketsFromSite = (site, team1, team2, section, r
       };
       addTickets((tickets) => [...tickets, newTicket]);
     }
-    setIsLoading(false);
   })
   .catch((err) => {
     console.log('Error:', err);
+  })
+  .finally(() => {
+    numSitesDone++;
+    if (numSitesDone === numTotalSites)
+      setIsLoading(false);
   });
 }
 

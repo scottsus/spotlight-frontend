@@ -31,6 +31,7 @@ const PurpleTag = ({ tagIsOpened, setTagIsOpened }) => {
 const purpleTagStyles: React.CSSProperties = {
   top: '25%',
   position: 'absolute',
+  transition: 'right 0.1s ease',
   zIndex: 1000,
 };
 

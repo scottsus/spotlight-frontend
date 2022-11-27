@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import FilterConfig from './FilterConfig';
 import SortbyConfig from './SortbyConfig';
 
@@ -21,21 +20,7 @@ const Filters: React.FC<IFilters> = () => {
           <img src={chrome.runtime.getURL('filter.png')} style={imgStyles} />
           <h3 style={h3Styles}>Filters</h3>
         </div>
-        <AnimatePresence>
-          {filtersIsOpen && (
-            <motion.div
-              className='box'
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              style={{
-                zIndex: 1001,
-              }}
-            >
-              <FilterConfig toggle={toggleFilters} />
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <FilterConfig filtersIsOpen={filtersIsOpen} toggle={toggleFilters} />
       </div>
       <div style={parentStyles}>
         <div style={buttonStyles} onClick={toggleSortby}>

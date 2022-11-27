@@ -16,6 +16,7 @@ const Skeletons = () => {
 const skeletonsStyles: React.CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
+  marginTop: '15px',
 };
 
 export default Skeletons;
