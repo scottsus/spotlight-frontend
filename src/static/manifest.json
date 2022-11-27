@@ -28,7 +28,7 @@
         },
         {
             "matches": [
-                "*://www.google.com/*"
+                "*://www.yahoo.com/*"
             ],
             "js": ["Concerts.js"]
         }

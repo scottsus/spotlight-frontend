@@ -15,11 +15,10 @@ const appStyles: React.CSSProperties = {
   position: 'absolute',
   left: '53%',
   top: '1%',
-  width: '500px',
-  height: '650px',
+  width: '100px',
+  height: '50px',
   borderRadius: '10px',
   zIndex: 1000,
-  padding: '20px 40px',
   filter: 'drop-shadow(0 0 0.75rem rgb(101, 100, 100))',
 };
 

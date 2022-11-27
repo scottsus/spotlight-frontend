@@ -30,10 +30,7 @@ const App: React.FC = () => {
     }, 2000); // make sure component renders before scraping
     return () => clearTimeout(timer);
   }, []);
-  if (!tagIsOpened)
-    return (
-      <PurpleTag tagIsOpened={tagIsOpened} setTagIsOpened={setTagIsOpened} />
-    );
+  if (!tagIsOpened) return <PurpleTag setTagIsOpened={setTagIsOpened} />;
   else
     return (
       <MainPage

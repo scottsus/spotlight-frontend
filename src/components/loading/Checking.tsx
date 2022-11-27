@@ -12,18 +12,16 @@ const Checking = ({ isLoading }) => {
     return () => clearInterval(interval);
   });
   return (
-    <AnimatePresence>
-      <motion.div
-        style={checkingStyles}
-        initial={{ opacity: 0, y: 0 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <div style={{ ...pillBorderStyles, ...pillColorStyles[choice] }}>
-          <h1 style={h1Styles}>Checking {siteNames[choice]}...</h1>
-        </div>
-      </motion.div>
-    </AnimatePresence>
+    <motion.div
+      style={checkingStyles}
+      initial={{ opacity: 0, y: 0 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div style={{ ...pillBorderStyles, ...pillColorStyles[choice] }}>
+        <h1 style={h1Styles}>Checking {siteNames[choice]}...</h1>
+      </div>
+    </motion.div>
   );
 };
 
@@ -31,6 +29,7 @@ const checkingStyles: React.CSSProperties = {
   height: '40px',
   display: 'flex',
   justifyContent: 'center',
+  zIndex: 1002,
 };
 
 const pillBorderStyles: React.CSSProperties = {

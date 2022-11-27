@@ -4,7 +4,7 @@ interface IPurpleTag {
   tagIsOpened: boolean;
 }
 
-const PurpleTag = ({ tagIsOpened, setTagIsOpened }) => {
+const PurpleTag = ({ setTagIsOpened }) => {
   const [isHovering, setIsHovering] = useState(false);
   const toggle = () => {
     setIsHovering((isHovering) => !isHovering);
