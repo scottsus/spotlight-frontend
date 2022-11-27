@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { siteNames } from '../lib/findSportsTickets';
+import { siteNames } from '../../lib/findSportsTickets';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Checking = ({ isLoading }) => {

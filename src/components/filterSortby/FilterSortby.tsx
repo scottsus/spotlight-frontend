@@ -2,25 +2,28 @@ import React, { useState } from 'react';
 import FilterConfig from './FilterConfig';
 import SortbyConfig from './SortbyConfig';
 
-interface IFilters {}
+interface IFilterSortby {}
 
-const Filters: React.FC<IFilters> = () => {
-  const [filtersIsOpen, setFiltersIsOpen] = useState(false);
+const FilterSortby: React.FC<IFilterSortby> = () => {
+  const [filterConfigIsOpen, setfilterConfigIsOpen] = useState(false);
   const [sortbyIsOpen, setsortbyIsOpen] = useState(false);
-  const toggleFilters = () => {
-    setFiltersIsOpen((filtersIsOpen) => !filtersIsOpen);
+  const toggleFilterConfig = () => {
+    setfilterConfigIsOpen((filterConfigIsOpen) => !filterConfigIsOpen);
   };
   const toggleSortby = () => {
     setsortbyIsOpen((sortbyIsOpen) => !sortbyIsOpen);
   };
   return (
-    <div style={filtersStyles}>
+    <div style={filterSortbyStyles}>
       <div style={parentStyles}>
-        <div style={buttonStyles} onClick={toggleFilters}>
+        <div style={buttonStyles} onClick={toggleFilterConfig}>
           <img src={chrome.runtime.getURL('filter.png')} style={imgStyles} />
           <h3 style={h3Styles}>Filters</h3>
         </div>
-        <FilterConfig filtersIsOpen={filtersIsOpen} toggle={toggleFilters} />
+        <FilterConfig
+          filterConfigIsOpen={filterConfigIsOpen}
+          toggle={toggleFilterConfig}
+        />
       </div>
       <div style={parentStyles}>
         <div style={buttonStyles} onClick={toggleSortby}>
@@ -32,7 +35,7 @@ const Filters: React.FC<IFilters> = () => {
   );
 };
 
-const filtersStyles: React.CSSProperties = {
+const filterSortbyStyles: React.CSSProperties = {
   color: '#4B3BFF',
   height: '30px',
   width: '100%',
@@ -69,4 +72,4 @@ const imgStyles: React.CSSProperties = {
   width: '17px',
 };
 
-export default Filters;
+export default FilterSortby;

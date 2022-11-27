@@ -4,11 +4,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import XButton from '../components/XButton';
 import Logo from '../components/Logo';
 import Title from '../components/Title';
-import Filters from '../components/Filters';
+import Filters from './filterSortby/FilterSortby';
 import MainList from '../components/MainList';
-import Checking from '../components/Checking';
-import Progress from '../components/Progress';
-import Skeletons from '../components/Skeletons';
+import Checking from './loading/Checking';
+import Progress from './loading/Progress';
+import Skeletons from './loading/Skeletons';
 
 const MainPage = ({
   tagIsOpened,

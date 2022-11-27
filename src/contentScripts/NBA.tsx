@@ -4,7 +4,7 @@ import { createRoot } from 'react-dom/client';
 import NBATeams from '../lib/teams';
 import findSportsTickets from '../lib/findSportsTickets';
 
-import { ICollapsible } from '../components/Collapsible/Collapsible';
+import { ICollapsible } from '../components/collapsible/Collapsible';
 import PurpleTag from '../components/PurpleTag';
 import MainPage from '../components/MainPage';
 

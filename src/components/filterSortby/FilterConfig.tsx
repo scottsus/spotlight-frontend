@@ -1,21 +1,24 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import BlackPurple from './BlackPurple';
+import BlackPurple from '../BlackPurple';
 import Box from './Box';
 import Boxes from './Boxes';
 
 interface IFilterConfig {
-  filtersIsOpen: boolean;
+  filterConfigIsOpen: boolean;
   toggle: () => void;
 }
 
-const FilterConfig: React.FC<IFilterConfig> = ({ filtersIsOpen, toggle }) => {
+const FilterConfig: React.FC<IFilterConfig> = ({
+  filterConfigIsOpen,
+  toggle,
+}) => {
   const numberList = ['Any', '1', '2', '3', '4', '5', '6', '7', '8', '9+'];
   const websitesList = ['Any', 'Ticketmaster', 'SeatGeek', 'Stubhub'];
   return (
     <AnimatePresence>
-      {filtersIsOpen && (
+      {filterConfigIsOpen && (
         <motion.div
           style={filterConfigStyles}
           initial={{ opacity: 0 }}

@@ -1,5 +1,5 @@
 import React from 'react';
-import Collapsible, { ICollapsible } from './Collapsible/Collapsible';
+import Collapsible, { ICollapsible } from './collapsible/Collapsible';
 
 interface IMainList {
   tickets: ICollapsible[];

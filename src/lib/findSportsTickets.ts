@@ -1,4 +1,4 @@
-import { ICollapsible } from '../components/Collapsible/Collapsible';
+import { ICollapsible } from '../components/collapsible/Collapsible';
 import { websiteScrape, seatgeekScrape, ticketmasterScrape } from './siteCheckoutScrape';
 
 export const siteNames = [
