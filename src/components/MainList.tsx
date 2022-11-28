@@ -1,17 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion, Variants } from 'framer-motion';
 import Collapsible, { ICollapsible } from './collapsible/Collapsible';
+import { processTickets, seenItems, sortedInsert } from '../lib/mainListUtils';
 
 interface IMainList {
   tickets: ICollapsible[];
 }
-
-const seenItems: Set<string> = new Set<string>();
-const processTickets = (ticket, seenItems: Set<string>) => {
-  if (seenItems.has(ticket.url)) return false;
-  seenItems.add(ticket.url);
-  return true;
-};
 
 const MainList: React.FC<IMainList> = ({ tickets }) => {
   const [collapsibleItems, setCollapsibleItems] = useState<JSX.Element[]>([]);
@@ -23,7 +17,7 @@ const MainList: React.FC<IMainList> = ({ tickets }) => {
             variants={collapsibleAnimations}
             initial='hidden'
             animate='show'
-            key={ticket.url}
+            key={ticket.price + '|?|' + ticket.url}
           >
             <Collapsible
               logo={chrome.runtime.getURL(`${ticket.logo}.png`)}
@@ -34,10 +28,7 @@ const MainList: React.FC<IMainList> = ({ tickets }) => {
             />
           </motion.div>
         );
-        setCollapsibleItems((collapsibleItems) => [
-          ...collapsibleItems,
-          newCollapsible,
-        ]);
+        sortedInsert(newCollapsible, collapsibleItems, setCollapsibleItems);
       }
     }
   }, [tickets]);
@@ -75,7 +66,8 @@ const collapsibleAnimations: Variants = {
     x: 0,
     transition: {
       type: 'spring',
-      duration: 0.5,
+      duration: 0.8,
+      damping: 12,
     },
   },
 };

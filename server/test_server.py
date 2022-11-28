@@ -14,21 +14,21 @@ def scrape_seatgeek():
             "name": "seatgeek",
             "section": 100,
             "row": 20,
-            "price": 400,
+            "price": 1000,
             "url": "https://seatgeek.com"
         },
         {
             "name": "seatgeek",
             "section": 200,
             "row": 15,
-            "price": 500,
+            "price": 800,
             "url": "https://seatgeek.com/2"
         }
     ])
 
 @app.route("/scrape/stubhub", methods=["GET"])
 def scrape_stubhub():
-    time.sleep(4)
+    time.sleep(5)
     return json.dumps([
         {
             "name": "stubhub",
@@ -41,34 +41,34 @@ def scrape_stubhub():
             "name": "stubhub",
             "section": 100,
             "row": 20,
-            "price": 400,
+            "price": 600,
             "url": "https://stubhub.com/2"
         },
     ])
 
 @app.route("/scrape/tickpick", methods=["GET"])
 def scrape_tickpick():
-    time.sleep(5)
+    time.sleep(8)
     return json.dumps([
         {
             "name": "tickpick",
             "section": 100,
             "row": 20,
-            "price": 400,
+            "price": 900,
             "url": "https://tickpick.com"
         },
         {
             "name": "tickpick",
             "section": 100,
             "row": 20,
-            "price": 400,
+            "price": 100,
             "url": "https://tickpick.com/2"
         }
     ])
 
 @app.route("/scrape/ticketmaster", methods=["GET"])
 def scrape_ticketmaster():
-    time.sleep(6)
+    time.sleep(11)
     return json.dumps([
         {
             "name": "ticketmaster",
@@ -81,7 +81,7 @@ def scrape_ticketmaster():
             "name": "ticketmaster",
             "section": 100,
             "row": 20,
-            "price": 400,
+            "price": 4000,
             "url": "https://ticketmaster.com/2"
         }
     ])
