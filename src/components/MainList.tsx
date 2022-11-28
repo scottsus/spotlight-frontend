@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { motion, Variants } from 'framer-motion';
 import Collapsible, { ICollapsible } from './collapsible/Collapsible';
 import { processTickets, seenItems, sortedInsert } from '../lib/mainListUtils';
@@ -8,7 +8,7 @@ interface IMainList {
 }
 
 const MainList: React.FC<IMainList> = ({ tickets }) => {
-  const [collapsibleItems, setCollapsibleItems] = useState<JSX.Element[]>([]);
+  const collapsibleItems = useRef<JSX.Element[]>([]);
   useEffect(() => {
     for (const ticket of tickets) {
       if (processTickets(ticket, seenItems)) {
@@ -28,13 +28,13 @@ const MainList: React.FC<IMainList> = ({ tickets }) => {
             />
           </motion.div>
         );
-        sortedInsert(newCollapsible, collapsibleItems, setCollapsibleItems);
+        sortedInsert(newCollapsible, collapsibleItems);
       }
     }
   }, [tickets]);
   return (
     <motion.div style={mainListStyles} variants={mainListAnimations}>
-      {collapsibleItems}
+      {collapsibleItems.current}
     </motion.div>
   );
 };

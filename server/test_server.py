@@ -41,7 +41,7 @@ def scrape_stubhub():
             "name": "stubhub",
             "section": 100,
             "row": 20,
-            "price": 600,
+            "price": 950,
             "url": "https://stubhub.com/2"
         },
     ])
