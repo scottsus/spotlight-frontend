@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, Variants } from 'framer-motion';
 import Collapsible, { ICollapsible } from './collapsible/Collapsible';
 import { processTickets, seenItems, sortedInsert } from '../lib/mainListUtils';
@@ -8,7 +8,10 @@ interface IMainList {
 }
 
 const MainList: React.FC<IMainList> = ({ tickets }) => {
-  const collapsibleItems = useRef<JSX.Element[]>([]);
+  const collapsibleItemsRef = useRef<JSX.Element[]>([]);
+  const [_, setCollapsibleItems] = useState<string>(
+    JSON.stringify(collapsibleItemsRef.current)
+  );
   useEffect(() => {
     for (const ticket of tickets) {
       if (processTickets(ticket, seenItems)) {
@@ -28,26 +31,18 @@ const MainList: React.FC<IMainList> = ({ tickets }) => {
             />
           </motion.div>
         );
-        sortedInsert(newCollapsible, collapsibleItems);
+        sortedInsert(newCollapsible, collapsibleItemsRef.current);
+        setCollapsibleItems(JSON.stringify(collapsibleItemsRef.current));
       }
     }
   }, [tickets]);
-  return <div style={mainListStyles}>{collapsibleItems.current}</div>;
+  return <div style={mainListStyles}>{collapsibleItemsRef.current}</div>;
 };
 
 const mainListStyles: React.CSSProperties = {
   marginTop: '-20px',
   height: '75%',
   overflowY: 'scroll',
-};
-
-const mainListAnimations: Variants = {
-  hidden: {
-    opacity: 0,
-  },
-  show: {
-    opacity: 1,
-  },
 };
 
 const collapsibleAnimations: Variants = {

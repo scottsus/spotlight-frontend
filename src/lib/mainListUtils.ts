@@ -14,18 +14,18 @@ export const extractPriceFromKey = (key: string) => {
 
 export const sortedInsert = (
   newCollapsible: JSX.Element,
-  collapsibleItems: React.MutableRefObject<JSX.Element[]>
+  collapsibleItems: JSX.Element[]
 ) => {
   let idx = 0,
-    n = collapsibleItems.current.length;
+    n = collapsibleItems.length;
 
   const newPrice = extractPriceFromKey(newCollapsible.key.toString());
   for (idx = 0; idx < n; idx++) {
-    const collapsible = collapsibleItems.current[idx];
+    const collapsible = collapsibleItems[idx];
     const price = extractPriceFromKey(collapsible.key.toString());
     if (price > newPrice) break;
   }
 
-  collapsibleItems.current.splice(idx, 0, newCollapsible);
+  collapsibleItems.splice(idx, 0, newCollapsible);
   return;
 };

@@ -9,7 +9,6 @@ export const siteNames = ['seatgeek', 'stubhub', 'ticketmaster', 'tickpick'];
 
 const sitesDone = new Set<string>();
 const numTotalSites = siteNames.length;
-// const numTotalSites = 1;
 
 interface ICheckoutInfo {
   (
