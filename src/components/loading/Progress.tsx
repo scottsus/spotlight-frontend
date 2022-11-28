@@ -28,8 +28,8 @@ const Progress = ({ hasLoadedAll }) => {
         <motion.div
           key='progressBar'
           style={progressStyles}
-          exit={{ height: '0px' }}
-          transition={{ type: 'tween', duration: 2 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.8 }}
         >
           <style>{progressStyle}</style>
           <ProgressBar animated now={(progress * 100.0) / 30} />
@@ -49,6 +49,7 @@ const progressStyle: string = `
 const progressStyles: React.CSSProperties = {
   display: 'flex',
   justifyContent: 'center',
+  margin: '0px 0px',
 };
 
 export default Progress;

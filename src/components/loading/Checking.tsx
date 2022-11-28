@@ -17,12 +17,23 @@ const Checking = ({ hasLoadedAll }) => {
         <motion.div
           key='checking'
           style={checkingStyles}
-          exit={{ height: '0px' }}
-          transition={{ duration: 1.0 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.2 }}
         >
-          <div style={{ ...pillBorderStyles, ...pillColorStyles[choice] }}>
+          <motion.div
+            key='pill'
+            style={pillStyles}
+            animate={{
+              backgroundColor: ['#000000', '#FFFFFF'],
+            }}
+            transition={{
+              times: [0, 0.5, 1],
+              repeat: Infinity,
+              repeatDelay: 1,
+            }}
+          >
             <h1 style={h1Styles}>Checking {siteNames[choice]}...</h1>
-          </div>
+          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>
@@ -30,40 +41,21 @@ const Checking = ({ hasLoadedAll }) => {
 };
 
 const checkingStyles: React.CSSProperties = {
-  height: '40px',
-  display: 'flex',
-  justifyContent: 'center',
-  zIndex: 1002,
+  height: '27px',
+  width: '60%',
+  margin: '0px 0px',
 };
 
-const pillBorderStyles: React.CSSProperties = {
-  width: '80%',
+const pillStyles: React.CSSProperties = {
   height: '27px',
+  width: '80%',
+  margin: '0px auto',
   borderRadius: '10px',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  transition: 'all 1.0s ease',
+  zIndex: 1002,
 };
-
-const pillColorStyles: React.CSSProperties[] = [
-  {
-    border: '2px solid red',
-    backgroundColor: 'pink',
-  },
-  {
-    border: '2px solid orange',
-    backgroundColor: 'yellow',
-  },
-  {
-    border: '2px solid blue',
-    backgroundColor: 'aquamarine',
-  },
-  {
-    border: '2px solid purple',
-    backgroundColor: 'violet',
-  },
-];
 
 const h1Styles: React.CSSProperties = {
   fontSize: '15px',

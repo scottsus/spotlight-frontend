@@ -29,12 +29,12 @@ const App: React.FC = () => {
         setHasLoadedOne,
         setHasLoadedAll
       );
-    }, 2000); // make sure component renders before scraping
+    }, 2000); // make sure page loads before scraping
     return () => clearTimeout(timer);
   }, []);
-  if (!tagIsOpened) return <PurpleTag setTagIsOpened={setTagIsOpened} />;
-  else
-    return (
+  return (
+    <div>
+      <PurpleTag tagIsOpened={tagIsOpened} setTagIsOpened={setTagIsOpened} />;
       <MainPage
         tagIsOpened={tagIsOpened}
         setTagIsOpened={setTagIsOpened}
@@ -43,7 +43,8 @@ const App: React.FC = () => {
         hasLoadedOne={hasLoadedOne}
         hasLoadedAll={hasLoadedAll}
       />
-    );
+    </div>
+  );
 };
 
 const div = document.createElement('div');

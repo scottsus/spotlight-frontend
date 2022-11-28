@@ -22,34 +22,42 @@ const MainPage = ({
 }) => {
   return (
     <div>
-      {tagIsOpened && (
-        <motion.div
-          style={appStyles}
-          initial={{ opacity: 0, y: 0 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.2 }}
-        >
-          <Logo />
-          <XButton tagIsOpened={tagIsOpened} setTagIsOpened={setTagIsOpened} />
-          <Title
-            team1={teams.current[0]}
-            team2={teams.current[1]}
-            stadium='SoFi Stadium'
-            city='Inglewood'
-            state='CA'
-            day='Sat'
-            date='Nov 26'
-            time='6:30pm'
-          />
+      <motion.div
+        style={
+          tagIsOpened
+            ? { ...appStyles, visibility: 'visible' }
+            : { ...appStyles, visibility: 'hidden' }
+        }
+        initial='hidden'
+        animate={
+          tagIsOpened ? { visibility: 'visible' } : { visibility: 'hidden' }
+        }
+        transition={{ duration: 0.5 }}
+      >
+        <Logo />
+        <XButton tagIsOpened={tagIsOpened} setTagIsOpened={setTagIsOpened} />
+        <Title
+          team1={teams.current[0]}
+          team2={teams.current[1]}
+          stadium='SoFi Stadium'
+          city='Inglewood'
+          state='CA'
+          day='Sat'
+          date='Nov 26'
+          time='6:30pm'
+        />
+        <div style={loadingStyles}>
           <Filters />
-          <div>
-            <Checking hasLoadedAll={hasLoadedAll} />
-            <Progress hasLoadedAll={hasLoadedAll} />
-          </div>
-          <Skeletons hasLoadedOne={hasLoadedOne} />
-          {hasLoadedOne && <MainList tickets={tickets} />}
-        </motion.div>
-      )}
+          <Checking hasLoadedAll={hasLoadedAll} />
+        </div>
+
+        <Progress hasLoadedAll={hasLoadedAll} />
+
+        <Skeletons hasLoadedOne={hasLoadedOne} />
+        {hasLoadedOne && (
+          <MainList tickets={tickets} hasLoadedAll={hasLoadedAll} />
+        )}
+      </motion.div>
     </div>
   );
 };
@@ -66,6 +74,15 @@ const appStyles: React.CSSProperties = {
   zIndex: 1000,
   padding: '20px 40px',
   filter: 'drop-shadow(0 0 0.75rem rgb(101, 100, 100))',
+  overflow: 'hidden',
+};
+
+const loadingStyles = {
+  height: '30px',
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  margin: '10px 0px',
 };
 
 export default MainPage;

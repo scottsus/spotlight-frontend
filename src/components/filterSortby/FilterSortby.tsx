@@ -38,14 +38,15 @@ const FilterSortby: React.FC<IFilterSortby> = () => {
 const filterSortbyStyles: React.CSSProperties = {
   color: '#4B3BFF',
   height: '30px',
-  width: '100%',
-  margin: '20px 0px',
+  width: '40%',
+  margin: '10px 0px',
   display: 'flex',
 };
 
 const parentStyles: React.CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
+  justifyContent: 'center',
   width: '85px',
   maxWidth: '85px',
 };
@@ -53,9 +54,9 @@ const parentStyles: React.CSSProperties = {
 const buttonStyles: React.CSSProperties = {
   border: '2px solid #4B3BFF',
   borderRadius: '5px',
-  height: '90%',
+  height: '80%',
   display: 'flex',
-  margin: '0px 5px 10px 5px',
+  margin: '0px 5px',
   justifyContent: 'space-evenly',
   alignItems: 'center',
   cursor: 'pointer',

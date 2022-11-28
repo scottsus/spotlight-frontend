@@ -2,13 +2,18 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 interface IPurpleTag {
+  tagIsOpened: boolean;
   setTagIsOpened: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const PurpleTag: React.FC<IPurpleTag> = ({ setTagIsOpened }) => {
+const PurpleTag: React.FC<IPurpleTag> = ({ tagIsOpened, setTagIsOpened }) => {
   return (
     <motion.div
-      style={{ ...purpleTagStyles }}
+      style={
+        tagIsOpened
+          ? { ...purpleTagStyles, visibility: 'hidden' }
+          : { ...purpleTagStyles, visibility: 'visible' }
+      }
       whileHover={{
         x: '-40px',
       }}

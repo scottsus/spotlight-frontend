@@ -11,7 +11,7 @@ const Skeletons = ({ hasLoadedOne }) => {
           key='skeletons'
           style={skeletonsStyles}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.1 }}
         >
           <SkeletonBlock />
           <SkeletonBlock />
@@ -24,8 +24,10 @@ const Skeletons = ({ hasLoadedOne }) => {
 };
 
 const skeletonsStyles: React.CSSProperties = {
+  height: '50%',
   display: 'flex',
   flexDirection: 'column',
+  justifyContent: 'space-evenly',
   marginTop: '15px',
 };
 
