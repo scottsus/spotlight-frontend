@@ -11,14 +11,14 @@ const Progress = () => {
     return () => clearInterval(interval);
   });
   return (
-    <div id='progressbar' style={progressStyles}>
+    <div style={progressStyles}>
       <style>{style}</style>
       <ProgressBar animated now={(progress * 100.0) / 30} />
     </div>
   );
 };
 
-const style = `
+const style: string = `
 .progress {
   height: 23px;
   width: 80%;

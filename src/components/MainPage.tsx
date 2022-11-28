@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 import XButton from '../components/XButton';
 import Logo from '../components/Logo';
@@ -18,13 +18,13 @@ const MainPage = ({
   tickets,
 }) => {
   return (
-    <AnimatePresence>
+    <div>
       {tagIsOpened && (
         <motion.div
           style={appStyles}
           initial={{ opacity: 0, y: 0 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.2 }}
         >
           <Logo />
           <XButton tagIsOpened={tagIsOpened} setTagIsOpened={setTagIsOpened} />
@@ -50,7 +50,7 @@ const MainPage = ({
           )}
         </motion.div>
       )}
-    </AnimatePresence>
+    </div>
   );
 };
 

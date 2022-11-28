@@ -1,43 +1,89 @@
 from flask import Flask, request
-import flask
-import json
-from threading import Thread
 from flask_cors import CORS
+import json
+import time
 
 app = Flask(__name__)
 CORS(app)
 
-@app.route("/find-sports-tickets", methods=["GET"])
-def find_sports_tickets():
+@app.route("/scrape/seatgeek", methods=["GET"])
+def scrape_seatgeek():
+    time.sleep(3)
     return json.dumps([
         {
             "name": "seatgeek",
             "section": 100,
             "row": 20,
             "price": 400,
-            "url": "https://scott-susanto.herokuapp.com"
+            "url": "https://seatgeek.com"
+        },
+        {
+            "name": "seatgeek",
+            "section": 200,
+            "row": 15,
+            "price": 500,
+            "url": "https://seatgeek.com/2"
+        }
+    ])
+
+@app.route("/scrape/stubhub", methods=["GET"])
+def scrape_stubhub():
+    time.sleep(4)
+    return json.dumps([
+        {
+            "name": "stubhub",
+            "section": 100,
+            "row": 20,
+            "price": 400,
+            "url": "https://stubhub.com"
         },
         {
             "name": "stubhub",
             "section": 100,
             "row": 20,
             "price": 400,
-            "url": "https://scott-susanto.herokuapp.com"
+            "url": "https://stubhub.com/2"
+        },
+    ])
+
+@app.route("/scrape/tickpick", methods=["GET"])
+def scrape_tickpick():
+    time.sleep(5)
+    return json.dumps([
+        {
+            "name": "tickpick",
+            "section": 100,
+            "row": 20,
+            "price": 400,
+            "url": "https://tickpick.com"
         },
         {
             "name": "tickpick",
             "section": 100,
             "row": 20,
             "price": 400,
-            "url": "https://scott-susanto.herokuapp.com"
+            "url": "https://tickpick.com/2"
+        }
+    ])
+
+@app.route("/scrape/ticketmaster", methods=["GET"])
+def scrape_ticketmaster():
+    time.sleep(6)
+    return json.dumps([
+        {
+            "name": "ticketmaster",
+            "section": 100,
+            "row": 20,
+            "price": 400,
+            "url": "https://ticketmaster.com"
         },
         {
             "name": "ticketmaster",
             "section": 100,
             "row": 20,
             "price": 400,
-            "url": "https://scott-susanto.herokuapp.com"
-        },
+            "url": "https://ticketmaster.com/2"
+        }
     ])
 
 

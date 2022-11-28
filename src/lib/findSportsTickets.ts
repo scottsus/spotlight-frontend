@@ -32,7 +32,6 @@ const findSportsTickets:ICheckoutInfo = (siteURL, document, NBATeams, teams, add
         const scrapingFunction:websiteScrape = siteMap[siteName];
         const ticketInfo:string[] = scrapingFunction(truncatedDocText);
         for (const site of siteNames) {
-          if (site !== 'stubhub') continue
           findTicketsFromSite(site, 
             teams.current[0],
             teams.current[1],
@@ -76,7 +75,7 @@ const findTicketsFromSite:IFindTicketsFromSite = (site, team1, team2, section, r
   .then((res) => res.json())
   .then(ticketList => {
     for (const [_, ticket] of ticketList.entries()) {
-      const newTicket = {
+      const newTicket:ICollapsible = {
         logo: ticket['name'],
         section: ticket['section'],
         row: ticket['row'],
