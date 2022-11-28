@@ -38,6 +38,7 @@ const FilterSortby: React.FC<IFilterSortby> = () => {
 const filterSortbyStyles: React.CSSProperties = {
   color: '#4B3BFF',
   height: '30px',
+  maxHeight: '30px',
   width: '40%',
   margin: '10px 0px',
   display: 'flex',

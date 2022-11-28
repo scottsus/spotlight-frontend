@@ -53,4 +53,4 @@ npm run server
 
 ## Progress
 
-![Div Scroll](div-scroll.gif)
+![Almost there...](almost.gif)
