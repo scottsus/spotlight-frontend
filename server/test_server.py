@@ -48,7 +48,7 @@ def scrape_stubhub():
 
 @app.route("/scrape/tickpick", methods=["GET"])
 def scrape_tickpick():
-    time.sleep(8)
+    time.sleep(6)
     return json.dumps([
         {
             "name": "tickpick",
@@ -68,7 +68,7 @@ def scrape_tickpick():
 
 @app.route("/scrape/ticketmaster", methods=["GET"])
 def scrape_ticketmaster():
-    time.sleep(11)
+    time.sleep(7)
     return json.dumps([
         {
             "name": "ticketmaster",

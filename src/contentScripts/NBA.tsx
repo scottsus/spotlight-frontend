@@ -11,7 +11,8 @@ import MainPage from '../components/MainPage';
 const App: React.FC = () => {
   const [tagIsOpened, setTagIsOpened] = useState<boolean>(false);
   const [tickets, addTickets] = useState<ICollapsible[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [hasLoadedOne, setHasLoadedOne] = useState<boolean>(false);
+  const [hasLoadedAll, setHasLoadedAll] = useState<boolean>(false);
   const teams = useRef<string[]>([]);
   const addTeam = (NBATeam) => {
     teams.current.push(NBATeam);
@@ -25,7 +26,8 @@ const App: React.FC = () => {
         teams,
         addTeam,
         addTickets,
-        setIsLoading
+        setHasLoadedOne,
+        setHasLoadedAll
       );
     }, 2000); // make sure component renders before scraping
     return () => clearTimeout(timer);
@@ -37,8 +39,9 @@ const App: React.FC = () => {
         tagIsOpened={tagIsOpened}
         setTagIsOpened={setTagIsOpened}
         teams={teams}
-        isLoading={isLoading}
         tickets={tickets}
+        hasLoadedOne={hasLoadedOne}
+        hasLoadedAll={hasLoadedAll}
       />
     );
 };

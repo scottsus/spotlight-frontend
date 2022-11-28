@@ -1,26 +1,47 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const Progress = () => {
+const Progress = ({ hasLoadedAll }) => {
   const [progress, setProgress] = useState(0);
+  const [isDoneWithProgressBar, setIsDoneWithProgressBar] = useState(false);
   useEffect(() => {
+    if (hasLoadedAll) {
+      const interval = setInterval(() => {
+        setProgress((progress) => progress + 1);
+        if (progress >= 30) {
+          setIsDoneWithProgressBar(true);
+          clearInterval(interval);
+        }
+      }, 50);
+      return () => clearInterval(interval);
+    }
     const interval = setInterval(() => {
       if (progress < 30) setProgress((progress) => progress + 0.1);
     }, 100);
     return () => clearInterval(interval);
-  });
+  }, [hasLoadedAll, progress]);
   return (
-    <div style={progressStyles}>
-      <style>{style}</style>
-      <ProgressBar animated now={(progress * 100.0) / 30} />
-    </div>
+    <AnimatePresence>
+      {!isDoneWithProgressBar && (
+        <motion.div
+          key='progressBar'
+          style={progressStyles}
+          exit={{ height: '0px' }}
+          transition={{ type: 'tween', duration: 2 }}
+        >
+          <style>{progressStyle}</style>
+          <ProgressBar animated now={(progress * 100.0) / 30} />
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 
-const style: string = `
+const progressStyle: string = `
 .progress {
-  height: 23px;
+  height: 27px;
   width: 80%;
 }
 `;

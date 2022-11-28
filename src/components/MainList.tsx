@@ -32,11 +32,7 @@ const MainList: React.FC<IMainList> = ({ tickets }) => {
       }
     }
   }, [tickets]);
-  return (
-    <motion.div style={mainListStyles} variants={mainListAnimations}>
-      {collapsibleItems.current}
-    </motion.div>
-  );
+  return <div style={mainListStyles}>{collapsibleItems.current}</div>;
 };
 
 const mainListStyles: React.CSSProperties = {
@@ -51,10 +47,6 @@ const mainListAnimations: Variants = {
   },
   show: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.5,
-      delayChildren: 1.0,
-    },
   },
 };
 

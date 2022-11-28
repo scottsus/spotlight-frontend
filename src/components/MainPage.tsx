@@ -10,12 +10,15 @@ import Checking from './loading/Checking';
 import Progress from './loading/Progress';
 import Skeletons from './loading/Skeletons';
 
+interface IMainPage {}
+
 const MainPage = ({
   tagIsOpened,
   setTagIsOpened,
   teams,
-  isLoading,
   tickets,
+  hasLoadedOne,
+  hasLoadedAll,
 }) => {
   return (
     <div>
@@ -39,15 +42,12 @@ const MainPage = ({
             time='6:30pm'
           />
           <Filters />
-          {isLoading ? (
-            <div>
-              <Checking isLoading={isLoading} />
-              <Progress />
-              <Skeletons />
-            </div>
-          ) : (
-            <MainList tickets={tickets} />
-          )}
+          <div>
+            <Checking hasLoadedAll={hasLoadedAll} />
+            <Progress hasLoadedAll={hasLoadedAll} />
+          </div>
+          <Skeletons hasLoadedOne={hasLoadedOne} />
+          {hasLoadedOne && <MainList tickets={tickets} />}
         </motion.div>
       )}
     </div>

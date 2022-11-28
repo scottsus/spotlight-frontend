@@ -1,15 +1,25 @@
 import React from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import SkeletonBlock from './SkeletonBlock';
 import 'react-loading-skeleton/dist/skeleton.css';
 
-const Skeletons = () => {
+const Skeletons = ({ hasLoadedOne }) => {
   return (
-    <div style={skeletonsStyles}>
-      <SkeletonBlock />
-      <SkeletonBlock />
-      <SkeletonBlock />
-      <SkeletonBlock />
-    </div>
+    <AnimatePresence>
+      {!hasLoadedOne && (
+        <motion.div
+          key='skeletons'
+          style={skeletonsStyles}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.5 }}
+        >
+          <SkeletonBlock />
+          <SkeletonBlock />
+          <SkeletonBlock />
+          <SkeletonBlock />
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 

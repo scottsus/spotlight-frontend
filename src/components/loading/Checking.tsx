@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { siteNames } from '../../lib/findSportsTickets';
 import { motion, AnimatePresence } from 'framer-motion';
+import { siteNames } from '../../lib/findSportsTickets';
 
-const Checking = ({ isLoading }) => {
+const Checking = ({ hasLoadedAll }) => {
   const [choice, setChoice] = useState(0);
   useEffect(() => {
     const interval = setInterval(() => {
@@ -12,16 +12,20 @@ const Checking = ({ isLoading }) => {
     return () => clearInterval(interval);
   });
   return (
-    <motion.div
-      style={checkingStyles}
-      initial={{ opacity: 0, y: 0 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      <div style={{ ...pillBorderStyles, ...pillColorStyles[choice] }}>
-        <h1 style={h1Styles}>Checking {siteNames[choice]}...</h1>
-      </div>
-    </motion.div>
+    <AnimatePresence>
+      {!hasLoadedAll && (
+        <motion.div
+          key='checking'
+          style={checkingStyles}
+          exit={{ height: '0px' }}
+          transition={{ duration: 1.0 }}
+        >
+          <div style={{ ...pillBorderStyles, ...pillColorStyles[choice] }}>
+            <h1 style={h1Styles}>Checking {siteNames[choice]}...</h1>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 
