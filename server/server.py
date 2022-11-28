@@ -26,17 +26,33 @@ def scrape_stubhub():
 @app.route("/scrape/ticketmaster")
 def scrape_ticketmaster():
     # TODO @dennis
+    
+    
     return
 
 @app.route("/scrape/seatgeek")
 def scrape_seatgeek():
     # TODO @dennis
-    return
+    (team1, team2, src_section, src_row, src_price, quantity) = get_data_from_req(request)
+    tickets_list = seatgeek.scrape(team1, team2, src_section, src_row, src_price, quantity)
+    print(tickets_list)
+    response_list = []
+    for ticket in tickets_list:
+        res = tuple_to_dict(ticket)
+        response_list.append(res)
+    return json.dumps(response_list)
 
 @app.route("/scrape/tickpick")
 def scrape_tickpick():
     # TODO @dennis
-    return
+    (team1, team2, src_section, src_row, src_price, quantity) = get_data_from_req(request)
+    tickets_list = seatgeek.scrape(team1, team2, src_section, src_row, src_price, quantity)
+    print(tickets_list)
+    response_list = []
+    for ticket in tickets_list:
+        res = tuple_to_dict(ticket)
+        response_list.append(res)
+    return json.dumps(response_list)
 
 
 # will be removed by EOD
@@ -53,8 +69,8 @@ def find_sports_tickets():
     
     t1 = Thread(target=find_cheaper_tickets, args=[response_list, 0, stubhub.scrape, team1, team2, section, row, price, quantity])
     t2 = Thread(target=find_cheaper_tickets, args=[response_list, 1, stubhub.scrape, team1, team2, section, row, price, quantity])
-    t3 = Thread(target=find_cheaper_tickets, args=[response_list, 2, stubhub.scrape, team1, team2, section, row, price, quantity])
-    t4 = Thread(target=find_cheaper_tickets, args=[response_list, 3, stubhub.scrape, team1, team2, section, row, price, quantity])
+    t3 = Thread(target=find_cheaper_tickets, args=[response_list, 2, seatgeek.scrape, team1, team2, section, row, price, quantity])
+    t4 = Thread(target=find_cheaper_tickets, args=[response_list, 3, tickpick.scrape, team1, team2, section, row, price, quantity])
 
     t1.start()
     t2.start()
