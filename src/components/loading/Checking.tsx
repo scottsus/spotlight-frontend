@@ -10,9 +10,9 @@ const Checking: React.FC<IChecking> = ({ hasLoadedAll }) => {
   const [choice, setChoice] = useState(0);
   useEffect(() => {
     const interval = setInterval(() => {
-      setChoice((choice) => choice + 1);
+      setChoice((choice) => (choice + 1) % siteNames.length);
       if (choice === siteNames.length - 1) setChoice(0);
-    }, 2000);
+    }, 4000);
     return () => clearInterval(interval);
   });
   return (
@@ -27,14 +27,7 @@ const Checking: React.FC<IChecking> = ({ hasLoadedAll }) => {
           <motion.div
             key='pill'
             style={pillStyles}
-            animate={{
-              backgroundColor: ['#000000', '#FFFFFF'],
-            }}
-            transition={{
-              times: [0, 0.5, 1],
-              repeat: Infinity,
-              repeatDelay: 1,
-            }}
+            // TODO: animating background colors
           >
             <h1 style={h1Styles}>Checking {siteNames[choice]}...</h1>
           </motion.div>
@@ -45,16 +38,18 @@ const Checking: React.FC<IChecking> = ({ hasLoadedAll }) => {
 };
 
 const checkingStyles: React.CSSProperties = {
-  height: '27px',
-  width: '60%',
-  margin: '0px 0px',
+  height: '35px',
+  width: '80%',
+  margin: '25px auto 20px',
 };
 
 const pillStyles: React.CSSProperties = {
-  height: '27px',
-  width: '80%',
+  height: '35px',
+  width: '275px',
   margin: '0px auto',
-  borderRadius: '10px',
+  padding: '9px 32px',
+  borderRadius: '38px',
+  backgroundColor: '#7A6FFF',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -62,8 +57,9 @@ const pillStyles: React.CSSProperties = {
 };
 
 const h1Styles: React.CSSProperties = {
-  fontSize: '15px',
-  fontWeight: 600,
+  fontSize: '13px',
+  fontWeight: 700,
+  color: '#FFFFFF',
 };
 
 export default Checking;

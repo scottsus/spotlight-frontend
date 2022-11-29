@@ -46,14 +46,15 @@ const Progress: React.FC<IProgress> = ({ hasLoadedAll }) => {
 const progressStyle: string = `
 .progress {
   height: 27px;
-  width: 80%;
+  width: 100%;
+  margin-right: 40px;
 }
 `;
 
 const progressStyles: React.CSSProperties = {
+  width: '50%',
   display: 'flex',
   justifyContent: 'center',
-  margin: '5px 0px 0px',
 };
 
 export default Progress;

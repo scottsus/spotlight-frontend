@@ -60,9 +60,9 @@ const MainPage: React.FC<IMainPage> = ({
         )}
         <div style={loadingStyles}>
           <Filters />
-          <Checking hasLoadedAll={hasLoadedAll} />
+          <Progress hasLoadedAll={hasLoadedAll} />
         </div>
-        <Progress hasLoadedAll={hasLoadedAll} />
+        <Checking hasLoadedAll={hasLoadedAll} />
         <Skeletons hasLoadedOne={hasLoadedOne} />
         {hasLoadedOne && (
           <MainList tickets={destTickets} hasLoadedAll={hasLoadedAll} />

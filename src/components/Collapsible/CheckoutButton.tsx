@@ -1,5 +1,5 @@
 import React from 'react';
-import Hoverable from '../Hoverable';
+import Hoverable from './Hoverable';
 
 interface ICheckoutButton {
   price: string;

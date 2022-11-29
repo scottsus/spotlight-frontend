@@ -1,4 +1,5 @@
 import React from 'react';
+import stateToAbbreviation from '../lib/stateToAbbreviation';
 
 interface ITitle {
   team1: string;
@@ -27,7 +28,8 @@ const Title: React.FC<ITitle> = ({
         {team1} vs {team2}
       </h2>
       <h3 style={h3Styles}>
-        {stadium} • {city}, {state} • {day}, {date} at {time}
+        {stadium} • {city}, {stateToAbbreviation(state)} • {day}, {date} at{' '}
+        {time}
       </h3>
       <div style={dividerStyles} />
     </div>
