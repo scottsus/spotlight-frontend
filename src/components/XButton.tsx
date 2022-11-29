@@ -1,15 +1,14 @@
 import React from 'react';
 
 interface IXButton {
-  tagIsOpened: boolean;
   setTagIsOpened: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const XButton = ({ tagIsOpened, setTagIsOpened }) => {
+const XButton: React.FC<IXButton> = ({ setTagIsOpened }) => {
   return (
     <div style={xButtonStyles}>
       <button onClick={() => setTagIsOpened(false)} style={buttonStyles}>
-        X
+        <img src={chrome.runtime.getURL('imgs/X Button.png')} />
       </button>
     </div>
   );

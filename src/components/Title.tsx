@@ -1,6 +1,26 @@
 import React from 'react';
 
-const Title = ({ team1, team2, stadium, city, state, day, date, time }) => {
+interface ITitle {
+  team1: string;
+  team2: string;
+  stadium?: string;
+  city?: string;
+  state?: string;
+  day?: string;
+  date?: string;
+  time?: string;
+}
+
+const Title: React.FC<ITitle> = ({
+  team1,
+  team2,
+  stadium,
+  city,
+  state,
+  day,
+  date,
+  time,
+}) => {
   return (
     <div style={titleStyles}>
       <h2 style={h2Styles}>

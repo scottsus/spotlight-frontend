@@ -2,7 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { siteNames } from '../../lib/findSportsTickets';
 
-const Checking = ({ hasLoadedAll }) => {
+interface IChecking {
+  hasLoadedAll: boolean;
+}
+
+const Checking: React.FC<IChecking> = ({ hasLoadedAll }) => {
   const [choice, setChoice] = useState(0);
   useEffect(() => {
     const interval = setInterval(() => {

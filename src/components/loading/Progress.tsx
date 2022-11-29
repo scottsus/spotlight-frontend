@@ -3,7 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const Progress = ({ hasLoadedAll }) => {
+interface IProgress {
+  hasLoadedAll: boolean;
+}
+
+const Progress: React.FC<IProgress> = ({ hasLoadedAll }) => {
   const [progress, setProgress] = useState(0);
   const [isDoneWithProgressBar, setIsDoneWithProgressBar] = useState(false);
   useEffect(() => {

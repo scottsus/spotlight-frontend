@@ -1,7 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const TicketInfo = () => {
+interface ITicketInfo {}
+
+const TicketInfo: React.FC<ITicketInfo> = () => {
   return (
     <motion.div
       style={ticketInfoStyles}

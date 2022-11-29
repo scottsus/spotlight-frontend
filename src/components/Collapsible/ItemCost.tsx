@@ -1,6 +1,11 @@
 import React from 'react';
 
-const ItemCost = ({ text, cost }) => {
+interface IItemCost {
+  text: string;
+  cost: number;
+}
+
+const ItemCost: React.FC<IItemCost> = ({ text, cost }) => {
   return (
     <div style={itemCostStyles}>
       <h1 style={{ ...itemStyles, ...{ textAlign: 'left' } }}>{text}</h1>

@@ -3,7 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import SkeletonBlock from './SkeletonBlock';
 import 'react-loading-skeleton/dist/skeleton.css';
 
-const Skeletons = ({ hasLoadedOne }) => {
+interface ISkeletons {
+  hasLoadedOne: boolean;
+}
+
+const Skeletons: React.FC<ISkeletons> = ({ hasLoadedOne }) => {
   return (
     <AnimatePresence>
       {!hasLoadedOne && (

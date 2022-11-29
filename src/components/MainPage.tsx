@@ -5,14 +5,22 @@ import XButton from '../components/XButton';
 import Logo from '../components/Logo';
 import Title from '../components/Title';
 import Filters from './filterSortby/FilterSortby';
+import { ICollapsible } from './collapsible/Collapsible';
 import MainList from '../components/MainList';
 import Checking from './loading/Checking';
 import Progress from './loading/Progress';
 import Skeletons from './loading/Skeletons';
 
-interface IMainPage {}
+interface IMainPage {
+  tagIsOpened: boolean;
+  setTagIsOpened: React.Dispatch<React.SetStateAction<boolean>>;
+  teams: React.MutableRefObject<string[]>;
+  tickets: ICollapsible[];
+  hasLoadedOne: boolean;
+  hasLoadedAll: boolean;
+}
 
-const MainPage = ({
+const MainPage: React.FC<IMainPage> = ({
   tagIsOpened,
   setTagIsOpened,
   teams,
@@ -35,7 +43,7 @@ const MainPage = ({
         transition={{ duration: 0.5 }}
       >
         <Logo />
-        <XButton tagIsOpened={tagIsOpened} setTagIsOpened={setTagIsOpened} />
+        <XButton setTagIsOpened={setTagIsOpened} />
         <Title
           team1={teams.current[0]}
           team2={teams.current[1]}
@@ -50,9 +58,7 @@ const MainPage = ({
           <Filters />
           <Checking hasLoadedAll={hasLoadedAll} />
         </div>
-
         <Progress hasLoadedAll={hasLoadedAll} />
-
         <Skeletons hasLoadedOne={hasLoadedOne} />
         {hasLoadedOne && (
           <MainList tickets={tickets} hasLoadedAll={hasLoadedAll} />
