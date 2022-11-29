@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 
 import NBATeams from '../lib/teams';
 import findSportsTickets from '../lib/findSportsTickets';
+import fonts from '../lib/fonts';
 
 import { ICollapsible } from '../components/collapsible/Collapsible';
 import PurpleTag from '../components/PurpleTag';
@@ -34,6 +35,7 @@ const App: React.FC = () => {
   }, []);
   return (
     <div>
+      <style>{fonts}</style>
       <PurpleTag tagIsOpened={tagIsOpened} setTagIsOpened={setTagIsOpened} />;
       <MainPage
         tagIsOpened={tagIsOpened}

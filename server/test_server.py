@@ -8,7 +8,6 @@ CORS(app)
 
 @app.route("/scrape/seatgeek", methods=["GET"])
 def scrape_seatgeek():
-    time.sleep(3)
     return json.dumps([
         {
             "name": "seatgeek",
@@ -28,7 +27,6 @@ def scrape_seatgeek():
 
 @app.route("/scrape/stubhub", methods=["GET"])
 def scrape_stubhub():
-    time.sleep(5)
     return json.dumps([
         {
             "name": "stubhub",

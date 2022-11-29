@@ -1,60 +1,77 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const TicketInfo = () => {
   return (
-    <div style={ticketInfoStyles}>
+    <motion.div
+      style={ticketInfoStyles}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      key='ticketinfo'
+    >
       <div style={textStyles}>
-        <h1 style={headerStyles}>Tickets Available:</h1>
+        <h1 style={categoryHeaderStyles}>Tickets Available:</h1>
         <h2 style={bodyStyles}>1 - 3 Resale Tickets</h2>
-        <h1 style={headerStyles}>Electronic Tickets:</h1>
+        <h1 style={{ ...categoryHeaderStyles, marginTop: '12px' }}>
+          Electronic Tickets:
+        </h1>
         <h2 style={bodyStyles}>E-tickets delivered to your email address</h2>
-        <h1 style={headerStyles}>Notes from Seller:</h1>
+        <h1 style={{ ...categoryHeaderStyles, marginTop: '12px' }}>
+          Notes from Seller:
+        </h1>
         <h2 style={bodyStyles}>XFER</h2>
-        <h1 style={headerStyles}>Buyer Guarantee:</h1>
+        <h1 style={{ ...categoryHeaderStyles, marginTop: '12px' }}>
+          Buyer Guarantee:
+        </h1>
         <h2 style={bodyStyles}>🚀🚀</h2>
       </div>
       <div style={pictureStyles}>
         <img
-          src={chrome.runtime.getURL('pov.png')}
+          src={chrome.runtime.getURL('imgs/pov.png')}
           alt='PoV'
           style={{ ...imgStyles, ...{ height: '120px' } }}
         />
         <img
-          src={chrome.runtime.getURL('stadium.png')}
+          src={chrome.runtime.getURL('imgs/stadium.png')}
           alt='stadium'
           style={{ ...imgStyles, ...{ height: '105px' } }}
         />
       </div>
-    </div>
+    </motion.div>
   );
 };
 
 const ticketInfoStyles: React.CSSProperties = {
   display: 'flex',
   justifyContent: 'space-evenly',
-  padding: '0px 10px',
+  padding: '16px 35px',
+  overflowY: 'scroll',
 };
 
 const textStyles: React.CSSProperties = {
-  width: '50%',
+  width: '263px',
 };
 
 const pictureStyles: React.CSSProperties = {
-  width: '40%',
+  height: '120px',
+  width: '180px',
 };
 
-const headerStyles: React.CSSProperties = {
-  color: '#000000',
-  margin: '8px 0px 0px 0px',
-  fontSize: '17px',
-  fontWeight: 600,
+const categoryHeaderStyles: React.CSSProperties = {
+  fontFamily: 'Manrope',
+  fontSize: '16px',
+  fontWeight: 700,
+  color: '#27292A',
+  margin: '2px 0px',
 };
 
 const bodyStyles: React.CSSProperties = {
-  width: '100%',
-  fontSize: '14px',
-  fontWeight: 400,
-  margin: '1px 0px',
+  fontFamily: 'Manrope',
+  fontSize: '16px',
+  fontWeight: 300,
+  color: '#5F5F5F',
+  margin: '2px 0px',
 };
 
 const imgStyles: React.CSSProperties = {

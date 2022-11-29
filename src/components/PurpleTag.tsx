@@ -15,13 +15,14 @@ const PurpleTag: React.FC<IPurpleTag> = ({ tagIsOpened, setTagIsOpened }) => {
           : { ...purpleTagStyles, visibility: 'visible' }
       }
       whileHover={{
-        x: '-40px',
+        x: '-25px',
       }}
     >
       <style>{HtmlBodyStyles}</style>
       <input
         type='image'
-        src={chrome.runtime.getURL('purpletag.png')}
+        src={chrome.runtime.getURL('imgs/purpletag.png')}
+        style={imgStyles}
         onClick={() => setTagIsOpened((tagIsOpened) => !tagIsOpened)}
       />
     </motion.div>
@@ -30,7 +31,7 @@ const PurpleTag: React.FC<IPurpleTag> = ({ tagIsOpened, setTagIsOpened }) => {
 
 const purpleTagStyles: React.CSSProperties = {
   top: '25%',
-  right: '-100px',
+  right: '-60px',
   position: 'absolute',
   transition: 'right 0.1s ease',
   zIndex: 1000,
@@ -41,5 +42,10 @@ html, body {
   overflow-x: hidden;
 }
 `;
+
+const imgStyles: React.CSSProperties = {
+  height: '100px',
+  width: '160px',
+};
 
 export default PurpleTag;

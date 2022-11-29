@@ -1,7 +1,10 @@
 import React from 'react';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { faAngleLeft } from '@fortawesome/fontawesome-free-solid';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import BlackPurple from '../BlackPurple';
+import BlackPurple from '../Collapsible/BlackPurple';
 import Box from './Box';
 import Boxes from './Boxes';
 
@@ -16,6 +19,7 @@ const FilterConfig: React.FC<IFilterConfig> = ({
 }) => {
   const numberList = ['Any', '1', '2', '3', '4', '5', '6', '7', '8', '9+'];
   const websitesList = ['Any', 'Ticketmaster', 'SeatGeek', 'Stubhub'];
+  const leftArrow = faAngleLeft as IconProp;
   return (
     <AnimatePresence>
       {filterConfigIsOpen && (
@@ -29,7 +33,7 @@ const FilterConfig: React.FC<IFilterConfig> = ({
           <div style={sliderBoxStyles}>
             <Box content={'$100'} isClickable={false} widthPercentage={'14%'} />
             <img
-              src={chrome.runtime.getURL('range-slider.png')}
+              src={chrome.runtime.getURL('imgs/range-slider.png')}
               alt='range slider'
               style={imgStyles}
             />
@@ -44,11 +48,14 @@ const FilterConfig: React.FC<IFilterConfig> = ({
           <BlackPurple black='Websites:' purple='Ticketmaster, SeatGeek' />
           <Boxes contentList={websitesList} />
           <div style={buttonsStyles}>
-            <button onClick={toggle} style={listingsStyles}>
-              Back to Listings
+            <button onClick={toggle} style={listingButtonStyles}>
+              <div style={inlineMaker}>
+                <FontAwesomeIcon icon={leftArrow} />
+                <p style={listingPStyles}>Back to Listings</p>
+              </div>
             </button>
-            <button onClick={toggle} style={applyStyles}>
-              Apply Changes
+            <button onClick={toggle} style={applyButtonStyles}>
+              <p style={applyPStyles}>Apply Changes</p>
             </button>
           </div>
         </motion.div>
@@ -58,14 +65,16 @@ const FilterConfig: React.FC<IFilterConfig> = ({
 };
 
 const filterConfigStyles: React.CSSProperties = {
-  margin: '0px 0px',
-  padding: '10px 17px',
-  border: '2px solid #4B3BFF',
-  borderRadius: '5px',
-  height: '320px',
-  width: '420px',
-  backgroundColor: '#FFFFFF',
+  position: 'absolute',
+  top: '211px',
+  left: '31px',
   zIndex: 1001,
+  border: '2px solid #4B3BFF',
+  borderRadius: '10.6px',
+  height: '372px',
+  width: '509px',
+  padding: '10px 37px 20px',
+  backgroundColor: '#FFFFFF',
 };
 
 const sliderBoxStyles: React.CSSProperties = {
@@ -75,28 +84,55 @@ const sliderBoxStyles: React.CSSProperties = {
 };
 
 const imgStyles: React.CSSProperties = {
+  height: '36px',
   width: '64%',
 };
 
 const buttonsStyles: React.CSSProperties = {
-  display: 'flex',
-  justifyContent: 'space-around',
   margin: '10px 0px',
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
 };
 
-const listingsStyles: React.CSSProperties = {
+const listingButtonStyles: React.CSSProperties = {
+  height: '25px',
+  width: '140px',
   border: 'none',
   backgroundColor: '#FFFFFF',
+  margin: '30px 0px',
+  padding: '0px',
   cursor: 'pointer',
 };
 
-const applyStyles: React.CSSProperties = {
+const inlineMaker: React.CSSProperties = {
+  display: 'flex',
+  justifyContent: 'space-evenly',
+  alignItems: 'center',
+};
+
+const listingPStyles: React.CSSProperties = {
+  fontFamily: 'Manrope',
+  fontSize: '16px',
+  fontWeight: 500,
+  color: '#27292A',
+  margin: '0px',
+};
+
+const applyButtonStyles: React.CSSProperties = {
   border: 'none',
-  borderRadius: '20px',
+  borderRadius: '22px',
   backgroundColor: '#4B3BFF',
-  color: '#FFFFFF',
-  padding: '12px 18px',
+  padding: '11px 24px',
   cursor: 'pointer',
+};
+
+const applyPStyles: React.CSSProperties = {
+  fontFamily: 'Manrope',
+  fontSize: '16px',
+  fontWeight: 500,
+  color: '#FFFFFF',
+  margin: '0px',
 };
 
 export default FilterConfig;

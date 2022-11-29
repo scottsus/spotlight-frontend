@@ -23,14 +23,18 @@ const overviewStyles: React.CSSProperties = {
 };
 
 const h1Styles: React.CSSProperties = {
-  fontSize: '17px',
-  fontWeight: 500,
+  fontFamily: 'Manrope',
+  fontSize: '16px',
+  fontWeight: 400,
+  color: '#27292A',
   margin: '0px 0px',
 };
 
 const h2Styles: React.CSSProperties = {
+  fontFamily: 'Manrope',
   fontSize: '16px',
-  color: '#5647FF',
+  fontWeight: 700,
+  color: '#4B3BFF',
   margin: '0px 0px',
 };
 

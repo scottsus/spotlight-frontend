@@ -5,10 +5,10 @@ const Logo = () => {
 };
 
 const logoStyle = {
-  color: '#4B3BFF',
-  font: 'arial',
+  fontFamily: 'Mont',
   fontSize: '30px',
-  fontWeight: 700,
+  fontWeight: 800,
+  color: '#4B3BFF',
 };
 
 export default Logo;

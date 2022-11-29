@@ -45,8 +45,9 @@ const inactiveBoxStyles: React.CSSProperties = {
 };
 
 const h1Styles: React.CSSProperties = {
-  fontSize: '15px',
-  fontWeight: 300,
+  fontFamily: 'Manrope',
+  fontSize: '16px',
+  fontWeight: 400,
   color: 'black',
   margin: '0px 0px',
   textAlign: 'center',

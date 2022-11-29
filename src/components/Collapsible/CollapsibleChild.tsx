@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import PriceTotal from './PriceTotal';
 import TicketInfo from './TicketInfo';
 
@@ -13,7 +14,7 @@ const CollapsibleChild: React.FC<ICollapsibleChild> = ({ isOpen }) => {
 
   useEffect(() => {
     if (isOpen) {
-      setHeight(300);
+      setHeight(266);
       setOpenOverflow('visible');
     } else {
       setHeight(0);
@@ -22,13 +23,21 @@ const CollapsibleChild: React.FC<ICollapsibleChild> = ({ isOpen }) => {
   }, [isOpen]);
   return (
     <div
+      id='abcd'
       style={{
         ...collapsibleChildStyles,
         ...{ height: height },
         ...{ overflow: openOverflow },
       }}
     >
-      <hr style={hrStyles} />
+      <div style={dividerStyles} />
+      <div
+        style={
+          isPriceTotalPage
+            ? { ...purplebarStyles, marginLeft: '2px', marginRight: 'auto' }
+            : { ...purplebarStyles, marginLeft: 'auto', marginRight: '2px' }
+        }
+      />
       <div style={headersStyles}>
         <button
           onClick={() => setIsPriceTotalPage(true)}
@@ -51,17 +60,19 @@ const CollapsibleChild: React.FC<ICollapsibleChild> = ({ isOpen }) => {
           </h1>
         </button>
       </div>
-      {isPriceTotalPage ? (
-        <PriceTotal
-          ticketPrice={125}
-          ticketQty={1}
-          orderProcessingFee={15.0}
-          serviceFee={20.5}
-          calculatedTax={2.25}
-        />
-      ) : (
-        <TicketInfo />
-      )}
+      <AnimatePresence>
+        {isPriceTotalPage ? (
+          <PriceTotal
+            ticketPrice={125}
+            ticketQty={1}
+            orderProcessingFee={15.0}
+            serviceFee={20.5}
+            calculatedTax={2.25}
+          />
+        ) : (
+          <TicketInfo />
+        )}
+      </AnimatePresence>
     </div>
   );
 };
@@ -72,11 +83,21 @@ const collapsibleChildStyles: React.CSSProperties = {
   transition: 'height 0.2s ease-in-out',
 };
 
-const hrStyles: React.CSSProperties = {
-  borderTop: '1px solid #DFE0E0',
+const dividerStyles: React.CSSProperties = {
+  height: '2px',
+  width: '100%',
+  backgroundColor: '#DFE0E0',
+};
+
+const purplebarStyles: React.CSSProperties = {
+  height: '4px',
+  width: '253px',
+  borderRadius: '2px',
+  backgroundColor: '#4B3BFF',
 };
 
 const headersStyles: React.CSSProperties = {
+  height: '28px',
   display: 'flex',
   justifyContent: 'space-evenly',
   margin: '5px 0px',
@@ -85,17 +106,23 @@ const headersStyles: React.CSSProperties = {
 };
 
 const activeHeaderStyles: React.CSSProperties = {
+  fontFamily: 'Manrope',
+  fontSize: '16px',
+  fontWeight: 600,
   color: '#4B3BFF',
-  fontSize: '15px',
 };
 
 const inactiveHeaderStyles: React.CSSProperties = {
+  fontFamily: 'Manrope',
+  fontSize: '16px',
+  fontWeight: 300,
   color: '#96979C',
-  fontSize: '15px',
 };
 
 const headerButtonStyles: React.CSSProperties = {
+  width: '50%',
   border: 'none',
+  padding: '0px 0px',
   backgroundColor: '#FFFFFF',
   cursor: 'pointer',
 };

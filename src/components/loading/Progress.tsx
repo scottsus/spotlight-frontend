@@ -49,7 +49,7 @@ const progressStyle: string = `
 const progressStyles: React.CSSProperties = {
   display: 'flex',
   justifyContent: 'center',
-  margin: '0px 0px',
+  margin: '5px 0px 0px',
 };
 
 export default Progress;

@@ -1,6 +1,6 @@
 import React from 'react';
 import Overview from './Overview';
-import CheckoutButton from '../CheckoutButton';
+import CheckoutButton from './CheckoutButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -30,7 +30,7 @@ const CollapsibleHeader = ({
       </button>
       <img style={imgStyle} src={logo} alt='logo' />
       <Overview section={section} row={row} price={price} />
-      <CheckoutButton url={url} />
+      <CheckoutButton price={price} url={url} />
     </div>
   );
 };
@@ -43,16 +43,18 @@ const collapsibleHeaderStyles: React.CSSProperties = {
 };
 
 const buttonStyle: React.CSSProperties = {
-  height: '25px',
+  height: '16px',
+  width: '14px',
   border: 'none',
+  padding: '0px 0px',
   backgroundColor: '#FFFFFF',
   color: '#4B3BFF',
   cursor: 'pointer',
 };
 
 const imgStyle: React.CSSProperties = {
-  height: '50px',
-  width: '65px',
+  height: '70px',
+  width: '85px',
   display: 'inline',
 };
 

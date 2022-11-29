@@ -26,15 +26,18 @@ const Collapsible: React.FC<ICollapsible> = ({
   useEffect(() => {
     if (isOpen) {
       setChildIsOpen(true);
-      setHeight(400);
+      setHeight(351);
     } else {
       setChildIsOpen(false);
-      setHeight(100);
+      setHeight(85);
     }
   }, [isOpen]);
 
   return (
-    <div style={{ ...collapsibleStyles, ...{ height: height } }}>
+    <div
+      id='collapsible'
+      style={{ ...collapsibleStyles, ...{ height: height } }}
+    >
       <CollapsibleHeader
         isOpen={isOpen}
         toggle={toggle}
@@ -51,13 +54,13 @@ const Collapsible: React.FC<ICollapsible> = ({
 
 const collapsibleStyles: React.CSSProperties = {
   border: '2px solid #DFE0E0',
-  borderRadius: '5px',
-  height: '100px',
+  borderRadius: '10px',
+  height: '50px',
   width: '100%',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
-  margin: '10px 0px',
+  margin: '7px auto',
   transition: 'height 0.2s ease-in-out',
   overflow: 'hidden',
 };

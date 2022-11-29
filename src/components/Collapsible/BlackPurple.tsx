@@ -17,21 +17,23 @@ const BlackPurple: React.FC<IBlackPurple> = ({ black, purple }) => {
 const blackPurpleStyles: React.CSSProperties = {
   display: 'flex',
   justifyContent: 'start',
-  marginTop: '8px',
+  marginTop: '16px',
 };
 
 const blackStyles: React.CSSProperties = {
-  fontSize: '15px',
-  color: 'black',
+  fontFamily: 'Manrope',
+  fontSize: '16px',
   fontWeight: 700,
-  margin: '5px 4px 5px 0px',
+  color: '#27292A',
+  margin: '4px 4px 4px 0px',
 };
 
 const purpleStyles: React.CSSProperties = {
-  fontSize: '15px',
-  color: '#4B3BFF',
+  fontFamily: 'Manrope',
+  fontSize: '16px',
   fontWeight: 300,
-  margin: '5px 0px',
+  color: '#4B3BFF',
+  margin: '4px 0px',
 };
 
 export default BlackPurple;

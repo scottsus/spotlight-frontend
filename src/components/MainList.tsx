@@ -24,7 +24,7 @@ const MainList: React.FC<IMainList> = ({ tickets, hasLoadedAll }) => {
             key={ticket.price + '|?|' + ticket.url}
           >
             <Collapsible
-              logo={chrome.runtime.getURL(`${ticket.logo}.png`)}
+              logo={chrome.runtime.getURL(`imgs/${ticket.logo}.png`)}
               section={ticket.section}
               row={ticket.row}
               price={ticket.price}
@@ -45,8 +45,9 @@ const MainList: React.FC<IMainList> = ({ tickets, hasLoadedAll }) => {
 };
 
 const mainListStyles: React.CSSProperties = {
-  marginTop: '10px',
+  margin: '10px auto',
   height: '75%',
+  width: '509px',
   overflowY: 'scroll',
 };
 

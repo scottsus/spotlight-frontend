@@ -21,9 +21,9 @@ const Hoverable: React.FC<IHoverable> = ({ url, children }) => {
 
 const isHoveringStyles: React.CSSProperties = {
   backgroundColor: '#4B3BFF',
-  borderRadius: '10px',
-  height: '45px',
-  width: '120px',
+  borderRadius: '8px',
+  height: '47px',
+  width: '159px',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -31,9 +31,9 @@ const isHoveringStyles: React.CSSProperties = {
 
 const isNotHoveringStyles: React.CSSProperties = {
   backgroundColor: '#695CFF',
-  borderRadius: '10px',
-  height: '45px',
-  width: '120px',
+  borderRadius: '8px',
+  height: '47px',
+  width: '159px',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
