@@ -1,4 +1,4 @@
-from seatgeek import scrape
+from stubhub import scrape
 
 def main():
     scrape('Boston Celtics', 'Los Angeles Lakers', 317, 4, 10000, 2)
