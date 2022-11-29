@@ -50,43 +50,6 @@ def scrape_tickpick():
         response_list.append(res)
     return json.dumps(response_list)
 
-
-# will be removed by EOD
-@app.route("/find-sports-tickets", methods=["GET"])
-def find_sports_tickets():
-    team1 = request.headers['team1']
-    team2 = request.headers['team2']
-    section = request.headers['section']
-    row = request.headers['row']
-    price = request.headers['price']
-    quantity = request.headers['quantity']
-    
-    response_list = [None] * 4
-    
-    t1 = Thread(target=find_cheaper_tickets, args=[response_list, 0, stubhub.scrape, team1, team2, section, row, price, quantity])
-    t2 = Thread(target=find_cheaper_tickets, args=[response_list, 1, stubhub.scrape, team1, team2, section, row, price, quantity])
-    t3 = Thread(target=find_cheaper_tickets, args=[response_list, 2, seatgeek.scrape, team1, team2, section, row, price, quantity])
-    t4 = Thread(target=find_cheaper_tickets, args=[response_list, 3, tickpick.scrape, team1, team2, section, row, price, quantity])
-
-    t1.start()
-    t2.start()
-    t3.start()
-    t4.start()
-
-    t1.join()
-    t2.join()
-    t3.join()
-    t4.join()
-    
-    dicts = list(map(tuple_to_dict, response_list))
-    final_response = [res for res in dicts if res is not None]
-    return json.dumps(final_response)
-
-def find_cheaper_tickets(response_list, index, scrape, team1, team2, section, row, price, quantity):
-    response = scrape(team1, team2, section, row, price, quantity)
-    if response[0] != "":
-        response_list[index] = response
-
 def get_data_from_req(request):
     team1 = request.headers['team1']
     team2 = request.headers['team2']
