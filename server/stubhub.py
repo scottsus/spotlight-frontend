@@ -87,16 +87,16 @@ def scrape(team1, team2, src_section, src_row, src_total_price, quantity):
         return tickets_list
     
     except TimeoutException:
-        print("Timeout!")
+        print("Timeout from Stubhub!")
         return tickets_list
     except NoSuchElementException:
-        print("No such element exception")
+        print("No such element exception from Stubhub")
         return tickets_list
     except StaleElementReferenceException:
-        print("State element exception")
+        print("State element exception from Stubhub")
         return tickets_list
     except ElementNotInteractableException:
-        print("Element not interactible exception")
+        print("Element not interactible exception from Stubhub")
         return tickets_list
 
     

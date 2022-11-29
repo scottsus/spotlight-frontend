@@ -28,37 +28,31 @@ def scrape(team1, team2, section, row, price, quantity):
         search_bar = driver.find_element(By.NAME, 'search')
         search_bar.clear()
         search_bar.send_keys(team1 + " vs " + team2)
-        print("Sent to search bar\n", driver.current_url)
+        # print("Sent to search bar\n", driver.current_url)
 
         WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable(
                 (By.XPATH, "//li[@id='active-result-item']/a/article/div/p[contains(text(), 'at')]")
             )
         ).click()
-        print("After clicking\n", driver.current_url)
+        # print("After clicking\n", driver.current_url)
 
-        WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable(
-                (By.XPATH, "//*[@id=\"start-of-content\"]/div[1]/div/div[2]/div/div[1]/button[last()]")
-            )
-        ).click()
-        print("Clicked last button\n", driver.current_url)
+        driver.add_cookie({"name": "sg-show-fees", "value": "true"})
 
-        WebDriverWait(driver, 10).until(
+        driver.refresh()  
+
+        number = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located(
-                (By.XPATH, "//*[@id=\"start-of-content\"]/div[1]/div")
+                (By.XPATH, "//*[@id=\"start-of-content\"]/div[1]/div/div[4]/div/h2")
             )
         )
 
-        number = driver.find_element(By.XPATH, "//*[@id=\"start-of-content\"]/div[1]/div/div[4]/div/h2").text.split(" ")[0]
+        number = number.text.split(" ")[0]
 
         last = 5
         actions = ActionChains(driver)
         
-        for x in range(5, int(number)):
-            if len(tickets_list) >= 4:
-                break
-
+        for x in range(5, min(500, int(number))):
             if x - last > 6:
                 nextElement = driver.find_element(By.XPATH, f"//*[@id=\"start-of-content\"]/div[1]/div/div[{x+10}]")
                 actions.move_to_element(nextElement).perform()
@@ -78,21 +72,21 @@ def scrape(team1, team2, section, row, price, quantity):
                     )
                 ).click()
             
-        # print(tickets_list)
+        print(tickets_list)
         return tickets_list
         
             
     except TimeoutException:
-        print("Timeout!")
+        print("Timeout from seatgeek!")
         return tickets_list
     except NoSuchElementException:
-        print("No such element exception")
+        print("No such element exception from seatgeek!")
         return tickets_list
     except StaleElementReferenceException:
-        print("State element exception")
+        print("State element exception from seatgeek!")
         return tickets_list
     except ElementNotInteractableException:
-        print("Element not interactible exception")
+        print("Element not interactible exception from seatgeek!")
         return tickets_list
 
 def assess(text, section, row, price, quantity):
