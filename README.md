@@ -53,4 +53,4 @@ npm run server
 
 ## Progress
 
-![Almost there...](almost.gif)
+![Almost finished styling](styled.gif)
