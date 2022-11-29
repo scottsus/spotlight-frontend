@@ -58,7 +58,7 @@ const pillStyles: React.CSSProperties = {
 
 const h1Styles: React.CSSProperties = {
   fontSize: '13px',
-  fontWeight: 700,
+  fontWeight: 600,
   color: '#FFFFFF',
 };
 

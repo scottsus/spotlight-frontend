@@ -62,11 +62,11 @@ def get_data_from_req(request):
 def tuple_to_dict(ticket):
     with app.app_context():
         res = {
-            "name": ticket[0][0],
-            "section": ticket[0][1],
-            "row": ticket[0][2],
-            "totalPrice": ticket[0][3],
-            "url": ticket[0][4],
+            "name": ticket[0],
+            "section": ticket[1],
+            "row": ticket[2],
+            "totalPrice": ticket[3],
+            "url": ticket[4],
         }
         return res
 
