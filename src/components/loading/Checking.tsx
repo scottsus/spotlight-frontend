@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { siteNames } from '../../lib/findSportsTickets';
+import siteNames from '../../lib/sitenames';
 
 interface IChecking {
   hasLoadedAll: boolean;

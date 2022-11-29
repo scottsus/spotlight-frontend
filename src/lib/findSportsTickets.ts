@@ -1,35 +1,33 @@
-import { ICollapsible } from '../components/collapsible/Collapsible';
+import TicketInfo from './TicketInfo';
 import {
   websiteScrape,
   seatgeekScrape,
   ticketmasterScrape,
 } from './siteCheckoutScrape';
-
-export const siteNames = ['seatgeek', 'stubhub', 'ticketmaster', 'tickpick'];
-
-const sitesDone = new Set<string>();
-const numTotalSites = siteNames.length;
+import siteNames from './sitenames';
 
 interface ICheckoutInfo {
   (
-    siteURL: string,
+    srcSiteURL: string,
     document: string,
     NBATeams: string[],
     teams: React.MutableRefObject<string[]>,
     addTeam: (string) => void,
-    addTickets: React.Dispatch<React.SetStateAction<ICollapsible[]>>,
+    addDestTickets: React.Dispatch<React.SetStateAction<TicketInfo[]>>,
+    setSrcTicketInfo: React.Dispatch<React.SetStateAction<TicketInfo>>,
     setHasLoadedOne: React.Dispatch<React.SetStateAction<boolean>>,
     setHasLoadedAll: React.Dispatch<React.SetStateAction<boolean>>
   ): void;
 }
 
 const findSportsTickets: ICheckoutInfo = (
-  siteURL,
+  srcSiteURL,
   document,
   NBATeams,
   teams,
   addTeam,
-  addTickets,
+  addDestTickets,
+  setSrcTicketInfo,
   setHasLoadedOne,
   setHasLoadedAll
 ) => {
@@ -38,19 +36,23 @@ const findSportsTickets: ICheckoutInfo = (
     if (truncatedDocText.includes(NBATeam)) {
       addTeam(NBATeam);
       if (teams.current.length == 2) {
-        const siteName = getNameFromURL(siteURL);
-        const scrapingFunction: websiteScrape = siteMap[siteName];
-        const ticketInfo: string[] = scrapingFunction(truncatedDocText);
-        for (const site of siteNames) {
+        const srcSite = getNameFromURL(srcSiteURL);
+        const scrapingFunction: websiteScrape = siteMap[srcSite];
+        const srcTicketInfo: TicketInfo = scrapingFunction(
+          srcSite,
+          srcSiteURL,
+          teams.current[0],
+          teams.current[1],
+          truncatedDocText
+        );
+        setSrcTicketInfo(srcTicketInfo);
+        const sitesDone = new Set<string>();
+        for (const siteName of siteNames) {
           findTicketsFromSite(
-            site,
-            teams.current[0],
-            teams.current[1],
-            ticketInfo[0],
-            ticketInfo[1],
-            ticketInfo[2],
-            ticketInfo[3],
-            addTickets,
+            siteName,
+            srcTicketInfo,
+            addDestTickets,
+            sitesDone,
             setHasLoadedOne,
             setHasLoadedAll
           );
@@ -63,14 +65,10 @@ const findSportsTickets: ICheckoutInfo = (
 
 interface IFindTicketsFromSite {
   (
-    site: string,
-    team1: string,
-    team2: string,
-    section: string,
-    row: string,
-    price: string,
-    quantity: string,
-    addTickets: React.Dispatch<React.SetStateAction<ICollapsible[]>>,
+    siteName: string,
+    srcTicketInfo: TicketInfo,
+    addDestTickets: React.Dispatch<React.SetStateAction<TicketInfo[]>>,
+    sitesDone: Set<string>,
     setHasLoadedOne: React.Dispatch<React.SetStateAction<boolean>>,
     setHasLoadedAll: React.Dispatch<React.SetStateAction<boolean>>
   ): void;
@@ -78,47 +76,64 @@ interface IFindTicketsFromSite {
 
 const findTicketsFromSite: IFindTicketsFromSite = (
   site,
-  team1,
-  team2,
-  section,
-  row,
-  price,
-  quantity,
-  addTickets,
+  srcTicketInfo,
+  addDestTickets,
+  sitesDone,
   setHasLoadedOne,
   setHasLoadedAll
 ) => {
-  const siteURL = `http://localhost:6969/scrape/${site}`;
-  fetch(siteURL, {
+  const srcSiteURL = `http://localhost:6969/scrape/${site}`;
+  fetch(srcSiteURL, {
     headers: {
-      team1: team1,
-      team2: team2,
-      section: section,
-      row: row,
-      price: price,
-      quantity: quantity,
+      team1: srcTicketInfo.team1,
+      team2: srcTicketInfo.team2,
+      section: srcTicketInfo.section,
+      row: srcTicketInfo.row,
+      totalPrice: srcTicketInfo.totalPrice,
+      quantity: srcTicketInfo.quantity,
+      day: srcTicketInfo.day,
+      date: srcTicketInfo.date,
+      time: srcTicketInfo.time,
+      stadium: srcTicketInfo.stadium,
+      city: srcTicketInfo.city,
+      state: srcTicketInfo.state,
     },
   })
     .then((res) => res.json())
-    .then((ticketList) => {
-      for (const [_, ticket] of ticketList.entries()) {
-        const newTicket: ICollapsible = {
-          logo: ticket['name'],
-          section: ticket['section'],
-          row: ticket['row'],
-          price: ticket['price'],
-          url: ticket['url'],
+    .then((resJSONArray) => {
+      for (const [_, resJSON] of resJSONArray.entries()) {
+        const newTicket: TicketInfo = {
+          team1: srcTicketInfo.team1,
+          team2: srcTicketInfo.team2,
+          section: resJSON['section'],
+          row: resJSON['row'],
+          totalPrice: resJSON['totalPrice'],
+          quantity: resJSON['quantity'],
+          // day: resJSON['day'],
+          // date: resJSON['date'],
+          // time: resJSON['time'],
+          // stadium: resJSON['stadium'],
+          // city: resJSON['city'],
+          // state: resJSON['state'],
+          day: 'Tue',
+          date: '13 Dec',
+          time: '7:00pm',
+          stadium: 'Crypto.com Arena',
+          city: 'Los Angeles',
+          state: 'CA',
+          url: resJSON['url'],
+          site: resJSON['name'],
         };
-        addTickets((tickets) => [...tickets, newTicket]);
-        sitesDone.add(ticket['name']);
+        addDestTickets((destTickets) => [...destTickets, newTicket]);
+        sitesDone.add(resJSON['name']);
+        if (resJSONArray.length !== 0) setHasLoadedOne(true);
       }
     })
     .catch((err) => {
       console.log('Error:', err);
     })
     .finally(() => {
-      setHasLoadedOne(true);
-      if (sitesDone.size === numTotalSites) setHasLoadedAll(true);
+      if (sitesDone.size === siteNames.length) setHasLoadedAll(true);
     });
 };
 

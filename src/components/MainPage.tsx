@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
+
+import TicketInfo from '../lib/ticketInfo';
 
 import XButton from '../components/XButton';
 import Logo from '../components/Logo';
 import Title from '../components/Title';
 import Filters from './filterSortby/FilterSortby';
-import { ICollapsible } from './collapsible/Collapsible';
 import MainList from '../components/MainList';
 import Checking from './loading/Checking';
 import Progress from './loading/Progress';
@@ -14,8 +15,8 @@ import Skeletons from './loading/Skeletons';
 interface IMainPage {
   tagIsOpened: boolean;
   setTagIsOpened: React.Dispatch<React.SetStateAction<boolean>>;
-  teams: React.MutableRefObject<string[]>;
-  tickets: ICollapsible[];
+  srcTicketInfo: TicketInfo;
+  destTickets: TicketInfo[];
   hasLoadedOne: boolean;
   hasLoadedAll: boolean;
 }
@@ -23,11 +24,12 @@ interface IMainPage {
 const MainPage: React.FC<IMainPage> = ({
   tagIsOpened,
   setTagIsOpened,
-  teams,
-  tickets,
+  destTickets,
+  srcTicketInfo,
   hasLoadedOne,
   hasLoadedAll,
 }) => {
+  useEffect(() => {}, [srcTicketInfo]);
   return (
     <div>
       <motion.div
@@ -44,16 +46,18 @@ const MainPage: React.FC<IMainPage> = ({
       >
         <Logo />
         <XButton setTagIsOpened={setTagIsOpened} />
-        <Title
-          team1={teams.current[0]}
-          team2={teams.current[1]}
-          stadium='SoFi Stadium'
-          city='Inglewood'
-          state='CA'
-          day='Sat'
-          date='Nov 26'
-          time='6:30pm'
-        />
+        {srcTicketInfo && (
+          <Title
+            team1={srcTicketInfo.team1}
+            team2={srcTicketInfo.team2}
+            day={srcTicketInfo.day}
+            date={srcTicketInfo.date}
+            time={srcTicketInfo.time}
+            stadium={srcTicketInfo.stadium}
+            city={srcTicketInfo.city}
+            state={srcTicketInfo.state}
+          />
+        )}
         <div style={loadingStyles}>
           <Filters />
           <Checking hasLoadedAll={hasLoadedAll} />
@@ -61,7 +65,7 @@ const MainPage: React.FC<IMainPage> = ({
         <Progress hasLoadedAll={hasLoadedAll} />
         <Skeletons hasLoadedOne={hasLoadedOne} />
         {hasLoadedOne && (
-          <MainList tickets={tickets} hasLoadedAll={hasLoadedAll} />
+          <MainList tickets={destTickets} hasLoadedAll={hasLoadedAll} />
         )}
       </motion.div>
     </div>

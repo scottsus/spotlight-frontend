@@ -1,10 +1,23 @@
-// Mapping each site to its own checkout scraping method
+import TicketInfo from './ticketInfo';
+
 export interface websiteScrape {
-  (text: string): string[];
+  (
+    site: string,
+    url: string,
+    team1: string,
+    team2: string,
+    text: string
+  ): TicketInfo;
 }
 
-export const seatgeekScrape: websiteScrape = (text) => {
-  const parts = parse(text);
+export const seatgeekScrape: websiteScrape = (
+  site,
+  url,
+  team1,
+  team2,
+  text
+) => {
+  const parts = parseSpacesAndNewlines(text);
   let sIdx = 0,
     rIdx = 0,
     pIdx = 0,
@@ -21,20 +34,57 @@ export const seatgeekScrape: websiteScrape = (text) => {
   }
   const sectionNumber = truncate(parts[sIdx + 1]);
   const rowNumber = truncate(parts[rIdx + 1]);
-  const price = truncate(parts[pIdx].substring(1));
+  const totalPrice = truncate(parts[pIdx].substring(1));
   const quantity = parts[pIdx + 2];
-  check(
-    parts,
+
+  const newlineParts = text.split('\n');
+  let idx = 0;
+  for (const part of newlineParts) {
+    if (part === 'Continue to Review') break;
+    idx++;
+  }
+  idx += 4;
+  const setting = newlineParts[idx];
+  const settingParts = setting.split(' ');
+  const day = settingParts[0];
+  const date = settingParts[1] + ' ' + settingParts[2];
+  const time = settingParts[4];
+  idx += 2;
+  const venue = newlineParts[idx];
+  const commaParts = venue.split(', ');
+  const stadium = commaParts[0];
+  const city = commaParts[1];
+  const state = commaParts[2];
+
+  const ticketInfo = new TicketInfo(
+    team1,
+    team2,
     sectionNumber,
     rowNumber,
-    parseFloat(price) * quantity,
-    quantity
+    totalPrice,
+    quantity,
+    day,
+    date,
+    time,
+    stadium,
+    city,
+    state,
+    site,
+    url
   );
-  return [sectionNumber, rowNumber, parseFloat(price) * quantity, quantity];
+
+  check(ticketInfo);
+  return ticketInfo;
 };
 
-export const ticketmasterScrape: websiteScrape = (text) => {
-  const parts = parse(text);
+export const ticketmasterScrape: websiteScrape = (
+  site,
+  url,
+  team1,
+  team2,
+  text
+) => {
+  const parts = parseSpacesAndNewlines(text);
   let sIdx = 0,
     rIdx = 0,
     pIdx = 0,
@@ -55,11 +105,42 @@ export const ticketmasterScrape: websiteScrape = (text) => {
   const rowNumber = truncate(parts[rIdx + 1]);
   const totalPrice = truncate(parts[pIdx].substring(1));
   const quantity = parts[qIdx + 1];
-  check(parts, sectionNumber, rowNumber, totalPrice, quantity);
-  return [sectionNumber, rowNumber, totalPrice, quantity];
+
+  const dots = text.split(' • ');
+  const firstDotParts = dots[0].split('\n');
+  const day = firstDotParts[firstDotParts.length - 1];
+  const date = dots[1];
+  const setting = dots[2].split('\n');
+  const time = setting[0];
+  const venue = setting[1];
+  const venueParts = venue.split(' - ');
+  const stadium = venueParts[0];
+  const cityState = venueParts[1].split(', ');
+  const city = cityState[0];
+  const state = cityState[1];
+
+  const ticketInfo = new TicketInfo(
+    team1,
+    team2,
+    sectionNumber,
+    rowNumber,
+    totalPrice,
+    quantity,
+    day,
+    date,
+    time,
+    stadium,
+    city,
+    state,
+    site,
+    url
+  );
+
+  check(ticketInfo);
+  return ticketInfo;
 };
 
-const parse = (text: string) => {
+const parseSpacesAndNewlines = (text: string) => {
   const spaces = text.split(' ');
   let parts = [];
   for (const space of spaces) {
@@ -76,16 +157,17 @@ const truncate = (text: string) => {
   return withoutCommas;
 };
 
-const check = (
-  parts: string[],
-  sectionNumber: string,
-  rowNumber: string,
-  totalPrice: string | number,
-  quantity: string
-) => {
-  // console.log(parts);
-  console.log('Section:', sectionNumber);
-  console.log('Row:', rowNumber);
-  console.log('Price:', totalPrice);
-  console.log('Quantity:', quantity);
+const check = (ticketInfo: TicketInfo) => {
+  console.log('Section:', ticketInfo.section);
+  console.log('Row:', ticketInfo.row);
+  console.log('Price:', ticketInfo.totalPrice);
+  console.log('Quantity:', ticketInfo.quantity);
+  console.log('Day:', ticketInfo.day);
+  console.log('Date:', ticketInfo.date);
+  console.log('Time:', ticketInfo.time);
+  console.log('Stadium:', ticketInfo.stadium);
+  console.log('City:', ticketInfo.city);
+  console.log('State:', ticketInfo.state);
+  console.log('Site:', ticketInfo.site);
+  console.log('URL:', ticketInfo.url);
 };

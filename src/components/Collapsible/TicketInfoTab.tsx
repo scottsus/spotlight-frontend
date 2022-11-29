@@ -1,16 +1,16 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-interface ITicketInfo {}
+interface ITicketInfoTab {}
 
-const TicketInfo: React.FC<ITicketInfo> = () => {
+const TicketInfoTab: React.FC<ITicketInfoTab> = () => {
   return (
     <motion.div
-      style={ticketInfoStyles}
+      style={ticketInfoTabStyles}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      key='ticketinfo'
+      key='ticketinfotab'
     >
       <div style={textStyles}>
         <h1 style={categoryHeaderStyles}>Tickets Available:</h1>
@@ -44,7 +44,7 @@ const TicketInfo: React.FC<ITicketInfo> = () => {
   );
 };
 
-const ticketInfoStyles: React.CSSProperties = {
+const ticketInfoTabStyles: React.CSSProperties = {
   display: 'flex',
   justifyContent: 'space-evenly',
   padding: '16px 35px',
@@ -80,4 +80,4 @@ const imgStyles: React.CSSProperties = {
   width: '170px',
 };
 
-export default TicketInfo;
+export default TicketInfoTab;

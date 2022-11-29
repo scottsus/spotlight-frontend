@@ -5,13 +5,14 @@ import NBATeams from '../lib/teams';
 import findSportsTickets from '../lib/findSportsTickets';
 import fonts from '../lib/fonts';
 
-import { ICollapsible } from '../components/collapsible/Collapsible';
 import PurpleTag from '../components/PurpleTag';
 import MainPage from '../components/MainPage';
+import TicketInfo from '../lib/ticketInfo';
 
 const App: React.FC = () => {
   const [tagIsOpened, setTagIsOpened] = useState<boolean>(false);
-  const [tickets, addTickets] = useState<ICollapsible[]>([]);
+  const [destTickets, addDestTickets] = useState<TicketInfo[]>([]);
+  const [srcTicketInfo, setSrcTicketInfo] = useState<TicketInfo>();
   const [hasLoadedOne, setHasLoadedOne] = useState<boolean>(false);
   const [hasLoadedAll, setHasLoadedAll] = useState<boolean>(false);
   const teams = useRef<string[]>([]);
@@ -26,7 +27,8 @@ const App: React.FC = () => {
         NBATeams,
         teams,
         addTeam,
-        addTickets,
+        addDestTickets,
+        setSrcTicketInfo,
         setHasLoadedOne,
         setHasLoadedAll
       );
@@ -40,8 +42,8 @@ const App: React.FC = () => {
       <MainPage
         tagIsOpened={tagIsOpened}
         setTagIsOpened={setTagIsOpened}
-        teams={teams}
-        tickets={tickets}
+        srcTicketInfo={srcTicketInfo}
+        destTickets={destTickets}
         hasLoadedOne={hasLoadedOne}
         hasLoadedAll={hasLoadedAll}
       />

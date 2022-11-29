@@ -8,13 +8,25 @@ import {
   faChevronDown,
 } from '@fortawesome/fontawesome-free-solid';
 
-const CollapsibleHeader = ({
+interface ICollapsibleHeader {
+  isOpen: boolean;
+  toggle: () => void;
+  logo: string;
+  section: string;
+  row: string;
+  price: string;
+  quantity: string;
+  url: string;
+}
+
+const CollapsibleHeader: React.FC<ICollapsibleHeader> = ({
   isOpen,
   toggle,
   logo,
   section,
   row,
   price,
+  quantity,
   url,
 }) => {
   const down = faChevronDown as IconProp;
@@ -29,7 +41,7 @@ const CollapsibleHeader = ({
         )}
       </button>
       <img style={imgStyle} src={logo} alt='logo' />
-      <Overview section={section} row={row} price={price} />
+      <Overview section={section} row={row} price={price} quantity={quantity} />
       <CheckoutButton price={price} url={url} />
     </div>
   );

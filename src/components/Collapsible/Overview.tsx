@@ -3,8 +3,8 @@ import React from 'react';
 interface IOverview {
   section: string;
   row: string;
-  price: number;
-  quantity?: number;
+  price: string;
+  quantity: string;
 }
 
 const Overview: React.FC<IOverview> = ({ section, row, price, quantity }) => {
@@ -14,7 +14,7 @@ const Overview: React.FC<IOverview> = ({ section, row, price, quantity }) => {
         Section {section}, Row {row}
       </h1>
       <h2 style={h2Styles}>
-        ${price}
+        ${parseFloat(price) / parseFloat(quantity)}
         <p style={pStyles}> each</p>
       </h2>
     </div>

@@ -2,19 +2,21 @@ import React, { useState, useEffect } from 'react';
 import CollapsibleHeader from './CollapsibleHeader';
 import CollapsibleChild from './CollapsibleChild';
 
-export interface ICollapsible {
+export interface ICollapsibleContainer {
   logo: string;
   section: string;
   row: string;
-  price: number;
+  price: string;
+  quantity: string;
   url: string;
 }
 
-const Collapsible: React.FC<ICollapsible> = ({
+const CollapsibleContainer: React.FC<ICollapsibleContainer> = ({
   logo,
   section,
   row,
   price,
+  quantity,
   url,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -45,6 +47,7 @@ const Collapsible: React.FC<ICollapsible> = ({
         section={section}
         row={row}
         price={price}
+        quantity={quantity}
         url={url}
       />
       <CollapsibleChild isOpen={childIsOpen} />
@@ -65,4 +68,4 @@ const collapsibleStyles: React.CSSProperties = {
   overflow: 'hidden',
 };
 
-export default Collapsible;
+export default CollapsibleContainer;

@@ -13,14 +13,16 @@ def scrape_seatgeek():
             "name": "seatgeek",
             "section": 100,
             "row": 20,
-            "price": 1000,
+            "totalPrice": 1000,
+            "quantity": 2,
             "url": "https://seatgeek.com"
         },
         {
             "name": "seatgeek",
             "section": 200,
             "row": 15,
-            "price": 800,
+            "totalPrice": 800,
+            "quantity": 2,
             "url": "https://seatgeek.com/2"
         }
     ])
@@ -32,14 +34,16 @@ def scrape_stubhub():
             "name": "stubhub",
             "section": 100,
             "row": 20,
-            "price": 400,
+            "totalPrice": 400,
+            "quantity": 2,
             "url": "https://stubhub.com"
         },
         {
             "name": "stubhub",
             "section": 100,
             "row": 20,
-            "price": 950,
+            "totalPrice": 950,
+            "quantity": 2,
             "url": "https://stubhub.com/2"
         },
     ])
@@ -52,14 +56,16 @@ def scrape_tickpick():
             "name": "tickpick",
             "section": 100,
             "row": 20,
-            "price": 900,
+            "totalPrice": 900,
+            "quantity": 3,
             "url": "https://tickpick.com"
         },
         {
             "name": "tickpick",
             "section": 100,
             "row": 20,
-            "price": 100,
+            "totalPrice": 100,
+            "quantity": 2,
             "url": "https://tickpick.com/2"
         }
     ])
@@ -72,14 +78,16 @@ def scrape_ticketmaster():
             "name": "ticketmaster",
             "section": 100,
             "row": 20,
-            "price": 400,
+            "totalPrice": 400,
+            "quantity": 2,
             "url": "https://ticketmaster.com"
         },
         {
             "name": "ticketmaster",
             "section": 100,
             "row": 20,
-            "price": 4000,
+            "totalPrice": 4000,
+            "quantity": 2,
             "url": "https://ticketmaster.com/2"
         }
     ])

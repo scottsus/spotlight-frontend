@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import ItemCost from './ItemCost';
 import TotalPrice from './TotalPrice';
 
-interface IPriceTotal {
+interface IPriceTotalTab {
   ticketPrice: number;
   ticketQty: number;
   orderProcessingFee: number;
@@ -11,7 +11,7 @@ interface IPriceTotal {
   calculatedTax: number;
 }
 
-const PriceTotal: React.FC<IPriceTotal> = ({
+const PriceTotalTab: React.FC<IPriceTotalTab> = ({
   ticketPrice,
   ticketQty,
   orderProcessingFee,
@@ -20,11 +20,11 @@ const PriceTotal: React.FC<IPriceTotal> = ({
 }) => {
   return (
     <motion.div
-      style={priceTotalStyles}
+      style={priceTotalTabStyles}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      key='pricetotal'
+      key='pricetotaltab'
     >
       <h1 style={categoryHeaderStyles}>Tickets</h1>
       <ItemCost text={`Resale Ticket x ${ticketQty}`} cost={ticketPrice} />
@@ -38,7 +38,7 @@ const PriceTotal: React.FC<IPriceTotal> = ({
   );
 };
 
-const priceTotalStyles: React.CSSProperties = {
+const priceTotalTabStyles: React.CSSProperties = {
   height: '100%',
   width: '100%',
   padding: '16px 35px',
@@ -60,4 +60,4 @@ const dividerStyles: React.CSSProperties = {
   margin: '14px auto 11px',
 };
 
-export default PriceTotal;
+export default PriceTotalTab;

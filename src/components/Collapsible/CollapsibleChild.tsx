@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import PriceTotal from './PriceTotal';
-import TicketInfo from './TicketInfo';
+import PriceTotal from './PriceTotalTab';
+import TicketInfo from './TicketInfoTab';
 
 interface ICollapsibleChild {
   isOpen: boolean;

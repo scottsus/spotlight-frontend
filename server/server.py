@@ -55,7 +55,7 @@ def get_data_from_req(request):
     team2 = request.headers['team2']
     section = request.headers['section']
     row = request.headers['row']
-    total_price = request.headers['price']
+    total_price = request.headers['totalPrice']
     quantity = request.headers['quantity']
     return (team1, team2, section, row, total_price, quantity)
 
@@ -65,7 +65,7 @@ def tuple_to_dict(ticket):
             "name": ticket[0][0],
             "section": ticket[0][1],
             "row": ticket[0][2],
-            "price": ticket[0][3],
+            "totalPrice": ticket[0][3],
             "url": ticket[0][4],
         }
         return res

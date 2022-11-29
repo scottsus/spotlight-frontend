@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, Variants } from 'framer-motion';
-import Collapsible, { ICollapsible } from './collapsible/Collapsible';
+import Collapsible from './collapsible/CollapsibleContainer';
+import TicketInfo from '../lib/TicketInfo';
 import { processTickets, seenItems, sortedInsert } from '../lib/mainListUtils';
 
 interface IMainList {
-  tickets: ICollapsible[];
+  tickets: TicketInfo[];
   hasLoadedAll: boolean;
 }
 
@@ -21,13 +22,14 @@ const MainList: React.FC<IMainList> = ({ tickets, hasLoadedAll }) => {
             variants={collapsibleAnimations}
             initial='hidden'
             animate='show'
-            key={ticket.price + '|?|' + ticket.url}
+            key={ticket.totalPrice + '|?|' + ticket.url}
           >
             <Collapsible
-              logo={chrome.runtime.getURL(`imgs/${ticket.logo}.png`)}
+              logo={chrome.runtime.getURL(`imgs/${ticket.site}.png`)}
               section={ticket.section}
               row={ticket.row}
-              price={ticket.price}
+              price={ticket.totalPrice}
+              quantity={ticket.quantity}
               url={ticket.url}
             />
           </motion.div>
