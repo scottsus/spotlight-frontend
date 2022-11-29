@@ -25,14 +25,11 @@ def scrape_stubhub():
 
 @app.route("/scrape/ticketmaster")
 def scrape_ticketmaster():
-    # TODO @dennis
-    
-    
-    return
+    # TODO
+    return []
 
 @app.route("/scrape/seatgeek")
 def scrape_seatgeek():
-    # TODO @dennis
     (team1, team2, src_section, src_row, src_price, quantity) = get_data_from_req(request)
     tickets_list = seatgeek.scrape(team1, team2, src_section, src_row, src_price, quantity)
     print(tickets_list)
@@ -44,9 +41,8 @@ def scrape_seatgeek():
 
 @app.route("/scrape/tickpick")
 def scrape_tickpick():
-    # TODO @dennis
     (team1, team2, src_section, src_row, src_price, quantity) = get_data_from_req(request)
-    tickets_list = seatgeek.scrape(team1, team2, src_section, src_row, src_price, quantity)
+    tickets_list = tickpick.scrape(team1, team2, src_section, src_row, src_price, quantity)
     print(tickets_list)
     response_list = []
     for ticket in tickets_list:

@@ -17,31 +17,32 @@ from price_parser import Price
 
 # Seat Geek specific webscraping
 def scrape(team1, team2, section, row, price, quantity):
+    tickets_list = []
     url = 'https://seatgeek.com'
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
     driver.get(url)
     print("Finding cheaper tickets for " + team1 + " vs " + team2 + " at " + "Section: " 
     + str(section) + " Row: " + str(row) + " at $" + str(price) + " from " + url + "\n")
-
+    
     try: 
         search_bar = driver.find_element(By.NAME, 'search')
         search_bar.clear()
         search_bar.send_keys(team1 + " vs " + team2)
-        # print("Sent to search bar", driver.current_url)
+        print("Sent to search bar\n", driver.current_url)
 
         WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable(
                 (By.XPATH, "//li[@id='active-result-item']/a/article/div/p[contains(text(), 'at')]")
             )
         ).click()
-        # print("After clicking", driver.current_url)
+        print("After clicking\n", driver.current_url)
 
         WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable(
                 (By.XPATH, "//*[@id=\"start-of-content\"]/div[1]/div/div[2]/div/div[1]/button[last()]")
             )
         ).click()
-        
+        print("Clicked last button\n", driver.current_url)
 
         WebDriverWait(driver, 10).until(
             EC.presence_of_element_located(
@@ -53,7 +54,7 @@ def scrape(team1, team2, section, row, price, quantity):
 
         last = 5
         actions = ActionChains(driver)
-        tickets_list = []
+        
         for x in range(5, int(number)):
             if len(tickets_list) >= 4:
                 break
@@ -77,7 +78,7 @@ def scrape(team1, team2, section, row, price, quantity):
                     )
                 ).click()
             
-        print(tickets_list)
+        # print(tickets_list)
         return tickets_list
         
             

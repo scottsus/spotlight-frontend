@@ -17,11 +17,13 @@ import time
 
 # Stubhub specific webscraping
 def scrape(team1, team2, src_section, src_row, src_total_price, quantity):
+    tickets_list = []
     url = 'https://stubhub.com'
     print("Finding " + str(quantity) + " tickets for " + team1 + " vs " + team2 + " at " + "Section: " 
     + str(src_section) + " Row: " + str(src_row) + " at $" + str(src_total_price) + " from " + url + "\n")
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
     driver.get(url)
+    
 
     try:
         search_bar = WebDriverWait(driver, 10).until(
@@ -31,7 +33,7 @@ def scrape(team1, team2, src_section, src_row, src_total_price, quantity):
         )
         search_bar.clear()
         search_bar.send_keys(team1 + " vs " + team2 + Keys.RETURN)
-        # print("Sent to search bar", driver.current_url)
+        # print("Sent to search bar\n", driver.current_url)
 
         a_tag = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located(
@@ -39,27 +41,23 @@ def scrape(team1, team2, src_section, src_row, src_total_price, quantity):
             )
         )
         driver.get(a_tag.get_attribute('href'))
-        # print("Team1 at Team 2: See Tickets", driver.current_url)
+        # print("Team1 at Team 2: See Tickets\n", driver.current_url)
 
-        WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable(
-                (By.XPATH, "//div/div/button[contains(text(), '1')]")
-            )
-        ).click()
-        # print("Chose 1 ticket", driver.current_url)
+        driver.get(driver.current_url + "?quantity=1")
+        # print("Chose 1 ticket\n", driver.current_url)
 
         WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable(
                 (By.XPATH, "//*[name()='g']/*[name()='text'][contains(text(), '" + str(src_section) + "')]")
             )
         ).click()
-        # print("Filtered to particular section", driver.current_url)
+        # print("Filtered to section", src_section + "\n", driver.current_url)
 
         driver.get(driver.current_url + "&estimatedFees=true")
-        # print("Set estimated fees to true", driver.current_url)
+        # print("Set estimated fees to true\n", driver.current_url)
 
         idx = 0
-        tickets_list = []
+        
         while True:
             WebDriverWait(driver, 10).until(
                 EC.presence_of_all_elements_located(

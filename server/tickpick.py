@@ -17,6 +17,7 @@ import time
 
 # Tickpick specific webscraping
 def scrape(team1, team2, section, row, price, quantity):
+    tickets_list = []
     url = 'https://www.tickpick.com/'
     print("Finding cheaper tickets for " + team1 + " vs " + team2 + " at " + "Section: " 
     + str(section) + " Row: " + str(row) + " at $" + str(price) + " from " + url + "\n")
@@ -32,7 +33,7 @@ def scrape(team1, team2, section, row, price, quantity):
 
         search_bar.clear()
         search_bar.send_keys(team1 + " vs " + team2 + Keys.RETURN)
-        # print("Sent to search bar", driver.current_url)
+        print("Sent to search bar", driver.current_url)
 
 
         a_tag = WebDriverWait(driver, 20).until(
@@ -41,69 +42,39 @@ def scrape(team1, team2, section, row, price, quantity):
             )
         )
         driver.get(a_tag.get_attribute('href'))
-
-        print("here tickpick")
+        print("clicked a tag\n", driver.current_url);
 
         WebDriverWait(driver, 20).until(
             EC.presence_of_element_located(
                 (By.XPATH, "//*[@id=\"listingContainer\"]/div[1]")
             )
         )
-
-        # time.sleep(2)
-        # choices = driver.find_elements(By.CLASS_NAME,
-        #     "listing"
-        # )
+        print('here', driver.current_url)
 
         WebDriverWait(driver, 10).until(
             EC.presence_of_all_elements_located(
                 (By.CLASS_NAME, "listing")
             )
         )
+        print("listing\n", driver.current_url);
 
         choices = driver.find_elements(By.CLASS_NAME,
             "listing"
         )
+        for choice in choices:
+            print(choice.text)
         ind = 0
-        tickets_list = []
-        
-        # while True:
-        #     WebDriverWait(driver, 10).until(
-        #         EC.presence_of_all_elements_located(
-        #             (By.CLASS_NAME, "listing")
-        #         )
-        #     )
 
-        # choices = driver.find_elements(By.CLASS_NAME,
-        #     "listing"
-        # )
-
-        # try:
         for choice in choices:
             # choice = choices[ind]
             (ok, this_row, this_price) = assess(choice.text, section, row, price, quantity)
             if (ok):
-                
-                # choice.click()
-
-                # time.sleep(10)
-                
-                # pos = WebDriverWait(driver, 30).until(
-                #     EC.visibility_of_element_located(
-                #         (By.ID, "licCheckout")
-                #     )
-                # )
-                # pos.click()
                 url = driver.current_url
                 # driver.back()
                 tickets_list.append(("tickpick", section, this_row, float(this_price) * int(quantity), url))
                 print("[FOUND]", "section:", section, "row:", this_row, "price:", float(this_price) * int(quantity))
-                    
-            # except IndexError:
-            #     break
-            # ind += 1
 
-        print(tickets_list)
+        # print(tickets_list)
         return tickets_list
 
     
@@ -124,7 +95,6 @@ def scrape(team1, team2, section, row, price, quantity):
     
 def assess(text, section, row, price, quantity):
     (this_section_num, this_row_num, this_price) = parse_seats(text)
-    print(parse_seats(text))
     if this_section_num != int(section) or this_row_num > int(row) or this_price * float(quantity) >= float(price):
         return (False, 0, 0)
     return (True, this_row_num, this_price)
