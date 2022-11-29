@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template, redirect, url_for
 import flask
 import json
 from threading import Thread
@@ -11,6 +11,10 @@ import tickpick
 
 app = Flask(__name__)
 CORS(app)
+
+@app.route("/")
+def homepage():
+    return render_template("spotlight_website.html")
 
 @app.route("/scrape/stubhub")
 def scrape_stubhub():
