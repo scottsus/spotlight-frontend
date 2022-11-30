@@ -46,7 +46,7 @@ const titleStyles: React.CSSProperties = {
 const h2Styles: React.CSSProperties = {
   font: 'Helvetica',
   fontSize: '20px',
-  fontWeight: 500,
+  fontWeight: 600,
   margin: '5px 0px 0px 0px',
 };
 

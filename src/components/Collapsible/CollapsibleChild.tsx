@@ -63,11 +63,11 @@ const CollapsibleChild: React.FC<ICollapsibleChild> = ({ isOpen }) => {
       <AnimatePresence>
         {isPriceTotalPage ? (
           <PriceTotal
-            ticketPrice={125}
-            ticketQty={1}
-            orderProcessingFee={15.0}
-            serviceFee={20.5}
-            calculatedTax={2.25}
+            ticketPrice={'250'}
+            ticketQty={'2'}
+            orderProcessingFee={'15'}
+            serviceFee={'20.5'}
+            calculatedTax={'2.25'}
           />
         ) : (
           <TicketInfo />

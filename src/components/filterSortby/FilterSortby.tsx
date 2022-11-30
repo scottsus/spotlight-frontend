@@ -39,8 +39,8 @@ const FilterSortby: React.FC<IFilterSortby> = () => {
           <h3 style={h3Styles}>Sort By:</h3>
           <FontAwesomeIcon icon={down} />
         </div>
+        <SortbyConfig sortbyIsOpen={sortbyIsOpen} />
       </div>
-      {sortbyIsOpen && <SortbyConfig />}
     </div>
   );
 };

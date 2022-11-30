@@ -4,11 +4,11 @@ import ItemCost from './ItemCost';
 import TotalPrice from './TotalPrice';
 
 interface IPriceTotalTab {
-  ticketPrice: number;
-  ticketQty: number;
-  orderProcessingFee: number;
-  serviceFee: number;
-  calculatedTax: number;
+  ticketPrice: string;
+  ticketQty: string;
+  orderProcessingFee: string;
+  serviceFee: string;
+  calculatedTax: string;
 }
 
 const PriceTotalTab: React.FC<IPriceTotalTab> = ({
@@ -27,13 +27,21 @@ const PriceTotalTab: React.FC<IPriceTotalTab> = ({
       key='pricetotaltab'
     >
       <h1 style={categoryHeaderStyles}>Tickets</h1>
-      <ItemCost text={`Resale Ticket x ${ticketQty}`} cost={ticketPrice} />
+      <ItemCost
+        text={`Resale Ticket x ${ticketQty}`}
+        cost={parseFloat(ticketPrice)}
+      />
       <h1 style={{ ...categoryHeaderStyles, marginTop: '12px' }}>Fees</h1>
-      <ItemCost text={'Service'} cost={serviceFee} />
-      <ItemCost text={'Order Processing Fee'} cost={orderProcessingFee} />
-      <ItemCost text={'Calculated Tax'} cost={calculatedTax} />
+      <ItemCost text={'Service'} cost={parseFloat(serviceFee)} />
+      <ItemCost
+        text={'Order Processing Fee'}
+        cost={parseFloat(orderProcessingFee)}
+      />
+      <ItemCost text={'Calculated Tax'} cost={parseFloat(calculatedTax)} />
       <div style={dividerStyles} />
-      <TotalPrice totalPrice={ticketPrice * ticketQty} />
+      <TotalPrice
+        totalPrice={parseFloat(ticketPrice) * parseFloat(ticketQty)}
+      />
     </motion.div>
   );
 };

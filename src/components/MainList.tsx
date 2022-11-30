@@ -48,7 +48,8 @@ const MainList: React.FC<IMainList> = ({ tickets, hasLoadedAll }) => {
 
 const mainListStyles: React.CSSProperties = {
   margin: '10px auto',
-  height: '75%',
+  height: '368px',
+  maxHeight: '368px',
   width: '509px',
   overflowY: 'scroll',
 };
