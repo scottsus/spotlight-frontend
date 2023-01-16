@@ -1,6 +1,0 @@
-flask
-flask_cors
-selenium
-webdriver_manager
-packaging
-price-parser
