@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 import SortByConfig from './SortbyConfig';
 import FiltersConfig from './FiltersConfig';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -21,7 +22,11 @@ export default function Options() {
     setsortByIsOpen((sortByIsOpen) => !sortByIsOpen);
   };
   return (
-    <OptionsDiv>
+    <OptionsDiv
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.4 }}
+    >
       <Button width="84px" onClick={toggleFiltersConfig}>
         <img src={chrome.runtime.getURL('imgs/filter.png')} style={imgStyles} />
         <ButtonText>Filters</ButtonText>
@@ -45,7 +50,7 @@ export default function Options() {
   );
 }
 
-const OptionsDiv = styled.div`
+const OptionsDiv = styled(motion.div)`
   color: #4b3bff;
   margin: 10px 0;
   display: flex;
@@ -59,6 +64,9 @@ const Button = styled.button<{ width: string }>`
   display: flex;
   justify-content: start;
   align-items: center;
+  :hover {
+    background-color: #ebe9ff;
+  }
 `;
 
 const ButtonText = styled.p`

@@ -49,6 +49,9 @@ const TicketBlockDiv = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  :hover {
+    background-color: #ebe9ff;
+  }
 `;
 
 const ArrowButton = styled.button`

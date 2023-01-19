@@ -34,7 +34,7 @@
         }
     ],
     "web_accessible_resources": [{
-        "resources": ["*.png", "*.ttf", "*.otf"],
+        "resources": ["*.png", "*.svg","*.ttf", "*.otf"],
         "matches": ["<all_urls>"]
     }]
 }

@@ -7,14 +7,13 @@ interface IChecking {
   hasLoadedAll: boolean;
 }
 
-const Checking: React.FC<IChecking> = ({ hasLoadedAll }) => {
+function Checking({ hasLoadedAll }: IChecking) {
   const [choice, setChoice] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setChoice((choice) => (choice + 1) % siteNames.length);
-      if (choice === siteNames.length - 1) setChoice(0);
-    }, 4000);
+    }, 2000);
     return () => clearInterval(interval);
   });
 
@@ -31,12 +30,12 @@ const Checking: React.FC<IChecking> = ({ hasLoadedAll }) => {
       )}
     </AnimatePresence>
   );
-};
+}
 
 const CheckingDiv = styled(motion.div)`
   width: 80%;
   height: 35px;
-  margin: 20px auto 10px;
+  margin: 20px auto;
 `;
 
 const CheckingText = styled.h2`
@@ -48,4 +47,4 @@ const CheckingText = styled.h2`
   margin: 0;
 `;
 
-export default Checking;
+export default React.memo(Checking);

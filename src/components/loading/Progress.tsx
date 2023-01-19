@@ -37,22 +37,25 @@ export default function ProgressBar({
   }, [hasLoadedAll, progress]);
 
   return (
-    <AnimatePresence>
-      {!isDoneWithProgressBar && (
-        <ProgressBarDiv
-          key="ProgressBar"
-          width={progress}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1.8 }}
-        />
-      )}
-    </AnimatePresence>
+    <ProgressBarDiv
+      key="ProgressBar"
+      width={progress}
+      isDone={isDoneWithProgressBar}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 1.8 }}
+    />
   );
 }
 
-const ProgressBarDiv = styled(motion.div)<{ width: number }>`
-  width: ${(props) => (props.width * 98.0) / 30}%;
+interface IProgressBarDiv {
+  width: number;
+  isDone: boolean;
+}
+
+const ProgressBarDiv = styled(motion.div)<IProgressBarDiv>`
+  width: ${(props) => (props.width * 80.0) / 30}%;
   height: 6px;
   border-radius: 2px;
-  background-color: #4b3bff;
+  background-color: ${(props) => (props.isDone ? 'transparent' : '#4b3bff')};
+  transition: background-color 0.5s ease-in-out;
 `;

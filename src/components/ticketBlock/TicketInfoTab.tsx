@@ -45,5 +45,5 @@ const Text = styled.p`
   font-family: Manrope;
   font-weight: 300;
   color: #5f5f5f;
-  margin: 2.5px 0 10px;
+  margin: 2.2px 0 10px;
 `;

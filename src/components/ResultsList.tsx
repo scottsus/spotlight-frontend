@@ -27,7 +27,7 @@ export default function ResultsList({ tickets, hasLoadedAll }: IResultsList) {
             key={ticket.totalPrice + '|?|' + ticket.url}
           >
             <TicketContainer
-              logo={chrome.runtime.getURL(`imgs/${ticket.site}.png`)}
+              logo={chrome.runtime.getURL(`imgs/${ticket.site}.svg`)}
               section={ticket.section}
               row={ticket.row}
               price={ticket.totalPrice}

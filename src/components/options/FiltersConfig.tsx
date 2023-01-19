@@ -25,6 +25,7 @@ export default function FiltersConfig({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          transition={{ duration: 0.25 }}
         >
           <FilterHeader>
             <Black>Price Range:</Black>
@@ -76,7 +77,7 @@ const FilterConfigDiv = styled(motion.div)`
   top: 211px;
   left: 31px;
   z-index: 101;
-  border: 2px solid #4b3bff;
+  border: 1.5px solid #4b3bff;
   border-radius: 10.6px;
   height: 372px;
   width: 509px;

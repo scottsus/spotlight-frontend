@@ -109,7 +109,7 @@ const Item = styled.p<IItem>`
   font-family: Manrope;
   font-weight: ${(props) => (props.isBold ? 700 : 300)};
   color: ${(props) => props.color};
-  margin: 2.4px 0;
+  margin: 2.2px 0;
   width: 50%;
   text-align: ${(props) => props.textAlign};
 `;

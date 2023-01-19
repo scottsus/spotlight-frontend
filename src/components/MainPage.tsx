@@ -56,8 +56,8 @@ export default function AppBox({
         setIsDoneWithProgressBar={setIsDoneWithProgressBar}
         hasLoadedAll={hasLoadedAll}
       />
-      <Options />
-      <Checking hasLoadedAll={hasLoadedAll} />
+      {hasLoadedAll && <Options />}
+      <Checking hasLoadedAll={isDoneWithProgressBar} />
       <Skeletons hasLoadedOne={hasLoadedOne} />
       {hasLoadedOne && (
         <ResultsList tickets={destTickets} hasLoadedAll={hasLoadedAll} />
@@ -137,14 +137,14 @@ const Teams = styled.h2`
   font-size: 20px;
   font-family: Helvetica;
   font-weight: 600;
-  margin: 10px 0;
+  margin: 7px 0;
 `;
 
 const Venue = styled.h4`
   font-size: 16px;
   font-family: Helvetica;
   font-weight: 300;
-  margin: 5px 0;
+  margin: 4px 0;
 `;
 
 interface IXButton {
