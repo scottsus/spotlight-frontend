@@ -28,7 +28,7 @@ export default function Options() {
       transition={{ duration: 0.4 }}
     >
       <Button width="84px" onClick={toggleFiltersConfig}>
-        <img src={chrome.runtime.getURL('imgs/filter.png')} style={imgStyles} />
+        <Image src={chrome.runtime.getURL('imgs/filter.png')} alt="Filter" />
         <ButtonText>Filters</ButtonText>
       </Button>
       <FiltersConfig
@@ -77,8 +77,8 @@ const ButtonText = styled.p`
   margin: 0;
 `;
 
-const imgStyles: React.CSSProperties = {
-  height: '17px',
-  width: '17px',
-  marginRight: '5px',
-};
+const Image = styled.img`
+  width: 17px;
+  height: 17px;
+  margin: 0 5px 0 0;
+`;
