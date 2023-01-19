@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import TicketInfo from '../lib/ticketInfo';
-import FilterSortby from './options/Options';
+import stateToAbbreviation from '../lib/stateToAbbreviation';
 
-import Logo from '../components/Logo';
-import Title from '../components/Title';
-import MainList from './ResultsList';
+import Options from './options/Options';
+import ResultsList from './ResultsList';
 import Checking from './loading/Checking';
 import Progress from './loading/Progress';
 import Skeletons from './loading/Skeletons';
@@ -28,13 +27,17 @@ export default function AppBox({
   hasLoadedOne,
   hasLoadedAll,
 }: IAppBox) {
+  // Progress Bar
+  const [progress, setProgress] = useState(0);
+  const [isDoneWithProgressBar, setIsDoneWithProgressBar] = useState(false);
+
   useEffect(() => {}, [srcTicketInfo]);
   return (
     <AppBoxDiv isVisible={tagIsOpened}>
-      <Logo />
+      <Logo>Spotlight</Logo>
       <XButton setTagIsOpened={setTagIsOpened} />
       {srcTicketInfo && (
-        <Title
+        <EventTitle
           team1={srcTicketInfo.team1}
           team2={srcTicketInfo.team2}
           day={srcTicketInfo.day}
@@ -45,15 +48,19 @@ export default function AppBox({
           state={srcTicketInfo.state}
         />
       )}
-      <div style={loadingStyles}>
-        {/* <Filters /> */}
-        <FilterSortby />
-        <Progress hasLoadedAll={hasLoadedAll} />
-      </div>
+      <Divider />
+      <Progress
+        progress={progress}
+        setProgress={setProgress}
+        isDoneWithProgressBar={isDoneWithProgressBar}
+        setIsDoneWithProgressBar={setIsDoneWithProgressBar}
+        hasLoadedAll={hasLoadedAll}
+      />
+      <Options />
       <Checking hasLoadedAll={hasLoadedAll} />
       <Skeletons hasLoadedOne={hasLoadedOne} />
       {hasLoadedOne && (
-        <MainList tickets={destTickets} hasLoadedAll={hasLoadedAll} />
+        <ResultsList tickets={destTickets} hasLoadedAll={hasLoadedAll} />
       )}
     </AppBoxDiv>
   );
@@ -74,13 +81,71 @@ const AppBoxDiv = styled.div<{ isVisible: boolean }>`
   visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
 `;
 
-const loadingStyles = {
-  height: '30px',
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  margin: '10px 0px',
-};
+const Logo = styled.h1`
+  font-size: 30px;
+  font-family: Mont;
+  font-weight: 800;
+  color: #4b3bff;
+  margin: 0;
+`;
+
+const Divider = styled.div`
+  height: 2px;
+  background-color: #dfe0e0;
+`;
+
+interface IEventTitle {
+  team1: string;
+  team2: string;
+  stadium: string;
+  city: string;
+  state: string;
+  day: string;
+  date: string;
+  time: string;
+}
+
+function EventTitle({
+  team1,
+  team2,
+  stadium,
+  city,
+  state,
+  day,
+  date,
+  time,
+}: IEventTitle) {
+  return (
+    <TitleDiv>
+      <Teams>
+        {team1} vs {team2}
+      </Teams>
+      <Venue>
+        {stadium} • {city}, {stateToAbbreviation(state)} • {day}, {date} at{' '}
+        {time}
+      </Venue>
+    </TitleDiv>
+  );
+}
+
+const TitleDiv = styled.div`
+  padding: 15px 0 0 0;
+  margin: 0 0 10px 0;
+`;
+
+const Teams = styled.h2`
+  font-size: 20px;
+  font-family: Helvetica;
+  font-weight: 600;
+  margin: 10px 0;
+`;
+
+const Venue = styled.h4`
+  font-size: 16px;
+  font-family: Helvetica;
+  font-weight: 300;
+  margin: 5px 0;
+`;
 
 interface IXButton {
   setTagIsOpened: React.Dispatch<React.SetStateAction<boolean>>;

@@ -13,14 +13,20 @@ import TicketInfo from '../lib/ticketInfo';
 
 const App: React.FC = () => {
   const [tagIsOpened, setTagIsOpened] = useState<boolean>(false);
+
+  // Getting Tickets
   const [destTickets, addDestTickets] = useState<TicketInfo[]>([]);
   const [srcTicketInfo, setSrcTicketInfo] = useState<TicketInfo>();
+
+  // Loading Results
   const [hasLoadedOne, setHasLoadedOne] = useState<boolean>(false);
   const [hasLoadedAll, setHasLoadedAll] = useState<boolean>(false);
+
   const teams = useRef<string[]>([]);
   const addTeam = (NBATeam) => {
     teams.current.push(NBATeam);
   };
+
   useEffect(() => {
     const timer = setTimeout(() => {
       findSportsTickets(
@@ -37,6 +43,7 @@ const App: React.FC = () => {
     }, 2000); // make sure page loads before scraping
     return () => clearTimeout(timer);
   }, []);
+
   return (
     <div>
       <style>{fonts}</style>

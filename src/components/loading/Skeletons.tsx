@@ -32,7 +32,7 @@ const SkeletonsDiv = styled(motion.div)`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  margin: 15px 0 0 0;
+  margin: 0;
 `;
 
 function SkeletonBlock() {

@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 interface IPurpleTag {
@@ -6,46 +7,32 @@ interface IPurpleTag {
   setTagIsOpened: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const PurpleTag: React.FC<IPurpleTag> = ({ tagIsOpened, setTagIsOpened }) => {
+export default function PurpleTag({ tagIsOpened, setTagIsOpened }: IPurpleTag) {
   return (
-    <motion.div
-      style={
-        tagIsOpened
-          ? { ...purpleTagStyles, visibility: 'hidden' }
-          : { ...purpleTagStyles, visibility: 'visible' }
-      }
+    <PurpleTagDiv
+      isVisible={!tagIsOpened}
       whileHover={{
         x: '-25px',
       }}
     >
-      <style>{HtmlBodyStyles}</style>
-      <input
-        type='image'
+      <Image
         src={chrome.runtime.getURL('imgs/purpletag.png')}
-        style={imgStyles}
         onClick={() => setTagIsOpened((tagIsOpened) => !tagIsOpened)}
       />
-    </motion.div>
+    </PurpleTagDiv>
   );
-};
-
-const purpleTagStyles: React.CSSProperties = {
-  top: '25%',
-  right: '-60px',
-  position: 'absolute',
-  transition: 'right 0.1s ease',
-  zIndex: 1000,
-};
-
-const HtmlBodyStyles: string = `
-html, body {
-  overflow-x: hidden;
 }
+
+const PurpleTagDiv = styled(motion.div)<{ isVisible: boolean }>`
+  position: absolute;
+  top: 25%;
+  right: -60px;
+  transition: right 0.1s ease;
+  z-index: 100;
+  visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
 `;
 
-const imgStyles: React.CSSProperties = {
-  height: '100px',
-  width: '160px',
-};
-
-export default PurpleTag;
+const Image = styled.img`
+  width: 160px;
+  height: 100px;
+`;

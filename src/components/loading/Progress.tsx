@@ -1,15 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
-import ProgressBar from 'react-bootstrap/ProgressBar';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
-interface IProgress {
+interface IProgressBar {
+  progress: number;
+  setProgress: React.Dispatch<React.SetStateAction<number>>;
+  isDoneWithProgressBar: boolean;
+  setIsDoneWithProgressBar: React.Dispatch<React.SetStateAction<boolean>>;
   hasLoadedAll: boolean;
 }
 
-const Progress: React.FC<IProgress> = ({ hasLoadedAll }) => {
-  const [progress, setProgress] = useState(0);
-  const [isDoneWithProgressBar, setIsDoneWithProgressBar] = useState(false);
+export default function ProgressBar({
+  progress,
+  setProgress,
+  isDoneWithProgressBar,
+  setIsDoneWithProgressBar,
+  hasLoadedAll,
+}: IProgressBar) {
   useEffect(() => {
     if (hasLoadedAll) {
       const interval = setInterval(() => {
@@ -21,40 +28,31 @@ const Progress: React.FC<IProgress> = ({ hasLoadedAll }) => {
       }, 50);
       return () => clearInterval(interval);
     }
+
     const interval = setInterval(() => {
       if (progress < 30) setProgress((progress) => progress + 0.1);
     }, 100);
+
     return () => clearInterval(interval);
   }, [hasLoadedAll, progress]);
+
   return (
     <AnimatePresence>
       {!isDoneWithProgressBar && (
-        <motion.div
-          key='progressBar'
-          style={progressStyles}
+        <ProgressBarDiv
+          key="ProgressBar"
+          width={progress}
           exit={{ opacity: 0 }}
           transition={{ duration: 1.8 }}
-        >
-          <style>{progressStyle}</style>
-          <ProgressBar animated now={(progress * 100.0) / 30} />
-        </motion.div>
+        />
       )}
     </AnimatePresence>
   );
-};
-
-const progressStyle: string = `
-.progress {
-  height: 27px;
-  width: 100%;
-  margin-right: 40px;
 }
+
+const ProgressBarDiv = styled(motion.div)<{ width: number }>`
+  width: ${(props) => (props.width * 98.0) / 30}%;
+  height: 6px;
+  border-radius: 2px;
+  background-color: #4b3bff;
 `;
-
-const progressStyles: React.CSSProperties = {
-  width: '50%',
-  display: 'flex',
-  justifyContent: 'center',
-};
-
-export default Progress;

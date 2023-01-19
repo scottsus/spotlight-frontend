@@ -53,8 +53,8 @@ export default function ResultsList({ tickets, hasLoadedAll }: IResultsList) {
 
 const ResultsListDiv = styled.div<{ isDone: boolean }>`
   width: 509px;
-  max-height: ${(props) => (props.isDone ? '368px' : '278px')};
-  margin: 10px auto;
+  max-height: ${(props) => (props.isDone ? '368px' : '308px')};
+  margin: 0 auto;
   overflow-y: scroll;
 `;
 
