@@ -82,7 +82,7 @@ const findTicketsFromSite: IFindTicketsFromSite = (
   setHasLoadedOne,
   setHasLoadedAll
 ) => {
-  const srcSiteURL = `https://spotlight-backend.vercel.app/api/scrape/${site}`;
+  const srcSiteURL = `https://spotlight-backend.vercel.app/api/test/${site}`;
   fetch(srcSiteURL, {
     headers: {
       team1: srcTicketInfo.team1,

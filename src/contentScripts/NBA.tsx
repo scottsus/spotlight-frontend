@@ -3,6 +3,8 @@ import { createRoot } from 'react-dom/client';
 
 import NBATeams from '../lib/teams';
 import findSportsTickets from '../lib/findSportsTickets';
+import './globals.css';
+
 import fonts from '../lib/fonts';
 
 import PurpleTag from '../components/PurpleTag';
@@ -54,5 +56,5 @@ const App: React.FC = () => {
 const div = document.createElement('div');
 document.body.appendChild(div);
 
-const root = createRoot(div);
-root.render(<App />);
+const shadowRoot = createRoot(div);
+shadowRoot.render(<App />);
