@@ -28,7 +28,7 @@ export default function Options() {
       transition={{ duration: 0.4 }}
     >
       <Button width="84px" onClick={toggleFiltersConfig}>
-        <Image src={chrome.runtime.getURL('imgs/filter.png')} alt="Filter" />
+        <Image src={chrome.runtime.getURL('imgs/filter.svg')} alt="Filter" />
         <ButtonText>Filters</ButtonText>
       </Button>
       <FiltersConfig

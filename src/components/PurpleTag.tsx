@@ -28,6 +28,7 @@ const PurpleTagDiv = styled(motion.div)<{ isVisible: boolean }>`
   top: 25%;
   right: -60px;
   transition: right 0.1s ease;
+  cursor: pointer;
   z-index: 100;
   visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
 `;
