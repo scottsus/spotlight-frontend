@@ -154,7 +154,7 @@ interface IXButton {
 function XButton({ setTagIsOpened }: IXButton) {
   return (
     <XButtonContainer onClick={() => setTagIsOpened(false)}>
-      <img src={chrome.runtime.getURL('imgs/X Button.png')} />
+      <Image src={chrome.runtime.getURL('imgs/X Button.svg')} />
     </XButtonContainer>
   );
 }
@@ -164,6 +164,18 @@ const XButtonContainer = styled.button`
   top: 5%;
   right: 5%;
   border: none;
+  border-radius: 50%;
   background-color: #ffffff;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  :hover {
+    background-color: #f1f1f1;
+  }
+`;
+
+const Image = styled.img`
+  width: 18px;
+  height: 18px;
 `;
