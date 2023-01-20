@@ -8,19 +8,25 @@
 git clone git@github.com:susantoscott/spotlight.git
 ```
 
-2. Install NPM
+2. Build Dependencies
 
 ```
 npm install
 ```
 
-3. Apply Chrome Extension
+3. Rebuild the Extension
+
+```
+npm start
+```
+
+4. Apply the Extension
 
 ```
 chrome://extensions => Load Unpacked => spotlight/dist
 ```
 
-4. Enjoy!
+5. Enjoy!
 
 - Checkout at:
   - ticketmaster.com
