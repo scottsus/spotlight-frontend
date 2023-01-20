@@ -26,7 +26,7 @@ export default function OpenTicketBlock({ isOpen }: IOpenTicketBlock) {
   return (
     <OpenTicketBlockDiv height={height} overflow={openOverflow}>
       <Divider />
-      <PurpleBar margin={isPriceTotalPage ? '0 auto 0 2px' : '0 2px 0 auto'} />
+      <PurpleBar isOnLeft={isPriceTotalPage} />
       <Headers>
         <HeaderButton onClick={() => setIsPriceTotalPage(true)}>
           <Header isActive={isPriceTotalPage}>Price Total</Header>
@@ -69,12 +69,13 @@ const Divider = styled.div`
   background-color: #dfe0e0;
 `;
 
-const PurpleBar = styled.div<{ margin: string }>`
+const PurpleBar = styled.div<{ isOnLeft: boolean }>`
   width: 253px;
   height: 4px;
   border-radius: 2px;
   background-color: #4b3bff;
-  margin: ${(props) => props.margin};
+  margin-left: ${(props) => (props.isOnLeft ? '0' : '253px')};
+  transition: margin-left 0.2s ease-in-out;
 `;
 
 const Headers = styled.div`

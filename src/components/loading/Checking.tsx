@@ -25,7 +25,7 @@ function Checking({ hasLoadedAll }: IChecking) {
           exit={{ opacity: 0 }}
           transition={{ duration: 1.2 }}
         >
-          <CheckingText>checking {siteNames[choice]}...</CheckingText>
+          <CheckingText text={siteNames[choice]} />
         </CheckingDiv>
       )}
     </AnimatePresence>
@@ -38,7 +38,31 @@ const CheckingDiv = styled(motion.div)`
   margin: 20px auto;
 `;
 
-const CheckingText = styled.h2`
+interface ICheckingText {
+  text: string;
+}
+
+function CheckingText({ text }: ICheckingText) {
+  useEffect(() => {
+    console.log('RE-RENDER');
+  }, [text]);
+  return (
+    <AnimatePresence>
+      <CheckingTextDiv
+      // key={text}
+      // initial={{ opacity: 0 }}
+      // animate={{ opacity: 1 }}
+      // exit={{ opacity: 0 }}
+      // transition={{ duration: 0.5, delay: 1.0 }}
+      >
+        checking {text}...
+      </CheckingTextDiv>
+      ;
+    </AnimatePresence>
+  );
+}
+
+const CheckingTextDiv = styled(motion.div)`
   font-size: 21px;
   font-family: Manrope;
   font-weight: 600;
