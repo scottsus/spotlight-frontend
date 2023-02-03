@@ -32,10 +32,10 @@ export const seatgeekScrape: websiteScrape = (
     pIdx++;
     if (parts[pIdx].charAt(0) === '$') dollarSignCount++;
   }
-  const sectionNumber = truncate(parts[sIdx + 1]);
-  const rowNumber = truncate(parts[rIdx + 1]);
-  const totalPrice = truncate(parts[pIdx].substring(1));
-  const quantity = parts[pIdx + 2];
+  const sectionNumber = parseInt(truncate(parts[sIdx + 1]));
+  const rowNumber = parseInt(truncate(parts[rIdx + 1]));
+  const totalPrice = parseFloat(truncate(parts[pIdx].substring(1)));
+  const quantity = parseInt(parts[pIdx + 2]);
 
   const newlineParts = text.split('\n');
   let idx = 0;
@@ -101,10 +101,54 @@ export const ticketmasterScrape: websiteScrape = (
   while (qIdx < parts.length && parts[qIdx] !== 'x') {
     qIdx++;
   }
-  const sectionNumber = truncate(parts[sIdx + 1]);
-  const rowNumber = truncate(parts[rIdx + 1]);
-  const totalPrice = truncate(parts[pIdx].substring(1));
-  const quantity = parts[qIdx + 1];
+
+  const getSectionNumber = (subpart: string[]) => {
+    const preliminaryRes = parseInt(truncate(subpart[0].replace(/^\D+/g, '')));
+    if (preliminaryRes) return preliminaryRes;
+    return parseInt(truncate(subpart[1].replace(/^\D+/g, '')));
+  };
+
+  const getRowNumber = (part: string) => {
+    const isAlphabetic = (unclearString: string) => {
+      return unclearString.length === 1 && unclearString.match(/[a-z]/i);
+    };
+    if (isAlphabetic(part)) {
+      switch (part.toUpperCase()) {
+        case 'A':
+          return 0;
+        case 'B':
+          return -1;
+        case 'C':
+          return -2;
+        case 'D':
+          return -3;
+        case 'E':
+          return -4;
+        case 'F':
+          return -5;
+        case 'G':
+          return -6;
+        case 'H':
+          return -7;
+        case 'I':
+          return -8;
+        case 'J':
+          return -9;
+        case 'K':
+          return -10;
+        case 'L':
+          return -11;
+        case 'M':
+          return -12;
+      }
+    }
+    return parseInt(truncate(part.replace(/^\D+/g, '')));
+  };
+
+  const sectionNumber = getSectionNumber(parts.slice(sIdx + 1, sIdx + 3));
+  const rowNumber = getRowNumber(parts[rIdx + 1].replace(/[,]/g, ''));
+  const totalPrice = parseFloat(truncate(parts[pIdx].substring(1)));
+  const quantity = parseInt(parts[qIdx + 1]);
 
   const dots = text.split(' • ');
   const firstDotParts = dots[0].split('\n');
@@ -142,7 +186,7 @@ export const ticketmasterScrape: websiteScrape = (
 
 const parseSpacesAndNewlines = (text: string) => {
   const spaces = text.split(' ');
-  let parts = [];
+  const parts: string[] = [];
   for (const space of spaces) {
     const newlines = space.split('\n');
     for (const newline of newlines) if (newline !== '') parts.push(newline);

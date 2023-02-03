@@ -48,6 +48,7 @@ const findSportsTickets: ICheckoutInfo = (
         setSrcTicketInfo(srcTicketInfo);
         const sitesDone = new Set<string>();
         for (const siteName of siteNames) {
+          // if (siteName === 'vividseats')
           findTicketsFromSite(
             siteName,
             srcTicketInfo,
@@ -82,22 +83,26 @@ const findTicketsFromSite: IFindTicketsFromSite = (
   setHasLoadedOne,
   setHasLoadedAll
 ) => {
-  const srcSiteURL = `https://spotlight-backend.vercel.app/api/test/${site}`;
+  // const srcSiteURL = `http://localhost:3000/api/test/${site}`;
+  // const srcSiteURL = `http://localhost:3000/api/scrape/${site}`;
+  const srcSiteURL = `https://www.tryspotlight.xyz/api/test/${site}`;
+  // const srcSiteURL = `https://www.tryspotlight.xyz/api/scrape/${site}`;
+  const headers = {
+    team1: srcTicketInfo.team1,
+    team2: srcTicketInfo.team2,
+    srcSection: srcTicketInfo.section.toString(),
+    srcRow: srcTicketInfo.row.toString(),
+    srcTotalPrice: srcTicketInfo.totalPrice.toString(),
+    quantity: srcTicketInfo.quantity.toString(),
+    day: srcTicketInfo.day,
+    date: srcTicketInfo.date,
+    time: srcTicketInfo.time,
+    stadium: srcTicketInfo.stadium,
+    city: srcTicketInfo.city,
+    state: srcTicketInfo.state,
+  };
   fetch(srcSiteURL, {
-    headers: {
-      team1: srcTicketInfo.team1,
-      team2: srcTicketInfo.team2,
-      section: srcTicketInfo.section,
-      row: srcTicketInfo.row,
-      totalPrice: srcTicketInfo.totalPrice,
-      quantity: srcTicketInfo.quantity,
-      day: srcTicketInfo.day,
-      date: srcTicketInfo.date,
-      time: srcTicketInfo.time,
-      stadium: srcTicketInfo.stadium,
-      city: srcTicketInfo.city,
-      state: srcTicketInfo.state,
-    },
+    headers: headers,
   })
     .then((res) => res.json())
     .then((resJSONArray) => {
@@ -105,9 +110,9 @@ const findTicketsFromSite: IFindTicketsFromSite = (
         const newTicket: TicketInfo = {
           team1: srcTicketInfo.team1,
           team2: srcTicketInfo.team2,
-          section: resJSON['section'],
-          row: resJSON['row'],
-          totalPrice: resJSON['totalPrice'],
+          section: parseInt(resJSON['section']),
+          row: parseInt(resJSON['row']),
+          totalPrice: parseFloat(resJSON['totalPrice']),
           quantity: srcTicketInfo.quantity,
           day: srcTicketInfo.day,
           date: srcTicketInfo.date,

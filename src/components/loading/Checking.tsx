@@ -43,9 +43,7 @@ interface ICheckingText {
 }
 
 function CheckingText({ text }: ICheckingText) {
-  useEffect(() => {
-    console.log('RE-RENDER');
-  }, [text]);
+  useEffect(() => {}, [text]);
   return (
     <AnimatePresence>
       <CheckingTextDiv

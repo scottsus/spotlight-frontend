@@ -1,10 +1,10 @@
 interface ITicketInfo {
   team1: string;
   team2: string;
-  section: string;
-  row: string;
-  totalPrice: string;
-  quantity: string;
+  section: number;
+  row: number;
+  totalPrice: number;
+  quantity: number;
   day: string;
   date: string;
   time: string;
@@ -18,10 +18,10 @@ interface ITicketInfo {
 class TicketInfo implements ITicketInfo {
   team1: string;
   team2: string;
-  section: string;
-  row: string;
-  totalPrice: string;
-  quantity: string;
+  section: number;
+  row: number;
+  totalPrice: number;
+  quantity: number;
   day: string;
   date: string;
   time: string;
@@ -31,20 +31,20 @@ class TicketInfo implements ITicketInfo {
   site: string;
   url: string;
   constructor(
-    team1,
-    team2,
-    section,
-    row,
-    totalPrice,
-    quantity,
-    day,
-    date,
-    time,
-    stadium,
-    city,
-    state,
-    site,
-    url
+    team1: string,
+    team2: string,
+    section: number,
+    row: number,
+    totalPrice: number,
+    quantity: number,
+    day: string,
+    date: string,
+    time: string,
+    stadium: string,
+    city: string,
+    state: string,
+    site: string,
+    url: string
   ) {
     this.team1 = team1;
     this.team2 = team2;
