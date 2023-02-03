@@ -20,11 +20,7 @@
         {
             "matches": [
                 "*://checkout.ticketmaster.com/*",
-                "*://*.seatgeek.com/checkout*",
-                "*://*.stubhub.com/secure/buy/*",
-                "*://*.tix.axs.com/*",
-                "*://*.vividseats.com/checkout/*",
-                "*://*.tickpick.com/buy/checkout?*"
+                "*://*.seatgeek.com/checkout*"
             ],
             "js": ["NBA.js"]
         },
@@ -38,5 +34,11 @@
     "web_accessible_resources": [{
         "resources": ["*.png", "*.svg","*.ttf", "*.otf"],
         "matches": ["<all_urls>"]
-    }]
+    }],
+    "future_support": [
+        "*://*.stubhub.com/secure/buy/*",
+        "*://*.tix.axs.com/*",
+        "*://*.vividseats.com/checkout/*",
+        "*://*.tickpick.com/checkout?*"
+    ]
 }

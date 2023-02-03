@@ -1,3 +1,10 @@
-const siteNames = ['seatgeek', 'stubhub', 'ticketmaster', 'tickpick', 'vividseats'];
+const siteNames = [
+  'ticketmaster',
+  'seatgeek',
+  'stubhub',
+  'axs',
+  'vividseats',
+  'tickpick',
+];
 
 export default siteNames;

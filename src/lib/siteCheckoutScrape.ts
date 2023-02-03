@@ -282,6 +282,28 @@ export const vividseatsScrape: websiteScrape = (
   return fakeTicket('vividseats');
 };
 
+// problem: need Beautiful Soup to extract venue info
+export const tickpickScrape: websiteScrape = (
+  site,
+  url,
+  team1,
+  team2,
+  text
+) => {
+  const parts = parseSpacesAndNewlines(text);
+  console.log(`Parts: ${parts}`);
+  let sIdx = 0,
+    rIdx = 0,
+    pIdx = 0;
+  while (sIdx < parts.length && parts[sIdx] !== 'Section') {
+    sIdx++;
+  }
+  while (rIdx < parts.length && parts[rIdx] !== 'Row') {
+    rIdx++;
+  }
+  return fakeTicket('axs');
+};
+
 const parseSpacesAndNewlines = (text: string) => {
   const spaces = text.split(' ');
   const parts: string[] = [];

@@ -6,6 +6,7 @@ import {
   stubhubScrape,
   axsScrape,
   vividseatsScrape,
+  tickpickScrape,
 } from './siteCheckoutScrape';
 import siteNames from './sitenames';
 
@@ -152,6 +153,7 @@ const siteMap = {
   stubhub: stubhubScrape,
   axs: axsScrape,
   vividseats: vividseatsScrape,
+  tickpick: tickpickScrape,
 };
 
 export default findSportsTickets;
