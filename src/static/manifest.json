@@ -22,6 +22,8 @@
                 "*://checkout.ticketmaster.com/*",
                 "*://*.seatgeek.com/checkout*",
                 "*://*.stubhub.com/secure/buy/*",
+                "*://*.tix.axs.com/*",
+                "*://*.vividseats.com/checkout/*",
                 "*://*.tickpick.com/buy/checkout?*"
             ],
             "js": ["NBA.js"]

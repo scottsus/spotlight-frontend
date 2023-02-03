@@ -1,8 +1,11 @@
 import TicketInfo from './TicketInfo';
 import {
   websiteScrape,
-  seatgeekScrape,
   ticketmasterScrape,
+  seatgeekScrape,
+  stubhubScrape,
+  axsScrape,
+  vividseatsScrape,
 } from './siteCheckoutScrape';
 import siteNames from './sitenames';
 
@@ -144,8 +147,11 @@ const getNameFromURL = (url: string) => {
 };
 
 const siteMap = {
-  seatgeek: seatgeekScrape,
   ticketmaster: ticketmasterScrape,
+  seatgeek: seatgeekScrape,
+  stubhub: stubhubScrape,
+  axs: axsScrape,
+  vividseats: vividseatsScrape,
 };
 
 export default findSportsTickets;
