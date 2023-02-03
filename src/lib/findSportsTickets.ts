@@ -9,6 +9,7 @@ import {
   tickpickScrape,
 } from './siteCheckoutScrape';
 import siteNames from './sitenames';
+import { TEST_URL } from './urls';
 
 interface ICheckoutInfo {
   (
@@ -87,8 +88,7 @@ const findTicketsFromSite: IFindTicketsFromSite = (
   setHasLoadedOne,
   setHasLoadedAll
 ) => {
-  console.log(`url: ${chrome.runtime.getManifest().TEST_URL}`);
-  const srcSiteURL = `${chrome.runtime.getManifest().TEST_URL}/${site}`;
+  const srcSiteURL = `${TEST_URL}/${site}`;
   const headers = {
     team1: srcTicketInfo.team1,
     team2: srcTicketInfo.team2,
