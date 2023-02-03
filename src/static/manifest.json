@@ -19,6 +19,7 @@
     "content_scripts": [
         {
             "matches": [
+                "*://*.tryspotlight.xyz/example",
                 "*://checkout.ticketmaster.com/*",
                 "*://*.seatgeek.com/checkout*"
             ],

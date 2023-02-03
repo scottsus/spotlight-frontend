@@ -1,6 +1,7 @@
 import TicketInfo from './TicketInfo';
 import {
   websiteScrape,
+  exampleScrape,
   ticketmasterScrape,
   seatgeekScrape,
   stubhubScrape,
@@ -53,15 +54,15 @@ const findSportsTickets: ICheckoutInfo = (
         setSrcTicketInfo(srcTicketInfo);
         const sitesDone = new Set<string>();
         for (const siteName of siteNames) {
-          // if (siteName === 'vividseats')
-          findTicketsFromSite(
-            siteName,
-            srcTicketInfo,
-            addDestTickets,
-            sitesDone,
-            setHasLoadedOne,
-            setHasLoadedAll
-          );
+          if (siteName !== 'example')
+            findTicketsFromSite(
+              siteName,
+              srcTicketInfo,
+              addDestTickets,
+              sitesDone,
+              setHasLoadedOne,
+              setHasLoadedAll
+            );
         }
         break;
       }
@@ -134,7 +135,7 @@ const findTicketsFromSite: IFindTicketsFromSite = (
       console.log('Error:', err);
     })
     .finally(() => {
-      if (sitesDone.size === siteNames.length) setHasLoadedAll(true);
+      if (sitesDone.size === siteNames.length - 1) setHasLoadedAll(true);
     });
 };
 
@@ -146,6 +147,7 @@ const getNameFromURL = (url: string) => {
 };
 
 const siteMap = {
+  example: exampleScrape,
   ticketmaster: ticketmasterScrape,
   seatgeek: seatgeekScrape,
   stubhub: stubhubScrape,

@@ -18,7 +18,7 @@ const fakeTicket = (site: string) =>
     20,
     1000,
     2,
-    'Fri',
+    'Thursday',
     'Mar 30',
     '9:00pm',
     'Crypto.com Arena',
@@ -27,6 +27,10 @@ const fakeTicket = (site: string) =>
     site,
     'https://scottsus.xyz'
   );
+
+export const exampleScrape: websiteScrape = (site, url, team1, team2, text) => {
+  return fakeTicket('example');
+};
 
 // COMPLETE
 export const ticketmasterScrape: websiteScrape = (

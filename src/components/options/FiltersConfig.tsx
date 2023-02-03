@@ -158,7 +158,7 @@ interface IBoxes {
 
 function Boxes({ contentList }: IBoxes) {
   const boxes = contentList.map((content) => (
-    <Box content={content} isClickable={true} />
+    <Box key={content} content={content} isClickable={true} />
   ));
   return <BoxesDiv>{boxes}</BoxesDiv>;
 }

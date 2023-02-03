@@ -1,4 +1,5 @@
 const siteNames = [
+  'example',
   'ticketmaster',
   'seatgeek',
   'stubhub',

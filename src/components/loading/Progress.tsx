@@ -1,36 +1,29 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 interface IProgressBar {
-  progress: number;
-  setProgress: React.Dispatch<React.SetStateAction<number>>;
   isDoneWithProgressBar: boolean;
   setIsDoneWithProgressBar: React.Dispatch<React.SetStateAction<boolean>>;
   hasLoadedAll: boolean;
 }
 
 export default function ProgressBar({
-  progress,
-  setProgress,
   isDoneWithProgressBar,
   setIsDoneWithProgressBar,
   hasLoadedAll,
 }: IProgressBar) {
+  const [progress, setProgress] = useState(0);
   useEffect(() => {
-    if (hasLoadedAll) {
-      const interval = setInterval(() => {
-        setProgress((progress) => progress + 1);
+    if (progress >= 36) return;
+    const interval = setInterval(() => {
+      if (hasLoadedAll) {
+        setProgress((progress) => progress + 2.5);
         if (progress >= 30) {
           setIsDoneWithProgressBar(true);
-          clearInterval(interval);
+          return clearInterval(interval);
         }
-      }, 50);
-      return () => clearInterval(interval);
-    }
-
-    const interval = setInterval(() => {
-      if (progress < 30) setProgress((progress) => progress + 0.1);
+      } else if (progress < 30) setProgress((progress) => progress + 0.1);
     }, 100);
 
     return () => clearInterval(interval);
@@ -41,8 +34,6 @@ export default function ProgressBar({
       key="ProgressBar"
       width={progress}
       isDone={isDoneWithProgressBar}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 1.8 }}
     />
   );
 }
@@ -57,5 +48,5 @@ const ProgressBarDiv = styled(motion.div)<IProgressBarDiv>`
   height: 6px;
   border-radius: 2px;
   background-color: ${(props) => (props.isDone ? 'transparent' : '#4b3bff')};
-  transition: background-color 0.5s ease-in-out;
+  transition: background-color 1.8s ease-in-out;
 `;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import TicketInfo from '../lib/ticketInfo';
@@ -27,11 +27,7 @@ export default function AppBox({
   hasLoadedOne,
   hasLoadedAll,
 }: IAppBox) {
-  // Progress Bar
-  const [progress, setProgress] = useState(0);
   const [isDoneWithProgressBar, setIsDoneWithProgressBar] = useState(false);
-
-  useEffect(() => {}, [srcTicketInfo]);
   return (
     <AppBoxDiv isVisible={tagIsOpened}>
       <Logo>Spotlight</Logo>
@@ -50,8 +46,6 @@ export default function AppBox({
       )}
       <Divider />
       <Progress
-        progress={progress}
-        setProgress={setProgress}
         isDoneWithProgressBar={isDoneWithProgressBar}
         setIsDoneWithProgressBar={setIsDoneWithProgressBar}
         hasLoadedAll={hasLoadedAll}
