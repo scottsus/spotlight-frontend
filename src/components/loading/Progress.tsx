@@ -44,7 +44,7 @@ interface IProgressBarDiv {
   isDone: boolean;
 }
 
-const ProgressBarDiv = styled(motion.div).attrs<IProgressBarDiv>((props) => ({
+const ProgressBarDiv = styled(motion.div).attrs((props: IProgressBarDiv) => ({
   style: {
     width: `${(props.width * 80.0) / 30}%`,
     backgroundColor: `${props.isDone ? 'transparent' : '#4b3bff'}`,
