@@ -15,16 +15,17 @@ export default function ProgressBar({
 }: IProgressBar) {
   const [progress, setProgress] = useState(0);
   useEffect(() => {
-    if (progress >= 36) return;
-    const interval = setInterval(() => {
+    console.log('Progress:', progress);
+    if (progress >= 37.5) return;
+    const interval = setTimeout(() => {
       if (hasLoadedAll) {
-        setProgress((progress) => progress + 2.5);
+        setProgress((progress) => progress + 0.25);
         if (progress >= 30) {
           setIsDoneWithProgressBar(true);
           return clearInterval(interval);
         }
-      } else if (progress < 30) setProgress((progress) => progress + 0.1);
-    }, 100);
+      } else if (progress < 30) setProgress((progress) => progress + 0.01);
+    }, 10);
 
     return () => clearInterval(interval);
   }, [hasLoadedAll, progress]);
@@ -43,10 +44,13 @@ interface IProgressBarDiv {
   isDone: boolean;
 }
 
-const ProgressBarDiv = styled(motion.div)<IProgressBarDiv>`
-  width: ${(props) => (props.width * 80.0) / 30}%;
+const ProgressBarDiv = styled(motion.div).attrs<IProgressBarDiv>((props) => ({
+  style: {
+    width: `${(props.width * 80.0) / 30}%`,
+    backgroundColor: `${props.isDone ? 'transparent' : '#4b3bff'}`,
+  },
+}))`
   height: 6px;
   border-radius: 2px;
-  background-color: ${(props) => (props.isDone ? 'transparent' : '#4b3bff')};
   transition: background-color 1.8s ease-in-out;
 `;
