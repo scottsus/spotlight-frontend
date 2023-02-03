@@ -28,6 +28,8 @@ chrome://extensions => Load Unpacked => spotlight/dist
 
 5. Enjoy!
 
+- Verify that it works:
+  - go to my [example checkout page](https://www.tryspotlight.xyz/example) and test the extension
 - Checkout at:
   - ticketmaster.com
   - seatgeek.com
