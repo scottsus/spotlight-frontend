@@ -35,6 +35,10 @@
         "resources": ["*.png", "*.svg","*.ttf", "*.otf"],
         "matches": ["<all_urls>"]
     }],
+    "BASE_URL": "https://www.tryspotlight.xyz/api/scrape",
+    "TEST_URL": "https://www.tryspotlight.xyz/api/test",
+    "LOCAL_BASE_URL": "http://localhost:3000/api/scrape",
+    "LOCAL_TEST_URL": "http://localhost:3000/api/test",
     "future_support": [
         "*://*.stubhub.com/secure/buy/*",
         "*://*.tix.axs.com/*",

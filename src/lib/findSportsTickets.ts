@@ -87,10 +87,8 @@ const findTicketsFromSite: IFindTicketsFromSite = (
   setHasLoadedOne,
   setHasLoadedAll
 ) => {
-  // const srcSiteURL = `http://localhost:3000/api/test/${site}`;
-  // const srcSiteURL = `http://localhost:3000/api/scrape/${site}`;
-  const srcSiteURL = `https://www.tryspotlight.xyz/api/test/${site}`;
-  // const srcSiteURL = `https://www.tryspotlight.xyz/api/scrape/${site}`;
+  console.log(`url: ${chrome.runtime.getManifest().TEST_URL}`);
+  const srcSiteURL = `${chrome.runtime.getManifest().TEST_URL}/${site}`;
   const headers = {
     team1: srcTicketInfo.team1,
     team2: srcTicketInfo.team2,
