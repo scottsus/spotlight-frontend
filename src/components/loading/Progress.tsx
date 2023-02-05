@@ -14,8 +14,8 @@ export default function ProgressBar({
   hasLoadedAll,
 }: IProgressBar) {
   const [progress, setProgress] = useState(0);
+
   useEffect(() => {
-    console.log('Progress:', progress);
     if (progress >= 37.5) return;
     const interval = setTimeout(() => {
       if (hasLoadedAll) {
