@@ -30,11 +30,9 @@ export default function FiltersConfig({
         >
           <FilterHeader>
             <Black>Price Range:</Black>
-            &ensp;
-            <Purple>$100 - $1,100</Purple>
           </FilterHeader>
 
-          <RangeSlider min={0} max={100} onChange="" />
+          <RangeSlider min={0} max={1000} />
 
           <FilterHeader>
             <Black>Number of Tickets:</Black>

@@ -3,22 +3,29 @@ import styled from 'styled-components';
 
 interface IBox {
   content: string;
-  isClickable: boolean;
+  isClickable?: boolean;
+  width?: number;
 }
 
-export default function Box({ content, isClickable }: IBox) {
+export default function Box({ content, isClickable = false, width = 0 }: IBox) {
   const [isActive, setIsActive] = useState(false);
   const toggle = () => {
     if (isClickable) setIsActive((isActive) => !isActive);
   };
   return (
-    <BoxDiv isActive={isActive} onClick={toggle}>
+    <BoxDiv isActive={isActive} width={width} onClick={toggle}>
       <BoxText>{content}</BoxText>
     </BoxDiv>
   );
 }
 
-const BoxDiv = styled.div<{ isActive: boolean }>`
+interface IBoxDiv {
+  isActive: boolean;
+  width?: number;
+}
+
+const BoxDiv = styled.div<IBoxDiv>`
+  width: ${(props) => (props.width > 0 ? `${props.width}px` : 'auto')};
   border: 2px solid ${(props) => (props.isActive ? '#4b3bff' : '#dfe0e0')};
   border-radius: 5px;
   background-color: ${(props) => (props.isActive ? '#ebe9ff' : '#ffffff')};

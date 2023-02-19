@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect, ChangeEvent } from 'react';
 import styled from 'styled-components';
+import Box from './Box';
 
 interface IRangeSlider {
   min: number;
   max: number;
-  onChange: any;
 }
 
-export default function RangeSlider({ min, max, onChange }: IRangeSlider) {
+export default function RangeSlider({ min, max }: IRangeSlider) {
   const [minVal, setMinVal] = useState(min);
   const [maxVal, setMaxVal] = useState(max);
   const minValRef = useRef<HTMLInputElement>(null);
@@ -54,145 +54,112 @@ export default function RangeSlider({ min, max, onChange }: IRangeSlider) {
   }, [maxVal, getPercent]);
 
   return (
-    <SliderContainer>
-      <LeftThumb
-        type="range"
-        min={min}
-        max={max}
-        value={minVal}
-        ref={minValRef}
-        onChange={minOnChange}
-        isOver={minVal > max - 100}
-      />
-      <RightThumb
-        type="range"
-        min={min}
-        max={max}
-        value={maxVal}
-        ref={maxValRef}
-        onChange={maxOnChange}
-      />
-      <TrackContainer>
-        <TrackMiddle ref={rangeRef} />
-        <TrackEnds />
-        <LeftValue isOver>{minVal}</LeftValue>
-        <RightValue>{maxVal}</RightValue>
-      </TrackContainer>
-    </SliderContainer>
+    <GrandContainer>
+      <Box content={`$${minVal.toString()}`} width={70} />
+      <RangeSliderContainer>
+        <LeftThumb
+          type="range"
+          min={min}
+          max={max}
+          value={minVal}
+          ref={minValRef}
+          onChange={minOnChange}
+          isOver={minVal > max - 100}
+        />
+        <RightThumb
+          type="range"
+          min={min}
+          max={max}
+          value={maxVal}
+          ref={maxValRef}
+          onChange={maxOnChange}
+        />
+        <TrackContainer>
+          <TrackMiddle ref={rangeRef} />
+          <TrackEnds />
+        </TrackContainer>
+      </RangeSliderContainer>
+      <Box content={`$${maxVal.toString()}`} width={70} />
+    </GrandContainer>
   );
 }
 
-const SliderContainer = styled.div`
-  height: 100px;
+const GrandContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const RangeSliderContainer = styled.div`
+  height: 30px;
+  margin-bottom: 7px;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-const disableThumbDefaults = `
-    -webkit-appearance: none;
-    -webkit-tap-highlight-color: transparent;
-    pointer-events: none;
-    position: absolute;
-    height: 0;
-    width: 200px;
-    outline: none;
+const inputTrackDefaults = `
+  width: 280px;
+  height: 0;
+
+  position: absolute;
+  pointer-events: none;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
 `;
 
-const chromeWebkit = `
-    position: relative;
-    background-color: green;
-    border: none;
+const inputThumbDefaults = `
+  ::-webkit-slider-thumb {
+    width: 30px;
+    height: 30px;
+    margin: 7px 0 0 0;
     border-radius: 50%;
-    width: 20px;
-    height: 80px;
-    box-shadow: 0 0 1px 1px purple;
+    border: 0.5px solid #4b3bff;
+    background-color: #ffffff;
+  
+    position: relative;
     pointer-events: all;
-    cursor: pointer;
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
+  }
 `;
 
 const LeftThumb = styled.input<{ isOver: boolean }>`
-  -webkit-appearance: none;
-  -webkit-tap-highlight-color: transparent;
-  pointer-events: none;
-  position: absolute;
-  width: 200px;
-  height: 0;
+  ${inputTrackDefaults}
+  ${inputThumbDefaults}
 
-  ::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    -webkit-tap-highlight-color: transparent;
-    position: relative;
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    background-color: #ffffff;
-    border: 1px solid #4b3bff;
-    pointer-events: all;
-  }
-
-  z-index: ${(props) => (props.isOver ? 215 : 213)};
+  z-index: ${(props) => (props.isOver ? 115 : 113)};
 `;
 
 const RightThumb = styled.input`
-  -webkit-appearance: none;
-  -webkit-tap-highlight-color: transparent;
-  pointer-events: none;
-  position: absolute;
-  width: 200px;
-  height: 0;
+  ${inputTrackDefaults}
+  ${inputThumbDefaults}
 
-  ::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    -webkit-tap-highlight-color: transparent;
-    position: relative;
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    background-color: #ffffff;
-    border: 1px solid #4b3bff;
-    pointer-events: all;
-  }
-
-  z-index: 214;
+  z-index: 114;
 `;
 
 const TrackContainer = styled.div`
   position: relative;
-  width: 200px;
+  width: 280px;
+`;
+
+const trackDefaults = `
+  height: 8.5px;
+  border-radius: 3px;
+  position: absolute;
 `;
 
 const TrackEnds = styled.div`
-  border-radius: 3px;
-  width: 100%;
-  height: 5px;
+  ${trackDefaults}
 
+  width: 100%;
   background-color: #3f3f3f;
-  z-index: 211;
-  position: absolute;
+  z-index: 111;
 `;
 
 const TrackMiddle = styled.div`
-  border-radius: 3px;
-  height: 5px;
+  ${trackDefaults}
 
   background-color: #6354ff;
-  z-index: 212;
-  position: absolute;
-`;
-
-const LeftValue = styled.div`
-  position: absolute;
-  color: aqua;
-  font-size: 16px;
-  margin-top: 20px;
-  left: 6px;
-`;
-
-const RightValue = styled.div`
-  position: absolute;
-  color: aqua;
-  font-size: 16px;
-  margin-top: 20px;
-  right: -4px;
+  z-index: 112;
 `;
