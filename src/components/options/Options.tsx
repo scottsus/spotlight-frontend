@@ -8,10 +8,7 @@ import FiltersConfig from './FiltersConfig';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import {
-  faChevronUp,
-  faChevronDown,
-} from '@fortawesome/fontawesome-free-solid';
+import { faChevronDown } from '@fortawesome/fontawesome-free-solid';
 
 interface IOptions {
   setFilterOptions: React.Dispatch<React.SetStateAction<FilterOptions>>;
@@ -24,7 +21,6 @@ export default function Options({
 }: IOptions) {
   const [filterConfigIsOpen, setFilterConfigIsOpen] = useState(false);
   const [sortByIsOpen, setsortByIsOpen] = useState(false);
-  const up = faChevronUp as IconProp;
   const down = faChevronDown as IconProp;
 
   const toggleFiltersConfig = () => {
@@ -56,7 +52,13 @@ export default function Options({
         style={{ marginLeft: '10px' }}
       >
         <ButtonText>
-          Sort By &thinsp; <FontAwesomeIcon icon={sortByIsOpen ? up : down} />
+          Sort By &thinsp;{' '}
+          <FontAwesomeIcon
+            icon={down}
+            className={
+              sortByIsOpen ? 'fa-chevron-down open' : 'fa-chevron-down'
+            }
+          />
         </ButtonText>
       </Button>
       <SortByConfig
@@ -92,6 +94,16 @@ const ButtonText = styled.p`
   font-weight: 400;
   color: #4b3bff;
   margin: 0;
+
+  .fa-chevron-down {
+    transform: rotate(0deg);
+    transition: transform 0.6s ease;
+  }
+
+  .fa-chevron-down.open {
+    transform: rotate(-180deg);
+    transition: transform 0.6s ease;
+  }
 `;
 
 const Image = styled.img`

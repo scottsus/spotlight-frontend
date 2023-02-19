@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 interface IBox {
   content: string;
+  isActiveInitially?: boolean;
   isClickable?: boolean;
   width?: number;
   setContents?: React.Dispatch<React.SetStateAction<any>>;
@@ -10,11 +11,13 @@ interface IBox {
 
 export default function Box({
   content,
+  isActiveInitially = false,
   isClickable = false,
   width = 0,
   setContents,
 }: IBox) {
-  const [isActive, setIsActive] = useState(false);
+  const [isActive, setIsActive] = useState(isActiveInitially);
+
   const toggle = (event: React.MouseEvent<HTMLDivElement>) => {
     if (isClickable) setIsActive((isActive) => !isActive);
     const targetItem = event.currentTarget.textContent;

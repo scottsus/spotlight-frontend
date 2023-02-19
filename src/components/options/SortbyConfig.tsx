@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { motion, AnimatePresence } from 'framer-motion';
 import SortByOptions from '../../lib/sortByOptions';
 
 interface ISortBy {
@@ -13,34 +12,26 @@ export default function SortByConfig({
   setSortByOptions,
 }: ISortBy) {
   return (
-    <AnimatePresence>
-      {sortByIsOpen && (
-        <SortByDiv
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.25 }}
-        >
+    <SortByDiv isOpen={sortByIsOpen}>
+      {/* TODO: SORTING USING OTHER THINGS
           <SortbyItem text="Trending" setSortByOptions={setSortByOptions} />
           <SortbyItem text="Recommended" setSortByOptions={setSortByOptions} />
-          <SortbyItem text="Section" setSortByOptions={setSortByOptions} />
-          <SortbyItem
-            text="Price: Low to High"
-            setSortByOptions={setSortByOptions}
-          />
-          <SortbyItem
-            text="Price: High to Low"
-            setSortByOptions={setSortByOptions}
-          />
-        </SortByDiv>
-      )}
-    </AnimatePresence>
+          <SortbyItem text="Section" setSortByOptions={setSortByOptions} /> */}
+      <SortbyItem
+        text="Price: Low to High"
+        setSortByOptions={setSortByOptions}
+      />
+      <SortbyItem
+        text="Price: High to Low"
+        setSortByOptions={setSortByOptions}
+      />
+    </SortByDiv>
   );
 }
 
-const SortByDiv = styled(motion.div)`
+const SortByDiv = styled.div<{ isOpen: boolean }>`
   position: absolute;
-  top: 210px;
+  top: ${(props) => (props.isOpen ? '210px' : '-300px')};
   left: 125px;
   width: 180px;
   border: 1.5px solid #4b3bff;
@@ -48,6 +39,7 @@ const SortByDiv = styled(motion.div)`
   padding: 4px 10px;
   z-index: 103;
   background-color: #ffffff;
+  opacity: ${(props) => (props.isOpen ? 1 : 0)};
 `;
 
 interface ISortByItem {

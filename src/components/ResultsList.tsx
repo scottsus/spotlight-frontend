@@ -37,9 +37,16 @@ export default function ResultsList({
     )
       return false;
 
-    const ticketQuantity = ticketContainer.props.children.props.quantity;
+    const ticketQuantity = parseInt(
+      ticketContainer.props.children.props.quantity
+    );
     let minQuantitySatisfied = false;
-    for (const numTicketNeeded of filterOptions.numTicketsArr) {
+    for (const numTicketNeededStr of filterOptions.numTicketsArr) {
+      if (numTicketNeededStr === 'Any') {
+        minQuantitySatisfied = true;
+        break;
+      }
+      const numTicketNeeded = parseInt(numTicketNeededStr);
       if (ticketQuantity >= numTicketNeeded) minQuantitySatisfied = true;
     }
     if (!minQuantitySatisfied) return false;
