@@ -7,8 +7,6 @@ import {
   faChevronDown,
 } from '@fortawesome/fontawesome-free-solid';
 
-interface TicketInfo {}
-
 interface ITicketBlock {
   isOpen: boolean;
   toggle: () => void;

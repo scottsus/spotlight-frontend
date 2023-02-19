@@ -54,8 +54,23 @@ export default function ResultsList({
     return true;
   };
 
+  const useSortBy = (
+    ticketContainerItemsRef: React.MutableRefObject<JSX.Element[]>
+  ) => {
+    ticketContainerItemsRef.current.sort((a, b) => {
+      const priceA = a.props.children.props.price;
+      const priceB = b.props.children.props.price;
+      if (options.sortByOptions.isAscending) return priceA - priceB;
+      return priceB - priceA;
+    });
+    setTicketContainerItems(JSON.stringify(ticketContainerItemsRef.current));
+  };
+
   useEffect(() => {
-    console.log('Options:', options);
+    if (options.sortByOptions) {
+      useSortBy(ticketContainerItemsRef);
+      return;
+    }
     for (const ticket of tickets) {
       if (processTickets(ticket, seenItems)) {
         const newTicketContainer = (
@@ -84,24 +99,15 @@ export default function ResultsList({
   }, [tickets, options]);
 
   return (
-    <ResultsListDiv isDone={hasLoadedAll}>
-      {/* {options.filterOptions
+    <ResultsListDiv isDone={hasLoadedAll} transition={{ staggerChildren: 0.5 }}>
+      {options.filterOptions
         ? ticketContainerItemsRef.current.filter(useFilters)
-        : ticketContainerItemsRef.current} */}
-      {/* {options.sortByOptions
-        ? ticketContainerItemsRef.current.sort((a, b) => {
-            const priceA = a.props.children.price;
-            const priceB = b.props.children.price;
-            console.log('Reversing...');
-            return priceA - priceB;
-          })
-        : ticketContainerItemsRef.current} */}
-      {ticketContainerItemsRef.current}
+        : ticketContainerItemsRef.current}
     </ResultsListDiv>
   );
 }
 
-const ResultsListDiv = styled.div<{ isDone: boolean }>`
+const ResultsListDiv = styled(motion.div)<{ isDone: boolean }>`
   width: 509px;
   max-height: ${(props) => (props.isDone ? '368px' : '308px')};
   margin: 0 auto;
