@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Box from './Box';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
@@ -16,8 +16,6 @@ export default function FiltersConfig({
   filterConfigIsOpen,
   toggle,
 }: IFilterConfig) {
-  const numberList = ['Any', '1', '2', '3', '4', '5', '6', '7', '8', '9+'];
-  const websitesList = ['Any', 'Ticketmaster', 'SeatGeek', 'Stubhub'];
   const leftArrow = faAngleLeft as IconProp;
   return (
     <AnimatePresence>
@@ -28,25 +26,9 @@ export default function FiltersConfig({
           exit={{ opacity: 0 }}
           transition={{ duration: 0.25 }}
         >
-          <FilterHeader>
-            <Black>Price Range:</Black>
-          </FilterHeader>
-
-          <RangeSlider min={0} max={1000} />
-
-          <FilterHeader>
-            <Black>Number of Tickets:</Black>
-            &ensp;
-            <Purple>2</Purple>
-          </FilterHeader>
-          <Boxes contentList={numberList} />
-
-          <FilterHeader>
-            <Black>Websites:</Black>
-            &ensp;
-            <Purple>Ticketmaster, SeatGeek</Purple>
-          </FilterHeader>
-          <Boxes contentList={websitesList} />
+          <PriceRange min={0} max={1000} />
+          <NumberOfTickets />
+          <Websites />
 
           <Buttons>
             <BackButton onClick={toggle}>
@@ -99,10 +81,87 @@ const Purple = styled.h2`
   color: #4b3bff;
 `;
 
-const imgStyles: React.CSSProperties = {
-  height: '36px',
-  width: '64%',
-};
+interface IBoxes {
+  contentList: string[] | number[];
+  setContents?: React.Dispatch<React.SetStateAction<any>>;
+}
+
+function Boxes({ contentList, setContents }: IBoxes) {
+  const boxes = contentList.map((content) => (
+    <Box
+      key={content}
+      content={content}
+      isClickable={true}
+      setContents={setContents}
+    />
+  ));
+  return <BoxesDiv>{boxes}</BoxesDiv>;
+}
+
+const BoxesDiv = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+`;
+
+interface IPriceRange {
+  min: number;
+  max: number;
+}
+
+function PriceRange({ min, max }: IPriceRange) {
+  const [minVal, setMinVal] = useState(min);
+  const [maxVal, setMaxVal] = useState(max);
+  return (
+    <>
+      <FilterHeader>
+        <Black>Price Range:</Black>
+        &ensp;
+        <Purple>
+          ${minVal} - ${maxVal}
+        </Purple>
+      </FilterHeader>
+      <RangeSlider
+        min={min}
+        max={max}
+        minVal={minVal}
+        maxVal={maxVal}
+        setMinVal={setMinVal}
+        setMaxVal={setMaxVal}
+      />
+    </>
+  );
+}
+
+function NumberOfTickets() {
+  const numberList = ['Any', '1', '2', '3', '4', '5', '6', '7', '8', '9+'];
+  const [selectedNumbers, setSelectedNumbers] = useState<string[]>([]);
+  return (
+    <>
+      <FilterHeader>
+        <Black>Number of Tickets:</Black>
+        &ensp;
+        <Purple>{selectedNumbers.join(', ')}</Purple>
+      </FilterHeader>
+      <Boxes contentList={numberList} setContents={setSelectedNumbers} />
+    </>
+  );
+}
+
+function Websites() {
+  const websitesList = ['Any', 'Ticketmaster', 'SeatGeek', 'StubHub'];
+  const [selectedWebsites, setSelectedWebsites] = useState<string[]>([]);
+  return (
+    <>
+      <FilterHeader>
+        <Black>Websites:</Black>
+        &ensp;
+        <Purple>{selectedWebsites.join(', ')}</Purple>
+      </FilterHeader>
+      <Boxes contentList={websitesList} setContents={setSelectedWebsites} />
+    </>
+  );
+}
 
 const Buttons = styled.div`
   margin: 20px auto;
@@ -137,20 +196,4 @@ const ButtonText = styled.p<{ color: string }>`
   font-weight: 500;
   color: ${(props) => props.color};
   margin: 0;
-`;
-
-interface IBoxes {
-  contentList: string[];
-}
-
-function Boxes({ contentList }: IBoxes) {
-  const boxes = contentList.map((content) => (
-    <Box key={content} content={content} isClickable={true} />
-  ));
-  return <BoxesDiv>{boxes}</BoxesDiv>;
-}
-
-const BoxesDiv = styled.div`
-  display: flex;
-  justify-content: space-evenly;
 `;

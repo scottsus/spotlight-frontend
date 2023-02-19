@@ -5,12 +5,33 @@ interface IBox {
   content: string;
   isClickable?: boolean;
   width?: number;
+  setContents?: React.Dispatch<React.SetStateAction<any>>;
 }
 
-export default function Box({ content, isClickable = false, width = 0 }: IBox) {
+export default function Box({
+  content,
+  isClickable = false,
+  width = 0,
+  setContents,
+}: IBox) {
   const [isActive, setIsActive] = useState(false);
-  const toggle = () => {
+  const toggle = (event: React.MouseEvent<HTMLDivElement>) => {
     if (isClickable) setIsActive((isActive) => !isActive);
+    const targetItem = event.currentTarget.textContent;
+
+    const checkContentList = (contentList: any[], item: any) => {
+      for (const content of contentList) {
+        if (content === item) return true;
+      }
+      return false;
+    };
+
+    setContents((contentList) => {
+      const itemInContentList = checkContentList(contentList, targetItem);
+      if (itemInContentList)
+        return contentList.filter((content) => content !== targetItem);
+      return [...contentList, targetItem];
+    });
   };
   return (
     <BoxDiv isActive={isActive} width={width} onClick={toggle}>

@@ -5,11 +5,20 @@ import Box from './Box';
 interface IRangeSlider {
   min: number;
   max: number;
+  minVal: number;
+  maxVal: number;
+  setMinVal: React.Dispatch<React.SetStateAction<number>>;
+  setMaxVal: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export default function RangeSlider({ min, max }: IRangeSlider) {
-  const [minVal, setMinVal] = useState(min);
-  const [maxVal, setMaxVal] = useState(max);
+export default function RangeSlider({
+  min,
+  max,
+  minVal,
+  maxVal,
+  setMinVal,
+  setMaxVal,
+}: IRangeSlider) {
   const minValRef = useRef<HTMLInputElement>(null);
   const maxValRef = useRef<HTMLInputElement>(null);
   const rangeRef = useRef<HTMLDivElement>(null);
@@ -37,7 +46,6 @@ export default function RangeSlider({ min, max }: IRangeSlider) {
       if (rangeRef.current) {
         rangeRef.current.style.left = `${minPercent}%`;
         rangeRef.current.style.width = `${maxPercent - minPercent}%`;
-        console.log(`Width: ${rangeRef.current.style.width}%`);
       }
     }
   }, [minVal, getPercent]);
@@ -48,7 +56,6 @@ export default function RangeSlider({ min, max }: IRangeSlider) {
       const maxPercent = getPercent(maxVal);
       if (rangeRef.current) {
         rangeRef.current.style.width = `${maxPercent - minPercent}%`;
-        console.log(`Width: ${rangeRef.current.style.width}%`);
       }
     }
   }, [maxVal, getPercent]);
@@ -118,6 +125,7 @@ const inputThumbDefaults = `
     background-color: #ffffff;
   
     position: relative;
+    cursor: pointer;
     pointer-events: all;
     -webkit-appearance: none;
     -webkit-tap-highlight-color: transparent;
