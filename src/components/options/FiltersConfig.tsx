@@ -5,6 +5,7 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faAngleLeft } from '@fortawesome/fontawesome-free-solid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion, AnimatePresence } from 'framer-motion';
+import RangeSlider from './RangeSlider';
 
 interface IFilterConfig {
   filterConfigIsOpen: boolean;
@@ -32,15 +33,8 @@ export default function FiltersConfig({
             &ensp;
             <Purple>$100 - $1,100</Purple>
           </FilterHeader>
-          <SliderContainer>
-            <Box content={'$100'} isClickable={false} />
-            <img
-              src={chrome.runtime.getURL('imgs/range-slider.png')}
-              alt="range slider"
-              style={imgStyles}
-            />
-            <Box content={'$1,100'} isClickable={false} />
-          </SliderContainer>
+
+          <RangeSlider min={0} max={100} onChange="" />
 
           <FilterHeader>
             <Black>Number of Tickets:</Black>
@@ -105,11 +99,6 @@ const Purple = styled.h2`
   ${headerText}
   font-weight: 400;
   color: #4b3bff;
-`;
-
-const SliderContainer = styled.div`
-  display: flex;
-  justify-content: space-evenly;
 `;
 
 const imgStyles: React.CSSProperties = {
