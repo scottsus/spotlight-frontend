@@ -1,21 +1,4 @@
-interface ITicketInfo {
-  team1: string;
-  team2: string;
-  section: number;
-  row: number;
-  totalPrice: number;
-  quantity: number;
-  day: string;
-  date: string;
-  time: string;
-  stadium: string;
-  city: string;
-  state: string;
-  site: string;
-  url: string;
-}
-
-class TicketInfo implements ITicketInfo {
+class TicketInfo {
   team1: string;
   team2: string;
   section: number;

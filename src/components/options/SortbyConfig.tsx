@@ -1,8 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
+import SortByOptions from '../../lib/sortByOptions';
 
-export default function SortByConfig({ sortByIsOpen }) {
+interface ISortBy {
+  sortByIsOpen: boolean;
+  setSortByOptions: React.Dispatch<React.SetStateAction<SortByOptions>>;
+}
+
+export default function SortByConfig({
+  sortByIsOpen,
+  setSortByOptions,
+}: ISortBy) {
   return (
     <AnimatePresence>
       {sortByIsOpen && (
@@ -12,11 +21,17 @@ export default function SortByConfig({ sortByIsOpen }) {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.25 }}
         >
-          <SortbyItem text="Trending" />
-          <SortbyItem text="Recommended" />
-          <SortbyItem text="Section" />
-          <SortbyItem text="Price: Low to High" />
-          <SortbyItem text="Price: High to Low" />
+          <SortbyItem text="Trending" setSortByOptions={setSortByOptions} />
+          <SortbyItem text="Recommended" setSortByOptions={setSortByOptions} />
+          <SortbyItem text="Section" setSortByOptions={setSortByOptions} />
+          <SortbyItem
+            text="Price: Low to High"
+            setSortByOptions={setSortByOptions}
+          />
+          <SortbyItem
+            text="Price: High to Low"
+            setSortByOptions={setSortByOptions}
+          />
         </SortByDiv>
       )}
     </AnimatePresence>
@@ -37,11 +52,16 @@ const SortByDiv = styled(motion.div)`
 
 interface ISortByItem {
   text: string;
+  setSortByOptions: React.Dispatch<React.SetStateAction<SortByOptions>>;
 }
 
-function SortbyItem({ text }: ISortByItem) {
+function SortbyItem({ text, setSortByOptions }: ISortByItem) {
+  const saveSortByOption = () => {
+    if (text === 'Price: High to Low') setSortByOptions({ isAscending: false });
+    else setSortByOptions({ isAscending: true });
+  };
   return (
-    <SortByItemDiv>
+    <SortByItemDiv onClick={saveSortByOption}>
       <SortByItemText>{text}</SortByItemText>
     </SortByItemDiv>
   );

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import TicketInfo from '../lib/ticketInfo';
+import { FilterOptions, SortByOptions } from '../lib/options';
 import stateToAbbreviation from '../lib/stateToAbbreviation';
 
 import Options from './options/Options';
@@ -28,6 +29,8 @@ export default function AppBox({
   hasLoadedAll,
 }: IAppBox) {
   const [isDoneWithProgressBar, setIsDoneWithProgressBar] = useState(false);
+  const [filterOptions, setFilterOptions] = useState<FilterOptions>(null);
+  const [sortByOptions, setSortByOptions] = useState<SortByOptions>(null);
   return (
     <AppBoxDiv isVisible={tagIsOpened}>
       <Logo>Spotlight</Logo>
@@ -50,11 +53,23 @@ export default function AppBox({
         setIsDoneWithProgressBar={setIsDoneWithProgressBar}
         hasLoadedAll={hasLoadedAll}
       />
-      {hasLoadedAll && <Options />}
+      {hasLoadedAll && (
+        <Options
+          setFilterOptions={setFilterOptions}
+          setSortByOptions={setSortByOptions}
+        />
+      )}
       <Checking hasLoadedAll={isDoneWithProgressBar} />
       <Skeletons hasLoadedOne={hasLoadedOne} />
       {hasLoadedOne && (
-        <ResultsList tickets={destTickets} hasLoadedAll={hasLoadedAll} />
+        <ResultsList
+          tickets={destTickets}
+          options={{
+            filterOptions: filterOptions,
+            sortByOptions: sortByOptions,
+          }}
+          hasLoadedAll={hasLoadedAll}
+        />
       )}
     </AppBoxDiv>
   );

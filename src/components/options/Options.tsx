@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+
+import { FilterOptions, SortByOptions } from '../../lib/options';
 import SortByConfig from './SortbyConfig';
 import FiltersConfig from './FiltersConfig';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -10,14 +13,24 @@ import {
   faChevronDown,
 } from '@fortawesome/fontawesome-free-solid';
 
-export default function Options() {
+interface IOptions {
+  setFilterOptions: React.Dispatch<React.SetStateAction<FilterOptions>>;
+  setSortByOptions: React.Dispatch<React.SetStateAction<SortByOptions>>;
+}
+
+export default function Options({
+  setFilterOptions,
+  setSortByOptions,
+}: IOptions) {
   const [filterConfigIsOpen, setFilterConfigIsOpen] = useState(false);
   const [sortByIsOpen, setsortByIsOpen] = useState(false);
   const up = faChevronUp as IconProp;
   const down = faChevronDown as IconProp;
+
   const toggleFiltersConfig = () => {
     setFilterConfigIsOpen((filterConfigIsOpen) => !filterConfigIsOpen);
   };
+
   const toggleSortBy = () => {
     setsortByIsOpen((sortByIsOpen) => !sortByIsOpen);
   };
@@ -34,6 +47,7 @@ export default function Options() {
       <FiltersConfig
         filterConfigIsOpen={filterConfigIsOpen}
         toggle={toggleFiltersConfig}
+        setFilterOptions={setFilterOptions}
       />
 
       <Button
@@ -45,7 +59,10 @@ export default function Options() {
           Sort By &thinsp; <FontAwesomeIcon icon={sortByIsOpen ? up : down} />
         </ButtonText>
       </Button>
-      <SortByConfig sortByIsOpen={sortByIsOpen} />
+      <SortByConfig
+        sortByIsOpen={sortByIsOpen}
+        setSortByOptions={setSortByOptions}
+      />
     </OptionsDiv>
   );
 }
