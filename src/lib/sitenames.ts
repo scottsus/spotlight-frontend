@@ -4,7 +4,7 @@ const siteNames = [
   'stubhub',
   'seatgeek',
   'ticketmaster',
-  // 'ticketsmarter',
+  'ticketsmarter',
   'vividseats',
   'tickpick',
 ];

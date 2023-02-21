@@ -3,11 +3,7 @@ import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import siteNames from '../../lib/sitenames';
 
-interface IChecking {
-  hasLoadedAll: boolean;
-}
-
-function Checking({ hasLoadedAll }: IChecking) {
+function Checking() {
   const [choice, setChoice] = useState(0);
 
   useEffect(() => {
@@ -18,17 +14,13 @@ function Checking({ hasLoadedAll }: IChecking) {
   });
 
   return (
-    <AnimatePresence>
-      {!hasLoadedAll && (
-        <CheckingDiv
-          key="Checking"
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1.2 }}
-        >
-          <CheckingText text={siteNames[choice]} />
-        </CheckingDiv>
-      )}
-    </AnimatePresence>
+    <CheckingDiv
+      key="Checking"
+      exit={{ opacity: 0 }}
+      transition={{ duration: 1.2 }}
+    >
+      <CheckingText text={siteNames[choice]} />
+    </CheckingDiv>
   );
 }
 

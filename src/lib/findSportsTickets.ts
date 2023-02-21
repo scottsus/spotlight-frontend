@@ -89,7 +89,7 @@ const findTicketsFromSite: IFindTicketsFromSite = (
   setHasLoadedOne,
   setHasLoadedAll
 ) => {
-  const srcSiteURL = `${TEST_URL}/${site}`;
+  const srcSiteURL = `${''}/${site}`;
   const reqHeaders = {
     /* Required Info */
     team1: srcTicketInfo.team1,
@@ -112,6 +112,7 @@ const findTicketsFromSite: IFindTicketsFromSite = (
   })
     .then((res) => res.json())
     .then((resJSONArray) => {
+      console.log('json:', resJSONArray);
       for (const [_, resJSON] of resJSONArray.entries()) {
         const newTicket: TicketInfo = {
           team1: srcTicketInfo.team1,
@@ -141,6 +142,9 @@ const findTicketsFromSite: IFindTicketsFromSite = (
     })
     .catch((err) => {
       console.log('Error:', err);
+
+      // We're saying this site failed, just mark it as done
+      sitesDone.add(Math.random().toString());
     })
     .finally(() => {
       if (sitesDone.size === siteNames.length - 1) setHasLoadedAll(true);

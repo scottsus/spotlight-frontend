@@ -10,6 +10,7 @@ import ResultsList from './ResultsList';
 import Checking from './loading/Checking';
 import Progress from './loading/Progress';
 import Skeletons from './loading/Skeletons';
+import BestDeal from './loading/BestDeal';
 
 interface IAppBox {
   tagIsOpened: boolean;
@@ -35,6 +36,7 @@ export default function AppBox({
     <AppBoxDiv isVisible={tagIsOpened}>
       <Logo>Spotlight</Logo>
       <XButton setTagIsOpened={setTagIsOpened} />
+
       {srcTicketInfo && (
         <EventTitle
           team1={srcTicketInfo.team1}
@@ -47,21 +49,28 @@ export default function AppBox({
           state={srcTicketInfo.venueInfo.state}
         />
       )}
+
       <Divider />
+
       <Progress
         isDoneWithProgressBar={isDoneWithProgressBar}
         setIsDoneWithProgressBar={setIsDoneWithProgressBar}
         hasLoadedAll={hasLoadedAll}
       />
-      {hasLoadedAll && (
-        <Options
-          setFilterOptions={setFilterOptions}
-          setSortByOptions={setSortByOptions}
-        />
+
+      {isDoneWithProgressBar && hasLoadedOne && (
+        <>
+          <Options
+            setFilterOptions={setFilterOptions}
+            setSortByOptions={setSortByOptions}
+          />
+          <Checking />
+        </>
       )}
-      <Checking hasLoadedAll={isDoneWithProgressBar} />
-      <Skeletons hasLoadedOne={hasLoadedOne} />
-      {hasLoadedOne && (
+
+      {!hasLoadedOne && !hasLoadedAll && <Skeletons />}
+
+      {hasLoadedOne ? (
         <ResultsList
           srcTicket={srcTicketInfo}
           destTickets={destTickets}
@@ -71,6 +80,8 @@ export default function AppBox({
           }}
           hasLoadedAll={hasLoadedAll}
         />
+      ) : (
+        isDoneWithProgressBar && <BestDeal />
       )}
     </AppBoxDiv>
   );

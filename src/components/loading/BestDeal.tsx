@@ -1,0 +1,65 @@
+import React from 'react';
+import styled from 'styled-components';
+
+interface IBestDeal {}
+
+export default function BestDeal({}: IBestDeal) {
+  return (
+    <BestDealDiv>
+      <Title>Congrats! The deal you have is truly the </Title>
+      <Highlight>BEST DEAL</Highlight>
+      <Image
+        src={chrome.runtime.getURL('imgs/bestdeal.svg')}
+        alt="Purple Ticket"
+      />
+      <Button>
+        <ButtonText>Back to Checkout</ButtonText>
+      </Button>
+    </BestDealDiv>
+  );
+}
+
+const BestDealDiv = styled.div`
+  height: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Title = styled.h1`
+  font-size: 23px;
+  font-family: Manrope;
+  font-weight: 500;
+  color: black;
+  text-align: center;
+  margin: 40px 0 20px 0;
+`;
+
+const Highlight = styled.span`
+  font-size: 37px;
+  font-family: Mont;
+  font-weight: 700;
+  color: #51da91;
+  margin: 0 0 40px 0;
+`;
+
+const Image = styled.img`
+  width: 175px;
+  height: 135px;
+`;
+
+const Button = styled.button`
+  width: 220px;
+  height: 42px;
+  border-radius: 40px;
+  background-color: #4b3bff;
+  margin: auto 0 20px;
+`;
+
+const ButtonText = styled.p`
+  font-size: 16px;
+  font-family: Manrope;
+  font-weight: 500;
+  color: #ffffff;
+  margin: 0 auto;
+`;

@@ -1,33 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
-import { motion, AnimatePresence } from 'framer-motion';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
-interface ISkeletons {
-  hasLoadedOne: boolean;
-}
-
-export default function Skeletons({ hasLoadedOne }: ISkeletons) {
+export default function Skeletons() {
   return (
-    <AnimatePresence>
-      {!hasLoadedOne && (
-        <SkeletonsDiv
-          key="Skeletons"
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.1 }}
-        >
-          <SkeletonBlock />
-          <SkeletonBlock />
-          <SkeletonBlock />
-          <SkeletonBlock />
-        </SkeletonsDiv>
-      )}
-    </AnimatePresence>
+    <SkeletonsDiv>
+      <SkeletonBlock />
+      <SkeletonBlock />
+      <SkeletonBlock />
+      <SkeletonBlock />
+    </SkeletonsDiv>
   );
 }
 
-const SkeletonsDiv = styled(motion.div)`
+const SkeletonsDiv = styled.div`
   height: 50%;
   display: flex;
   flex-direction: column;
