@@ -1,30 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
-import siteNames from '../../lib/sitenames';
 
 function Checking() {
   const [choice, setChoice] = useState(0);
+  const checkingLines = [
+    '👀 looking for the best deals...',
+    '⏰ this might take up to 40s...',
+    '🏀 checking Crypto.com Arena...',
+    '🎤 asking Taylor Swift...',
+    '🗑 looking through the trash...',
+  ];
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setChoice((choice) => (choice + 1) % siteNames.length);
-    }, 2000);
+      setChoice((choice) => (choice + 1) % checkingLines.length);
+    }, 4000);
     return () => clearInterval(interval);
   });
 
   return (
-    <CheckingDiv
-      key="Checking"
-      exit={{ opacity: 0 }}
-      transition={{ duration: 1.2 }}
-    >
-      <CheckingText text={siteNames[choice]} />
+    <CheckingDiv>
+      <CheckingText text={checkingLines[choice]} />
     </CheckingDiv>
   );
 }
 
-const CheckingDiv = styled(motion.div)`
+const CheckingDiv = styled.div`
   width: 80%;
   height: 35px;
   margin: 20px auto;
@@ -45,7 +47,7 @@ function CheckingText({ text }: ICheckingText) {
       // exit={{ opacity: 0 }}
       // transition={{ duration: 0.5, delay: 1.0 }}
       >
-        checking {text}...
+        {text}
       </CheckingTextDiv>
       ;
     </AnimatePresence>

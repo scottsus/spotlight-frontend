@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
 interface IBestDeal {
   setTagIsOpened: React.Dispatch<React.SetStateAction<boolean>>;
@@ -10,7 +11,12 @@ export default function BestDeal({ setTagIsOpened }: IBestDeal) {
     setTagIsOpened(false);
   };
   return (
-    <BestDealDiv onClick={closeTag}>
+    <BestDealDiv
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      onClick={closeTag}
+    >
       <Title>Congrats! The deal you have is truly the </Title>
       <Highlight>BEST DEAL</Highlight>
       <Image
@@ -24,7 +30,7 @@ export default function BestDeal({ setTagIsOpened }: IBestDeal) {
   );
 }
 
-const BestDealDiv = styled.div`
+const BestDealDiv = styled(motion.div)`
   height: 420px;
   display: flex;
   flex-direction: column;
@@ -37,7 +43,7 @@ const Title = styled.h1`
   font-weight: 500;
   color: black;
   text-align: center;
-  margin: 40px 0 20px 0;
+  margin: 30px 0 20px 0;
 `;
 
 const Highlight = styled.span`

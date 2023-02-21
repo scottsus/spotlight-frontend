@@ -59,14 +59,13 @@ export default function AppBox({
       />
 
       {isDoneWithProgressBar && hasLoadedOne && (
-        <>
-          <Options
-            setFilterOptions={setFilterOptions}
-            setSortByOptions={setSortByOptions}
-          />
-          <Checking />
-        </>
+        <Options
+          setFilterOptions={setFilterOptions}
+          setSortByOptions={setSortByOptions}
+        />
       )}
+
+      {!hasLoadedAll && <Checking />}
 
       {!hasLoadedOne && !hasLoadedAll && <Skeletons />}
 
