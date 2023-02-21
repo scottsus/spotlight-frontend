@@ -61,7 +61,7 @@ const ArrowButton = styled.button`
   margin: 0 20px 0 20px;
   padding: 0;
   background-color: transparent;
-  color: #4b3bff;
+  color: #6354ff;
 
   .fa-chevron-down {
     transform: rotate(0deg);
@@ -102,7 +102,7 @@ function Overview({ section, row, srcPrice, destPrice, quantity }: IOverview) {
           SAVE ${Math.round(savings)}
         </Text>
       ) : (
-        <Text color="#4b3bff" size="18px" weight={700}>
+        <Text color="#6354ff" size="18px" weight={700}>
           ${Math.round(singlePrice)}{' '}
           <p style={{ display: 'inline', fontWeight: 500 }}>each</p>
         </Text>
@@ -153,7 +153,7 @@ const CheckoutAnchor = styled.a`
 const Button = styled.button`
   height: 48px;
   width: 160px;
-  background-color: #4b3bff;
+  background-color: #6354ff;
   border-radius: 8px;
   :hover {
     background-color: #695cff;

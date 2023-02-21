@@ -121,7 +121,7 @@ const inputThumbDefaults = `
     height: 30px;
     margin: 7px 0 0 0;
     border-radius: 50%;
-    border: 0.5px solid #4b3bff;
+    border: 0.5px solid #6354ff;
     background-color: #ffffff;
   
     position: relative;

@@ -94,7 +94,7 @@ const FilterConfigDiv = styled.div<{ isOpen: boolean }>`
   top: ${(props) => (props.isOpen ? '211px' : '-300px')};
   left: 31px;
   z-index: 101;
-  border: 1.5px solid #4b3bff;
+  border: 1.5px solid #6354ff;
   border-radius: 10.6px;
   // height: 372px;
   height: 300px;
@@ -123,7 +123,7 @@ const Black = styled.h2`
 const Purple = styled.h2`
   ${headerText}
   font-weight: 400;
-  color: #4b3bff;
+  color: #6354ff;
 `;
 
 interface IBoxes {
@@ -169,7 +169,7 @@ const BackButton = styled.button`
 `;
 
 const ApplyButton = styled.button`
-  background-color: #4b3bff;
+  background-color: #6354ff;
   padding: 11px 24px;
   border-radius: 20px;
   :hover {

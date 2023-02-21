@@ -38,7 +38,7 @@ export default function PriceTotalTab({ ticketInfo }: IPriceTotalTab) {
       <ItemCost
         text="Total"
         cost={ticketInfo.priceInfo.totalPrice}
-        color="#4b3bff"
+        color="#6354ff"
         isBold
       />
     </PriceTotalDiv>

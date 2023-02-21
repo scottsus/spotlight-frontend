@@ -106,7 +106,7 @@ const Logo = styled.h1`
   font-size: 30px;
   font-family: Mont;
   font-weight: 800;
-  color: #4b3bff;
+  color: #6354ff;
   margin: 0;
 `;
 

@@ -67,7 +67,7 @@ const TitleText = styled.h1<{ isSpotlight: boolean }>`
   font-size: 20px;
   font-family: Manrope;
   font-weight: 700;
-  color: ${(props) => (props.isSpotlight ? '#4b3bff' : '#27292a')};
+  color: ${(props) => (props.isSpotlight ? '#6354ff' : '#27292a')};
   text-align: center;
   margin: 0 0 20px 0;
 `;

@@ -60,7 +60,7 @@ const Button = styled.button`
   background-color: #7a6fff;
   margin: auto 0 20px;
   :hover {
-    background-color: #4b3bff;
+    background-color: #6354ff;
   }
 `;
 
