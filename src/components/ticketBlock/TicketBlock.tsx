@@ -13,7 +13,8 @@ interface ITicketBlock {
   logo: string;
   section: string;
   row: string;
-  price: string;
+  srcPrice: string;
+  destPrice: string;
   quantity: string;
   url: string;
 }
@@ -24,7 +25,8 @@ export default function TicketBlock({
   logo,
   section,
   row,
-  price,
+  srcPrice,
+  destPrice,
   quantity,
   url,
 }: ITicketBlock) {
@@ -36,8 +38,14 @@ export default function TicketBlock({
         <FontAwesomeIcon icon={isOpen ? up : down} />
       </ArrowButton>
       <Logo src={logo} alt="Website Logo" />
-      <Overview section={section} row={row} price={price} quantity={quantity} />
-      <CheckoutButton price={price} url={url} />
+      <Overview
+        section={section}
+        row={row}
+        srcPrice={srcPrice}
+        destPrice={destPrice}
+        quantity={quantity}
+      />
+      <CheckoutButton price={destPrice} url={url} />
     </TicketBlockDiv>
   );
 }
@@ -45,7 +53,6 @@ export default function TicketBlock({
 const TicketBlockDiv = styled.div`
   height: 85px;
   display: flex;
-  justify-content: space-evenly;
   align-items: center;
   :hover {
     background-color: #ebe9ff;
@@ -55,6 +62,7 @@ const TicketBlockDiv = styled.div`
 const ArrowButton = styled.button`
   height: 16px;
   width: 14px;
+  margin: 0 20px 0 20px;
   padding: 0;
   background-color: transparent;
   color: #4b3bff;
@@ -63,6 +71,7 @@ const ArrowButton = styled.button`
 const Logo = styled.img`
   height: 70px;
   width: 85px;
+  margin: 0 17.5px 0 0;
   display: inline;
 `;
 
@@ -74,20 +83,29 @@ interface ICheckoutButton {
 interface IOverview {
   section: string;
   row: string;
-  price: string;
+  srcPrice: string;
+  destPrice: string;
   quantity: string;
 }
 
-function Overview({ section, row, price, quantity }: IOverview) {
-  const singlePrice = parseFloat(price) / parseFloat(quantity);
+function Overview({ section, row, srcPrice, destPrice, quantity }: IOverview) {
+  const savings = parseFloat(srcPrice) - parseFloat(destPrice);
+  const singlePrice = parseFloat(destPrice) / parseInt(quantity);
   return (
     <OverviewDiv>
       <Text color="#27292a" size="16px" weight={400}>
         Section {section}, Row {row}
       </Text>
-      <Text color="#4b3bff" size="18px" weight={700}>
-        ${singlePrice} <p style={{ display: 'inline' }}>each</p>
-      </Text>
+      {savings > 0 ? (
+        <Text color="#51da91" size="18px" weight={700}>
+          SAVE ${Math.round(savings)}
+        </Text>
+      ) : (
+        <Text color="#4b3bff" size="18px" weight={700}>
+          ${Math.round(singlePrice)}{' '}
+          <p style={{ display: 'inline', fontWeight: 500 }}>each</p>
+        </Text>
+      )}
     </OverviewDiv>
   );
 }
@@ -114,13 +132,17 @@ const Text = styled.h3<IText>`
 
 function CheckoutButton({ price, url }: ICheckoutButton) {
   return (
-    <a href={url} target="_blank">
+    <CheckoutAnchor href={url} target="_blank">
       <Button>
         <ButtonText>Buy for ${price}</ButtonText>
       </Button>
-    </a>
+    </CheckoutAnchor>
   );
 }
+
+const CheckoutAnchor = styled.a`
+  margin: 0 22.5px 0 auto;
+`;
 
 const Button = styled.button`
   height: 48px;

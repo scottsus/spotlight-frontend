@@ -10,7 +10,7 @@ import {
   tickpickScrape,
 } from './siteCheckoutScrape';
 import siteNames from './sitenames';
-import { TEST_URL } from './urls';
+import { BASE_URL, TEST_URL } from './urls';
 
 interface ICheckoutInfo {
   (
@@ -90,22 +90,25 @@ const findTicketsFromSite: IFindTicketsFromSite = (
   setHasLoadedAll
 ) => {
   const srcSiteURL = `${TEST_URL}/${site}`;
-  const headers = {
+  const reqHeaders = {
+    /* Required Info */
     team1: srcTicketInfo.team1,
     team2: srcTicketInfo.team2,
-    srcSection: srcTicketInfo.section.toString(),
-    srcRow: srcTicketInfo.row.toString(),
-    srcTotalPrice: srcTicketInfo.totalPrice.toString(),
+    srcSection: srcTicketInfo.seatInfo.section,
+    srcRow: srcTicketInfo.seatInfo.row,
+    srcTotalPrice: srcTicketInfo.priceInfo.totalPrice.toString(),
     quantity: srcTicketInfo.quantity.toString(),
-    day: srcTicketInfo.day,
-    date: srcTicketInfo.date,
-    time: srcTicketInfo.time,
-    stadium: srcTicketInfo.stadium,
-    city: srcTicketInfo.city,
-    state: srcTicketInfo.state,
+
+    /* Unused for now */
+    day: srcTicketInfo.timeInfo.day,
+    date: srcTicketInfo.timeInfo.date,
+    hour: srcTicketInfo.timeInfo.hour,
+    stadium: srcTicketInfo.venueInfo.stadium,
+    city: srcTicketInfo.venueInfo.city,
+    state: srcTicketInfo.venueInfo.state,
   };
   fetch(srcSiteURL, {
-    headers: headers,
+    headers: reqHeaders,
   })
     .then((res) => res.json())
     .then((resJSONArray) => {
@@ -113,18 +116,23 @@ const findTicketsFromSite: IFindTicketsFromSite = (
         const newTicket: TicketInfo = {
           team1: srcTicketInfo.team1,
           team2: srcTicketInfo.team2,
-          section: parseInt(resJSON['section']),
-          row: parseInt(resJSON['row']),
-          totalPrice: parseFloat(resJSON['totalPrice']),
-          quantity: srcTicketInfo.quantity,
-          day: srcTicketInfo.day,
-          date: srcTicketInfo.date,
-          time: srcTicketInfo.time,
-          stadium: srcTicketInfo.stadium,
-          city: srcTicketInfo.city,
-          state: srcTicketInfo.state,
-          url: resJSON['url'],
+          performers: srcTicketInfo.performers,
+          quantity: resJSON['quantity'],
+          seatInfo: {
+            section: resJSON['seatInfo']['section'],
+            row: resJSON['seatInfo']['row'],
+          },
+          priceInfo: {
+            totalPrice: resJSON['priceInfo']['totalPrice'],
+            basePrice: resJSON['priceInfo']['basePrice'],
+            quantity: resJSON['priceInfo']['quantity'],
+            serviceFee: resJSON['priceInfo']['serviceFee'],
+            deliveryFee: resJSON['priceInfo']['deliveryFee'],
+          },
+          venueInfo: srcTicketInfo.venueInfo,
+          timeInfo: srcTicketInfo.timeInfo,
           site: resJSON['name'],
+          url: resJSON['url'],
         };
         addDestTickets((destTickets) => [...destTickets, newTicket]);
         sitesDone.add(resJSON['name']);

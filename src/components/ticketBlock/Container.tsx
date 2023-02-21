@@ -1,24 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import TicketInfo, { SeatInfo, PriceInfo } from '../../lib/TicketInfo';
 import TicketBlock from './TicketBlock';
 import OpenTicketBlock from './OpenTicketBlock';
 
 export interface IContainer {
   logo: string;
-  section: string;
-  row: string;
-  price: string;
   quantity: string;
+  seatInfo: SeatInfo;
+  priceInfo: PriceInfo;
   url: string;
+  srcTicket: TicketInfo;
 }
 
 export default function Container({
   logo,
-  section,
-  row,
-  price,
   quantity,
+  seatInfo,
+  priceInfo,
   url,
+  srcTicket,
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [childIsOpen, setChildIsOpen] = useState(false);
@@ -42,13 +43,14 @@ export default function Container({
         isOpen={isOpen}
         toggle={toggle}
         logo={logo}
-        section={section}
-        row={row}
-        price={price}
+        section={seatInfo.section}
+        row={seatInfo.row}
+        srcPrice={srcTicket.priceInfo.totalPrice}
+        destPrice={priceInfo.totalPrice}
         quantity={quantity}
         url={url}
       />
-      <OpenTicketBlock isOpen={childIsOpen} />
+      <OpenTicketBlock isOpen={childIsOpen} priceInfo={priceInfo} />
     </ContainerDiv>
   );
 }

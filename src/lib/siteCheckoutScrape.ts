@@ -10,23 +10,37 @@ export interface websiteScrape {
   ): TicketInfo;
 }
 
-const fakeTicket = (site: string) =>
-  new TicketInfo(
-    'Los Angeles Lakers',
-    'Toronto Raptors',
-    301,
-    20,
-    1000,
-    2,
-    'Thursday',
-    'Mar 30',
-    '9:00pm',
-    'Crypto.com Arena',
-    'Los Angeles',
-    'CA',
-    site,
-    'https://scottsus.xyz'
-  );
+const fakeTicket = (site: string) => {
+  return {
+    team1: 'Los Angeles Lakers',
+    team2: 'Toronto Raptors',
+    performers: [],
+    quantity: 2,
+    seatInfo: {
+      section: 'Sec 301',
+      row: 'Row 10',
+    },
+    priceInfo: {
+      totalPrice: 1000,
+      quantity: 2,
+      basePrice: 500,
+      serviceFee: 200,
+      deliveryFee: 5,
+    },
+    venueInfo: {
+      stadium: 'Crypto.com Arena',
+      city: 'Los Angeles',
+      state: 'CA',
+    },
+    timeInfo: {
+      day: 'Thursday',
+      date: 'Mar 30',
+      hour: '9:00pm',
+    },
+    site: site,
+    url: 'https://scottsus.xyz',
+  };
+};
 
 export const exampleScrape: websiteScrape = (site, url, team1, team2, text) => {
   return fakeTicket('example');
@@ -122,16 +136,29 @@ export const ticketmasterScrape: websiteScrape = (
   const ticketInfo = new TicketInfo(
     team1,
     team2,
-    sectionNumber,
-    rowNumber,
-    totalPrice,
+    [],
     quantity,
-    day,
-    date,
-    time,
-    stadium,
-    city,
-    state,
+    {
+      section: sectionNumber.toString(),
+      row: rowNumber.toString(),
+    },
+    {
+      totalPrice: totalPrice,
+      quantity: quantity,
+      basePrice: totalPrice / quantity,
+      serviceFee: 0,
+      deliveryFee: 5,
+    },
+    {
+      stadium: stadium,
+      city: city,
+      state: state,
+    },
+    {
+      date: date,
+      day: day,
+      hour: time,
+    },
     site,
     url
   );
@@ -190,16 +217,29 @@ export const seatgeekScrape: websiteScrape = (
   const ticketInfo = new TicketInfo(
     team1,
     team2,
-    sectionNumber,
-    rowNumber,
-    totalPrice,
+    [],
     quantity,
-    day,
-    date,
-    time,
-    stadium,
-    city,
-    state,
+    {
+      section: sectionNumber.toString(),
+      row: rowNumber.toString(),
+    },
+    {
+      totalPrice: totalPrice,
+      quantity: quantity,
+      basePrice: totalPrice / quantity,
+      serviceFee: 0,
+      deliveryFee: 5,
+    },
+    {
+      stadium: stadium,
+      city: city,
+      state: state,
+    },
+    {
+      date: date,
+      day: day,
+      hour: time,
+    },
     site,
     url
   );
@@ -326,16 +366,16 @@ const truncate = (text: string) => {
 };
 
 const check = (ticketInfo: TicketInfo) => {
-  console.log('Section:', ticketInfo.section);
-  console.log('Row:', ticketInfo.row);
-  console.log('Price:', ticketInfo.totalPrice);
+  console.log('Section:', ticketInfo.seatInfo.section);
+  console.log('Row:', ticketInfo.seatInfo.row);
+  console.log('Price:', ticketInfo.priceInfo.totalPrice);
   console.log('Quantity:', ticketInfo.quantity);
-  console.log('Day:', ticketInfo.day);
-  console.log('Date:', ticketInfo.date);
-  console.log('Time:', ticketInfo.time);
-  console.log('Stadium:', ticketInfo.stadium);
-  console.log('City:', ticketInfo.city);
-  console.log('State:', ticketInfo.state);
+  console.log('Date:', ticketInfo.timeInfo.date);
+  console.log('Day:', ticketInfo.timeInfo.day);
+  console.log('Time:', ticketInfo.timeInfo.hour);
+  console.log('Stadium:', ticketInfo.venueInfo.stadium);
+  console.log('City:', ticketInfo.venueInfo.city);
+  console.log('State:', ticketInfo.venueInfo.state);
   console.log('Site:', ticketInfo.site);
   console.log('URL:', ticketInfo.url);
 };

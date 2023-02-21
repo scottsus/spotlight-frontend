@@ -8,13 +8,15 @@ import { processTickets, seenItems, sortedInsert } from '../lib/mainListUtils';
 import TicketContainer from './ticketBlock/Container';
 
 interface IResultsList {
-  tickets: TicketInfo[];
+  srcTicket: TicketInfo;
+  destTickets: TicketInfo[];
   hasLoadedAll: boolean;
   options: Options;
 }
 
 export default function ResultsList({
-  tickets,
+  srcTicket,
+  destTickets,
   hasLoadedAll,
   options,
 }: IResultsList) {
@@ -78,22 +80,32 @@ export default function ResultsList({
       useSortBy(ticketContainerItemsRef);
       return;
     }
-    for (const ticket of tickets) {
+    for (const ticket of destTickets) {
       if (processTickets(ticket, seenItems)) {
         const newTicketContainer = (
           <motion.div
             variants={ticketContainerAnimations}
             initial="hidden"
             animate="show"
-            key={ticket.totalPrice + '|?|' + ticket.url}
+            key={ticket.priceInfo.totalPrice + '|?|' + ticket.url}
           >
             <TicketContainer
               logo={chrome.runtime.getURL(`imgs/${ticket.site}.svg`)}
-              section={ticket.section}
-              row={ticket.row}
-              price={ticket.totalPrice}
               quantity={ticket.quantity}
+              seatInfo={{
+                section: ticket.seatInfo.section,
+                row: ticket.seatInfo.row,
+              }}
+              priceInfo={{
+                totalPrice: ticket.priceInfo.totalPrice,
+                quantity: ticket.priceInfo.quantity,
+                basePrice:
+                  ticket.priceInfo.totalPrice / ticket.priceInfo.quantity,
+                serviceFee: ticket.priceInfo.serviceFee,
+                deliveryFee: ticket.priceInfo.deliveryFee,
+              }}
               url={ticket.url}
+              srcTicket={srcTicket}
             />
           </motion.div>
         );
@@ -103,7 +115,7 @@ export default function ResultsList({
         );
       }
     }
-  }, [tickets, options]);
+  }, [destTickets, options]);
 
   return (
     <ResultsListDiv isDone={hasLoadedAll} transition={{ staggerChildren: 0.5 }}>

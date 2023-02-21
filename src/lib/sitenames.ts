@@ -1,9 +1,10 @@
 const siteNames = [
   'example',
-  'ticketmaster',
-  'seatgeek',
-  'stubhub',
   'axs',
+  'stubhub',
+  'seatgeek',
+  'ticketmaster',
+  // 'ticketsmarter',
   'vividseats',
   'tickpick',
 ];

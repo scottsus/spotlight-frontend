@@ -1,22 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import ItemCost from './ItemCost';
 
 interface IPriceTotalTab {
-  ticketPrice: string;
-  ticketQty: string;
-  orderProcessingFee: string;
-  serviceFee: string;
-  calculatedTax: string;
+  totalPrice: number;
+  ticketQty: number;
+  serviceFee: number;
+  deliveryFee: number;
 }
 
 export default function PriceTotalTab({
-  ticketPrice,
+  totalPrice,
   ticketQty,
-  orderProcessingFee,
   serviceFee,
-  calculatedTax,
+  deliveryFee,
 }: IPriceTotalTab) {
+  const calculatedTax = totalPrice * 0.1;
   return (
     <PriceTotalDiv
       initial={{ opacity: 0 }}
@@ -27,24 +27,18 @@ export default function PriceTotalTab({
       <CategoryHeader>Tickets</CategoryHeader>
       <ItemCost
         text={`Resale Ticket x ${ticketQty}`}
-        cost={parseFloat(ticketPrice)}
+        cost={
+          (totalPrice - serviceFee - deliveryFee - calculatedTax) / ticketQty
+        }
       />
 
       <CategoryHeader style={{ marginTop: '5px' }}>Fees</CategoryHeader>
-      <ItemCost text="Service" cost={parseFloat(serviceFee)} />
-      <ItemCost
-        text={'Order Processing Fee'}
-        cost={parseFloat(orderProcessingFee)}
-      />
-      <ItemCost text="Calculated Tax" cost={parseFloat(calculatedTax)} />
+      <ItemCost text="Service Fee" cost={serviceFee} />
+      <ItemCost text="Delivery Fee" cost={deliveryFee} />
+      <ItemCost text="Calculated Tax" cost={calculatedTax} />
 
       <Divider />
-      <ItemCost
-        text="Total"
-        cost={parseFloat(ticketPrice) * parseFloat(ticketQty)}
-        color="#4b3bff"
-        isBold
-      />
+      <ItemCost text="Total" cost={totalPrice} color="#4b3bff" isBold />
     </PriceTotalDiv>
   );
 }
@@ -64,52 +58,7 @@ const CategoryHeader = styled.h3`
 const Divider = styled.div`
   height: 2px;
   width: 98%;
-  background-color: #27292a;
+  background-color: #dfe0e0;
   border-radius: 1px;
-  margin: 14px auto 11px;
-`;
-
-interface IItemCost {
-  text: string;
-  cost: number;
-  color?: string;
-  isBold?: boolean;
-}
-
-function ItemCost({
-  text,
-  cost,
-  color = '#5f5f5f',
-  isBold = false,
-}: IItemCost) {
-  return (
-    <ItemCostDiv>
-      <Item textAlign="left" color={color} isBold={isBold}>
-        {text}
-      </Item>
-      <Item textAlign="right" color={color} isBold={isBold}>
-        ${cost.toFixed(2)}
-      </Item>
-    </ItemCostDiv>
-  );
-}
-
-const ItemCostDiv = styled.div`
-  display: flex;
-`;
-
-interface IItem {
-  textAlign: string;
-  color: string;
-  isBold: boolean;
-}
-
-const Item = styled.p<IItem>`
-  font-size: 16px;
-  font-family: Manrope;
-  font-weight: ${(props) => (props.isBold ? 700 : 300)};
-  color: ${(props) => props.color};
-  margin: 2.2px 0;
-  width: 50%;
-  text-align: ${(props) => props.textAlign};
+  margin: 12px auto 8px;
 `;

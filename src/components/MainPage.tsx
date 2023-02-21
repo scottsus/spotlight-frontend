@@ -39,12 +39,12 @@ export default function AppBox({
         <EventTitle
           team1={srcTicketInfo.team1}
           team2={srcTicketInfo.team2}
-          day={srcTicketInfo.day}
-          date={srcTicketInfo.date}
-          time={srcTicketInfo.time}
-          stadium={srcTicketInfo.stadium}
-          city={srcTicketInfo.city}
-          state={srcTicketInfo.state}
+          day={srcTicketInfo.timeInfo.day}
+          date={srcTicketInfo.timeInfo.date}
+          time={srcTicketInfo.timeInfo.hour}
+          stadium={srcTicketInfo.venueInfo.stadium}
+          city={srcTicketInfo.venueInfo.city}
+          state={srcTicketInfo.venueInfo.state}
         />
       )}
       <Divider />
@@ -63,7 +63,8 @@ export default function AppBox({
       <Skeletons hasLoadedOne={hasLoadedOne} />
       {hasLoadedOne && (
         <ResultsList
-          tickets={destTickets}
+          srcTicket={srcTicketInfo}
+          destTickets={destTickets}
           options={{
             filterOptions: filterOptions,
             sortByOptions: sortByOptions,

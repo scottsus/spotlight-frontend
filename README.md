@@ -34,9 +34,11 @@ chrome://extensions => Load Unpacked => spotlight/dist
   - ticketmaster.com
   - seatgeek.com
 - Scraped from:
-  - VividSeats
   - StubHub
+  - TicketMaster
+  - TicketSmarter
   - TickPick
+  - VividSeats
 
 ## Progress
 

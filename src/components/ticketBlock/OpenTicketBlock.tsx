@@ -3,12 +3,18 @@ import styled from 'styled-components';
 import { AnimatePresence } from 'framer-motion';
 import PriceTotal from './PriceTotalTab';
 import TicketInfo from './TicketInfoTab';
+import PriceComparisonTab from './PriceComparisonTab';
+import { PriceInfo } from '../../lib/TicketInfo';
 
 interface IOpenTicketBlock {
   isOpen: boolean;
+  priceInfo: PriceInfo;
 }
 
-export default function OpenTicketBlock({ isOpen }: IOpenTicketBlock) {
+export default function OpenTicketBlock({
+  isOpen,
+  priceInfo,
+}: IOpenTicketBlock) {
   const [height, setHeight] = useState(0);
   const [openOverflow, setOpenOverflow] = useState('hidden');
   const [isPriceTotalPage, setIsPriceTotalPage] = useState(true);
@@ -32,20 +38,23 @@ export default function OpenTicketBlock({ isOpen }: IOpenTicketBlock) {
           <Header isActive={isPriceTotalPage}>Price Total</Header>
         </HeaderButton>
         <HeaderButton onClick={() => setIsPriceTotalPage(false)}>
-          <Header isActive={!isPriceTotalPage}>Ticket Info</Header>
+          <Header isActive={!isPriceTotalPage}>Price Comparison</Header>
         </HeaderButton>
       </Headers>
       <AnimatePresence>
         {isPriceTotalPage ? (
           <PriceTotal
-            ticketPrice={'250'}
-            ticketQty={'2'}
-            orderProcessingFee={'15'}
-            serviceFee={'20.5'}
-            calculatedTax={'2.25'}
+            totalPrice={priceInfo.totalPrice}
+            ticketQty={priceInfo.quantity}
+            serviceFee={priceInfo.serviceFee}
+            deliveryFee={priceInfo.deliveryFee}
           />
         ) : (
-          <TicketInfo />
+          // <TicketInfo />
+          <PriceComparisonTab
+            currentPrice={1000}
+            spotlightPrice={priceInfo.totalPrice}
+          />
         )}
       </AnimatePresence>
     </OpenTicketBlockDiv>
