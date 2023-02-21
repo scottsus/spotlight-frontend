@@ -1,11 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
-interface IBestDeal {}
+interface IBestDeal {
+  setTagIsOpened: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-export default function BestDeal({}: IBestDeal) {
+export default function BestDeal({ setTagIsOpened }: IBestDeal) {
+  const closeTag = () => {
+    setTagIsOpened(false);
+  };
   return (
-    <BestDealDiv>
+    <BestDealDiv onClick={closeTag}>
       <Title>Congrats! The deal you have is truly the </Title>
       <Highlight>BEST DEAL</Highlight>
       <Image
@@ -52,8 +57,11 @@ const Button = styled.button`
   width: 220px;
   height: 42px;
   border-radius: 40px;
-  background-color: #4b3bff;
+  background-color: #7a6fff;
   margin: auto 0 20px;
+  :hover {
+    background-color: #4b3bff;
+  }
 `;
 
 const ButtonText = styled.p`

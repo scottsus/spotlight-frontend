@@ -89,7 +89,7 @@ const findTicketsFromSite: IFindTicketsFromSite = (
   setHasLoadedOne,
   setHasLoadedAll
 ) => {
-  const srcSiteURL = `${''}/${site}`;
+  const srcSiteURL = `${BASE_URL}/${site}`;
   const reqHeaders = {
     /* Required Info */
     team1: srcTicketInfo.team1,
@@ -112,7 +112,6 @@ const findTicketsFromSite: IFindTicketsFromSite = (
   })
     .then((res) => res.json())
     .then((resJSONArray) => {
-      console.log('json:', resJSONArray);
       for (const [_, resJSON] of resJSONArray.entries()) {
         const newTicket: TicketInfo = {
           team1: srcTicketInfo.team1,

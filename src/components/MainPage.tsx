@@ -81,7 +81,7 @@ export default function AppBox({
           hasLoadedAll={hasLoadedAll}
         />
       ) : (
-        isDoneWithProgressBar && <BestDeal />
+        isDoneWithProgressBar && <BestDeal setTagIsOpened={setTagIsOpened} />
       )}
     </AppBoxDiv>
   );
