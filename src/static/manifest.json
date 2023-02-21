@@ -23,13 +23,7 @@
                 "*://checkout.ticketmaster.com/*",
                 "*://*.seatgeek.com/checkout*"
             ],
-            "js": ["NBA.js"]
-        },
-        {
-            "matches": [
-                "*://www.yahoo.com/*"
-            ],
-            "js": ["Concerts.js"]
+            "js": ["App.js"]
         }
     ],
     "web_accessible_resources": [{

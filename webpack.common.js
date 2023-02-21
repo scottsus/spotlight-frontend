@@ -8,8 +8,7 @@ module.exports = {
         popup: path.resolve('src/popup/popup.tsx'),
         options: path.resolve('src/options/options.tsx'),
         // background: path.resolve('src/background/background.ts'),
-        NBA: path.resolve('src/contentScripts/NBA.tsx'),
-        Concerts: path.resolve('src/contentScripts/Concerts.tsx'),
+        App: path.resolve('src/contentScripts/App.tsx'),
     },
     module: {
         rules: [
@@ -55,7 +54,7 @@ module.exports = {
     optimization: {
         splitChunks: {
             chunks(chunk) {
-                return chunk.name != 'popup' && chunk.name !== 'NBA' && chunk.name !== 'Concerts'
+                return chunk.name != 'popup' && chunk.name !== 'App'
             }
         },
     },
