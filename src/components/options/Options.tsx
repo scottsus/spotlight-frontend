@@ -97,12 +97,12 @@ const ButtonText = styled.p`
 
   .fa-chevron-down {
     transform: rotate(0deg);
-    transition: transform 0.6s ease;
+    transition: transform 0.4s ease;
   }
 
   .fa-chevron-down.open {
     transform: rotate(-180deg);
-    transition: transform 0.6s ease;
+    transition: transform 0.4s ease;
   }
 `;
 

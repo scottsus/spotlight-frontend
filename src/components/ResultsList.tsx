@@ -89,24 +89,7 @@ export default function ResultsList({
             animate="show"
             key={ticket.priceInfo.totalPrice + '|?|' + ticket.url}
           >
-            <TicketContainer
-              logo={chrome.runtime.getURL(`imgs/${ticket.site}.svg`)}
-              quantity={ticket.quantity}
-              seatInfo={{
-                section: ticket.seatInfo.section,
-                row: ticket.seatInfo.row,
-              }}
-              priceInfo={{
-                totalPrice: ticket.priceInfo.totalPrice,
-                quantity: ticket.priceInfo.quantity,
-                basePrice:
-                  ticket.priceInfo.totalPrice / ticket.priceInfo.quantity,
-                serviceFee: ticket.priceInfo.serviceFee,
-                deliveryFee: ticket.priceInfo.deliveryFee,
-              }}
-              url={ticket.url}
-              srcTicket={srcTicket}
-            />
+            <TicketContainer srcTicket={srcTicket} destTicket={ticket} />
           </motion.div>
         );
         sortedInsert(newTicketContainer, ticketContainerItemsRef.current);

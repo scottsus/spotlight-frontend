@@ -1,22 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import TicketInfo from '../../lib/TicketInfo';
 import ItemCost from './ItemCost';
 
 interface IPriceTotalTab {
-  totalPrice: number;
-  ticketQty: number;
-  serviceFee: number;
-  deliveryFee: number;
+  ticketInfo: TicketInfo;
 }
 
-export default function PriceTotalTab({
-  totalPrice,
-  ticketQty,
-  serviceFee,
-  deliveryFee,
-}: IPriceTotalTab) {
-  const calculatedTax = totalPrice * 0.1;
+export default function PriceTotalTab({ ticketInfo }: IPriceTotalTab) {
+  const calculatedTax = ticketInfo.priceInfo.totalPrice * 0.1;
   return (
     <PriceTotalDiv
       initial={{ opacity: 0 }}
@@ -26,19 +19,28 @@ export default function PriceTotalTab({
     >
       <CategoryHeader>Tickets</CategoryHeader>
       <ItemCost
-        text={`Resale Ticket x ${ticketQty}`}
+        text={`Resale Ticket x ${ticketInfo.priceInfo.quantity}`}
         cost={
-          (totalPrice - serviceFee - deliveryFee - calculatedTax) / ticketQty
+          (ticketInfo.priceInfo.totalPrice -
+            ticketInfo.priceInfo.serviceFee -
+            ticketInfo.priceInfo.deliveryFee -
+            calculatedTax) /
+          ticketInfo.priceInfo.quantity
         }
       />
 
       <CategoryHeader style={{ marginTop: '5px' }}>Fees</CategoryHeader>
-      <ItemCost text="Service Fee" cost={serviceFee} />
-      <ItemCost text="Delivery Fee" cost={deliveryFee} />
+      <ItemCost text="Service Fee" cost={ticketInfo.priceInfo.serviceFee} />
+      <ItemCost text="Delivery Fee" cost={ticketInfo.priceInfo.deliveryFee} />
       <ItemCost text="Calculated Tax" cost={calculatedTax} />
 
       <Divider />
-      <ItemCost text="Total" cost={totalPrice} color="#4b3bff" isBold />
+      <ItemCost
+        text="Total"
+        cost={ticketInfo.priceInfo.totalPrice}
+        color="#4b3bff"
+        isBold
+      />
     </PriceTotalDiv>
   );
 }
