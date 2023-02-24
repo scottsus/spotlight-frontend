@@ -163,7 +163,7 @@ export const ticketmasterScrape: websiteScrape = (
     url
   );
 
-  check(ticketInfo);
+  // check(ticketInfo);
   return ticketInfo;
 };
 
@@ -244,7 +244,7 @@ export const seatgeekScrape: websiteScrape = (
     url
   );
 
-  check(ticketInfo);
+  // check(ticketInfo);
   return ticketInfo;
 };
 

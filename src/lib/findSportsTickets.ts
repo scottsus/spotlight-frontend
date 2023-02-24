@@ -143,7 +143,7 @@ const findTicketsFromSite: IFindTicketsFromSite = (
       }
     })
     .catch((err) => {
-      console.log(err);
+      // No need further processing
     })
     .finally(() => {
       sitesDone.add(site);

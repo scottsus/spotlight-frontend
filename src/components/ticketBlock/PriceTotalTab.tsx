@@ -5,11 +5,17 @@ import TicketInfo from '../../lib/TicketInfo';
 import ItemCost from './ItemCost';
 
 interface IPriceTotalTab {
-  ticketInfo: TicketInfo;
+  ticket: TicketInfo;
 }
 
-export default function PriceTotalTab({ ticketInfo }: IPriceTotalTab) {
-  const calculatedTax = ticketInfo.priceInfo.totalPrice * 0.1;
+export default function PriceTotalTab({ ticket }: IPriceTotalTab) {
+  const calculatedTax = ticket.priceInfo.totalPrice * 0.1;
+  const getFee = (ticket: TicketInfo, option: string) => {
+    if (ticket.priceInfo.serviceFee == -1) return 'HIDDEN';
+    if (option === 'service') return ticket.priceInfo.serviceFee;
+    if (option === 'delivery') return ticket.priceInfo.deliveryFee;
+    return '';
+  };
   return (
     <PriceTotalDiv
       initial={{ opacity: 0 }}
@@ -19,25 +25,28 @@ export default function PriceTotalTab({ ticketInfo }: IPriceTotalTab) {
     >
       <CategoryHeader>Tickets</CategoryHeader>
       <ItemCost
-        text={`Resale Ticket x ${ticketInfo.priceInfo.quantity}`}
+        text={`Resale Ticket x ${ticket.priceInfo.quantity}`}
         cost={
-          (ticketInfo.priceInfo.totalPrice -
-            ticketInfo.priceInfo.serviceFee -
-            ticketInfo.priceInfo.deliveryFee -
+          (ticket.priceInfo.totalPrice -
+            ticket.priceInfo.serviceFee -
+            ticket.priceInfo.deliveryFee -
             calculatedTax) /
-          ticketInfo.priceInfo.quantity
+          ticket.priceInfo.quantity
         }
       />
 
       <CategoryHeader style={{ marginTop: '5px' }}>Fees</CategoryHeader>
-      <ItemCost text="Service Fee" cost={ticketInfo.priceInfo.serviceFee} />
-      <ItemCost text="Delivery Fee" cost={ticketInfo.priceInfo.deliveryFee} />
+      <ItemCost text="Service Fee" cost={getFee(ticket, 'service') as number} />
+      <ItemCost
+        text="Delivery Fee"
+        cost={getFee(ticket, 'delivery') as number}
+      />
       <ItemCost text="Calculated Tax" cost={calculatedTax} />
 
       <Divider />
       <ItemCost
         text="Total"
-        cost={ticketInfo.priceInfo.totalPrice}
+        cost={ticket.priceInfo.totalPrice}
         color="#4b3bff"
         isBold
       />

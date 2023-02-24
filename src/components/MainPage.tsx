@@ -37,18 +37,7 @@ export default function AppBox({
       <Logo>Spotlight</Logo>
       <XButton setTagIsOpened={setTagIsOpened} />
 
-      {srcTicketInfo && (
-        <EventTitle
-          team1={srcTicketInfo.team1}
-          team2={srcTicketInfo.team2}
-          day={srcTicketInfo.timeInfo.day}
-          date={srcTicketInfo.timeInfo.date}
-          time={srcTicketInfo.timeInfo.hour}
-          stadium={srcTicketInfo.venueInfo.stadium}
-          city={srcTicketInfo.venueInfo.city}
-          state={srcTicketInfo.venueInfo.state}
-        />
-      )}
+      {srcTicketInfo && <EventTitle ticket={srcTicketInfo} />}
 
       <Divider />
 
@@ -58,12 +47,11 @@ export default function AppBox({
         hasLoadedAll={hasLoadedAll}
       />
 
-      {isDoneWithProgressBar && hasOneGoodResult && (
-        <Options
-          setFilterOptions={setFilterOptions}
-          setSortByOptions={setSortByOptions}
-        />
-      )}
+      <Options
+        isReady={isDoneWithProgressBar && hasOneGoodResult}
+        setFilterOptions={setFilterOptions}
+        setSortByOptions={setSortByOptions}
+      />
 
       {!hasLoadedAll && <Checking />}
 
@@ -115,34 +103,19 @@ const Divider = styled.div`
 `;
 
 interface IEventTitle {
-  team1: string;
-  team2: string;
-  stadium: string;
-  city: string;
-  state: string;
-  day: string;
-  date: string;
-  time: string;
+  ticket: TicketInfo;
 }
 
-function EventTitle({
-  team1,
-  team2,
-  stadium,
-  city,
-  state,
-  day,
-  date,
-  time,
-}: IEventTitle) {
+function EventTitle({ ticket }: IEventTitle) {
   return (
     <TitleDiv>
       <Teams>
-        {team1} vs {team2}
+        {ticket.team1} vs {ticket.team2}
       </Teams>
       <Venue>
-        {stadium} • {city}, {stateToAbbreviation(state)} • {day}, {date} at{' '}
-        {time}
+        {ticket.venueInfo.stadium} • {ticket.venueInfo.city},{' '}
+        {stateToAbbreviation(ticket.venueInfo.state)} • {ticket.timeInfo.day},{' '}
+        {ticket.timeInfo.date} at {ticket.timeInfo.hour}
       </Venue>
     </TitleDiv>
   );

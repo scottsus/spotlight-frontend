@@ -31,7 +31,7 @@ export default function BestDeal({ setTagIsOpened }: IBestDeal) {
 }
 
 const BestDealDiv = styled(motion.div)`
-  height: 420px;
+  height: 380px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -43,7 +43,7 @@ const Title = styled.h1`
   font-weight: 500;
   color: black;
   text-align: center;
-  margin: 30px 0 20px 0;
+  margin: 0 0 10px 0;
 `;
 
 const Highlight = styled.span`
@@ -51,7 +51,7 @@ const Highlight = styled.span`
   font-family: Mont;
   font-weight: 700;
   color: #51da91;
-  margin: 0 0 40px 0;
+  margin: 0 0 30px 0;
 `;
 
 const Image = styled.img`
@@ -63,10 +63,10 @@ const Button = styled.button`
   width: 220px;
   height: 42px;
   border-radius: 40px;
-  background-color: #7a6fff;
-  margin: auto 0 20px;
+  background-color: #4b3bff;
+  margin: auto 0 40px;
   :hover {
-    background-color: #4b3bff;
+    background-color: #7a6fff;
   }
 `;
 

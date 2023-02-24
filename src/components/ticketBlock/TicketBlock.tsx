@@ -140,7 +140,7 @@ function CheckoutButton({ price, url }: ICheckoutButton) {
   return (
     <CheckoutAnchor href={url} target="_blank">
       <Button>
-        <ButtonText>Buy for ${price}</ButtonText>
+        <ButtonText>Buy for ${Math.round(price)}</ButtonText>
       </Button>
     </CheckoutAnchor>
   );

@@ -11,11 +11,13 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faChevronDown } from '@fortawesome/fontawesome-free-solid';
 
 interface IOptions {
+  isReady: boolean;
   setFilterOptions: React.Dispatch<React.SetStateAction<FilterOptions>>;
   setSortByOptions: React.Dispatch<React.SetStateAction<SortByOptions>>;
 }
 
 export default function Options({
+  isReady,
   setFilterOptions,
   setSortByOptions,
 }: IOptions) {
@@ -31,11 +33,7 @@ export default function Options({
     setsortByIsOpen((sortByIsOpen) => !sortByIsOpen);
   };
   return (
-    <OptionsDiv
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.4 }}
-    >
+    <OptionsDiv isReady={isReady}>
       <Button width="84px" onClick={toggleFiltersConfig}>
         <Image src={chrome.runtime.getURL('imgs/filter.svg')} alt="Filter" />
         <ButtonText>Filters</ButtonText>
@@ -69,10 +67,12 @@ export default function Options({
   );
 }
 
-const OptionsDiv = styled(motion.div)`
+const OptionsDiv = styled(motion.div)<{ isReady: boolean }>`
   color: #4b3bff;
   margin: 10px 0;
   display: flex;
+  opacity: ${(props) => (props.isReady ? 1 : 0)};
+  transition: opacity 0.5s ease;
 `;
 
 const Button = styled.button<{ width: string }>`

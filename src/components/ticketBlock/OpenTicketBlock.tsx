@@ -44,7 +44,7 @@ export default function OpenTicketBlock({
       </Headers>
       <AnimatePresence>
         {isPriceTotalPage ? (
-          <PriceTotal ticketInfo={destTicket} />
+          <PriceTotal ticket={destTicket} />
         ) : (
           <PriceComparisonTab srcTicket={srcTicket} destTicket={destTicket} />
         )}

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 interface IItemCost {
   text: string;
-  cost: number;
+  cost: string | number;
   color?: string;
   isBold?: boolean;
   margin?: string;
@@ -16,13 +16,17 @@ export default function ItemCost({
   isBold = false,
   margin = '2px 0',
 }: IItemCost) {
+  const displayCost = (cost: string | number) => {
+    if (typeof cost === 'number') return `$${cost.toFixed(2)}`;
+    return cost;
+  };
   return (
     <ItemCostDiv>
       <Item textAlign="left" color={color} isBold={isBold} margin={margin}>
         {text}
       </Item>
       <Item textAlign="right" color={color} isBold={isBold} margin={margin}>
-        ${cost.toFixed(2)}
+        {displayCost(cost)}
       </Item>
     </ItemCostDiv>
   );
