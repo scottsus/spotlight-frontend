@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { AnimatePresence } from 'framer-motion';
 import PriceTotal from './PriceTotalTab';
-import PriceComparisonTab from './ComparisonTab';
+import PriceComparisonTab from './TicketComparisonTab';
 import TicketInfo from '../../lib/TicketInfo';
 
 interface IOpenTicketBlock {

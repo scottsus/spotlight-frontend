@@ -89,12 +89,12 @@ export default function FiltersConfig({
 
 const FilterConfigDiv = styled.div<{ isOpen: boolean }>`
   position: absolute;
-  top: ${(props) => (props.isOpen ? '223px' : '-300px')};
+  top: ${(props) => (props.isOpen ? '223px' : '-1000px')};
   left: 31px;
   z-index: 101;
   border: 1.5px solid #4b3bff;
   border-radius: 10px;
-  height: 372px;
+  height: 360px;
   width: 509px;
   padding: 10px 37px 20px;
   background-color: #ffffff;

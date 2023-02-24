@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+
 import TicketInfo from '../../lib/TicketInfo';
 import { getProperSiteName } from '../../lib/sitenames';
+import { seatNumberToAlphabet } from '../../lib/seatConversion';
 
 interface IComparisonTab {
   srcTicket: TicketInfo;
@@ -46,7 +48,7 @@ function TicketBox({ ticket, name }: ITicketBox) {
         {getProperSiteName(name)}
       </TitleText>
       <KeyVal myKey="Section:" value={ticket.seatInfo.section} />
-      <KeyVal myKey="Row:" value={ticket.seatInfo.row} />
+      <KeyVal myKey="Row:" value={seatNumberToAlphabet(ticket.seatInfo.row)} />
       <Divider />
       <KeyVal
         myKey="Total Price:"

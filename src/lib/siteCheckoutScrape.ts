@@ -1,4 +1,5 @@
 import TicketInfo from './ticketInfo';
+import { seatAlphabetToNumber } from './seatConversion';
 
 export interface websiteScrape {
   (
@@ -78,45 +79,8 @@ export const ticketmasterScrape: websiteScrape = (
     return parseInt(truncate(subpart[1].replace(/^\D+/g, '')));
   };
 
-  const getRowNumber = (part: string) => {
-    const isAlphabetic = (unclearString: string) => {
-      return unclearString.length === 1 && unclearString.match(/[a-z]/i);
-    };
-    if (isAlphabetic(part)) {
-      switch (part.toUpperCase()) {
-        case 'A':
-          return 0;
-        case 'B':
-          return -1;
-        case 'C':
-          return -2;
-        case 'D':
-          return -3;
-        case 'E':
-          return -4;
-        case 'F':
-          return -5;
-        case 'G':
-          return -6;
-        case 'H':
-          return -7;
-        case 'I':
-          return -8;
-        case 'J':
-          return -9;
-        case 'K':
-          return -10;
-        case 'L':
-          return -11;
-        case 'M':
-          return -12;
-      }
-    }
-    return parseInt(truncate(part.replace(/^\D+/g, '')));
-  };
-
   const sectionNumber = getSectionNumber(parts.slice(sIdx + 1, sIdx + 3));
-  const rowNumber = getRowNumber(parts[rIdx + 1].replace(/[,]/g, ''));
+  const rowNumber = seatAlphabetToNumber(parts[rIdx + 1].replace(/[,]/g, ''));
   const totalPrice = parseFloat(truncate(parts[pIdx].substring(1)));
   const quantity = parseInt(parts[qIdx + 1]);
 
