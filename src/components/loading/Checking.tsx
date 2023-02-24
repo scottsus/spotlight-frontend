@@ -29,7 +29,7 @@ function Checking() {
 const CheckingDiv = styled.div`
   width: 80%;
   height: 35px;
-  margin: 20px auto;
+  margin: 0 auto 20px;
 `;
 
 interface ICheckingText {
