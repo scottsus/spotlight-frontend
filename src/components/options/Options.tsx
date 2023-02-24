@@ -27,10 +27,12 @@ export default function Options({
 
   const toggleFiltersConfig = () => {
     setFilterConfigIsOpen((filterConfigIsOpen) => !filterConfigIsOpen);
+    setsortByIsOpen(false);
   };
 
   const toggleSortBy = () => {
     setsortByIsOpen((sortByIsOpen) => !sortByIsOpen);
+    setFilterConfigIsOpen(false);
   };
   return (
     <OptionsDiv isReady={isReady}>

@@ -23,7 +23,7 @@ export default function FiltersConfig({
   const leftArrow = faAngleLeft as IconProp;
 
   const min = 0,
-    max = 1000;
+    max = 3000;
   const [minVal, setMinVal] = useState(min);
   const [maxVal, setMaxVal] = useState(max);
 
@@ -31,7 +31,7 @@ export default function FiltersConfig({
   const [selectedNumbers, setSelectedNumbers] = useState<string[]>(['Any']);
 
   const websitesList = ['Any', 'Ticketmaster', 'SeatGeek', 'StubHub'];
-  const [selectedWebsites, setSelectedWebsites] = useState<string[]>([]);
+  const [selectedWebsites, setSelectedWebsites] = useState<string[]>(['Any']);
 
   const saveFilterOptions = () => {
     setFilterOptions({
@@ -59,7 +59,6 @@ export default function FiltersConfig({
         setMinVal={setMinVal}
         setMaxVal={setMaxVal}
       />
-
       <FilterHeader>
         <Black>Number of Tickets:</Black>
         &ensp;
@@ -67,13 +66,12 @@ export default function FiltersConfig({
       </FilterHeader>
       <Boxes contentList={numberList} setContents={setSelectedNumbers} />
 
-      {/* TODO: FILTER BY WEBSITES
-          <FilterHeader>
-            <Black>Websites:</Black>
-            &ensp;
-            <Purple>{selectedWebsites.join(', ')}</Purple>
-          </FilterHeader>
-          <Boxes contentList={websitesList} setContents={setSelectedWebsites} /> */}
+      <FilterHeader>
+        <Black>Websites:</Black>
+        &ensp;
+        <Purple>{selectedWebsites.join(', ')}</Purple>
+      </FilterHeader>
+      <Boxes contentList={websitesList} setContents={setSelectedWebsites} />
 
       <Buttons>
         <BackButton onClick={toggle}>
@@ -91,13 +89,12 @@ export default function FiltersConfig({
 
 const FilterConfigDiv = styled.div<{ isOpen: boolean }>`
   position: absolute;
-  top: ${(props) => (props.isOpen ? '211px' : '-300px')};
+  top: ${(props) => (props.isOpen ? '223px' : '-300px')};
   left: 31px;
   z-index: 101;
   border: 1.5px solid #4b3bff;
-  border-radius: 10.6px;
-  // height: 372px;
-  height: 300px;
+  border-radius: 10px;
+  height: 372px;
   width: 509px;
   padding: 10px 37px 20px;
   background-color: #ffffff;

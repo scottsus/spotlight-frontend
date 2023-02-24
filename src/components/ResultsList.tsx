@@ -26,11 +26,11 @@ export default function ResultsList({
   );
 
   const useFilters = (ticketContainer: JSX.Element) => {
-    // console.log('Filters:', filterOptions);
-    // console.log('Props:', ticketContainer.props.children.props);
     const filterOptions = options.filterOptions;
 
-    const ticketPrice = parseFloat(ticketContainer.props.children.props.price);
+    const ticketPrice = parseFloat(
+      ticketContainer.props.children.props.destTicket.priceInfo.totalPrice
+    );
     if (
       !(
         filterOptions.minPrice <= ticketPrice &&
@@ -53,22 +53,24 @@ export default function ResultsList({
     }
     if (!minQuantitySatisfied) return false;
 
-    /* TODO: FILTER BY WEBSITE NAME
-    const websiteName = ticketContainer.props.children.props.logo;
-    console.log('WebsiteName:', websiteName);
+    const websiteName = ticketContainer.props.children.props.destTicket.site;
     for (const chosenWebsite of filterOptions.chosenWebsites) {
-      if (chosenWebsite.toLowerCase() !== websiteName) return false;
+      if (
+        chosenWebsite === 'Any' ||
+        chosenWebsite.toLowerCase() === websiteName
+      )
+        return true;
     }
-    */
-    return true;
+
+    return false;
   };
 
   const useSortBy = (
     ticketContainerItemsRef: React.MutableRefObject<JSX.Element[]>
   ) => {
     ticketContainerItemsRef.current.sort((a, b) => {
-      const priceA = a.props.children.props.price;
-      const priceB = b.props.children.props.price;
+      const priceA = a.props.children.props.destTicket.priceInfo.totalPrice;
+      const priceB = b.props.children.props.destTicket.priceInfo.totalPrice;
       if (options.sortByOptions.isAscending) return priceA - priceB;
       return priceB - priceA;
     });
