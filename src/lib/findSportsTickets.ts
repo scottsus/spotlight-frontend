@@ -21,7 +21,7 @@ interface ICheckoutInfo {
     addTeam: (string) => void,
     addDestTickets: React.Dispatch<React.SetStateAction<TicketInfo[]>>,
     setSrcTicketInfo: React.Dispatch<React.SetStateAction<TicketInfo>>,
-    setHasLoadedOne: React.Dispatch<React.SetStateAction<boolean>>,
+    setHasOneGoodResult: React.Dispatch<React.SetStateAction<boolean>>,
     setHasLoadedAll: React.Dispatch<React.SetStateAction<boolean>>
   ): void;
 }
@@ -34,7 +34,7 @@ const findSportsTickets: ICheckoutInfo = (
   addTeam,
   addDestTickets,
   setSrcTicketInfo,
-  setHasLoadedOne,
+  setHasOneGoodResult,
   setHasLoadedAll
 ) => {
   const truncatedDocText: string = document;
@@ -52,6 +52,7 @@ const findSportsTickets: ICheckoutInfo = (
           truncatedDocText
         );
         setSrcTicketInfo(srcTicketInfo);
+
         const sitesDone = new Set<string>();
         for (const siteName of siteNames) {
           if (siteName !== 'example')
@@ -60,7 +61,7 @@ const findSportsTickets: ICheckoutInfo = (
               srcTicketInfo,
               addDestTickets,
               sitesDone,
-              setHasLoadedOne,
+              setHasOneGoodResult,
               setHasLoadedAll
             );
         }
@@ -76,7 +77,7 @@ interface IFindTicketsFromSite {
     srcTicketInfo: TicketInfo,
     addDestTickets: React.Dispatch<React.SetStateAction<TicketInfo[]>>,
     sitesDone: Set<string>,
-    setHasLoadedOne: React.Dispatch<React.SetStateAction<boolean>>,
+    setHasOneGoodResult: React.Dispatch<React.SetStateAction<boolean>>,
     setHasLoadedAll: React.Dispatch<React.SetStateAction<boolean>>
   ): void;
 }
@@ -86,7 +87,7 @@ const findTicketsFromSite: IFindTicketsFromSite = (
   srcTicketInfo,
   addDestTickets,
   sitesDone,
-  setHasLoadedOne,
+  setHasOneGoodResult,
   setHasLoadedAll
 ) => {
   const srcSiteURL = `${BASE_URL}/${site}`;
@@ -100,17 +101,20 @@ const findTicketsFromSite: IFindTicketsFromSite = (
     quantity: srcTicketInfo.quantity.toString(),
 
     /* Unused for now */
-    day: srcTicketInfo.timeInfo.day,
-    date: srcTicketInfo.timeInfo.date,
-    hour: srcTicketInfo.timeInfo.hour,
-    stadium: srcTicketInfo.venueInfo.stadium,
-    city: srcTicketInfo.venueInfo.city,
-    state: srcTicketInfo.venueInfo.state,
+    // day: srcTicketInfo.timeInfo.day,
+    // date: srcTicketInfo.timeInfo.date,
+    // hour: srcTicketInfo.timeInfo.hour,
+    // stadium: srcTicketInfo.venueInfo.stadium,
+    // city: srcTicketInfo.venueInfo.city,
+    // state: srcTicketInfo.venueInfo.state,
   };
   fetch(srcSiteURL, {
     headers: reqHeaders,
   })
-    .then((res) => res.json())
+    .then((res) => {
+      if (res.status === 200) return res.json();
+      throw new Error(`non-200 status code`);
+    })
     .then((resJSONArray) => {
       for (const [_, resJSON] of resJSONArray.entries()) {
         const newTicket: TicketInfo = {
@@ -135,18 +139,15 @@ const findTicketsFromSite: IFindTicketsFromSite = (
           url: resJSON['url'],
         };
         addDestTickets((destTickets) => [...destTickets, newTicket]);
-        sitesDone.add(resJSON['name']);
-        if (resJSONArray.length !== 0) setHasLoadedOne(true);
+        if (resJSONArray.length !== 0) setHasOneGoodResult(true);
       }
     })
     .catch((err) => {
-      console.log('Error:', err);
-
-      // We're saying this site failed, just mark it as done
-      sitesDone.add(Math.random().toString());
+      console.log(err);
     })
     .finally(() => {
-      if (sitesDone.size === siteNames.length - 1) setHasLoadedAll(true);
+      sitesDone.add(site);
+      if (sitesDone.size === siteNames.length - 3) setHasLoadedAll(true);
     });
 };
 

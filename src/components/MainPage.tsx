@@ -17,7 +17,7 @@ interface IAppBox {
   setTagIsOpened: React.Dispatch<React.SetStateAction<boolean>>;
   srcTicketInfo: TicketInfo;
   destTickets: TicketInfo[];
-  hasLoadedOne: boolean;
+  hasOneGoodResult: boolean;
   hasLoadedAll: boolean;
 }
 
@@ -26,7 +26,7 @@ export default function AppBox({
   setTagIsOpened,
   destTickets,
   srcTicketInfo,
-  hasLoadedOne,
+  hasOneGoodResult,
   hasLoadedAll,
 }: IAppBox) {
   const [isDoneWithProgressBar, setIsDoneWithProgressBar] = useState(false);
@@ -58,7 +58,7 @@ export default function AppBox({
         hasLoadedAll={hasLoadedAll}
       />
 
-      {isDoneWithProgressBar && hasLoadedOne && (
+      {isDoneWithProgressBar && hasOneGoodResult && (
         <Options
           setFilterOptions={setFilterOptions}
           setSortByOptions={setSortByOptions}
@@ -67,9 +67,9 @@ export default function AppBox({
 
       {!hasLoadedAll && <Checking />}
 
-      {!hasLoadedOne && !hasLoadedAll && <Skeletons />}
+      {!hasOneGoodResult && !hasLoadedAll && <Skeletons />}
 
-      {hasLoadedOne ? (
+      {hasOneGoodResult ? (
         <ResultsList
           srcTicket={srcTicketInfo}
           destTickets={destTickets}

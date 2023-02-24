@@ -19,7 +19,7 @@ const App: React.FC = () => {
   const [srcTicketInfo, setSrcTicketInfo] = useState<TicketInfo>();
 
   // Loading Results
-  const [hasLoadedOne, setHasLoadedOne] = useState<boolean>(false);
+  const [hasOneGoodResult, setHasOneGoodResult] = useState<boolean>(false);
   const [hasLoadedAll, setHasLoadedAll] = useState<boolean>(false);
 
   const teams = useRef<string[]>([]);
@@ -37,7 +37,7 @@ const App: React.FC = () => {
         addTeam,
         addDestTickets,
         setSrcTicketInfo,
-        setHasLoadedOne,
+        setHasOneGoodResult,
         setHasLoadedAll
       );
     }, 2000); // make sure page loads before scraping
@@ -53,7 +53,7 @@ const App: React.FC = () => {
         setTagIsOpened={setTagIsOpened}
         srcTicketInfo={srcTicketInfo}
         destTickets={destTickets}
-        hasLoadedOne={hasLoadedOne}
+        hasOneGoodResult={hasOneGoodResult}
         hasLoadedAll={hasLoadedAll}
       />
     </div>
