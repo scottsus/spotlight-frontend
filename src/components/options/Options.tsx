@@ -70,13 +70,13 @@ export default function Options({
 }
 
 const OptionsDiv = styled(motion.div)`
-  color: #6354ff;
+  color: #4b3bff;
   margin: 10px 0;
   display: flex;
 `;
 
 const Button = styled.button<{ width: string }>`
-  border: 1.5px solid #6354ff;
+  border: 1.5px solid #4b3bff;
   border-radius: 4.5px;
   height: 28px;
   width: ${(props) => props.width};
@@ -92,7 +92,7 @@ const ButtonText = styled.p`
   font-size: 16px;
   font-family: Manrope;
   font-weight: 400;
-  color: #6354ff;
+  color: #4b3bff;
   margin: 0;
 
   .fa-chevron-down {

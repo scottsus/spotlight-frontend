@@ -50,10 +50,10 @@ interface IBoxDiv {
 
 const BoxDiv = styled.div<IBoxDiv>`
   width: ${(props) => (props.width > 0 ? `${props.width}px` : 'auto')};
-  border: 2px solid ${(props) => (props.isActive ? '#6354ff' : '#dfe0e0')};
+  border: 2px solid ${(props) => (props.isActive ? '#4b3bff' : '#dfe0e0')};
   border-radius: 5px;
   background-color: ${(props) => (props.isActive ? '#ebe9ff' : '#ffffff')};
-  color: #6354ff;
+  color: #4b3bff;
   margin: 5px 0px;
   padding: 5px 12.5px;
   cursor: pointer;

@@ -34,7 +34,7 @@ const SortByDiv = styled.div<{ isOpen: boolean }>`
   top: ${(props) => (props.isOpen ? '210px' : '-300px')};
   left: 125px;
   width: 180px;
-  border: 1.5px solid #6354ff;
+  border: 1.5px solid #4b3bff;
   border-radius: 5px;
   padding: 4px 10px;
   z-index: 103;

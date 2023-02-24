@@ -121,7 +121,7 @@ const inputThumbDefaults = `
     height: 30px;
     margin: 7px 0 0 0;
     border-radius: 50%;
-    border: 0.5px solid #6354ff;
+    border: 0.5px solid #4b3bff;
     background-color: #ffffff;
   
     position: relative;
@@ -168,6 +168,6 @@ const TrackEnds = styled.div`
 const TrackMiddle = styled.div`
   ${trackDefaults}
 
-  background-color: #6354ff;
+  background-color: #4b3bff;
   z-index: 112;
 `;

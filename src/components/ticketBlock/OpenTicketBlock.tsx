@@ -74,7 +74,7 @@ const PurpleBar = styled.div<{ isOnLeft: boolean }>`
   width: 253px;
   height: 4px;
   border-radius: 2px;
-  background-color: #6354ff;
+  background-color: #4b3bff;
   margin-left: ${(props) => (props.isOnLeft ? '0' : '253px')};
   transition: margin-left 0.2s ease-in-out;
 `;
@@ -90,7 +90,7 @@ const Header = styled.h2<{ isActive: boolean }>`
   font-size: 16px;
   font-family: Manrope;
   font-weight: ${(props) => (props.isActive ? 600 : 300)};
-  color: ${(props) => (props.isActive ? '#6354ff' : '#96979c')};
+  color: ${(props) => (props.isActive ? '#4b3bff' : '#96979c')};
   margin: 0;
   :hover {
     color: #695cff;
