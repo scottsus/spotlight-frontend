@@ -6,6 +6,7 @@ interface IBox {
   isActiveInitially?: boolean;
   isClickable?: boolean;
   width?: number;
+  margin?: string;
   setContents?: React.Dispatch<React.SetStateAction<any>>;
 }
 
@@ -14,6 +15,7 @@ export default function Box({
   isActiveInitially = false,
   isClickable = false,
   width = 0,
+  margin,
   setContents,
 }: IBox) {
   const [isActive, setIsActive] = useState(isActiveInitially);
@@ -37,7 +39,7 @@ export default function Box({
     });
   };
   return (
-    <BoxDiv isActive={isActive} width={width} onClick={toggle}>
+    <BoxDiv isActive={isActive} width={width} margin={margin} onClick={toggle}>
       <BoxText>{content}</BoxText>
     </BoxDiv>
   );
@@ -46,6 +48,7 @@ export default function Box({
 interface IBoxDiv {
   isActive: boolean;
   width?: number;
+  margin: string;
 }
 
 const BoxDiv = styled.div<IBoxDiv>`
@@ -54,7 +57,7 @@ const BoxDiv = styled.div<IBoxDiv>`
   border-radius: 5px;
   background-color: ${(props) => (props.isActive ? '#ebe9ff' : '#ffffff')};
   color: #4b3bff;
-  margin: 5px 0px;
+  margin: ${(props) => props.margin};
   padding: 5px 12.5px;
   cursor: pointer;
   :hover {

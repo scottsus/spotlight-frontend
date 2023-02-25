@@ -60,7 +60,7 @@ export default function Options({
               ? ' Price: Low-High '
               : ' Price: High-Low '
             : ''}
-          &ensp;
+          &thinsp;
           <FontAwesomeIcon
             icon={down}
             className={

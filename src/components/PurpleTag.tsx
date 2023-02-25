@@ -12,7 +12,7 @@ export default function PurpleTag({ tagIsOpened, setTagIsOpened }: IPurpleTag) {
     <PurpleTagDiv
       isVisible={!tagIsOpened}
       whileHover={{
-        x: '-25px',
+        x: '-10px',
       }}
     >
       <Image

@@ -92,6 +92,7 @@ export default function RangeSlider({
 }
 
 const GrandContainer = styled.div`
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -161,7 +162,7 @@ const TrackEnds = styled.div`
   ${trackDefaults}
 
   width: 100%;
-  background-color: #3f3f3f;
+  background-color: #938bf4;
   z-index: 111;
 `;
 

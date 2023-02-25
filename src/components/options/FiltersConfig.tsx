@@ -30,7 +30,17 @@ export default function FiltersConfig({
   const numberList = ['Any', '1', '2', '3', '4', '5', '6', '7', '8', '9+'];
   const [selectedNumbers, setSelectedNumbers] = useState<string[]>(['Any']);
 
-  const websitesList = ['Any', 'Ticketmaster', 'SeatGeek', 'StubHub'];
+  const websitesList = [
+    'Any',
+    'AXS',
+    'GameTime',
+    'SeatGeek',
+    'StubHub',
+    'Ticketmaster',
+    'TickPick',
+    'TicketIQ',
+    'VividSeats',
+  ];
   const [selectedWebsites, setSelectedWebsites] = useState<string[]>(['Any']);
 
   const saveFilterOptions = () => {
@@ -44,34 +54,41 @@ export default function FiltersConfig({
   };
   return (
     <FilterConfigDiv isOpen={filterConfigIsOpen}>
-      <FilterHeader>
-        <Black>Price Range:</Black>
-        &ensp;
-        <Purple>
-          ${minVal} - ${maxVal}
-        </Purple>
-      </FilterHeader>
-      <RangeSlider
-        min={min}
-        max={max}
-        minVal={minVal}
-        maxVal={maxVal}
-        setMinVal={setMinVal}
-        setMaxVal={setMaxVal}
-      />
-      <FilterHeader>
-        <Black>Number of Tickets:</Black>
-        &ensp;
-        <Purple>{selectedNumbers.join(', ')}</Purple>
-      </FilterHeader>
-      <Boxes contentList={numberList} setContents={setSelectedNumbers} />
+      <Scrollable>
+        <FilterHeader>
+          <Black>Price Range:</Black>
+          &ensp;
+          <Purple>
+            ${minVal} - ${maxVal}
+          </Purple>
+        </FilterHeader>
+        <RangeSlider
+          min={min}
+          max={max}
+          minVal={minVal}
+          maxVal={maxVal}
+          setMinVal={setMinVal}
+          setMaxVal={setMaxVal}
+        />
+        <FilterHeader>
+          <Black>Number of Tickets:</Black>
+          &ensp;
+          <Purple>{selectedNumbers.join(', ')}</Purple>
+        </FilterHeader>
+        <Boxes contentList={numberList} setContents={setSelectedNumbers} />
 
-      <FilterHeader>
-        <Black>Websites:</Black>
-        &ensp;
-        <Purple>{selectedWebsites.join(', ')}</Purple>
-      </FilterHeader>
-      <Boxes contentList={websitesList} setContents={setSelectedWebsites} />
+        <FilterHeader>
+          <Black>Websites:</Black>
+          &ensp;
+          <Purple>{selectedWebsites.join(', ')}</Purple>
+        </FilterHeader>
+        <Boxes
+          contentList={websitesList}
+          setContents={setSelectedWebsites}
+          justify="start"
+          margin="2px"
+        />
+      </Scrollable>
 
       <Buttons>
         <BackButton onClick={toggle}>
@@ -101,6 +118,11 @@ const FilterConfigDiv = styled.div<{ isOpen: boolean }>`
   opacity: ${(props) => (props.isOpen ? 1 : 0)};
 `;
 
+const Scrollable = styled.div`
+  height: 250px;
+  overflow-y: scroll;
+`;
+
 const FilterHeader = styled.div`
   margin-top: 16px;
 `;
@@ -126,9 +148,16 @@ const Purple = styled.h2`
 interface IBoxes {
   contentList: string[] | number[];
   setContents?: React.Dispatch<React.SetStateAction<any>>;
+  justify?: string;
+  margin?: string;
 }
 
-function Boxes({ contentList, setContents }: IBoxes) {
+function Boxes({
+  contentList,
+  setContents,
+  justify = 'space-evenly',
+  margin = '5px 0',
+}: IBoxes) {
   const boxes = contentList.map((content) => (
     <Box
       key={content}
@@ -136,15 +165,16 @@ function Boxes({ contentList, setContents }: IBoxes) {
       isActiveInitially={content === 'Any' ? true : false}
       isClickable={true}
       setContents={setContents}
+      margin={margin}
     />
   ));
-  return <BoxesDiv>{boxes}</BoxesDiv>;
+  return <BoxesDiv justify={justify}>{boxes}</BoxesDiv>;
 }
 
-const BoxesDiv = styled.div`
+const BoxesDiv = styled.div<{ justify: string }>`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: ${(props) => props.justify};
 `;
 
 const Buttons = styled.div`
@@ -156,18 +186,22 @@ const Buttons = styled.div`
 
 const BackButton = styled.button`
   background-color: transparent;
-  padding: 11px 24px;
+  padding: 11px 0;
   border-radius: 20px;
-  :hover {
-    background-color: #d9d9d9;
-    transition: 0.2s ease;
+
+  // TODO
+  p {
+    :hover {
+      color: grey;
+      transition: 0.2s ease;
+    }
   }
 `;
 
 const ApplyButton = styled.button`
   background-color: #4b3bff;
-  padding: 11px 24px;
-  border-radius: 20px;
+  padding: 11px 30px;
+  border-radius: 30px;
   :hover {
     background-color: #695cff;
   }

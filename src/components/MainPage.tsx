@@ -106,7 +106,7 @@ function EventTitle({ ticket }: IEventTitle) {
   return (
     <TitleDiv>
       <Teams>
-        {ticket.team1} vs {ticket.team2}
+        {ticket.team1} vs. {ticket.team2}
       </Teams>
       <Venue>
         {ticket.venueInfo.stadium} • {ticket.venueInfo.city},{' '}
@@ -124,8 +124,8 @@ const TitleDiv = styled.div`
 const Teams = styled.h2`
   font-size: 20px;
   font-family: Helvetica;
-  font-weight: 600;
-  margin: 0 0 2px 0;
+  font-weight: 500;
+  margin: 0 0 1px 0;
 `;
 
 const Venue = styled.h4`
