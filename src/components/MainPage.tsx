@@ -138,6 +138,7 @@ const Venue = styled.h4`
 
 const Divider = styled.div`
   height: 2px;
+  border-radius: 3px;
   background-color: #dfe0e0;
   margin: 15px auto 0;
 `;

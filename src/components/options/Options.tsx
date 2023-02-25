@@ -89,6 +89,7 @@ const Button = styled.button<{ width: string }>`
   border: 1.5px solid #4b3bff;
   border-radius: 4.5px;
   height: 28px;
+  margin: 0 2.5px 0 0;
   padding: 6px 8px;
   display: flex;
   justify-content: start;
