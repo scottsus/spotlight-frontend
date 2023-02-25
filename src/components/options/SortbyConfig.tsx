@@ -17,24 +17,18 @@ export default function SortByConfig({
           <SortbyItem text="Trending" setSortByOptions={setSortByOptions} />
           <SortbyItem text="Recommended" setSortByOptions={setSortByOptions} />
           <SortbyItem text="Section" setSortByOptions={setSortByOptions} /> */}
-      <SortbyItem
-        text="Price: Low to High"
-        setSortByOptions={setSortByOptions}
-      />
-      <SortbyItem
-        text="Price: High to Low"
-        setSortByOptions={setSortByOptions}
-      />
+      <SortbyItem text="Price: Low-High" setSortByOptions={setSortByOptions} />
+      <SortbyItem text="Price: High-Low" setSortByOptions={setSortByOptions} />
     </SortByDiv>
   );
 }
 
 const SortByDiv = styled.div<{ isOpen: boolean }>`
   position: absolute;
-  top: ${(props) => (props.isOpen ? '223px' : '-1000px')};
+  top: ${(props) => (props.isOpen ? '220px' : '-1000px')};
   left: 125px;
   width: 180px;
-  border: 1.5px solid #4b3bff;
+  border: 1.05px solid #4b3bff;
   border-radius: 5px;
   padding: 4px 10px;
   z-index: 103;
@@ -49,7 +43,7 @@ interface ISortByItem {
 
 function SortbyItem({ text, setSortByOptions }: ISortByItem) {
   const saveSortByOption = () => {
-    if (text === 'Price: High to Low') setSortByOptions({ isAscending: false });
+    if (text === 'Price: High-Low') setSortByOptions({ isAscending: false });
     else setSortByOptions({ isAscending: true });
   };
   return (

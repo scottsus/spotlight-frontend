@@ -15,15 +15,14 @@ export default function BestDeal({ setTagIsOpened }: IBestDeal) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      onClick={closeTag}
     >
       <Title>Congrats! The deal you have is truly the </Title>
-      <Highlight>BEST DEAL</Highlight>
+      <Highlight>Best Deal.</Highlight>
       <Image
         src={chrome.runtime.getURL('imgs/bestdeal.svg')}
         alt="Purple Ticket"
       />
-      <Button>
+      <Button onClick={closeTag}>
         <ButtonText>Back to Checkout</ButtonText>
       </Button>
     </BestDealDiv>
@@ -50,7 +49,7 @@ const Highlight = styled.span`
   font-size: 37px;
   font-family: Mont;
   font-weight: 700;
-  color: #51da91;
+  color: #5fcd92;
   margin: 0 0 30px 0;
 `;
 

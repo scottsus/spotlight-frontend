@@ -73,7 +73,10 @@ const Divider = styled.div`
 const PurpleBar = styled.div<{ isOnLeft: boolean }>`
   width: 253px;
   height: 4px;
-  border-radius: 2px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
   background-color: #4b3bff;
   margin-left: ${(props) => (props.isOnLeft ? '0' : '253px')};
   transition: margin-left 0.2s ease-in-out;

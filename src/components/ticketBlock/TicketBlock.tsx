@@ -20,8 +20,8 @@ export default function TicketBlock({
 }: ITicketBlock) {
   const down = faChevronDown as IconProp;
   return (
-    <TicketBlockDiv>
-      <ArrowButton onClick={toggle}>
+    <TicketBlockDiv onClick={toggle}>
+      <ArrowButton>
         <FontAwesomeIcon
           icon={down}
           className={isOpen ? 'fa-chevron-down open' : 'fa-chevron-down'}
@@ -50,6 +50,7 @@ const TicketBlockDiv = styled.div`
   height: 85px;
   display: flex;
   align-items: center;
+  cursor: pointer;
   :hover {
     background-color: #ebe9ff;
   }
@@ -60,6 +61,7 @@ const ArrowButton = styled.button`
   width: 14px;
   margin: 0 20px 0 20px;
   padding: 0;
+  border: none;
   background-color: transparent;
   color: #4b3bff;
 
@@ -98,8 +100,9 @@ function Overview({ section, row, srcPrice, destPrice, quantity }: IOverview) {
         Section {section}, Row {row}
       </Text>
       {savings > 0 ? (
-        <Text color="#51da91" size="18px" weight={700}>
-          SAVE ${Math.round(savings)}
+        <Text color="#42d988" size="18px" weight={700}>
+          ${Math.round(savings)}{' '}
+          <span style={{ fontSize: '16px', fontWeight: 300 }}>saved</span>
         </Text>
       ) : (
         <Text color="#4b3bff" size="18px" weight={700}>
@@ -154,6 +157,7 @@ const Button = styled.button`
   height: 48px;
   width: 160px;
   background-color: #4b3bff;
+  border: 2px solid #dfe0e0;
   border-radius: 8px;
   :hover {
     background-color: #695cff;

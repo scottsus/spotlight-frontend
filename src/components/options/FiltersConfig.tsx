@@ -89,10 +89,10 @@ export default function FiltersConfig({
 
 const FilterConfigDiv = styled.div<{ isOpen: boolean }>`
   position: absolute;
-  top: ${(props) => (props.isOpen ? '223px' : '-1000px')};
+  top: ${(props) => (props.isOpen ? '220px' : '-1000px')};
   left: 31px;
   z-index: 101;
-  border: 1.5px solid #4b3bff;
+  border: 1.05px solid #4b3bff;
   border-radius: 10px;
   height: 360px;
   width: 509px;
@@ -149,7 +149,6 @@ const BoxesDiv = styled.div`
 
 const Buttons = styled.div`
   margin: 20px auto;
-  width: 90%;
   display: flex;
   justify-content: space-between;
   align-items: center;

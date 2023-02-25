@@ -90,7 +90,7 @@ const findTicketsFromSite: IFindTicketsFromSite = (
   setHasOneGoodResult,
   setHasLoadedAll
 ) => {
-  const srcSiteURL = `${BASE_URL}/${site}`;
+  const srcSiteURL = `${TEST_URL}/${site}`;
   const reqHeaders = {
     /* Required Info */
     team1: srcTicketInfo.team1,

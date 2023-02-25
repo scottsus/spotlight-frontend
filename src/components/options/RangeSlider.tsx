@@ -106,7 +106,7 @@ const RangeSliderContainer = styled.div`
 `;
 
 const inputTrackDefaults = `
-  width: 280px;
+  width: 250px;
   height: 0;
 
   position: absolute;
@@ -148,7 +148,7 @@ const RightThumb = styled.input`
 
 const TrackContainer = styled.div`
   position: relative;
-  width: 280px;
+  width: 250px;
 `;
 
 const trackDefaults = `

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import styled from 'styled-components';
 import { createRoot } from 'react-dom/client';
 
 import NBATeams from '../lib/teams';
@@ -45,7 +46,7 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div>
+    <AppDiv>
       <style>{fonts}</style>
       <PurpleTag tagIsOpened={tagIsOpened} setTagIsOpened={setTagIsOpened} />;
       <MainPage
@@ -56,9 +57,15 @@ const App: React.FC = () => {
         hasOneGoodResult={hasOneGoodResult}
         hasLoadedAll={hasLoadedAll}
       />
-    </div>
+    </AppDiv>
   );
 };
+
+const AppDiv = styled.div`
+  * {
+    line-height: 1.4;
+  }
+`;
 
 const div = document.createElement('div');
 document.body.appendChild(div);

@@ -12,12 +12,14 @@ import { faChevronDown } from '@fortawesome/fontawesome-free-solid';
 
 interface IOptions {
   isReady: boolean;
+  sortByOptions: SortByOptions;
   setFilterOptions: React.Dispatch<React.SetStateAction<FilterOptions>>;
   setSortByOptions: React.Dispatch<React.SetStateAction<SortByOptions>>;
 }
 
 export default function Options({
   isReady,
+  sortByOptions,
   setFilterOptions,
   setSortByOptions,
 }: IOptions) {
@@ -52,7 +54,13 @@ export default function Options({
         style={{ marginLeft: '10px' }}
       >
         <ButtonText>
-          Sort By &thinsp;{' '}
+          Sort By:
+          {sortByOptions
+            ? sortByOptions.isAscending
+              ? ' Price: Low-High '
+              : ' Price: High-Low '
+            : ''}
+          &ensp;
           <FontAwesomeIcon
             icon={down}
             className={
@@ -71,7 +79,7 @@ export default function Options({
 
 const OptionsDiv = styled(motion.div)<{ isReady: boolean }>`
   color: #4b3bff;
-  margin: 10px 0;
+  margin: 8px 0;
   display: flex;
   opacity: ${(props) => (props.isReady ? 1 : 0)};
   transition: opacity 0.5s ease;
@@ -81,7 +89,7 @@ const Button = styled.button<{ width: string }>`
   border: 1.5px solid #4b3bff;
   border-radius: 4.5px;
   height: 28px;
-  width: ${(props) => props.width};
+  padding: 6px 8px;
   display: flex;
   justify-content: start;
   align-items: center;
@@ -98,6 +106,7 @@ const ButtonText = styled.p`
   margin: 0;
 
   .fa-chevron-down {
+    font-size: 13px;
     transform: rotate(0deg);
     transition: transform 0.4s ease;
   }

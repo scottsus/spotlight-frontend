@@ -11,7 +11,7 @@ interface IPriceTotalTab {
 export default function PriceTotalTab({ ticket }: IPriceTotalTab) {
   const calculatedTax = ticket.priceInfo.totalPrice * 0.1;
   const getFee = (ticket: TicketInfo, option: string) => {
-    if (ticket.priceInfo.serviceFee == -1) return 'HIDDEN';
+    if (ticket.priceInfo.serviceFee == -1) return 'INCLUDED';
     if (option === 'service') return ticket.priceInfo.serviceFee;
     if (option === 'delivery') return ticket.priceInfo.deliveryFee;
     return '';
@@ -68,7 +68,6 @@ const CategoryHeader = styled.h3`
 
 const Divider = styled.div`
   height: 2px;
-  width: 98%;
   background-color: #dfe0e0;
   border-radius: 1px;
   margin: 12px auto 8px;

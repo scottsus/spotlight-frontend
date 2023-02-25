@@ -34,7 +34,7 @@ export default function AppBox({
   const [sortByOptions, setSortByOptions] = useState<SortByOptions>(null);
   return (
     <AppBoxDiv isVisible={tagIsOpened}>
-      <Logo>Spotlight</Logo>
+      <Logo>spotlight</Logo>
       <XButton setTagIsOpened={setTagIsOpened} />
 
       {srcTicketInfo && <EventTitle ticket={srcTicketInfo} />}
@@ -49,6 +49,7 @@ export default function AppBox({
 
       <Options
         isReady={isDoneWithProgressBar && hasOneGoodResult}
+        sortByOptions={sortByOptions}
         setFilterOptions={setFilterOptions}
         setSortByOptions={setSortByOptions}
       />
@@ -83,7 +84,7 @@ const AppBoxDiv = styled.div<{ isVisible: boolean }>`
   border-radius: 10.6px;
   z-index: 100;
   background-color: #ffffff;
-  padding: 28px 31px;
+  padding: 20px 32px;
   filter: drop-shadow(0 0 0.75rem rgb(101, 100, 100));
   overflow: hidden;
   visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
@@ -94,12 +95,7 @@ const Logo = styled.h1`
   font-family: Mont;
   font-weight: 800;
   color: #4b3bff;
-  margin: 0;
-`;
-
-const Divider = styled.div`
-  height: 2px;
-  background-color: #dfe0e0;
+  margin: 12px auto 0;
 `;
 
 interface IEventTitle {
@@ -122,22 +118,26 @@ function EventTitle({ ticket }: IEventTitle) {
 }
 
 const TitleDiv = styled.div`
-  padding: 15px 0 0 0;
-  margin: 0 0 10px 0;
+  margin: 20px 0 0 0;
 `;
 
 const Teams = styled.h2`
   font-size: 20px;
   font-family: Helvetica;
   font-weight: 600;
-  margin: 7px 0;
+  margin: 0 0 2px 0;
 `;
 
 const Venue = styled.h4`
   font-size: 16px;
   font-family: Helvetica;
   font-weight: 300;
-  margin: 4px 0;
+`;
+
+const Divider = styled.div`
+  height: 2px;
+  background-color: #dfe0e0;
+  margin: 15px auto 0;
 `;
 
 interface IXButton {
@@ -162,7 +162,7 @@ const XButtonContainer = styled.button`
   cursor: pointer;
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 15px;
   :hover {
     background-color: #f1f1f1;
   }
