@@ -3,8 +3,12 @@
 
 const montBoldURL = chrome.runtime.getURL('fonts/MontBold.otf');
 const manropeURL = chrome.runtime.getURL('fonts/Manrope.ttf');
-const helveticaLightURL = chrome.runtime.getURL('fonts/HelveticaLight.ttf');
-const helveticaMediumURL = chrome.runtime.getURL('fonts/HelveticaMedium.ttf');
+const helveticaLightURL = chrome.runtime.getURL(
+  'fonts/HelveticaNeue Light.ttf'
+);
+const helveticaRegularURL = chrome.runtime.getURL(
+  'fonts/HelveticaNeue Medium.ttf'
+);
 
 const fonts = `
 @font-face {
@@ -20,14 +24,14 @@ const fonts = `
 }
 
 @font-face {
-    font-family: 'Helvetica';
+    font-family: 'HelveticaNeue';
     src: url(${helveticaLightURL}) format('truetype');
     font-weight: 300;
 }
 
 @font-face {
-    font-family: 'Helvetica';
-    src: url(${helveticaMediumURL}) format('truetype');
+    font-family: 'HelveticaNeue';
+    src: url(${helveticaRegularURL}) format('truetype');
     font-weight: 500;
 }
 `;

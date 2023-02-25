@@ -109,8 +109,8 @@ function EventTitle({ ticket }: IEventTitle) {
         {ticket.team1} vs. {ticket.team2}
       </Teams>
       <Venue>
-        {ticket.venueInfo.stadium} • {ticket.venueInfo.city},{' '}
-        {stateToAbbreviation(ticket.venueInfo.state)} • {ticket.timeInfo.day},{' '}
+        {ticket.venueInfo.stadium} · {ticket.venueInfo.city},{' '}
+        {stateToAbbreviation(ticket.venueInfo.state)} · {ticket.timeInfo.day},{' '}
         {ticket.timeInfo.date} at {ticket.timeInfo.hour}
       </Venue>
     </TitleDiv>
@@ -123,15 +123,17 @@ const TitleDiv = styled.div`
 
 const Teams = styled.h2`
   font-size: 20px;
-  font-family: Helvetica;
+  font-family: HelveticaNeue;
   font-weight: 500;
   margin: 0 0 1px 0;
 `;
 
 const Venue = styled.h4`
   font-size: 16px;
-  font-family: Helvetica;
+  font-family: HelveticaNeue;
   font-weight: 300;
+  white-space: nowrap;
+  overflow-x: scroll;
 `;
 
 const Divider = styled.div`
