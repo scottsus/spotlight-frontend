@@ -42,4 +42,4 @@ chrome://extensions => Load Unpacked => spotlight/dist
 
 ## Progress
 
-![Almost finished styling](styled.gif)
+![Try out Spotlight v0!](progress.gif)
