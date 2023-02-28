@@ -2,43 +2,21 @@
 
 ## Usage
 
-1. Clone
+1. Install it from the Chrome Store [here](https://chrome.google.com/webstore/detail/spotlight/eoiphenpdjlfgnmokccmeiopgoeddboe?hl=en&authuser=0)
 
-```
-git clone git@github.com:susantoscott/spotlight.git
-```
-
-2. Build Dependencies
-
-```
-npm install
-```
-
-3. Rebuild the Extension
-
-```
-npm start
-```
-
-4. Apply the Extension
-
-```
-chrome://extensions => Load Unpacked => spotlight/dist
-```
-
-5. Enjoy!
-
-- Verify that it works:
+2. Verify that it works:
   - go to my [example checkout page](https://www.tryspotlight.xyz/example) and test the extension
-- Checkout at:
-  - ticketmaster.com
-  - seatgeek.com
-- Scraped from:
-  - StubHub
-  - TicketMaster
-  - TicketSmarter
-  - TickPick
-  - VividSeats
+  
+3. Enjoy!
+  - Checkout at:
+    - seatgeek.com
+    - ticketmaster.com
+  - Scraped from:
+    - StubHub
+    - TicketMaster
+    - TicketSmarter
+    - TickPick
+    - VividSeats
 
 ## Progress
 
