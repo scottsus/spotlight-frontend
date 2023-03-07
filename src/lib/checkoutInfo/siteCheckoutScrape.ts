@@ -1,5 +1,5 @@
-import TicketInfo from './ticketInfo';
-import { seatAlphabetToNumber } from './seatConversion';
+import TicketInfo from '../ticketInfo';
+import { seatAlphabetToNumber } from '../seatConversion';
 
 export interface websiteScrape {
   (
