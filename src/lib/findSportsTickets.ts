@@ -1,24 +1,22 @@
 import TicketInfo from './TicketInfo';
-import {
-  websiteScrape,
-  exampleScrape,
-  ticketmasterScrape,
-  seatgeekScrape,
-  stubhubScrape,
-  axsScrape,
-  vividseatsScrape,
-  tickpickScrape,
-} from './siteCheckoutScrape';
+
+import { checkoutScrape } from './checkoutInfo/utils';
+import axsScrape from './checkoutInfo/axs';
+import exampleScrape from './checkoutInfo/example';
+import seatgeekScrape from './checkoutInfo/seatgeek';
+import stubhubScrape from './checkoutInfo/stubhub';
+import ticketmasterScrape from './checkoutInfo/ticketmaster';
+import tickpickScrape from './checkoutInfo/tickpick';
+import vividseatsScrape from './checkoutInfo/vividseats';
+
 import siteNames from './sitenames';
+import NBATeams from './teams';
 import { BASE_URL, TEST_URL } from './urls';
 
 interface ICheckoutInfo {
   (
     srcSiteURL: string,
-    document: string,
-    NBATeams: string[],
-    teams: React.MutableRefObject<string[]>,
-    addTeam: (string) => void,
+    outerHtml: string,
     addDestTickets: React.Dispatch<React.SetStateAction<TicketInfo[]>>,
     setSrcTicketInfo: React.Dispatch<React.SetStateAction<TicketInfo>>,
     setHasOneGoodResult: React.Dispatch<React.SetStateAction<boolean>>,
@@ -28,44 +26,48 @@ interface ICheckoutInfo {
 
 const findSportsTickets: ICheckoutInfo = (
   srcSiteURL,
-  document,
-  NBATeams,
-  teams,
-  addTeam,
+  outerHtml,
   addDestTickets,
   setSrcTicketInfo,
   setHasOneGoodResult,
   setHasLoadedAll
 ) => {
-  const truncatedDocText: string = document;
+  const foundTeams: string[] = [];
   for (const NBATeam of NBATeams) {
-    if (truncatedDocText.includes(NBATeam)) {
-      addTeam(NBATeam);
-      if (teams.current.length == 2) {
+    if (outerHtml.includes(NBATeam)) {
+      foundTeams.push(NBATeam);
+      if (foundTeams.length == 2) {
         const srcSite = getNameFromURL(srcSiteURL);
-        const scrapingFunction: websiteScrape = siteMap[srcSite];
-        const srcTicketInfo: TicketInfo = scrapingFunction(
-          srcSite,
-          srcSiteURL,
-          teams.current[0],
-          teams.current[1],
-          truncatedDocText
-        );
-        setSrcTicketInfo(srcTicketInfo);
+        const scrapingFunction: checkoutScrape = siteMap[srcSite];
 
-        const sitesDone = new Set<string>();
-        for (const siteName of siteNames) {
-          if (siteName !== 'example')
-            findTicketsFromSite(
-              siteName,
-              srcTicketInfo,
-              addDestTickets,
-              sitesDone,
-              setHasOneGoodResult,
-              setHasLoadedAll
-            );
+        try {
+          const srcTicketInfo: TicketInfo = scrapingFunction(
+            srcSite,
+            srcSiteURL,
+            foundTeams[0],
+            foundTeams[1],
+            outerHtml
+          );
+          setSrcTicketInfo(srcTicketInfo);
+
+          const sitesDone = new Set<string>();
+          for (const siteName of siteNames) {
+            if (siteName !== 'example')
+              findTicketsFromSite(
+                siteName,
+                srcTicketInfo,
+                addDestTickets,
+                sitesDone,
+                setHasOneGoodResult,
+                setHasLoadedAll
+              );
+          }
+        } catch (err) {
+          console.log(`[READING CHECKOUT]:`, err);
+          setHasLoadedAll(true);
+        } finally {
+          break;
         }
-        break;
       }
     }
   }

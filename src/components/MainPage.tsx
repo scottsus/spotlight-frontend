@@ -56,20 +56,22 @@ export default function AppBox({
 
       {!hasLoadedAll && <Checking />}
 
-      {!hasOneGoodResult && !hasLoadedAll && <Skeletons />}
+      {!hasLoadedAll && !hasOneGoodResult && <Skeletons />}
 
-      {hasOneGoodResult ? (
-        <ResultsList
-          srcTicket={srcTicketInfo}
-          destTickets={destTickets}
-          options={{
-            filterOptions: filterOptions,
-            sortByOptions: sortByOptions,
-          }}
-          hasLoadedAll={hasLoadedAll}
-        />
+      {!isDoneWithProgressBar ? (
+        hasOneGoodResult && (
+          <ResultsList
+            srcTicket={srcTicketInfo}
+            destTickets={destTickets}
+            options={{
+              filterOptions: filterOptions,
+              sortByOptions: sortByOptions,
+            }}
+            hasLoadedAll={hasLoadedAll}
+          />
+        )
       ) : (
-        isDoneWithProgressBar && <BestDeal setTagIsOpened={setTagIsOpened} />
+        <BestDeal setTagIsOpened={setTagIsOpened} />
       )}
     </AppBoxDiv>
   );

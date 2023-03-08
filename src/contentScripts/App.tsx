@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { createRoot } from 'react-dom/client';
 
-import NBATeams from '../lib/teams';
+import fonts from '../lib/fonts';
 import findSportsTickets from '../lib/findSportsTickets';
 import './globals.css';
-
-import fonts from '../lib/fonts';
 
 import PurpleTag from '../components/PurpleTag';
 import MainPage from '../components/MainPage';
@@ -23,25 +21,18 @@ const App: React.FC = () => {
   const [hasOneGoodResult, setHasOneGoodResult] = useState<boolean>(false);
   const [hasLoadedAll, setHasLoadedAll] = useState<boolean>(false);
 
-  const teams = useRef<string[]>([]);
-  const addTeam = (NBATeam) => {
-    teams.current.push(NBATeam);
-  };
-
   useEffect(() => {
     const timer = setTimeout(() => {
       findSportsTickets(
         document.URL,
-        document.body.innerText,
-        NBATeams,
-        teams,
-        addTeam,
+        document.body.outerHTML,
         addDestTickets,
         setSrcTicketInfo,
         setHasOneGoodResult,
         setHasLoadedAll
       );
-    }, 2000); // make sure page loads before scraping
+      // console.log(document.body.outerHTML);
+    }, 4000); // make sure page loads before scraping
     return () => clearTimeout(timer);
   }, []);
 
