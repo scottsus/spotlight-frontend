@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { createRoot } from 'react-dom/client';
 
-import fonts from '../lib/fonts';
+import fonts from '../lib/constants/fonts';
 import findSportsTickets from '../lib/findSportsTickets';
 import './globals.css';
 
 import PurpleTag from '../components/PurpleTag';
 import MainPage from '../components/MainPage';
-import TicketInfo from '../lib/ticketInfo';
+import TicketInfo from '../lib/types/ticketInfo';
 
 const App: React.FC = () => {
   const [tagIsOpened, setTagIsOpened] = useState<boolean>(false);

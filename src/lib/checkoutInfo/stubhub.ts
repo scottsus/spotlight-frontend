@@ -1,5 +1,5 @@
 import { load } from 'cheerio';
-import TicketInfo from '../TicketInfo';
+import TicketInfo from '../types/ticketInfo';
 import { checkoutScrape, check, findDiv } from './utils';
 
 const stubhub: checkoutScrape = (site, url, team1, team2, outerHtml) => {

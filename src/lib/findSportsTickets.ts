@@ -1,4 +1,4 @@
-import TicketInfo from './TicketInfo';
+import TicketInfo from './types/ticketInfo';
 
 import { checkoutScrape } from './checkoutInfo/utils';
 import axsScrape from './checkoutInfo/axs';
@@ -9,9 +9,9 @@ import ticketmasterScrape from './checkoutInfo/ticketmaster';
 import tickpickScrape from './checkoutInfo/tickpick';
 import vividseatsScrape from './checkoutInfo/vividseats';
 
-import siteNames from './sitenames';
-import NBATeams from './teams';
-import { BASE_URL, TEST_URL } from './urls';
+import siteNames from './constants/sitenames';
+import NBATeams from './constants/teams';
+import { BASE_URL, TEST_URL } from './constants/urls';
 
 interface ICheckoutInfo {
   (
