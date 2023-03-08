@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-import TicketInfo from '../../lib/TicketInfo';
-import { getProperSiteName } from '../../lib/sitenames';
+import TicketInfo from '../../lib/types/ticketInfo';
+import { getProperSiteName } from '../../lib/constants/sitenames';
 import { seatNumberToAlphabet } from '../../lib/seatConversion';
 
 interface IComparisonTab {

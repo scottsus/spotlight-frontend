@@ -2,8 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, Variants } from 'framer-motion';
 
-import TicketInfo from '../lib/TicketInfo';
-import Options from '../lib/options';
+import TicketInfo from '../lib/types/ticketInfo';
+import Options from '../lib/types/options';
 import { processTickets, seenItems, sortedInsert } from '../lib/mainListUtils';
 import TicketContainer from './ticketBlock/Container';
 

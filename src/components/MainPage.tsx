@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import TicketInfo from '../lib/ticketInfo';
-import { FilterOptions, SortByOptions } from '../lib/options';
-import stateToAbbreviation from '../lib/stateToAbbreviation';
+import TicketInfo from '../lib/types/ticketInfo';
+import { FilterOptions, SortByOptions } from '../lib/types/options';
+import stateToAbbreviation from '../lib/constants/stateToAbbreviation';
 
 import Options from './options/Options';
 import ResultsList from './ResultsList';

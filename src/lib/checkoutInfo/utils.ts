@@ -1,5 +1,5 @@
 import { CheerioAPI } from 'cheerio';
-import TicketInfo from '../TicketInfo';
+import TicketInfo from '../types/ticketInfo';
 
 export interface checkoutScrape {
   (
