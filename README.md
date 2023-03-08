@@ -14,7 +14,7 @@ git clone git@github.com:susantoscott/spotlight.git
 npm install
 ```
 
-3. Rebuild the Extension
+3. Build the Extension
 
 ```
 npm start
@@ -29,10 +29,15 @@ chrome://extensions => Load Unpacked => spotlight/dist
 5. Enjoy!
 
 - Verify that it works:
+
   - go to my [example checkout page](https://www.tryspotlight.xyz/example) and test the extension
+
 - Checkout at:
-  - ticketmaster.com
-  - seatgeek.com
+  - `seatgeek.com`
+  - `stubhub.com`
+  - `ticketmaster.com`
+  - `tickpick.com`
+  - `vividseats.com`
 - Scraped from:
   - StubHub
   - TicketMaster
