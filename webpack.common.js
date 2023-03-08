@@ -5,10 +5,11 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
     entry: {
+        anchor: path.resolve('src/contentScripts/Anchor.tsx'),
+        checkout: path.resolve('src/contentScripts/Checkout.tsx'),
         popup: path.resolve('src/popup/popup.tsx'),
         options: path.resolve('src/options/options.tsx'),
         // background: path.resolve('src/background/background.ts'),
-        App: path.resolve('src/contentScripts/App.tsx'),
     },
     module: {
         rules: [
@@ -54,7 +55,7 @@ module.exports = {
     optimization: {
         splitChunks: {
             chunks(chunk) {
-                return chunk.name != 'popup' && chunk.name !== 'App'
+                return chunk.name != 'anchor' && chunk.name != 'checkout' && chunk.name != 'popup'
             }
         },
     },

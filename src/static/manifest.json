@@ -17,6 +17,10 @@
   "background": {},
   "content_scripts": [
     {
+      "matches": ["*://*.ticketmaster.com"],
+      "js": ["Anchor.js"]
+    },
+    {
       "matches": [
         "*://*.tryspotlight.xyz/example",
         "*://*.seatgeek.com/checkout*",
@@ -25,7 +29,7 @@
         "*://*.tickpick.com/checkout?*",
         "*://*.vividseats.com/checkout/*&stepNumber=4"
       ],
-      "js": ["App.js"]
+      "js": ["Checkout.js"]
     }
   ],
   "web_accessible_resources": [
