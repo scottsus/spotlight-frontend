@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { AnimatePresence } from 'framer-motion';
 import PriceTotal from './PriceTotalTab';
 import PriceComparisonTab from './TicketComparisonTab';
-import TicketInfo from '../../lib/TicketInfo';
+import TicketInfo from '../../lib/types/ticketInfo';
 
 interface IOpenTicketBlock {
   isOpen: boolean;

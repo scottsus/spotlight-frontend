@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import TicketInfo from '../../lib/TicketInfo';
+import TicketInfo from '../../lib/types/ticketInfo';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faChevronDown } from '@fortawesome/fontawesome-free-solid';

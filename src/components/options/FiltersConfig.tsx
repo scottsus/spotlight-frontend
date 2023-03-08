@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import { FilterOptions } from '../../lib/options';
+import { FilterOptions } from '../../lib/types/options';
 import Box from './Box';
 import RangeSlider from './RangeSlider';
 

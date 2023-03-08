@@ -1,5 +1,5 @@
 import { load } from 'cheerio';
-import TicketInfo from '../TicketInfo';
+import TicketInfo from '../types/ticketInfo';
 import { checkoutScrape, check, findDiv, isNumber } from './utils';
 
 const tickpick: checkoutScrape = (site, url, team1, team2, outerHtml) => {

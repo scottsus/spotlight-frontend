@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import TicketInfo from '../../lib/TicketInfo';
+import TicketInfo from '../../lib/types/ticketInfo';
 import ItemCost from './ItemCost';
 
 interface IPriceTotalTab {
