@@ -1,39 +1,42 @@
 {
-    "manifest_version": 3,
-    "name": "Spotlight",
-    "description": "Chrome extension to browse the cheapest tickets",
-    "version": "1.0.0",
-    "icons": {
-        "16": "spotlight.png",
-        "48": "spotlight.png",
-        "128": "spotlight.png"
-    },
-    "action": {
-        "default_popup": "popup.html",
-        "default_title": "Hello Spotlight",
-        "default_icon": "spotlight.png"
-    },
-    "options_page": "options.html",
-    "background": {
-    },
-    "content_scripts": [
-        {
-            "matches": [
-                "*://*.tryspotlight.xyz/example",
-                "*://checkout.ticketmaster.com/*",
-                "*://*.seatgeek.com/checkout*"
-            ],
-            "js": ["App.js"]
-        }
-    ],
-    "web_accessible_resources": [{
-        "resources": ["*.png", "*.svg","*.ttf", "*.otf"],
-        "matches": ["<all_urls>"]
-    }],
-    "future_support": [
-        "*://*.stubhub.com/secure/buy/*",
-        "*://*.tix.axs.com/*",
-        "*://*.vividseats.com/checkout/*",
-        "*://*.tickpick.com/checkout?*"
-    ]
+  "manifest_version": 3,
+  "name": "Spotlight",
+  "description": "Chrome extension to browse the cheapest tickets",
+  "version": "1.1.0",
+  "icons": {
+    "16": "spotlight.png",
+    "48": "spotlight.png",
+    "128": "spotlight.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Hello Spotlight",
+    "default_icon": "spotlight.png"
+  },
+  "options_page": "options.html",
+  "background": {},
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.tryspotlight.xyz/example",
+        "*://*.seatgeek.com/checkout*",
+        "*://*.stubhub.com/secure/buy/ReviewAndBuy?*",
+        "*://checkout.ticketmaster.com/*",
+        "*://*.tickpick.com/checkout?*",
+        "*://*.vividseats.com/checkout/*&stepNumber=4"
+      ],
+      "js": ["App.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["*.png", "*.svg", "*.ttf", "*.otf"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "future_support": [
+    "*://*.stubhub.com/secure/buy/*",
+    "*://*.tix.axs.com/*",
+    "*://*.tickpick.com/checkout?*"
+  ]
 }

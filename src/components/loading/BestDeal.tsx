@@ -16,7 +16,7 @@ export default function BestDeal({ setTagIsOpened }: IBestDeal) {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <Title>Congrats! The deal you have is truly the </Title>
+      <Title>Congrats! You already have the </Title>
       <Highlight>Best Deal.</Highlight>
       <Image
         src={chrome.runtime.getURL('imgs/bestdeal.svg')}
