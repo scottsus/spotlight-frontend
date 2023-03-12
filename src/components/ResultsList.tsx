@@ -10,14 +10,14 @@ import TicketContainer from './ticketBlock/Container';
 interface IResultsList {
   srcTicket: TicketInfo;
   destTickets: TicketInfo[];
-  hasLoadedAll: boolean;
+  hasProcessedAll: boolean;
   options: Options;
 }
 
 export default function ResultsList({
   srcTicket,
   destTickets,
-  hasLoadedAll,
+  hasProcessedAll,
   options,
 }: IResultsList) {
   const ticketContainerItemsRef = useRef<JSX.Element[]>([]);
@@ -103,7 +103,10 @@ export default function ResultsList({
   }, [destTickets, options]);
 
   return (
-    <ResultsListDiv isDone={hasLoadedAll} transition={{ staggerChildren: 0.5 }}>
+    <ResultsListDiv
+      isDone={hasProcessedAll}
+      transition={{ staggerChildren: 0.5 }}
+    >
       {options.filterOptions
         ? ticketContainerItemsRef.current.filter(useFilters)
         : ticketContainerItemsRef.current}
@@ -113,7 +116,7 @@ export default function ResultsList({
 
 const ResultsListDiv = styled(motion.div)<{ isDone: boolean }>`
   width: 509px;
-  max-height: ${(props) => (props.isDone ? '368px' : '308px')};
+  max-height: ${(props) => (props.isDone ? '375px' : '308px')};
   margin: 0 auto;
   overflow-y: scroll;
 `;

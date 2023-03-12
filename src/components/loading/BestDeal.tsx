@@ -40,9 +40,9 @@ const Title = styled.h1`
   font-size: 23px;
   font-family: Manrope;
   font-weight: 500;
-  color: black;
+  color: #27292a;
   text-align: center;
-  margin: 0 0 10px 0;
+  margin: 0;
 `;
 
 const Highlight = styled.span`
@@ -50,7 +50,7 @@ const Highlight = styled.span`
   font-family: Mont;
   font-weight: 700;
   color: #5fcd92;
-  margin: 0 0 30px 0;
+  margin: 0 0 40px 0;
 `;
 
 const Image = styled.img`
@@ -63,7 +63,7 @@ const Button = styled.button`
   height: 42px;
   border-radius: 40px;
   background-color: #4b3bff;
-  margin: auto 0 40px;
+  margin: auto 0 36px;
   :hover {
     background-color: #7a6fff;
   }

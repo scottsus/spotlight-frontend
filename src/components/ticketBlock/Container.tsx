@@ -45,9 +45,9 @@ export default function Container({ srcTicket, destTicket }) {
 
 const ContainerDiv = styled.div<{ height: number }>`
   height: ${(props) => props.height}px;
-  border: 2px solid #dfe0e0;
+  border: 1.5px solid #dfe0e0;
   border-radius: 10px;
-  margin: 7px auto;
+  margin: 8px auto;
   transition: height 0.2s ease-in-out;
   overflow: hidden;
 `;

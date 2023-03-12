@@ -56,9 +56,10 @@ function CheckingText({ text }: ICheckingText) {
 
 const CheckingTextDiv = styled(motion.div)`
   font-size: 21px;
-  font-family: Manrope;
-  font-weight: 600;
+  font-family: Mont;
+  font-weight: 700;
   color: #7a6fff;
+  letter-spacing: -0.025em;
   text-align: center;
   margin: 0;
 `;

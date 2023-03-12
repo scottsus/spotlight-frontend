@@ -15,11 +15,11 @@ export default function Skeletons() {
 }
 
 const SkeletonsDiv = styled.div`
-  height: 50%;
+  height: 60%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  margin: 0;
+  margin: -30px 0 auto;
 `;
 
 function SkeletonBlock() {

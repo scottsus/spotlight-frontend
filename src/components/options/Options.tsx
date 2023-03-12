@@ -79,7 +79,7 @@ export default function Options({
 
 const OptionsDiv = styled(motion.div)<{ isReady: boolean }>`
   color: #4b3bff;
-  margin: 8px 0;
+  margin: 8px 0 6px;
   display: flex;
   opacity: ${(props) => (props.isReady ? 1 : 0)};
   transition: opacity 0.5s ease;

@@ -1,6 +1,6 @@
 import { checkoutScrape, fakeTicket } from './utils';
 
-const axs: checkoutScrape = (site, url, team1, team2, text) => {
+const axsScrape: checkoutScrape = (site, url, text) => {
   return fakeTicket('axs');
 };
-export default axs;
+export default axsScrape;

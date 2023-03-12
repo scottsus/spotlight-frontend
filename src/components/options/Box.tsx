@@ -69,7 +69,7 @@ const BoxText = styled.p`
   font-size: 16px;
   font-family: Manrope;
   font-weight: 400,
-  color: black;
+  color: #272p2a;
   margin: 0;
   text-align: center;
 `;

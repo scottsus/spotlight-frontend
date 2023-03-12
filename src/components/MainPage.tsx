@@ -18,7 +18,7 @@ interface IAppBox {
   srcTicketInfo: TicketInfo;
   destTickets: TicketInfo[];
   hasOneGoodResult: boolean;
-  hasLoadedAll: boolean;
+  hasProcessedAll: boolean;
 }
 
 export default function AppBox({
@@ -27,7 +27,7 @@ export default function AppBox({
   destTickets,
   srcTicketInfo,
   hasOneGoodResult,
-  hasLoadedAll,
+  hasProcessedAll,
 }: IAppBox) {
   const [isDoneWithProgressBar, setIsDoneWithProgressBar] = useState(false);
   const [filterOptions, setFilterOptions] = useState<FilterOptions>(null);
@@ -44,7 +44,7 @@ export default function AppBox({
       <Progress
         isDoneWithProgressBar={isDoneWithProgressBar}
         setIsDoneWithProgressBar={setIsDoneWithProgressBar}
-        hasLoadedAll={hasLoadedAll}
+        hasProcessedAll={hasProcessedAll}
       />
 
       <Options
@@ -54,23 +54,21 @@ export default function AppBox({
         setSortByOptions={setSortByOptions}
       />
 
-      {!hasLoadedAll && <Checking />}
+      {!hasProcessedAll && <Checking />}
 
-      {!hasLoadedAll && !hasOneGoodResult && <Skeletons />}
+      {!hasProcessedAll && !hasOneGoodResult && <Skeletons />}
 
-      {!isDoneWithProgressBar ? (
-        hasOneGoodResult && (
-          <ResultsList
-            srcTicket={srcTicketInfo}
-            destTickets={destTickets}
-            options={{
-              filterOptions: filterOptions,
-              sortByOptions: sortByOptions,
-            }}
-            hasLoadedAll={hasLoadedAll}
-          />
-        )
-      ) : (
+      <ResultsList
+        srcTicket={srcTicketInfo}
+        destTickets={destTickets}
+        options={{
+          filterOptions: filterOptions,
+          sortByOptions: sortByOptions,
+        }}
+        hasProcessedAll={hasProcessedAll}
+      />
+
+      {!hasOneGoodResult && isDoneWithProgressBar && (
         <BestDeal setTagIsOpened={setTagIsOpened} />
       )}
     </AppBoxDiv>
@@ -87,7 +85,7 @@ const AppBoxDiv = styled.div<{ isVisible: boolean }>`
   z-index: 100;
   background-color: #ffffff;
   padding: 20px 32px;
-  filter: drop-shadow(0 0 0.75rem rgb(101, 100, 100));
+  filter: drop-shadow(0 0 0.5rem rgba(0, 0, 0, 0.26));
   overflow: hidden;
   visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
 `;
@@ -97,7 +95,8 @@ const Logo = styled.h1`
   font-family: Mont;
   font-weight: 800;
   color: #4b3bff;
-  margin: 12px auto 0;
+  letter-spacing: -0.03em;
+  margin: 8px auto 0;
 `;
 
 interface IEventTitle {
@@ -108,7 +107,7 @@ function EventTitle({ ticket }: IEventTitle) {
   return (
     <TitleDiv>
       <Teams>
-        {ticket.team1} vs. {ticket.team2}
+        {ticket.actor1} vs. {ticket.actor2}
       </Teams>
       <Venue>
         {ticket.venueInfo.stadium} · {ticket.venueInfo.city},{' '}
@@ -127,7 +126,7 @@ const Teams = styled.h2`
   font-size: 20px;
   font-family: HelveticaNeue;
   font-weight: 500;
-  margin: 0 0 1px 0;
+  margin: 0 0 0.8px 0;
 `;
 
 const Venue = styled.h4`
@@ -139,10 +138,10 @@ const Venue = styled.h4`
 `;
 
 const Divider = styled.div`
-  height: 2px;
+  height: 1.5px;
   border-radius: 3px;
   background-color: #dfe0e0;
-  margin: 15px auto 0;
+  margin: 15px auto -3px;
 `;
 
 interface IXButton {
@@ -159,8 +158,8 @@ function XButton({ setTagIsOpened }: IXButton) {
 
 const XButtonContainer = styled.button`
   position: absolute;
-  top: 5%;
-  right: 5%;
+  top: 4%;
+  right: 3%;
   border: none;
   border-radius: 50%;
   background-color: #ffffff;
@@ -174,6 +173,6 @@ const XButtonContainer = styled.button`
 `;
 
 const Image = styled.img`
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
 `;

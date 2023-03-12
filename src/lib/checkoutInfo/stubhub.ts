@@ -2,7 +2,7 @@ import { load } from 'cheerio';
 import TicketInfo from '../types/ticketInfo';
 import { checkoutScrape, check, findDiv } from './utils';
 
-const stubhub: checkoutScrape = (site, url, team1, team2, outerHtml) => {
+const stubhubScrape: checkoutScrape = (site, url, outerHtml) => {
   const $ = load(outerHtml);
 
   const quantityDiv = findDiv($, 'ADMIT');
@@ -46,9 +46,8 @@ const stubhub: checkoutScrape = (site, url, team1, team2, outerHtml) => {
   };
 
   const ticketInfo = new TicketInfo(
-    team1,
-    team2,
-    [],
+    'team1',
+    'team2',
     quantity,
     {
       section: section,
@@ -79,4 +78,4 @@ const stubhub: checkoutScrape = (site, url, team1, team2, outerHtml) => {
   return ticketInfo;
 };
 
-export default stubhub;
+export default stubhubScrape;

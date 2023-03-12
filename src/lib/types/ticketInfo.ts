@@ -1,7 +1,6 @@
 class TicketInfo {
-  team1?: string;
-  team2?: string;
-  performers?: string[];
+  actor1: string;
+  actor2?: string;
   quantity: number;
   seatInfo: SeatInfo;
   priceInfo: PriceInfo;
@@ -10,9 +9,8 @@ class TicketInfo {
   site: string;
   url: string;
   constructor(
-    team1: string = '',
-    team2: string = '',
-    performers: string[] = [],
+    actor1: string,
+    actor2: string = '',
     quantity: number,
     seatInfo: SeatInfo,
     priceInfo: PriceInfo,
@@ -21,9 +19,8 @@ class TicketInfo {
     site: string,
     url: string
   ) {
-    this.team1 = team1;
-    this.team2 = team2;
-    this.performers = performers;
+    this.actor1 = actor1;
+    this.actor2 = actor2;
     this.quantity = quantity;
     this.seatInfo = seatInfo;
     this.priceInfo = priceInfo;

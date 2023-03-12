@@ -2,7 +2,7 @@ import { load } from 'cheerio';
 import TicketInfo from '../types/ticketInfo';
 import { checkoutScrape, check, extractAndTrim } from './utils';
 
-const vividseats: checkoutScrape = (site, url, team1, team2, outerHtml) => {
+const vividseatsScrape: checkoutScrape = (site, url, outerHtml) => {
   const $ = load(outerHtml);
 
   const eventDiv = $(`[class='productionName']`).text();
@@ -16,7 +16,7 @@ const vividseats: checkoutScrape = (site, url, team1, team2, outerHtml) => {
   const dateTimeDiv = $(`[class='production-date']`).text();
   const venueDiv = $(`[class='production-venue']`).text();
 
-  const performersArr = extractAndTrim(eventDiv, 'at');
+  const actorsArr = extractAndTrim(eventDiv, 'at');
   const quantityArr = extractAndTrim(quantityDiv, ' ');
   const sectionArr = extractAndTrim(sectionDiv, ' ');
   const rowArr = extractAndTrim(rowDiv, ' ');
@@ -28,7 +28,7 @@ const vividseats: checkoutScrape = (site, url, team1, team2, outerHtml) => {
   const venueArr = extractAndTrim(venueDiv, '-');
 
   const checkArrays = () => {
-    console.log(`Event:`, performersArr);
+    console.log(`Event:`, actorsArr);
     console.log(`Quantity:`, quantityArr);
     console.log(`Section:`, sectionArr);
     console.log(`Row:`, rowArr);
@@ -46,9 +46,8 @@ const vividseats: checkoutScrape = (site, url, team1, team2, outerHtml) => {
   const hour = `${dateTimeArr[4]} ${dateTimeArr[5]}`;
 
   const ticketInfo = new TicketInfo(
-    team1,
-    team2,
-    [],
+    actorsArr[0],
+    actorsArr.length > 1 ? actorsArr[1] : '',
     quantity,
     {
       section: sectionArr[sectionArr.length - 1],
@@ -79,4 +78,4 @@ const vividseats: checkoutScrape = (site, url, team1, team2, outerHtml) => {
   return ticketInfo;
 };
 
-export default vividseats;
+export default vividseatsScrape;

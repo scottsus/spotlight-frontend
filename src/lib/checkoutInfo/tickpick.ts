@@ -2,7 +2,7 @@ import { load } from 'cheerio';
 import TicketInfo from '../types/ticketInfo';
 import { checkoutScrape, check, findDiv, isNumber } from './utils';
 
-const tickpick: checkoutScrape = (site, url, team1, team2, outerHtml) => {
+const tickpickScrape: checkoutScrape = (site, url, outerHtml) => {
   const $ = load(outerHtml);
 
   const eventDateDiv = $(`[class*='eventDate']`);
@@ -14,7 +14,7 @@ const tickpick: checkoutScrape = (site, url, team1, team2, outerHtml) => {
   const basePriceDiv = findDiv($, `Price`, `dt`);
   const totalPriceDiv = $(`[class='total']`);
 
-  const performers = titleDiv.text().split(' vs. ');
+  const actorsArr = titleDiv.text().split(' vs. ');
   const quantity = parseInt(quantityDiv.next().text().split(' ')[1]);
 
   const sectionParts = sectionDiv.text().split(' ');
@@ -39,7 +39,7 @@ const tickpick: checkoutScrape = (site, url, team1, team2, outerHtml) => {
   const totalPrice = parseFloat(totalPriceDiv.text().trim().match(/\d+/)[0]);
 
   const checkItems = () => {
-    console.log(`Title:`, performers);
+    console.log(`Title:`, actorsArr);
     console.log(`Quantity:`, quantityDiv);
     console.log(`Section:`, section);
     console.log(`Row:`, row);
@@ -53,10 +53,11 @@ const tickpick: checkoutScrape = (site, url, team1, team2, outerHtml) => {
     console.log(`Total Price:`, totalPriceDiv);
   };
 
+  checkItems();
+
   const ticketInfo = new TicketInfo(
-    team1,
-    team2,
-    [],
+    actorsArr[0],
+    actorsArr.length > 1 ? actorsArr[1] : '',
     quantity,
     {
       section: section,
@@ -87,4 +88,4 @@ const tickpick: checkoutScrape = (site, url, team1, team2, outerHtml) => {
   return ticketInfo;
 };
 
-export default tickpick;
+export default tickpickScrape;
