@@ -1,46 +1,57 @@
 import { CheerioAPI } from 'cheerio';
 import TicketInfo from '../types/ticketInfo';
 
+import axsScrape from './axs';
+import exampleScrape from './example';
+import seatgeekScrape from './seatgeek';
+import stubhubScrape from './stubhub';
+import ticketmasterScrape from './ticketmaster';
+import tickpickScrape from './tickpick';
+import vividseatsScrape from './vividseats';
+
+export const siteMap = {
+  axs: axsScrape,
+  example: exampleScrape,
+  seatgeek: seatgeekScrape,
+  stubhub: stubhubScrape,
+  ticketmaster: ticketmasterScrape,
+  tickpick: tickpickScrape,
+  vividseats: vividseatsScrape,
+};
+
 export interface checkoutScrape {
-  (
-    site: string,
-    url: string,
-    team1: string,
-    team2: string,
-    text: string
-  ): TicketInfo;
+  (srcSite: string, srcUrl: string, outerHtml: string): TicketInfo;
 }
 
 export const fakeTicket = (site: string) => {
-  return {
-    team1: 'Los Angeles Lakers',
-    team2: 'Toronto Raptors',
-    performers: [],
-    quantity: 2,
-    seatInfo: {
+  return new TicketInfo(
+    'Los Angeles Lakers',
+    'Toronto Raptors',
+    2,
+    {
       section: 'Sec 301',
       row: 'Row 10',
     },
-    priceInfo: {
+    {
       totalPrice: 1000,
       quantity: 2,
       basePrice: 500,
       serviceFee: 200,
       deliveryFee: 5,
     },
-    venueInfo: {
+    {
       stadium: 'Crypto.com Arena',
       city: 'Los Angeles',
       state: 'CA',
     },
-    timeInfo: {
+    {
       day: 'Thursday',
       date: 'Mar 30',
       hour: '9:00pm',
     },
-    site: site,
-    url: 'https://scottsus.xyz',
-  };
+    site,
+    'https://scottsus.xyz'
+  );
 };
 
 export const extractAndTrim = (targetString: string, delimiter: string) => {
@@ -76,8 +87,8 @@ export const isNumber = (str: string) => {
 };
 
 export const check = (ticketInfo: TicketInfo) => {
-  console.log('Team 1:', ticketInfo.team1);
-  console.log('Team 2:', ticketInfo.team2);
+  console.log('Actor 1:', ticketInfo.actor1);
+  console.log('Actor 2:', ticketInfo.actor2);
   console.log('Section:', ticketInfo.seatInfo.section);
   console.log('Row:', ticketInfo.seatInfo.row);
   console.log('Price:', ticketInfo.priceInfo.totalPrice);

@@ -11,8 +11,8 @@ export default function PurpleTag({ tagIsOpened, setTagIsOpened }: IPurpleTag) {
   const [right, setRight] = useState(`-200px`);
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      setRight(`-60px`);
-    }, 4000);
+      setRight(`-35px`);
+    }, 1000);
     return () => clearTimeout(timeoutId);
   });
   return (
@@ -24,7 +24,7 @@ export default function PurpleTag({ tagIsOpened, setTagIsOpened }: IPurpleTag) {
       }}
     >
       <Image
-        src={chrome.runtime.getURL('imgs/purpletag.png')}
+        src={chrome.runtime.getURL('imgs/purpletag.svg')}
         onClick={() => setTagIsOpened((tagIsOpened) => !tagIsOpened)}
       />
     </PurpleTagDiv>
@@ -46,5 +46,5 @@ const PurpleTagDiv = styled(motion.div)<{
 
 const Image = styled.img`
   width: 160px;
-  height: 100px;
+  height: 84px;
 `;

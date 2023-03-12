@@ -2,7 +2,7 @@ import { load } from 'cheerio';
 import TicketInfo from '../types/ticketInfo';
 import { checkoutScrape, extractAndTrim, extractPriceFromStr } from './utils';
 
-const seatgeek: checkoutScrape = (site, url, team1, team2, outerHtml) => {
+const seatgeekScrape: checkoutScrape = (site, url, outerHtml) => {
   const $ = load(outerHtml);
   const titleDiv = $(`[data-test='event-title']`).text();
   const seatDiv = $(`[data-test='listing-section-title']`).text();
@@ -12,7 +12,7 @@ const seatgeek: checkoutScrape = (site, url, team1, team2, outerHtml) => {
   const serviceFeesDiv = $(`[data-test='line-item'][data-role='fees']`).text();
   const totalPriceDiv = $(`[data-test='line-item'][data-role='total']`).text();
 
-  const performersArr = extractAndTrim(titleDiv, 'at');
+  const actorsArr = extractAndTrim(titleDiv, 'at');
   const seatArr = extractAndTrim(seatDiv, ',');
   const dateTimeArr = extractAndTrim(dateTimeDiv, 'at');
   const locationArr = extractAndTrim(locationDiv, ',');
@@ -21,7 +21,7 @@ const seatgeek: checkoutScrape = (site, url, team1, team2, outerHtml) => {
   const totalPriceArr = extractAndTrim(totalPriceDiv, '$');
 
   const checkArrays = () => {
-    console.log(`Performers:`, performersArr);
+    console.log(`Actors:`, actorsArr);
     console.log(`Seat:`, seatArr);
     console.log(`Date & Time:`, dateTimeArr);
     console.log(`Location:`, locationArr);
@@ -30,6 +30,8 @@ const seatgeek: checkoutScrape = (site, url, team1, team2, outerHtml) => {
     console.log(`Total Price:`, totalPriceArr);
   };
 
+  checkArrays();
+
   const quantity = parseInt(basePriceArr[2]);
 
   const dateParts = dateTimeArr[0].split(' ');
@@ -37,9 +39,8 @@ const seatgeek: checkoutScrape = (site, url, team1, team2, outerHtml) => {
   const date = `${dateParts[1]} ${dateParts[2]}`;
 
   const ticketInfo = new TicketInfo(
-    team1,
-    team2,
-    [],
+    actorsArr[0],
+    actorsArr.length > 1 ? actorsArr[1] : '',
     quantity,
     {
       section: seatArr[0],
@@ -70,4 +71,4 @@ const seatgeek: checkoutScrape = (site, url, team1, team2, outerHtml) => {
   return ticketInfo;
 };
 
-export default seatgeek;
+export default seatgeekScrape;

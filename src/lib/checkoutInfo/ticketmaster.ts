@@ -2,7 +2,7 @@ import { load } from 'cheerio';
 import TicketInfo from '../types/ticketInfo';
 import { checkoutScrape, check, extractAndTrim } from './utils';
 
-const ticketmaster: checkoutScrape = (site, url, team1, team2, outerHtml) => {
+const ticketmasterScrape: checkoutScrape = (site, url, outerHtml) => {
   const $ = load(outerHtml);
 
   const eventDiv = $(`[data-tid='event-name']`).text();
@@ -15,7 +15,7 @@ const ticketmaster: checkoutScrape = (site, url, team1, team2, outerHtml) => {
   const dateTimeDiv = $(`[data-tid='event-datetime']`).text();
   const venueDiv = $(`[data-tid='event-venue']`).text();
 
-  const performersArr = extractAndTrim(eventDiv, 'vs.');
+  const actorsArr = extractAndTrim(eventDiv, 'vs.');
   const quantityArr = extractAndTrim(quantityDiv, ' ');
   const seatArr = extractAndTrim(seatDiv, ',');
   const totalPriceArr = extractAndTrim(totalPriceDiv, '$');
@@ -26,7 +26,7 @@ const ticketmaster: checkoutScrape = (site, url, team1, team2, outerHtml) => {
   const venueArr = extractAndTrim(venueDiv, ',');
 
   const checkArrays = () => {
-    console.log(`Event:`, performersArr);
+    console.log(`Event:`, actorsArr);
     console.log(`Quantity:`, quantityArr);
     console.log(`Seat:`, seatArr);
     console.log(`Total Price:`, totalPriceArr);
@@ -42,9 +42,8 @@ const ticketmaster: checkoutScrape = (site, url, team1, team2, outerHtml) => {
   const stadiumCity = venueArr[0].split(' - ');
 
   const ticketInfo = new TicketInfo(
-    team1,
-    team2,
-    [],
+    actorsArr[0],
+    actorsArr.length > 1 ? actorsArr[1] : '',
     quantity,
     {
       section: seatArr[0],
@@ -75,4 +74,4 @@ const ticketmaster: checkoutScrape = (site, url, team1, team2, outerHtml) => {
   return ticketInfo;
 };
 
-export default ticketmaster;
+export default ticketmasterScrape;

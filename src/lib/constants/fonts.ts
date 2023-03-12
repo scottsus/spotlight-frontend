@@ -2,6 +2,7 @@
 // __MSG@@extension_id is not working 😩😩
 
 const montBoldURL = chrome.runtime.getURL('fonts/MontBold.otf');
+const montSemiBoldUrl = chrome.runtime.getURL('fonts/Mont-SemiBold.otf');
 const manropeURL = chrome.runtime.getURL('fonts/Manrope.ttf');
 const helveticaLightURL = chrome.runtime.getURL(
   'fonts/HelveticaNeue Light.ttf'
@@ -13,8 +14,14 @@ const helveticaRegularURL = chrome.runtime.getURL(
 const fonts = `
 @font-face {
     font-family: 'Mont';
-    src: url(${montBoldURL}) format('opentype');
-    font-weight: 300;
+    src: url(${montSemiBoldUrl}) format('opentype');
+    font-weight: 700;
+}
+
+@font-face {
+  font-family: 'Mont';
+  src: url(${montBoldURL}) format('opentype');
+  font-weight: 800;
 }
 
 @font-face {

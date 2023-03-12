@@ -1,6 +1,6 @@
 const siteNames = [
-  'example',
   'axs',
+  'example',
   'seatgeek',
   'stubhub',
   'ticketmaster',
@@ -10,18 +10,19 @@ const siteNames = [
 ];
 
 const properSiteNamesDict = {
-  spotlight: 'Spotlight',
-  example: 'Example',
   axs: 'AXS',
-  stubhub: 'StubHub',
+  example: 'Example',
   seatgeek: 'SeatGeek',
+  stubhub: 'StubHub',
   ticketmaster: 'TicketMaster',
   ticketsmarter: 'TicketSmarter',
-  vividseats: 'VividSeats',
   tickpick: 'TickPick',
+  vividseats: 'VividSeats',
 };
 
 export const getProperSiteName = (siteName: string) =>
   properSiteNamesDict[siteName];
+
+export const NUM_FUNCTIONAL_SITES = siteNames.length - 3;
 
 export default siteNames;

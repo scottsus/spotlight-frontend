@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import SortByOptions from '../../lib/sortByOptions';
+import { SortByOptions } from '../../lib/types/options';
 
 interface ISortBy {
   sortByIsOpen: boolean;

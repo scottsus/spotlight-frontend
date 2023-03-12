@@ -102,7 +102,9 @@ function Overview({ section, row, srcPrice, destPrice, quantity }: IOverview) {
       {savings > 0 ? (
         <Text color="#42d988" size="18px" weight={700}>
           ${Math.round(savings)}{' '}
-          <span style={{ fontSize: '16px', fontWeight: 300 }}>saved</span>
+          <span style={{ fontSize: '16px', fontWeight: 400, color: '#73757a' }}>
+            saved
+          </span>
         </Text>
       ) : (
         <Text color="#4b3bff" size="18px" weight={700}>
@@ -157,7 +159,7 @@ const Button = styled.button`
   height: 48px;
   width: 160px;
   background-color: #4b3bff;
-  border: 2px solid #dfe0e0;
+  border: 1.5px solid #dfe0e0;
   border-radius: 8px;
   :hover {
     background-color: #695cff;

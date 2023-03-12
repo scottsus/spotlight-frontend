@@ -60,7 +60,7 @@ function TicketBox({ ticket, name }: ITicketBox) {
 
 const TicketBoxDiv = styled.div`
   width: 48%;
-  border: 2px solid #dfe0e0;
+  border: 1.5px solid #dfe0e0;
   border-radius: 10px;
   padding: 7.5px 30px;
 `;
