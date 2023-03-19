@@ -21,14 +21,18 @@ const findCompetingTickets: IfindCompetingTickets = (
   setHasOneGoodResult,
   setHasLoadedAll
 ) => {
-  const srcSiteURL = `${BASE_URL}/${site}`;
+  let seatMode = '';
+  if (!srcTicketInfo.seatInfo.row) seatMode = `standing`;
+  else seatMode = `seated`;
+  const srcSiteUrl = `${BASE_URL}/${seatMode}/${site}`;
   const reqHeaders = setReqHeaders(srcTicketInfo);
 
-  fetch(srcSiteURL, {
+  fetch(srcSiteUrl, {
     headers: reqHeaders,
   })
     .then((res) => {
-      if (res.status !== 200) throw new Error(`non-200 status code`);
+      if (!(200 <= res.status && res.status <= 299))
+        throw new Error(`[${site.toUpperCase()}]: non-2xx status code`);
       return res.json();
     })
     .then((jsonArr) => {
@@ -41,7 +45,7 @@ const findCompetingTickets: IfindCompetingTickets = (
     })
     .catch((err) => {
       // No need further processing
-      console.log(`[FETCH]:`, err);
+      console.log(err);
     })
     .finally(() => {
       sitesDone.add(site);
@@ -68,6 +72,12 @@ const setReqHeaders = (srcTicketInfo: TicketInfo) => {
   };
 
   return reqHeaders;
+};
+
+const setStandingReqHeaders = (srcTicketInfo: TicketInfo) => {
+  const standingReqHeaders = {
+    actor: srcTicketInfo.actor1,
+  };
 };
 
 const jsonToTicketInfo = (json: any, srcTicketInfo: TicketInfo) => {

@@ -74,7 +74,7 @@ const stubhubScrape: checkoutScrape = (site, url, outerHtml) => {
     url
   );
 
-  //   check(ticketInfo);
+  // check(ticketInfo);
   return ticketInfo;
 };
 
