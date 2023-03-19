@@ -33,7 +33,7 @@ class TicketInfo {
 
 export class SeatInfo {
   section: string;
-  row: string;
+  row?: string;
 }
 
 export class PriceInfo {

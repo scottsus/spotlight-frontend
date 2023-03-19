@@ -11,7 +11,7 @@ export default function PurpleTag({ tagIsOpened, setTagIsOpened }: IPurpleTag) {
   const [right, setRight] = useState(`-200px`);
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      setRight(`-35px`);
+      setRight(`-55px`);
     }, 1000);
     return () => clearTimeout(timeoutId);
   });
@@ -20,7 +20,7 @@ export default function PurpleTag({ tagIsOpened, setTagIsOpened }: IPurpleTag) {
       right={right}
       isVisible={!tagIsOpened}
       whileHover={{
-        x: '-10px',
+        x: '-8.5px',
       }}
     >
       <Image

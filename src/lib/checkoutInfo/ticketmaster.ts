@@ -50,7 +50,7 @@ const ticketmasterScrape: checkoutScrape = (site, url, outerHtml) => {
       row: seatArr[1],
     },
     {
-      totalPrice: parseFloat(totalPriceArr[1]),
+      totalPrice: parseFloat(totalPriceArr[1].replace(`,`, ``)),
       basePrice: basePrice,
       quantity: quantity,
       serviceFee: parseFloat(serviceFeeArr[0]),
@@ -70,7 +70,7 @@ const ticketmasterScrape: checkoutScrape = (site, url, outerHtml) => {
     url
   );
 
-  // check(ticketInfo);
+  check(ticketInfo);
   return ticketInfo;
 };
 
