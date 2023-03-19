@@ -82,8 +82,8 @@ const AppBoxDiv = styled.div<{ isVisible: boolean }>`
   width: 573px;
   height: 604px;
   border-radius: 10.6px;
-  z-index: 100;
   background-color: #ffffff;
+  z-index: 100;
   padding: 20px 32px;
   filter: drop-shadow(0 0 0.5rem rgba(0, 0, 0, 0.26));
   overflow: hidden;

@@ -10,7 +10,7 @@ import PurpleTag from '../components/PurpleTag';
 import MainPage from '../components/MainPage';
 import TicketInfo from '../lib/types/ticketInfo';
 
-const App: React.FC = () => {
+export default function Checkout() {
   const [tagIsOpened, setTagIsOpened] = useState<boolean>(false);
 
   // Getting Tickets
@@ -49,7 +49,7 @@ const App: React.FC = () => {
       />
     </AppDiv>
   );
-};
+}
 
 const AppDiv = styled.div`
   * {
@@ -61,4 +61,4 @@ const div = document.createElement('div');
 document.body.appendChild(div);
 
 const shadowRoot = createRoot(div);
-shadowRoot.render(<App />);
+shadowRoot.render(<Checkout />);

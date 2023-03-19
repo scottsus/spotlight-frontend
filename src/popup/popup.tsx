@@ -1,10 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { useEffect } from 'react';
+import { createRoot } from 'react-dom/client';
+import styled from 'styled-components';
 
-const greeting = <h1>Hello Spotlight!</h1>;
+import MainPage from '../components/popup/MainPage';
+import fonts from '../lib/constants/fonts';
 
-const image = <img src='spotlight.png' />;
+import './globals.css';
 
-const root = document.createElement('div');
-document.body.appendChild(root);
-ReactDOM.render(image, root);
+export default function Popup() {
+  return (
+    <PopupDiv>
+      <style>{fonts}</style>
+      <MainPage />
+    </PopupDiv>
+  );
+}
+
+const PopupDiv = styled.div`
+  * {
+    line-height: 1.4;
+  }
+`;
+
+const div = document.createElement('div');
+document.body.appendChild(div);
+
+const shadowRoot = createRoot(div);
+shadowRoot.render(<Popup />);
