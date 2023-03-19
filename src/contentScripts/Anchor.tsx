@@ -4,16 +4,16 @@ import styled from 'styled-components';
 
 import './globals.css';
 
-const App: React.FC = () => {
+export default function Anchor() {
   return (
     <>
       <h1>Hello Spotlight!</h1>
     </>
   );
-};
+}
 
 const div = document.createElement('div');
 document.body.appendChild(div);
 
 const shadowRoot = createRoot(div);
-shadowRoot.render(<App />);
+shadowRoot.render(<Anchor />);
