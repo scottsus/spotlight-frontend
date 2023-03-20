@@ -195,21 +195,21 @@ function OpenSuggestionBlock({ isOpen }: IOpenSuggestionBlock) {
       </TicketsAvailable>
       <Carousell>
         <WebsiteButton
-          logoUrl="imgs/websiteButtons/stubhub.svg"
+          logoUrl="imgs/websiteButtons/stubhub.png"
           logoWidth={68}
           logoHeight={32}
           backgroundColor="#3f1d75"
           startingPrice={68}
         />
         <WebsiteButton
-          logoUrl="imgs/websiteButtons/gametime.svg"
+          logoUrl="imgs/websiteButtons/gametime.png"
           logoWidth={72}
           logoHeight={13}
           backgroundColor="#19ce85"
           startingPrice={150}
         />
         <WebsiteButton
-          logoUrl="imgs/websiteButtons/seatgeek.svg"
+          logoUrl="imgs/websiteButtons/seatgeek.png"
           logoWidth={38}
           logoHeight={27}
           backgroundColor="#ff5b49"
