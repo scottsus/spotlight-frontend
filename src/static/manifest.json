@@ -17,7 +17,7 @@
   "background": {},
   "content_scripts": [
     {
-      "matches": ["*://*.ticketmaster.com/*"],
+      "matches": ["*://www.ticketmaster.com/*"],
       "js": ["Anchor.js"]
     },
     {
