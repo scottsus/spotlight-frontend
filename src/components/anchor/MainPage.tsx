@@ -53,7 +53,7 @@ export default function MainPage({ tagIsOpened, setTagIsOpened }: IMainPage) {
 const MainPageDiv = styled.div<{ isVisible: boolean }>`
   position: absolute;
   top: 70px;
-  left: 10px;
+  right: 10px;
   width: 480px;
   height: 570px;
   border-radius: 10.5px;
