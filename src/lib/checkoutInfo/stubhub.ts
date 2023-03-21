@@ -5,20 +5,48 @@ import { checkoutScrape, check, findDiv } from './utils';
 const stubhubScrape: checkoutScrape = (site, url, outerHtml) => {
   const $ = load(outerHtml);
 
+  let isAssigned = true;
+  const rowDiv = findDiv($, `Row`);
+  if (rowDiv.text() === '') isAssigned = false;
+
+  const yourEventDiv = findDiv($, `Your Event`);
+  const performerDiv = yourEventDiv
+    .next()
+    .children()
+    .eq(0)
+    .children()
+    .eq(0)
+    .children()
+    .eq(0);
   const quantityDiv = findDiv($, 'ADMIT');
   const sectionDiv = findDiv($, 'Section');
-  const rowDiv = findDiv($, 'Row');
   const dateDiv = findDiv($, '2023').parent();
   const venueDiv = $(`[class*='event-venue-label']`);
   const basePriceDiv = findDiv($, 'Ticket Price');
-  const serviceDiv = findDiv($, 'Fulfillment and Service Fee');
+
+  const getServiceDiv = () => {
+    const firstTry = findDiv($, `Service and Fulfillment Fee`);
+    if (firstTry.text() !== '') return firstTry;
+    return findDiv($, `Fulfillment and Service Fee`);
+  };
+  const serviceDiv = getServiceDiv();
   const totalPriceDiv = $(`[class*='total-price-value']`);
+
+  const actors = performerDiv.text();
+  const actorParts = actors.split(' at ');
+  const actor1 = actorParts[0];
+  const actor2 = actorParts.length > 1 ? actorParts[1] : '';
 
   const quantity = parseInt(quantityDiv.next().text());
   const section = sectionDiv.first().next().text();
   const row = rowDiv.first().next().text();
+
   const stadium = venueDiv.children().eq(0).text();
   const cityState = venueDiv.children().eq(1).text().split(', ');
+  const city = cityState[0];
+  let state = '';
+  if (cityState.length > 1) state = cityState[1];
+
   const dateDay = dateDiv.children().eq(0).text();
   const month = dateDiv.children().eq(1).text();
   const year = dateDiv.children().eq(2).text();
@@ -26,17 +54,25 @@ const stubhubScrape: checkoutScrape = (site, url, outerHtml) => {
   const dayHourParent = venueDiv.parent().prev();
   const day = dayHourParent.children().eq(0).text();
   const hour = dayHourParent.children().eq(1).text();
-  const basePrice = basePriceDiv.next().text().split(' × ')[1].replace('$', '');
-  const service = serviceDiv.next().text().split(' × ')[1].replace('$', '');
+
+  let basePrice = '',
+    service = '';
+  try {
+    basePrice = basePriceDiv.next().text().split(' × ')[1].replace('$', '');
+    service = serviceDiv.next().text().split(' × ')[1].replace('$', '');
+  } catch (err) {
+    console.log(err);
+  }
   const totalPrice = totalPriceDiv.text().replace('$', '');
 
   const checkItems = () => {
+    console.log(`Actor:`, actors);
     console.log(`Quantity:`, quantity);
     console.log(`Section:`, section);
     console.log(`Row:`, row);
     console.log(`Stadium:`, stadium);
-    console.log(`City:`, cityState[0]);
-    console.log(`State:`, cityState[1]);
+    console.log(`City:`, city);
+    console.log(`State:`, state);
     console.log(`Date:`, date);
     console.log(`Day:`, day);
     console.log(`Hour:`, hour);
@@ -46,10 +82,11 @@ const stubhubScrape: checkoutScrape = (site, url, outerHtml) => {
   };
 
   const ticketInfo = new TicketInfo(
-    'team1',
-    'team2',
+    actor1,
+    actor2,
     quantity,
     {
+      isAssigned: isAssigned,
       section: section,
       row: row,
     },
@@ -62,8 +99,8 @@ const stubhubScrape: checkoutScrape = (site, url, outerHtml) => {
     },
     {
       stadium: stadium,
-      city: cityState[0],
-      state: cityState[1],
+      city: city,
+      state: state,
     },
     {
       day: day,

@@ -1,4 +1,5 @@
 import { load } from 'cheerio';
+import { isStanding } from '../constants/classifySeat';
 import TicketInfo from '../types/ticketInfo';
 import { checkoutScrape, check, findDiv, isNumber } from './utils';
 
@@ -15,6 +16,8 @@ const tickpickScrape: checkoutScrape = (site, url, outerHtml) => {
   const totalPriceDiv = $(`[class='total']`);
 
   const actorsArr = titleDiv.text().split(' vs. ');
+  const actor1 = actorsArr[0];
+  const actor2 = actorsArr.length > 1 ? actorsArr[1] : '';
   const quantity = parseInt(quantityDiv.next().text().split(' ')[1]);
 
   const sectionParts = sectionDiv.text().split(' ');
@@ -22,6 +25,7 @@ const tickpickScrape: checkoutScrape = (site, url, outerHtml) => {
   if (isNumber(sectionParts[1])) section = sectionParts[1];
   else section = `${sectionParts[1]} ${sectionParts[2]}`;
   const row = rowDiv.text().split(' ')[1];
+  const isAssigned = !isStanding(section);
 
   const locationDiv = eventLocationParentDiv.children().eq(1);
   const cityState = locationDiv.children().eq(0).text();
@@ -53,13 +57,12 @@ const tickpickScrape: checkoutScrape = (site, url, outerHtml) => {
     console.log(`Total Price:`, totalPriceDiv);
   };
 
-  checkItems();
-
   const ticketInfo = new TicketInfo(
-    actorsArr[0],
-    actorsArr.length > 1 ? actorsArr[1] : '',
+    actor1,
+    actor2,
     quantity,
     {
+      isAssigned: isAssigned,
       section: section,
       row: row,
     },
@@ -84,7 +87,7 @@ const tickpickScrape: checkoutScrape = (site, url, outerHtml) => {
     url
   );
 
-  // check(ticketInfo);
+  check(ticketInfo);
   return ticketInfo;
 };
 

@@ -24,7 +24,7 @@ const findCompetingTickets: IfindCompetingTickets = (
   let seatMode = '';
   if (!srcTicketInfo.seatInfo.row) seatMode = `standing`;
   else seatMode = `seated`;
-  const srcSiteUrl = `${BASE_URL}/${seatMode}/${site}`;
+  const srcSiteUrl = `${'BASE_URL'}/${seatMode}/${site}`;
   const reqHeaders = setReqHeaders(srcTicketInfo);
 
   fetch(srcSiteUrl, {
@@ -86,6 +86,7 @@ const jsonToTicketInfo = (json: any, srcTicketInfo: TicketInfo) => {
     actor2: srcTicketInfo.actor2,
     quantity: json['quantity'],
     seatInfo: {
+      isAssigned: srcTicketInfo.seatInfo.isAssigned,
       section: json['seatInfo']['section'],
       row: json['seatInfo']['row'],
     },

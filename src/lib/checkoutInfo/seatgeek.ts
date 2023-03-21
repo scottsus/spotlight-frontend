@@ -1,6 +1,12 @@
 import { load } from 'cheerio';
+import { isStanding } from '../constants/classifySeat';
 import TicketInfo from '../types/ticketInfo';
-import { checkoutScrape, extractAndTrim, extractPriceFromStr } from './utils';
+import {
+  check,
+  checkoutScrape,
+  extractAndTrim,
+  extractPriceFromStr,
+} from './utils';
 
 const seatgeekScrape: checkoutScrape = (site, url, outerHtml) => {
   const $ = load(outerHtml);
@@ -14,6 +20,13 @@ const seatgeekScrape: checkoutScrape = (site, url, outerHtml) => {
 
   const actorsArr = extractAndTrim(titleDiv, 'at');
   const seatArr = extractAndTrim(seatDiv, ',');
+  const actor1 = actorsArr[1];
+  const actor2 = actorsArr.length > 1 ? actorsArr[1] : '';
+
+  const section = seatArr[0];
+  const row = seatArr.length > 1 ? seatArr[1] : '';
+  const isAssigned = !isStanding(section);
+
   const dateTimeArr = extractAndTrim(dateTimeDiv, 'at');
   const locationArr = extractAndTrim(locationDiv, ',');
   const basePriceArr = extractAndTrim(basePriceDiv, ' ');
@@ -39,12 +52,13 @@ const seatgeekScrape: checkoutScrape = (site, url, outerHtml) => {
   const date = `${dateParts[1]} ${dateParts[2]}`;
 
   const ticketInfo = new TicketInfo(
-    actorsArr[0],
-    actorsArr.length > 1 ? actorsArr[1] : '',
+    actor1,
+    actor2,
     quantity,
     {
-      section: seatArr[0],
-      row: seatArr[1],
+      isAssigned: isAssigned,
+      section: section,
+      row: row,
     },
     {
       totalPrice: parseFloat(totalPriceArr[1]),
