@@ -1,8 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Suggestion from './Suggestion';
 
 export default function MainPage() {
+  const [dollarSaved, setDollarSaved] = useState(0);
+  useEffect(() => {
+    const initialSetDollarSaved = async () => {
+      await chrome.storage.local.set({ dollarSaved: 0 });
+    };
+    const getDollarSaved = async () => {
+      const keyVal = await chrome.storage.local.get(`dollarSaved`);
+      return keyVal[`dollarSaved`] as number;
+    };
+    initialSetDollarSaved().catch((err) => console.log(err));
+    getDollarSaved()
+      .then((dollarSaved) => setDollarSaved(dollarSaved))
+      .catch((err) => console.log(err));
+  });
   return (
     <MainPageDiv>
       <Logo>spotlight</Logo>
@@ -13,7 +27,8 @@ export default function MainPage() {
         <SavingsTextBox>
           <SoFar>With Spotlight, you saved...</SoFar>
           <Dollar>
-            $22.00 <NumTickets>with 1 ticket</NumTickets>
+            ${dollarSaved.toFixed(2)}&thinsp;
+            <NumTickets>with 1 ticket</NumTickets>
           </Dollar>
         </SavingsTextBox>
       </LifetimeSavings>
