@@ -23,47 +23,54 @@ export default function MainPage() {
       <Divider />
       <SuggestionList>
         <Suggestion
-          thumbnailUrl="imgs/keshi.png"
-          performer="keshi - The Hell & Back Tour"
-          venue="Greek Theater"
-          date="Apr 8"
-          time="Sat · 7:30 PM"
+          thumbnailUrl="imgs/jackson-wang.png"
+          performer="Jackson Wang"
+          venue="Shrine Expo Hall"
+          date="Apr 26"
+          time="Wed · 8:00 PM"
+          ticketHrefs={jacksonWangHrefs}
         />
         <Suggestion
-          thumbnailUrl="imgs/dabin.png"
-          performer="Dabin (18+ Event)"
-          venue="Shrine Auditorium and Expo Hall"
-          date="Apr 18"
-          time="Fri · 8:00 PM"
+          thumbnailUrl="imgs/joji.png"
+          performer="Joji Presents Smithereens"
+          venue="Kia Forum"
+          date="May 13"
+          time="Sat · 8:00 PM"
+          ticketHrefs={jojiHrefs}
         />
         <Suggestion
           thumbnailUrl="imgs/lakers-clippers.png"
-          performer="Lakers vs. Clippers"
+          performer="LA Lakers vs. LA Clippers"
           venue="Crypto.com Arena"
-          date="Apr 23"
-          time="Thu · 8:30 PM"
+          date="Apr 05"
+          time="Wed · 7:00 PM"
+          ticketHrefs={lakersClippersHrefs}
         />
       </SuggestionList>
       <Footer>
         <Feedback>
           Your opinion matters 🔥 share it with us{' '}
-          <FeedbackLink>here</FeedbackLink>
+          <FeedbackLink>
+            <a href="https://forms.gle/pEoztLqSCdgu6E9U6" target="_blank">
+              here
+            </a>
+          </FeedbackLink>
         </Feedback>
         <Socials>
           <a href="https://www.instagram.com/tryspotlight" target="_blank">
-            <Instagram src={chrome.runtime.getURL(`imgs/instagram.svg`)} />
+            <SocialIcon src={chrome.runtime.getURL(`imgs/instagram.svg`)} />
           </a>
           <a href="https://twitter.com/spotlightxyz" target="_blank">
-            <Twitter src={chrome.runtime.getURL(`imgs/twitter.svg`)} />
+            <SocialIcon src={chrome.runtime.getURL(`imgs/twitter.svg`)} />
           </a>
           <a
             href="https://www.linkedin.com/company/tryspotlight/"
             target="_blank"
           >
-            <LinkedIn src={chrome.runtime.getURL(`imgs/linkedin.svg`)} />
+            <SocialIcon src={chrome.runtime.getURL(`imgs/linkedin.svg`)} />
           </a>
           <a href="https://www.tryspotlight.xyz/" target="_blank">
-            <Landing src={chrome.runtime.getURL(`imgs/landing.svg`)} />
+            <SocialIcon src={chrome.runtime.getURL(`imgs/landing.svg`)} />
           </a>
         </Socials>
       </Footer>
@@ -148,12 +155,12 @@ const Divider = styled.div`
 `;
 
 const SuggestionList = styled.div`
-  height: 260px;
+  height: 270px;
   overflow-y: scroll;
 `;
 
 const Footer = styled.div`
-  margin: 22.5px 0 0 0;
+  margin: 13px 0 0 5px;
   display: flex;
   justify-content: space-between;
 `;
@@ -176,22 +183,39 @@ const Socials = styled.div`
   justify-content: space-around;
 `;
 
-const Instagram = styled.img`
+const SocialIcon = styled.img`
   width: 20px;
   height: 20px;
 `;
 
-const Twitter = styled.img`
-  width: 20px;
-  height: 20px;
-`;
+const jacksonWangHrefs = [
+  `https://www.stubhub.com/jackson-wang-los-angeles-tickets-4-26-2023/event/151388684/`,
+  `https://gametime.co/concert/jackson-wang-tickets/4-26-2023-los-angeles-ca-shrine-expo-hall/events/63c1d3c33f5b310001839e9f`,
+  `https://seatgeek.com/jackson-wang-tickets/los-angeles-california-shrine-expo-hall-2023-04-26-8-pm/concert/5914761`,
+  `https://www.ticketmaster.com/event/Z7r9jZ1Adqk8A?tmrid=TMR-3746405&routing=y`,
+  `https://www.tickpick.com/buy-jackson-wang-tickets-shrine-expo-hall-4-26-23-8pm/5529044/`,
+  `https://www.vividseats.com/jackson-wang-tickets-los-angeles-shrine-auditorium-and-expo-hall-los-angeles-4-26-2023--concerts-k-pop/production/4272266`,
+  `https://www.axs.com/events/464713/jackson-wang-tickets`,
+  `https://www.ticketiq.com/buy-jackson-wang-tickets-shrine-expo-hall-4-26-23-8pm/5529044/`,
+];
+const jojiHrefs = [
+  `https://www.stubhub.com/joji-inglewood-tickets-5-13-2023/event/151205722/`,
+  `https://gametime.co/concert/joji-tickets/5-13-2023-inglewood-ca-the-forum/events/63655a2f46631b00011cba84`,
+  `https://seatgeek.com/joji-tickets/inglewood-california-kia-forum-2-2023-05-13-7-30-pm/concert/5864111`,
+  `https://www.ticketmaster.com/joji-presents-smithereens-oblivion-with-rei-inglewood-california-05-13-2023/event/09005D5E34307424`,
+  `https://www.tickpick.com/buy-joji-tickets-the-kia-forum-5-13-23-7pm/5414801/`,
+  `https://www.vividseats.com/joji-tickets-inglewood-kia-forum-5-13-2023--concerts-rap-hip-hop/production/4187644`,
+  `https://www.axs.com/events/455069/joji-tickets`,
+  `https://www.ticketiq.com/buy-joji-tickets-the-kia-forum-5-13-23-7pm/5414801/`,
+];
 
-const LinkedIn = styled.img`
-  width: 20px;
-  height: 20px;
-`;
-
-const Landing = styled.img`
-  width: 20px;
-  height: 20px;
-`;
+const lakersClippersHrefs = [
+  `https://www.stubhub.com/los-angeles-lakers-los-angeles-tickets-4-5-2023/event/150339034/`,
+  `https://gametime.co/nba-basketball/lakers-at-clippers-tickets/4-5-2023-los-angeles-ca-crypto-com-arena/events/62fd48aaf3a44b0001934fd3`,
+  `https://seatgeek.com/lakers-at-clippers-tickets/4-5-2023-los-angeles-california-crypto-com-arena/nba/5776494`,
+  `https://www.ticketmaster.com/event/Z7r9jZ1Ad4sOS?tmrid=TMR-3571833&routing=y`,
+  `https://www.tickpick.com/buy-los-angeles-clippers-vs-los-angeles-lakers-tickets-crypto-com-arena-4-5-23-7pm/5274651/`,
+  `https://www.vividseats.com/la-clippers-tickets-cryptocom-arena-4-5-2023--sports-nba-basketball/production/4068597`,
+  `https://www.axs.com/events/444333/22-23-la-clippers-vs-los-angeles-lakers-tickets`,
+  `https://www.ticketiq.com/buy-los-angeles-clippers-vs-los-angeles-lakers-tickets-crypto-com-arena-4-5-23-7pm/5274651/`,
+];

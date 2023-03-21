@@ -22,11 +22,9 @@ export default function PurpleTag({ tagIsOpened, setTagIsOpened }: IPurpleTag) {
       whileHover={{
         x: '-6.5px',
       }}
+      onClick={() => setTagIsOpened((tagIsOpened) => !tagIsOpened)}
     >
-      <BaseLayer
-        src={chrome.runtime.getURL('imgs/base-layer.png')}
-        onClick={() => setTagIsOpened((tagIsOpened) => !tagIsOpened)}
-      />
+      <BaseLayer src={chrome.runtime.getURL('imgs/base-layer.png')} />
       <Dots
         src={chrome.runtime.getURL('imgs/white-dots.png')}
         className="dots"

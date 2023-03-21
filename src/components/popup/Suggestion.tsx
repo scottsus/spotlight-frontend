@@ -10,6 +10,7 @@ interface ISuggestion {
   venue: string;
   date: string;
   time: string;
+  ticketHrefs: string[];
 }
 
 export default function Suggestion({
@@ -18,6 +19,7 @@ export default function Suggestion({
   venue,
   date,
   time,
+  ticketHrefs,
 }: ISuggestion) {
   const [isOpen, setIsOpen] = useState(false);
   const [height, setHeight] = useState(80);
@@ -39,7 +41,7 @@ export default function Suggestion({
         date={date}
         time={time}
       />
-      <OpenSuggestionBlock isOpen={isOpen} />
+      <OpenSuggestionBlock isOpen={isOpen} ticketHrefs={ticketHrefs} />
     </SuggestionContainer>
   );
 }
@@ -128,7 +130,6 @@ const Thumbnail = styled.img`
   width: 60px;
   height: 60px;
   margin: 0 17.5px 0 0;
-  //   display: inline;
 `;
 
 const Title = styled.div`
@@ -173,9 +174,10 @@ const Time = styled.p`
 
 interface IOpenSuggestionBlock {
   isOpen: boolean;
+  ticketHrefs: string[];
 }
 
-function OpenSuggestionBlock({ isOpen }: IOpenSuggestionBlock) {
+function OpenSuggestionBlock({ isOpen, ticketHrefs }: IOpenSuggestionBlock) {
   const [height, setHeight] = useState(0);
   const [openOverflow, setOpenOverflow] = useState('hidden');
   useEffect(() => {
@@ -200,6 +202,7 @@ function OpenSuggestionBlock({ isOpen }: IOpenSuggestionBlock) {
           logoHeight={32}
           backgroundColor="#3f1d75"
           startingPrice={68}
+          ticketHref={ticketHrefs[0]}
         />
         <WebsiteButton
           logoUrl="imgs/websiteButtons/gametime.png"
@@ -207,6 +210,7 @@ function OpenSuggestionBlock({ isOpen }: IOpenSuggestionBlock) {
           logoHeight={13}
           backgroundColor="#19ce85"
           startingPrice={150}
+          ticketHref={ticketHrefs[1]}
         />
         <WebsiteButton
           logoUrl="imgs/websiteButtons/seatgeek.png"
@@ -214,10 +218,51 @@ function OpenSuggestionBlock({ isOpen }: IOpenSuggestionBlock) {
           logoHeight={27}
           backgroundColor="#ff5b49"
           startingPrice={102}
+          ticketHref={ticketHrefs[2]}
         />
-        <NextButton>
+        <WebsiteButton
+          logoUrl="imgs/websiteButtons/ticketmaster.png"
+          logoWidth={90}
+          logoHeight={13}
+          backgroundColor="#026CDF"
+          startingPrice={102}
+          ticketHref={ticketHrefs[3]}
+        />
+        <WebsiteButton
+          logoUrl="imgs/websiteButtons/tickpick.png"
+          logoWidth={80}
+          logoHeight={17}
+          backgroundColor="#2E90FF"
+          startingPrice={102}
+          ticketHref={ticketHrefs[4]}
+        />
+        <WebsiteButton
+          logoUrl="imgs/websiteButtons/vividseats.png"
+          logoWidth={85}
+          logoHeight={20}
+          backgroundColor="#0983B6"
+          startingPrice={102}
+          ticketHref={ticketHrefs[5]}
+        />
+        <WebsiteButton
+          logoUrl="imgs/websiteButtons/axs.png"
+          logoWidth={47}
+          logoHeight={20}
+          backgroundColor="#0855A2"
+          startingPrice={102}
+          ticketHref={ticketHrefs[6]}
+        />
+        <WebsiteButton
+          logoUrl="imgs/websiteButtons/ticketiq.png"
+          logoWidth={68}
+          logoHeight={15}
+          backgroundColor="#2C2474"
+          startingPrice={102}
+          ticketHref={ticketHrefs[7]}
+        />
+        {/* <NextButton>
           <RightArrow src={chrome.runtime.getURL('imgs/rightAngleArrow.svg')} />
-        </NextButton>
+        </NextButton> */}
       </Carousell>
     </OpenSuggestionBlockDiv>
   );
@@ -259,6 +304,7 @@ const Carousell = styled.div`
   justify-content: space-between;
   align-items: center;
   margin: 10px 0 20px 36px;
+  overflow-x: scroll;
 `;
 
 const NextButton = styled.button`
@@ -282,6 +328,7 @@ interface IWebsiteButton {
   logoHeight: number;
   backgroundColor: string;
   startingPrice: number;
+  ticketHref: string;
 }
 
 function WebsiteButton({
@@ -290,19 +337,22 @@ function WebsiteButton({
   logoHeight,
   backgroundColor,
   startingPrice,
+  ticketHref,
 }: IWebsiteButton) {
   return (
     <WebsiteButtonDiv>
-      <ColorPortion backgroundColor={backgroundColor}>
-        <WebsiteLogo
-          src={chrome.runtime.getURL(logoUrl)}
-          width={logoWidth}
-          height={logoHeight}
-        />
-      </ColorPortion>
-      <TextPortion>
-        <StartingPrice>From ${startingPrice}</StartingPrice>
-      </TextPortion>
+      <a href={ticketHref} target="_blank">
+        <ColorPortion backgroundColor={backgroundColor}>
+          <WebsiteLogo
+            src={chrome.runtime.getURL(logoUrl)}
+            width={logoWidth}
+            height={logoHeight}
+          />
+        </ColorPortion>
+        <TextPortion className="textPortion">
+          <StartingPrice>From ${startingPrice}</StartingPrice>
+        </TextPortion>
+      </a>
     </WebsiteButtonDiv>
   );
 }
@@ -313,6 +363,13 @@ const WebsiteButtonDiv = styled.div`
   border: 1.5px solid #d9d9d9;
   border-radius: 10px;
   overflow: hidden;
+  margin: 0 21px 0 0;
+  flex-shrink: 0;
+  :hover {
+    .textPortion {
+      background-color: #ebe9ff;
+    }
+  }
 `;
 
 const ColorPortion = styled.div<{ backgroundColor: string }>`

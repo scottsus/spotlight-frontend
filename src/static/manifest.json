@@ -17,7 +17,13 @@
   "background": {},
   "content_scripts": [
     {
-      "matches": ["*://www.ticketmaster.com/*"],
+      "matches": [
+        "*://seatgeek.com/",
+        "*://www.stubhub.com/",
+        "*://www.ticketmaster.com/",
+        "*://www.tickpick.com/",
+        "*://www.vividseats.com/"
+      ],
       "js": ["Anchor.js"]
     },
     {
