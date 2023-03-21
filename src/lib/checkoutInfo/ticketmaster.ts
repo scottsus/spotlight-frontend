@@ -1,4 +1,5 @@
 import { load } from 'cheerio';
+import { isStanding } from '../constants/classifySeat';
 import TicketInfo from '../types/ticketInfo';
 import { checkoutScrape, check, extractAndTrim } from './utils';
 
@@ -16,8 +17,16 @@ const ticketmasterScrape: checkoutScrape = (site, url, outerHtml) => {
   const venueDiv = $(`[data-tid='event-venue']`).text();
 
   const actorsArr = extractAndTrim(eventDiv, 'vs.');
+  const actor1 = actorsArr[0];
+  const actor2 = actorsArr.length > 1 ? actorsArr[1] : '';
+
   const quantityArr = extractAndTrim(quantityDiv, ' ');
   const seatArr = extractAndTrim(seatDiv, ',');
+  const section = seatArr[0];
+  let row = '';
+  if (seatArr.length > 1) row = seatArr[1];
+  const isAssigned = !isStanding(section);
+
   const totalPriceArr = extractAndTrim(totalPriceDiv, '$');
   const basePriceArr = extractAndTrim(basePriceDiv, '$');
   const serviceFeeArr = extractAndTrim(serviceFeeDiv, '$');
@@ -42,12 +51,13 @@ const ticketmasterScrape: checkoutScrape = (site, url, outerHtml) => {
   const stadiumCity = venueArr[0].split(' - ');
 
   const ticketInfo = new TicketInfo(
-    actorsArr[0],
-    actorsArr.length > 1 ? actorsArr[1] : '',
+    actor1,
+    actor2,
     quantity,
     {
-      section: seatArr[0],
-      row: seatArr[1],
+      isAssigned: isAssigned,
+      section: section,
+      row: row,
     },
     {
       totalPrice: parseFloat(totalPriceArr[1].replace(`,`, ``)),
@@ -70,7 +80,7 @@ const ticketmasterScrape: checkoutScrape = (site, url, outerHtml) => {
     url
   );
 
-  check(ticketInfo);
+  // check(ticketInfo);
   return ticketInfo;
 };
 

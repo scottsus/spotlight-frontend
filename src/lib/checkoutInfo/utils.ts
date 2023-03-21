@@ -29,6 +29,7 @@ export const fakeTicket = (site: string) => {
     'Toronto Raptors',
     2,
     {
+      isAssigned: true,
       section: 'Sec 301',
       row: 'Row 10',
     },
@@ -87,18 +88,19 @@ export const isNumber = (str: string) => {
 };
 
 export const check = (ticketInfo: TicketInfo) => {
-  console.log('Actor 1:', ticketInfo.actor1);
-  console.log('Actor 2:', ticketInfo.actor2);
-  console.log('Section:', ticketInfo.seatInfo.section);
-  console.log('Row:', ticketInfo.seatInfo.row);
-  console.log('Price:', ticketInfo.priceInfo.totalPrice);
-  console.log('Quantity:', ticketInfo.quantity);
-  console.log('Date:', ticketInfo.timeInfo.date);
-  console.log('Day:', ticketInfo.timeInfo.day);
-  console.log('Time:', ticketInfo.timeInfo.hour);
-  console.log('Stadium:', ticketInfo.venueInfo.stadium);
-  console.log('City:', ticketInfo.venueInfo.city);
-  console.log('State:', ticketInfo.venueInfo.state);
-  console.log('Site:', ticketInfo.site);
-  console.log('URL:', ticketInfo.url);
+  console.log(`Actor 1:`, ticketInfo.actor1);
+  console.log(`Actor 2:`, ticketInfo.actor2);
+  console.log(`Assigned Seating:`, ticketInfo.seatInfo.isAssigned);
+  console.log(`Section:`, ticketInfo.seatInfo.section);
+  console.log(`Row:`, ticketInfo.seatInfo.row);
+  console.log(`Price:`, ticketInfo.priceInfo.totalPrice);
+  console.log(`Quantity:`, ticketInfo.quantity);
+  console.log(`Date:`, ticketInfo.timeInfo.date);
+  console.log(`Day:`, ticketInfo.timeInfo.day);
+  console.log(`Time:`, ticketInfo.timeInfo.hour);
+  console.log(`Stadium:`, ticketInfo.venueInfo.stadium);
+  console.log(`City:`, ticketInfo.venueInfo.city);
+  console.log(`State:`, ticketInfo.venueInfo.state);
+  console.log(`Site:`, ticketInfo.site);
+  console.log(`URL:`, ticketInfo.url);
 };
