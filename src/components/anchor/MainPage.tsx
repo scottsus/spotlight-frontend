@@ -59,7 +59,7 @@ const MainPageDiv = styled.div<{ isVisible: boolean }>`
   border-radius: 10.5px;
   background-color: #ffffff;
   padding: 20px 30px;
-  z-index: 100;
+  z-index: 10000;
   filter: drop-shadow(0 0 0.5rem rgba(0, 0, 0, 0.26));
   overflow: hidden;
   visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};

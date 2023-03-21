@@ -8,7 +8,7 @@ import fonts from '../lib/constants/fonts';
 import './globals.css';
 
 export default function Anchor() {
-  const [tagIsOpened, setTagIsOpened] = useState(true);
+  const [tagIsOpened, setTagIsOpened] = useState(false);
   return (
     <AnchorDiv>
       <style>{fonts}</style>
