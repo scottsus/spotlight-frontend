@@ -57,8 +57,7 @@ export default function ComparisonTab({
 }
 
 const ComparisonDiv = styled(motion.div)`
-  height: 200px;
-  padding: 5px 25px;
+  height: 180px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -69,14 +68,13 @@ const ComparisonTable = styled.table`
   width: 400px;
   height: 115px;
   border: none;
-  margin: auto;
+  margin: 15px auto 0;
 `;
 
-const HeaderRow = styled.tr`
-  margin: 0 0 20px 0;
-`;
+const HeaderRow = styled.tr``;
 
 const HeaderCell = styled.th<{ align: string }>`
+  height: 50px;
   font-size: 16px;
   font-family: Manrope;
   font-weight: 300;
@@ -119,7 +117,7 @@ const Divider = styled.div`
   width: 400px;
   background-color: #dfe0e0;
   border-radius: 2px;
-  margin: 0 0 10px;
+  margin: 0;
 `;
 
 interface IKeyVal {
