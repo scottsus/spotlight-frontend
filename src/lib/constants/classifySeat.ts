@@ -4,3 +4,10 @@ export const isStanding = (originalSeatStr: string) => {
     return true;
   return false;
 };
+
+export const isGA = (originalSeatStr: string) => {
+  const seatStr = originalSeatStr.toUpperCase();
+  if (seatStr.includes(`GENERAL ADMISSION`) || seatStr.includes(`GA`))
+    return true;
+  return false;
+};
