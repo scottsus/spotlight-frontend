@@ -1,5 +1,5 @@
 import TicketInfo from './types/ticketInfo';
-import { BASE_URL, TEST_URL } from './constants/urls';
+import { BASE_URL } from './constants/urls';
 import { NUM_FUNCTIONAL_SITES } from './constants/sitenames';
 
 interface IfindCompetingTickets {
@@ -22,9 +22,9 @@ const findCompetingTickets: IfindCompetingTickets = (
   setHasLoadedAll
 ) => {
   let seatMode = '';
-  if (!srcTicketInfo.seatInfo.row) seatMode = `standing`;
-  else seatMode = `seated`;
-  const srcSiteUrl = `${'BASE_URL'}/${seatMode}/${site}`;
+  if (srcTicketInfo.seatInfo.isAssigned) seatMode = `seated`;
+  else seatMode = `standing`;
+  const srcSiteUrl = `${BASE_URL}/${seatMode}/${site}`;
   const reqHeaders = setReqHeaders(srcTicketInfo);
 
   fetch(srcSiteUrl, {
@@ -55,8 +55,8 @@ const findCompetingTickets: IfindCompetingTickets = (
 
 const setReqHeaders = (srcTicketInfo: TicketInfo) => {
   const reqHeaders = {
-    team1: srcTicketInfo.actor1,
-    team2: srcTicketInfo.actor2,
+    actor1: srcTicketInfo.actor1,
+    actor2: srcTicketInfo.actor2,
     srcSection: srcTicketInfo.seatInfo.section,
     srcRow: srcTicketInfo.seatInfo.row,
     srcTotalPrice: srcTicketInfo.priceInfo.totalPrice.toString(),
@@ -69,6 +69,7 @@ const setReqHeaders = (srcTicketInfo: TicketInfo) => {
     // stadium: srcTicketInfo.venueInfo.stadium,
     // city: srcTicketInfo.venueInfo.city,
     // state: srcTicketInfo.venueInfo.state,
+    isTestMode: 'isTestMode',
   };
 
   return reqHeaders;

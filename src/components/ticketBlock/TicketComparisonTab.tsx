@@ -22,8 +22,36 @@ export default function ComparisonTab({
       exit={{ opacity: 0 }}
       key="ComparisonTab"
     >
-      <TicketBox ticket={srcTicket} name={srcTicket.site} />
-      <TicketBox ticket={destTicket} name="spotlight" />
+      <ComparisonTable>
+        <HeaderRow>
+          <HeaderCell align="left">Website</HeaderCell>
+          <HeaderCell align="right">Section</HeaderCell>
+          <HeaderCell align="right">Row</HeaderCell>
+          <HeaderCell align="right">Price</HeaderCell>
+        </HeaderRow>
+        <ItemRow>
+          <ItemCell align="left">Ticketmaster</ItemCell>
+          <ItemCell align="right">106</ItemCell>
+          <ItemCell align="right">17</ItemCell>
+          <ItemCell align="right">$430.99</ItemCell>
+        </ItemRow>
+        <ItemRow>
+          <ItemCell align="left">
+            <SpotlightChoice>
+              SeatGeek
+              <SmallIcon
+                src={chrome.runtime.getURL(`imgs/small-icon.svg`)}
+                className="smallIcon"
+              />
+            </SpotlightChoice>
+          </ItemCell>
+          <ItemCell align="right">106</ItemCell>
+          <ItemCell align="right">12</ItemCell>
+          <ItemCell align="right">$324.99</ItemCell>
+        </ItemRow>
+      </ComparisonTable>
+      <Divider />
+      <KeyVal myKey="Savings" value="$106.00" />
     </ComparisonDiv>
   );
 }
@@ -32,46 +60,66 @@ const ComparisonDiv = styled(motion.div)`
   height: 200px;
   padding: 5px 25px;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
 `;
 
-interface ITicketBox {
-  ticket: TicketInfo;
-  name: string;
-}
-
-function TicketBox({ ticket, name }: ITicketBox) {
-  return (
-    <TicketBoxDiv>
-      <TitleText isSpotlight={name === 'spotlight'}>
-        {getProperSiteName(name)}
-      </TitleText>
-      <KeyVal myKey="Section:" value={ticket.seatInfo.section} />
-      <KeyVal myKey="Row:" value={seatNumberToAlphabet(ticket.seatInfo.row)} />
-      <Divider />
-      <KeyVal
-        myKey="Total Price:"
-        value={`$${ticket.priceInfo.totalPrice.toString()}`}
-      />
-    </TicketBoxDiv>
-  );
-}
-
-const TicketBoxDiv = styled.div`
-  width: 48%;
-  border: 1.5px solid #dfe0e0;
-  border-radius: 10px;
-  padding: 7.5px 30px;
+const ComparisonTable = styled.table`
+  width: 400px;
+  height: 115px;
+  border: none;
+  margin: auto;
 `;
 
-const TitleText = styled.h1<{ isSpotlight: boolean }>`
-  font-size: 20px;
-  font-family: Manrope;
-  font-weight: 700;
-  color: ${(props) => (props.isSpotlight ? '#4b3bff' : '#27292a')};
-  text-align: center;
+const HeaderRow = styled.tr`
   margin: 0 0 20px 0;
+`;
+
+const HeaderCell = styled.th<{ align: string }>`
+  font-size: 16px;
+  font-family: Manrope;
+  font-weight: 300;
+  text-align: ${(props) => props.align};
+  color: #5f5f5f;
+`;
+
+const ItemRow = styled.tr`
+  height: 24px;
+  :hover {
+    smallIcon {
+      scale: 1.1;
+      transition: scale 0.5s ease-in-out;
+    }
+  }
+`;
+
+const ItemCell = styled.td<{ align: string }>`
+  font-size: 16px;
+  font-family: Manrope;
+  font-weight: 400;
+  text-align: ${(props) => props.align};
+  color: #27292a;
+`;
+
+const SpotlightChoice = styled.div`
+  display: flex;
+  align-items: center;
+  color: #4b3bff;
+`;
+
+const SmallIcon = styled.img`
+  width: 22px;
+  height: 22px;
+  margin: 0 0 0 5px;
+`;
+
+const Divider = styled.div`
+  height: 1.5px;
+  width: 400px;
+  background-color: #dfe0e0;
+  border-radius: 2px;
+  margin: 0 0 10px;
 `;
 
 interface IKeyVal {
@@ -82,10 +130,10 @@ interface IKeyVal {
 function KeyVal({ myKey, value }: IKeyVal) {
   return (
     <KeyValDiv>
-      <Item textAlign="left" color="#27292a" width={60}>
+      <Item textAlign="left" color="#4b3bff" width={60} isBold>
         {myKey}
       </Item>
-      <Item textAlign="right" color="#27292a" width={40}>
+      <Item textAlign="right" color="#4b3bff" width={40} isBold>
         {value}
       </Item>
     </KeyValDiv>
@@ -93,6 +141,7 @@ function KeyVal({ myKey, value }: IKeyVal) {
 }
 
 const KeyValDiv = styled.div`
+  width: 400px;
   display: flex;
 `;
 
@@ -111,12 +160,4 @@ const Item = styled.p<IItem>`
   margin: 2px 0;
   width: ${(props) => props.width}%;
   text-align: ${(props) => props.textAlign};
-`;
-
-const Divider = styled.div`
-  height: 2px;
-  width: 98%;
-  background-color: #dfe0e0;
-  border-radius: 2px;
-  margin: 12px auto 8px;
 `;

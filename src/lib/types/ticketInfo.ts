@@ -8,7 +8,6 @@ class TicketInfo {
   timeInfo: TimeInfo;
   site: string;
   url: string;
-  isTestMode?: boolean;
   constructor(
     actor1: string,
     actor2: string = '',
@@ -18,8 +17,7 @@ class TicketInfo {
     venueInfo: VenueInfo,
     timeInfo: TimeInfo,
     site: string,
-    url: string,
-    isTestMode: boolean = false
+    url: string
   ) {
     this.actor1 = actor1;
     this.actor2 = actor2;
@@ -30,7 +28,6 @@ class TicketInfo {
     this.timeInfo = timeInfo;
     this.site = site;
     this.url = url;
-    this.isTestMode = isTestMode;
   }
 }
 
