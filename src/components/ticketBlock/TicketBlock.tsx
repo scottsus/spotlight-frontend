@@ -4,6 +4,7 @@ import TicketInfo from '../../lib/types/ticketInfo';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faChevronDown } from '@fortawesome/fontawesome-free-solid';
+import { isGA } from '../../lib/constants/classifySeat';
 
 interface ITicketBlock {
   isOpen: boolean;
@@ -94,11 +95,18 @@ interface IOverview {
 function Overview({ section, row, srcPrice, destPrice, quantity }: IOverview) {
   const savings = srcPrice - destPrice;
   const singlePrice = destPrice / quantity;
+  const trimmedSection = isGA(section) ? `GA` : section;
   return (
     <OverviewDiv>
-      <Text color="#27292a" size="16px" weight={400}>
-        Section {section}, Row {row}
-      </Text>
+      {row !== '' ? (
+        <Text color="#27292a" size="16px" weight={400}>
+          Section {trimmedSection}, Row {row}
+        </Text>
+      ) : (
+        <Text color="#27292a" size="16px" weight={400}>
+          Section {trimmedSection}
+        </Text>
+      )}
       {savings > 0 ? (
         <Text color="#42d988" size="18px" weight={700}>
           ${Math.round(savings)}{' '}

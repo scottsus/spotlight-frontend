@@ -3,8 +3,8 @@ const siteNames = [
   'example',
   'seatgeek',
   'stubhub',
+  'ticketiq',
   'ticketmaster',
-  'ticketsmarter',
   'tickpick',
   'vividseats',
 ];
@@ -14,8 +14,8 @@ const properSiteNamesDict = {
   example: 'Example',
   seatgeek: 'SeatGeek',
   stubhub: 'StubHub',
-  ticketmaster: 'TicketMaster',
-  ticketsmarter: 'TicketSmarter',
+  ticketiq: 'TicketIQ',
+  ticketmaster: 'Ticketmaster',
   tickpick: 'TickPick',
   vividseats: 'VividSeats',
 };

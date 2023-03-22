@@ -75,12 +75,6 @@ const setReqHeaders = (srcTicketInfo: TicketInfo) => {
   return reqHeaders;
 };
 
-const setStandingReqHeaders = (srcTicketInfo: TicketInfo) => {
-  const standingReqHeaders = {
-    actor: srcTicketInfo.actor1,
-  };
-};
-
 const jsonToTicketInfo = (json: any, srcTicketInfo: TicketInfo) => {
   const newTicket: TicketInfo = {
     actor1: srcTicketInfo.actor1,
