@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import Draggable, { DraggableData, DraggableEvent } from 'react-draggable';
 
 interface ISmallPurpleTag {
   tagIsOpened: boolean;
@@ -11,38 +12,90 @@ export default function SmallPurpleTag({
   tagIsOpened,
   setTagIsOpened,
 }: ISmallPurpleTag) {
-  const [right, setRight] = useState(`-200px`);
+  const [right, setRight] = useState(-200);
+  const [y, setY] = useState(200);
+  const [dragY, setDragY] = useState(0);
+  const [wasDragged, setWasDragged] = useState(false);
+
+  const getY = async () => {
+    const keyVal = await chrome.storage.local.get(`yPos`);
+    if (!keyVal[`yPos`]) return 0;
+
+    return keyVal[`yPos`];
+  };
+
+  const onDrag = (e: DraggableEvent, data: DraggableData) => {
+    setDragY(data.lastY);
+    setWasDragged(true);
+  };
+
+  const onStop = (e: DraggableEvent, data: DraggableData) => {
+    const storeY = async () =>
+      await chrome.storage.local.set({ yPos: y + dragY });
+    storeY().catch((err) => console.log(err));
+  };
+
+  const onClick = () => {
+    if (!wasDragged) setTagIsOpened((tagIsOpened) => !tagIsOpened);
+    setWasDragged(false);
+  };
+
   useEffect(() => {
+    const resetY = async () => await chrome.storage.local.set({ yPos: 0 });
+    // resetY().catch((err) => console.log(err));
+
     const timeoutId = setTimeout(() => {
-      setRight(`-69px`);
+      setRight(-69);
     }, 1000);
+
+    getY()
+      .then((y) => setY(y))
+      .catch((err) => console.log(err));
+
     return () => clearTimeout(timeoutId);
-  });
+  }, []);
+
   return (
-    <SmallPurpleTagDiv
-      right={right}
-      isVisible={!tagIsOpened}
-      whileHover={{
-        x: '-4px',
-      }}
-      onClick={() => setTagIsOpened((tagIsOpened) => !tagIsOpened)}
-    >
-      <BaseLayer src={chrome.runtime.getURL('imgs/small-base-layer.png')} />
-      <Dots
-        src={chrome.runtime.getURL('imgs/small-text.svg')}
-        className="smallText"
-      />
-    </SmallPurpleTagDiv>
+    <Draggable axis="y" onDrag={onDrag} onStop={onStop}>
+      <SmallPurpleTagDiv
+        top={y + dragY}
+        right={right}
+        isVisible={!tagIsOpened}
+        whileHover={{
+          x: '-6px',
+        }}
+        onClick={onClick}
+      >
+        <BaseLayer
+          src={chrome.runtime.getURL('imgs/small-base-layer.png')}
+          draggable={false}
+        />
+        <Dots
+          src={chrome.runtime.getURL('imgs/small-text.svg')}
+          className="smallText"
+          draggable={false}
+        />
+      </SmallPurpleTagDiv>
+    </Draggable>
   );
 }
 
-const SmallPurpleTagDiv = styled(motion.div)<{
+interface ISmallPurpleTagDiv {
   isVisible: boolean;
   right: string;
-}>`
+  top: number;
+}
+
+const restrictBounds = (y) => {
+  y = Math.max(y, 0);
+  y = Math.min(y, 600);
+  return y;
+};
+
+const SmallPurpleTagDiv = styled(motion.div)<ISmallPurpleTagDiv>`
   position: absolute;
-  top: 32%;
-  right: ${(props) => props.right};
+  top: ${(props) => restrictBounds(props.top)}px;
+  right: ${(props) => props.right}px;
   cursor: pointer;
   z-index: 100;
   visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
