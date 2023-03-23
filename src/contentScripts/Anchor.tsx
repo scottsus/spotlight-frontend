@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import styled from 'styled-components';
 import MainPage from '../components/anchor/MainPage';
-import PurpleTag from '../components/PurpleTag';
+import SmallPurpleTag from '../components/SmallPurpleTag';
 import fonts from '../lib/constants/fonts';
 
 import './globals.css';
@@ -12,7 +12,10 @@ export default function Anchor() {
   return (
     <AnchorDiv>
       <style>{fonts}</style>
-      <PurpleTag tagIsOpened={tagIsOpened} setTagIsOpened={setTagIsOpened} />
+      <SmallPurpleTag
+        tagIsOpened={tagIsOpened}
+        setTagIsOpened={setTagIsOpened}
+      />
       <MainPage tagIsOpened={tagIsOpened} setTagIsOpened={setTagIsOpened} />
     </AnchorDiv>
   );
