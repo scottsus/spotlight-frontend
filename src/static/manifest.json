@@ -38,6 +38,7 @@
       "js": ["Checkout.js"]
     }
   ],
+  "permissions": ["storage"],
   "web_accessible_resources": [
     {
       "resources": ["*.png", "*.svg", "*.ttf", "*.otf"],
