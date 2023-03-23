@@ -109,10 +109,10 @@ function Overview({ section, row, srcPrice, destPrice, quantity }: IOverview) {
       )}
       {savings > 0 ? (
         <Text color="#42d988" size="18px" weight={700}>
-          ${Math.round(savings)}{' '}
           <span style={{ fontSize: '16px', fontWeight: 400, color: '#73757a' }}>
-            saved
+            save{' '}
           </span>
+          ${Math.round(savings)}
         </Text>
       ) : (
         <Text color="#4b3bff" size="18px" weight={700}>

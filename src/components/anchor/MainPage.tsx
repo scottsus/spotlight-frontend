@@ -13,6 +13,7 @@ export default function MainPage({ tagIsOpened, setTagIsOpened }: IMainPage) {
   return (
     <MainPageDiv isVisible={tagIsOpened}>
       <Logo>spotlight</Logo>
+      <XButton setTagIsOpened={setTagIsOpened} />
       <Divider />
       <Steps>
         <StepBlock
@@ -20,8 +21,9 @@ export default function MainPage({ tagIsOpened, setTagIsOpened }: IMainPage) {
           stepNumber="Step 1:"
           stepDetail="Peruse through Ticketmaster"
           stepImageUrl="imgs/step1.png"
-          stepImageWidth={105}
-          stepImageHeight={85}
+          stepImageWidth={100}
+          stepImageHeight={90}
+          stepImageMargin="0 -10px 10px 0"
         />
 
         <StepBlock
@@ -32,15 +34,17 @@ export default function MainPage({ tagIsOpened, setTagIsOpened }: IMainPage) {
           stepImageUrl="imgs/step2.png"
           stepImageWidth={118}
           stepImageHeight={70}
+          stepImageMargin="0"
         />
 
         <StepBlock
           backgroundColor="#e0ffcb"
-          stepNumber="Step 1:"
+          stepNumber="Step 3:"
           stepDetail="Save precious time and money"
           stepImageUrl="imgs/step3.png"
-          stepImageWidth={64}
+          stepImageWidth={58}
           stepImageHeight={72}
+          stepImageMargin="0 10px 0 0"
         />
       </Steps>
       <SeeYouButton onClick={closeTag}>
@@ -55,7 +59,7 @@ const MainPageDiv = styled.div<{ isVisible: boolean }>`
   top: 70px;
   right: 10px;
   width: 480px;
-  height: 570px;
+  height: 555px;
   border-radius: 10.5px;
   background-color: #ffffff;
   padding: 20px 30px;
@@ -77,7 +81,7 @@ const Logo = styled.h1`
 const Divider = styled.div`
   height: 1.5px;
   background-color: #d0d0d0;
-  margin: 14px 0;
+  margin: 14px 0 18px;
 `;
 
 const Steps = styled.div`
@@ -93,6 +97,7 @@ interface IStepBlock {
   stepImageUrl: string;
   stepImageWidth: number;
   stepImageHeight: number;
+  stepImageMargin: string;
 }
 
 function StepBlock({
@@ -103,6 +108,7 @@ function StepBlock({
   stepImageUrl,
   stepImageWidth,
   stepImageHeight,
+  stepImageMargin,
 }: IStepBlock) {
   return (
     <StepBlockDiv backgroundColor={backgroundColor}>
@@ -116,6 +122,7 @@ function StepBlock({
             src={chrome.runtime.getURL(stepImageUrl)}
             width={stepImageWidth}
             height={stepImageHeight}
+            margin={stepImageMargin}
           />
         </>
       ) : (
@@ -125,7 +132,7 @@ function StepBlock({
             width={stepImageWidth}
             height={stepImageHeight}
           />
-          <TextBlock>
+          <TextBlock style={{ margin: '0 0 0 30px' }}>
             <StepNumber>{stepNumber}</StepNumber>
             <StepDetail>{stepDetail}</StepDetail>
           </TextBlock>
@@ -138,16 +145,21 @@ function StepBlock({
 const StepBlockDiv = styled.div<{ backgroundColor: string }>`
   width: 420px;
   height: 100px;
-  border-radius: 90px;
-  background-color: ${(props) => props.backgroundColor};
+  border-radius: 20px;
+  background-color: transparent;
+  border: 1.3px solid #dfe0e0;
   margin: 9px auto;
   padding: 0 40px;
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   align-items: center;
+  // :hover {
+  //   background-color: #ebe9ff;
+  // }
 `;
 
 const TextBlock = styled.div`
+  width: 80%;
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -168,11 +180,13 @@ const StepDetail = styled.p`
 interface IStepImage {
   width: number;
   height: number;
+  margin: string;
 }
 
 const StepImage = styled.img<IStepImage>`
   width: ${(props) => props.width}px;
   height: ${(props) => props.height}px;
+  margin: ${(props) => props.margin};
 `;
 
 const SeeYouButton = styled.button`
@@ -180,7 +194,7 @@ const SeeYouButton = styled.button`
   padding: 0 40px;
   background-color: #4b3bff;
   border-radius: 52px;
-  margin: 30px auto 0;
+  margin: 24px auto 0;
   display: block;
   :hover {
     background-color: #7a6fff;
@@ -192,4 +206,37 @@ const ButtonText = styled.h3`
   font-family: Manrope;
   font-weight: 500;
   color: #ffffff;
+`;
+
+interface IXButton {
+  setTagIsOpened: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function XButton({ setTagIsOpened }: IXButton) {
+  return (
+    <XButtonContainer onClick={() => setTagIsOpened(false)}>
+      <Image src={chrome.runtime.getURL('imgs/X Button.svg')} />
+    </XButtonContainer>
+  );
+}
+
+const XButtonContainer = styled.button`
+  position: absolute;
+  top: 4%;
+  right: 3%;
+  border: none;
+  border-radius: 50%;
+  background-color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  :hover {
+    background-color: #f1f1f1;
+  }
+`;
+
+const Image = styled.img`
+  width: 20px;
+  height: 20px;
 `;

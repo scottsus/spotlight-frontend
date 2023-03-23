@@ -77,9 +77,9 @@ const HeaderCell = styled.th<{ align: string }>`
   height: 50px;
   font-size: 16px;
   font-family: Manrope;
-  font-weight: 300;
+  font-weight: 600;
   text-align: ${(props) => props.align};
-  color: #5f5f5f;
+  color: #27292a;
 `;
 
 const ItemRow = styled.tr`
@@ -95,14 +95,15 @@ const ItemRow = styled.tr`
 const ItemCell = styled.td<{ align: string }>`
   font-size: 16px;
   font-family: Manrope;
-  font-weight: 400;
+  font-weight: 300;
   text-align: ${(props) => props.align};
-  color: #27292a;
+  color: #5f5f5f;
 `;
 
 const SpotlightChoice = styled.div`
   display: flex;
   align-items: center;
+  font-weight: 500;
   color: #4b3bff;
 `;
 
