@@ -20,6 +20,13 @@ const properSiteNamesDict = {
   vividseats: 'VividSeats',
 };
 
+export const getNameFromURL = (url: string) => {
+  for (const siteName of siteNames) {
+    if (url.includes(siteName)) return siteName;
+  }
+  return '';
+};
+
 export const getProperSiteName = (siteName: string) =>
   properSiteNamesDict[siteName];
 

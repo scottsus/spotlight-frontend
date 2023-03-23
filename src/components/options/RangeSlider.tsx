@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect, ChangeEvent } from 'react';
+import React, { useRef, useEffect, ChangeEvent } from 'react';
 import styled from 'styled-components';
-import Box from './Box';
+import Box from '../general/boxes/Box';
 
 interface IRangeSlider {
   min: number;
@@ -91,6 +91,8 @@ export default function RangeSlider({
   );
 }
 
+const RANGESLIDER_WIDTH = 248;
+
 const GrandContainer = styled.div`
   position: relative;
   display: flex;
@@ -107,7 +109,7 @@ const RangeSliderContainer = styled.div`
 `;
 
 const inputTrackDefaults = `
-  width: 250px;
+  width: ${RANGESLIDER_WIDTH}px;
   height: 0;
 
   position: absolute;
@@ -149,7 +151,7 @@ const RightThumb = styled.input`
 
 const TrackContainer = styled.div`
   position: relative;
-  width: 250px;
+  width: ${RANGESLIDER_WIDTH}px;
 `;
 
 const trackDefaults = `

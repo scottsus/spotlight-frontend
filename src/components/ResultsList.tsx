@@ -40,18 +40,14 @@ export default function ResultsList({
       return false;
 
     const ticketQuantity = parseInt(
-      ticketContainer.props.children.props.quantity
+      ticketContainer.props.children.props.destTicket.quantity
     );
-    let minQuantitySatisfied = false;
-    for (const numTicketNeededStr of filterOptions.numTicketsArr) {
-      if (numTicketNeededStr === 'Any') {
-        minQuantitySatisfied = true;
-        break;
-      }
-      const numTicketNeeded = parseInt(numTicketNeededStr);
-      if (ticketQuantity >= numTicketNeeded) minQuantitySatisfied = true;
+    const numTicketsNeededStr = filterOptions.numTickets;
+    if ((numTicketsNeededStr as string) !== `Any`) {
+      const numTicketsNeeded = parseInt(numTicketsNeededStr as string);
+      console.log(`num:`, numTicketsNeeded);
+      if (ticketQuantity < numTicketsNeeded) return false;
     }
-    if (!minQuantitySatisfied) return false;
 
     const websiteName = ticketContainer.props.children.props.destTicket.site;
     for (const chosenWebsite of filterOptions.chosenWebsites) {

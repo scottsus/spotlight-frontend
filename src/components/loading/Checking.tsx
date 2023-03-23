@@ -61,7 +61,7 @@ const CheckingTextDiv = styled(motion.div)`
   color: #7a6fff;
   letter-spacing: -0.025em;
   text-align: center;
-  margin: 0;
+  margin: 30px auto 10px;
 `;
 
 export default React.memo(Checking);

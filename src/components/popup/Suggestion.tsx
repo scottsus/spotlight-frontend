@@ -11,6 +11,7 @@ interface ISuggestion {
   date: string;
   time: string;
   ticketHrefs: string[];
+  minPrices: number[];
 }
 
 export default function Suggestion({
@@ -20,6 +21,7 @@ export default function Suggestion({
   date,
   time,
   ticketHrefs,
+  minPrices,
 }: ISuggestion) {
   const [isOpen, setIsOpen] = useState(false);
   const [height, setHeight] = useState(80);
@@ -41,7 +43,11 @@ export default function Suggestion({
         date={date}
         time={time}
       />
-      <OpenSuggestionBlock isOpen={isOpen} ticketHrefs={ticketHrefs} />
+      <OpenSuggestionBlock
+        isOpen={isOpen}
+        ticketHrefs={ticketHrefs}
+        minPrices={minPrices}
+      />
     </SuggestionContainer>
   );
 }
@@ -113,9 +119,10 @@ const ArrowButton = styled.button`
   padding: 0;
   border: none;
   background-color: transparent;
-  color: #4b3bff;
+  color: #27292a;
 
   .fa-chevron-down {
+    font-size: 11px;
     transform: rotate(0deg);
     transition: transform 0.6s ease;
   }
@@ -129,6 +136,8 @@ const ArrowButton = styled.button`
 const Thumbnail = styled.img`
   width: 60px;
   height: 60px;
+  border: 1.4px solid #d9d9d9;
+  border-radius: 30px;
   margin: 0 17.5px 0 0;
 `;
 
@@ -140,7 +149,7 @@ const Title = styled.div`
 const Performer = styled.h2`
   font-size: 16px;
   font-family: Manrope;
-  font-weight: 600;
+  font-weight: 500;
   color: #27292a;
 `;
 
@@ -175,9 +184,14 @@ const Time = styled.p`
 interface IOpenSuggestionBlock {
   isOpen: boolean;
   ticketHrefs: string[];
+  minPrices: number[];
 }
 
-function OpenSuggestionBlock({ isOpen, ticketHrefs }: IOpenSuggestionBlock) {
+function OpenSuggestionBlock({
+  isOpen,
+  ticketHrefs,
+  minPrices,
+}: IOpenSuggestionBlock) {
   const [height, setHeight] = useState(0);
   const [openOverflow, setOpenOverflow] = useState('hidden');
   useEffect(() => {
@@ -201,64 +215,80 @@ function OpenSuggestionBlock({ isOpen, ticketHrefs }: IOpenSuggestionBlock) {
           logoWidth={68}
           logoHeight={32}
           backgroundColor="#3f1d75"
+          hoverColor="#2D1356"
           startingPrice={68}
           ticketHref={ticketHrefs[0]}
+          minPrice={minPrices[0]}
         />
         <WebsiteButton
           logoUrl="imgs/websiteButtons/gametime.png"
           logoWidth={72}
           logoHeight={13}
           backgroundColor="#19ce85"
+          hoverColor="#11AF6F"
           startingPrice={150}
           ticketHref={ticketHrefs[1]}
+          minPrice={minPrices[1]}
         />
         <WebsiteButton
           logoUrl="imgs/websiteButtons/seatgeek.png"
           logoWidth={38}
           logoHeight={27}
           backgroundColor="#ff5b49"
+          hoverColor="#C33C2D"
           startingPrice={102}
           ticketHref={ticketHrefs[2]}
+          minPrice={minPrices[2]}
         />
         <WebsiteButton
           logoUrl="imgs/websiteButtons/ticketmaster.png"
           logoWidth={90}
           logoHeight={13}
           backgroundColor="#026CDF"
+          hoverColor="#0250A4"
           startingPrice={102}
           ticketHref={ticketHrefs[3]}
+          minPrice={minPrices[3]}
         />
         <WebsiteButton
           logoUrl="imgs/websiteButtons/tickpick.png"
           logoWidth={80}
           logoHeight={17}
           backgroundColor="#2E90FF"
+          hoverColor="#2470C6"
           startingPrice={102}
           ticketHref={ticketHrefs[4]}
+          minPrice={minPrices[4]}
         />
         <WebsiteButton
           logoUrl="imgs/websiteButtons/vividseats.png"
           logoWidth={85}
           logoHeight={20}
           backgroundColor="#0983B6"
+          hoverColor="#0F719A"
           startingPrice={102}
           ticketHref={ticketHrefs[5]}
+          minPrice={minPrices[5]}
         />
         <WebsiteButton
           logoUrl="imgs/websiteButtons/axs.png"
           logoWidth={47}
           logoHeight={20}
           backgroundColor="#0855A2"
+          hoverColor="#0B4580"
           startingPrice={102}
           ticketHref={ticketHrefs[6]}
+          minPrice={minPrices[6]}
         />
         <WebsiteButton
           logoUrl="imgs/websiteButtons/ticketiq.png"
           logoWidth={68}
           logoHeight={15}
           backgroundColor="#2C2474"
+          hoverColor="#1F1951"
           startingPrice={102}
           ticketHref={ticketHrefs[7]}
+          minPrice={minPrices[7]}
         />
         {/* <NextButton>
           <RightArrow src={chrome.runtime.getURL('imgs/rightAngleArrow.svg')} />
@@ -307,28 +337,15 @@ const Carousell = styled.div`
   overflow-x: scroll;
 `;
 
-const NextButton = styled.button`
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  background-color: #eeeeee;
-  :hover {
-    background-color: #cbcbcb;
-  }
-`;
-
-const RightArrow = styled.img`
-  width: 6px;
-  height: 12px;
-`;
-
 interface IWebsiteButton {
   logoUrl: string;
   logoWidth: number;
   logoHeight: number;
   backgroundColor: string;
+  hoverColor: string;
   startingPrice: number;
   ticketHref: string;
+  minPrice: number;
 }
 
 function WebsiteButton({
@@ -336,13 +353,14 @@ function WebsiteButton({
   logoWidth,
   logoHeight,
   backgroundColor,
-  startingPrice,
+  hoverColor,
   ticketHref,
+  minPrice,
 }: IWebsiteButton) {
   return (
     <WebsiteButtonDiv>
       <a href={ticketHref} target="_blank">
-        <ColorPortion backgroundColor={backgroundColor}>
+        <ColorPortion backgroundColor={backgroundColor} hoverColor={hoverColor}>
           <WebsiteLogo
             src={chrome.runtime.getURL(logoUrl)}
             width={logoWidth}
@@ -350,7 +368,9 @@ function WebsiteButton({
           />
         </ColorPortion>
         <TextPortion className="textPortion">
-          <StartingPrice>From ${startingPrice}</StartingPrice>
+          <StartingPrice className="startingPrice">
+            From ${minPrice.toFixed(0)}
+          </StartingPrice>
         </TextPortion>
       </a>
     </WebsiteButtonDiv>
@@ -366,18 +386,26 @@ const WebsiteButtonDiv = styled.div`
   margin: 0 21px 0 0;
   flex-shrink: 0;
   :hover {
-    .textPortion {
-      background-color: #ebe9ff;
+    .startingPrice {
+      color: #4b3bff;
     }
   }
 `;
 
-const ColorPortion = styled.div<{ backgroundColor: string }>`
+interface IColorPortion {
+  backgroundColor: string;
+  hoverColor: string;
+}
+
+const ColorPortion = styled.div<IColorPortion>`
   height: 70px;
   background-color: ${(props) => props.backgroundColor};
   display: flex;
   justify-content: center;
   align-items: center;
+  :hover {
+    background-color: ${(props) => props.hoverColor};
+  }
 `;
 
 interface IWebsiteLogo {

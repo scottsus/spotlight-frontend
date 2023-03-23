@@ -47,12 +47,14 @@ export default function AppBox({
         hasProcessedAll={hasProcessedAll}
       />
 
-      <Options
-        isReady={isDoneWithProgressBar && hasOneGoodResult}
-        sortByOptions={sortByOptions}
-        setFilterOptions={setFilterOptions}
-        setSortByOptions={setSortByOptions}
-      />
+      {hasProcessedAll && hasOneGoodResult && (
+        <Options
+          isReady={isDoneWithProgressBar && hasOneGoodResult}
+          sortByOptions={sortByOptions}
+          setFilterOptions={setFilterOptions}
+          setSortByOptions={setSortByOptions}
+        />
+      )}
 
       {!hasProcessedAll && <Checking />}
 
@@ -107,7 +109,9 @@ function EventTitle({ ticket }: IEventTitle) {
   return (
     <TitleDiv>
       <Teams>
-        {ticket.actor1} vs. {ticket.actor2}
+        {ticket.seatInfo.isAssigned
+          ? `${ticket.actor1} vs. ${ticket.actor2}`
+          : `${ticket.actor1}`}
       </Teams>
       <Venue>
         {ticket.venueInfo.stadium} · {ticket.venueInfo.city},{' '}
