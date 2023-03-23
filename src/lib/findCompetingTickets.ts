@@ -31,9 +31,16 @@ const findCompetingTickets: IfindCompetingTickets = (
     headers: reqHeaders,
   })
     .then((res) => {
+      if (res.status === 200) return res.json();
+      if (res.status === 204) {
+        console.log(`[${site.toUpperCase()}]: No better deals`);
+        return [];
+      }
+
       if (!(200 <= res.status && res.status <= 299))
-        throw new Error(`[${site.toUpperCase()}]: non-2xx status code`);
-      return res.json();
+        throw new Error(
+          `[${site.toUpperCase()}]: expected 2xx error code, got ${res.status}`
+        );
     })
     .then((jsonArr) => {
       for (const [_, json] of jsonArr.entries()) {

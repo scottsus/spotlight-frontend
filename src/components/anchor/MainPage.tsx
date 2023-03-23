@@ -1,5 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import {
+  getNameFromURL,
+  getProperSiteName,
+} from '../../lib/constants/sitenames';
 
 interface IMainPage {
   tagIsOpened: boolean;
@@ -7,9 +11,14 @@ interface IMainPage {
 }
 
 export default function MainPage({ tagIsOpened, setTagIsOpened }: IMainPage) {
+  const [website, setWebsite] = useState('');
   const closeTag = () => {
     setTagIsOpened(!tagIsOpened);
   };
+  useEffect(() => {
+    const siteName = getNameFromURL(document.URL);
+    setWebsite(`Peruse through ${getProperSiteName(siteName)}.`);
+  });
   return (
     <MainPageDiv isVisible={tagIsOpened}>
       <Logo>spotlight</Logo>
@@ -19,7 +28,7 @@ export default function MainPage({ tagIsOpened, setTagIsOpened }: IMainPage) {
         <StepBlock
           backgroundColor="#e7dffe"
           stepNumber="Step 1:"
-          stepDetail="Peruse through Ticketmaster"
+          stepDetail={website}
           stepImageUrl="imgs/step1.png"
           stepImageWidth={100}
           stepImageHeight={90}
@@ -30,7 +39,7 @@ export default function MainPage({ tagIsOpened, setTagIsOpened }: IMainPage) {
           backgroundColor="#dcecff"
           isRightToLeft
           stepNumber="Step 2:"
-          stepDetail="View the best deals we find for your seat"
+          stepDetail="View the best deals we find for your seat."
           stepImageUrl="imgs/step2.png"
           stepImageWidth={118}
           stepImageHeight={70}
@@ -40,7 +49,7 @@ export default function MainPage({ tagIsOpened, setTagIsOpened }: IMainPage) {
         <StepBlock
           backgroundColor="#e0ffcb"
           stepNumber="Step 3:"
-          stepDetail="Save precious time and money"
+          stepDetail="Save precious time and money."
           stepImageUrl="imgs/step3.png"
           stepImageWidth={58}
           stepImageHeight={72}
@@ -59,7 +68,7 @@ const MainPageDiv = styled.div<{ isVisible: boolean }>`
   top: 70px;
   right: 10px;
   width: 480px;
-  height: 555px;
+  height: 540px;
   border-radius: 10.5px;
   background-color: #ffffff;
   padding: 20px 30px;
@@ -74,7 +83,7 @@ const Logo = styled.h1`
   font-family: Mont;
   font-weight: 800;
   color: #4b3bff;
-  letter-spacing: -0.03em;
+  letter-spacing: -1.5px;
   margin: 10px 0 0;
 `;
 
@@ -143,12 +152,12 @@ function StepBlock({
 }
 
 const StepBlockDiv = styled.div<{ backgroundColor: string }>`
-  width: 420px;
+  width: 424px;
   height: 100px;
   border-radius: 20px;
   background-color: transparent;
-  border: 1.3px solid #dfe0e0;
-  margin: 9px auto;
+  border: 1.5px solid #dfe0e0;
+  margin: 7px auto;
   padding: 0 40px;
   display: flex;
   justify-content: start;
@@ -194,7 +203,7 @@ const SeeYouButton = styled.button`
   padding: 0 40px;
   background-color: #4b3bff;
   border-radius: 52px;
-  margin: 24px auto 0;
+  margin: 20px auto 0;
   display: block;
   :hover {
     background-color: #7a6fff;

@@ -15,7 +15,7 @@ export default function Skeletons() {
 }
 
 const SkeletonsDiv = styled.div`
-  height: 60%;
+  height: 64%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -26,17 +26,17 @@ function SkeletonBlock() {
   return (
     <SkeletonBlockDiv>
       <SquareBlock>
-        <Skeleton height={20} width={20} baseColor="#DEDBFF" />
+        <Skeleton height={20} width={20} baseColor="#F2F3F5" />
       </SquareBlock>
 
-      <Skeleton height={50} width={50} baseColor="#D2CEFF" />
+      <Skeleton height={50} width={50} baseColor="#EEEFF2" />
 
       <TwoSkeletons>
-        <Skeleton height={20} width={120} baseColor="#DEDBFF" />
-        <Skeleton height={20} width={100} baseColor="#EDECff" />
+        <Skeleton height={20} width={150} baseColor="#F2F3F5" />
+        <Skeleton height={20} width={100} baseColor="#F6F7F8" />
       </TwoSkeletons>
 
-      <Skeleton height={50} width={100} baseColor="#D6D2FF" />
+      <Skeleton height={50} width={160} baseColor="#F2F3F5" />
     </SkeletonBlockDiv>
   );
 }

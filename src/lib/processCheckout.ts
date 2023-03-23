@@ -1,6 +1,6 @@
 import TicketInfo from './types/ticketInfo';
 import findCompetingTickets from './findCompetingTickets';
-import siteNames from './constants/sitenames';
+import siteNames, { getNameFromURL } from './constants/sitenames';
 import { siteMap } from './checkoutInfo/utils';
 
 interface ICheckoutInfo {
@@ -45,13 +45,6 @@ const processCheckout: ICheckoutInfo = (
     console.error(`[READING CHECKOUT]:`, err);
     setHasLoadedAll(true);
   }
-};
-
-const getNameFromURL = (url: string) => {
-  for (const siteName of siteNames) {
-    if (url.includes(siteName)) return siteName;
-  }
-  return '';
 };
 
 export default processCheckout;

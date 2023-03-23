@@ -64,9 +64,10 @@ const ArrowButton = styled.button`
   padding: 0;
   border: none;
   background-color: transparent;
-  color: #4b3bff;
+  color: #27292a;
 
   .fa-chevron-down {
+    font-size: 11px;
     transform: rotate(0deg);
     transition: transform 0.6s ease;
   }
@@ -80,7 +81,7 @@ const ArrowButton = styled.button`
 const Logo = styled.img`
   height: 70px;
   width: 85px;
-  margin: 0 17.5px 0 0;
+  margin: 0 17.5px 3px 0;
   display: inline;
 `;
 
@@ -110,7 +111,7 @@ function Overview({ section, row, srcPrice, destPrice, quantity }: IOverview) {
       {savings > 0 ? (
         <Text color="#42d988" size="18px" weight={700}>
           <span style={{ fontSize: '16px', fontWeight: 400, color: '#73757a' }}>
-            save{' '}
+            Save{' '}
           </span>
           ${Math.round(savings)}
         </Text>

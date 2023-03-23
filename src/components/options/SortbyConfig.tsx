@@ -25,10 +25,9 @@ export default function SortByConfig({
 
 const SortByDiv = styled.div<{ isOpen: boolean }>`
   position: absolute;
-  top: ${(props) => (props.isOpen ? '220px' : '-1000px')};
-  left: 125px;
-  width: 180px;
-  border: 1.05px solid #4b3bff;
+  top: ${(props) => (props.isOpen ? '212px' : '-1000px')};
+  left: 130px;
+  border: 1.5px solid #4b3bff;
   border-radius: 5px;
   padding: 4px 10px;
   z-index: 103;

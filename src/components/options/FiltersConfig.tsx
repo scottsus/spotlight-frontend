@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import { FilterOptions } from '../../lib/types/options';
-import Box from './Box';
+import RadioBox from '../general/boxes/RadioBox';
+import ChoiceBox from '../general/boxes/ChoiceBox';
 import RangeSlider from './RangeSlider';
 
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
@@ -28,18 +29,18 @@ export default function FiltersConfig({
   const [maxVal, setMaxVal] = useState(max);
 
   const numberList = ['Any', '1', '2', '3', '4', '5', '6', '7', '8', '9+'];
-  const [selectedNumbers, setSelectedNumbers] = useState<string[]>(['Any']);
+  const [selectedNumber, setSelectedNumber] = useState<string | number>('Any');
 
   const websitesList = [
-    'Any',
-    'AXS',
+    `Any`,
+    `Ticketmaster`,
+    `SeatGeek`,
+    `StubHub`,
+    `AXS`,
+    `VividSeats`,
+    `TickPick`,
     'GameTime',
-    'SeatGeek',
-    'StubHub',
-    'Ticketmaster',
-    'TickPick',
-    'TicketIQ',
-    'VividSeats',
+    `TicketIQ`,
   ];
   const [selectedWebsites, setSelectedWebsites] = useState<string[]>(['Any']);
 
@@ -47,7 +48,7 @@ export default function FiltersConfig({
     setFilterOptions({
       minPrice: minVal,
       maxPrice: maxVal,
-      numTicketsArr: selectedNumbers,
+      numTickets: selectedNumber,
       chosenWebsites: selectedWebsites,
     });
     toggle();
@@ -55,7 +56,7 @@ export default function FiltersConfig({
   return (
     <FilterConfigDiv isOpen={filterConfigIsOpen}>
       <Scrollable>
-        <FilterHeader>
+        <FilterHeader style={{ marginBottom: '4px' }}>
           <Black>Price Range:</Black>
           &ensp;
           <Purple>
@@ -73,20 +74,21 @@ export default function FiltersConfig({
         <FilterHeader>
           <Black>Number of Tickets:</Black>
           &ensp;
-          <Purple>{selectedNumbers.join(', ')}</Purple>
+          <Purple>{selectedNumber}</Purple>
         </FilterHeader>
-        <Boxes contentList={numberList} setContents={setSelectedNumbers} />
+        <RadioBoxes
+          contentList={numberList}
+          setSelectedNumber={setSelectedNumber}
+        />
 
-        <FilterHeader>
+        <FilterHeader style={{ marginBottom: '3px' }}>
           <Black>Websites:</Black>
           &ensp;
           <Purple>{selectedWebsites.join(', ')}</Purple>
         </FilterHeader>
-        <Boxes
+        <ChoiceBoxes
           contentList={websitesList}
           setContents={setSelectedWebsites}
-          justify="start"
-          margin="2px"
         />
       </Scrollable>
 
@@ -97,7 +99,7 @@ export default function FiltersConfig({
           </ButtonText>
         </BackButton>
         <ApplyButton onClick={saveFilterOptions}>
-          <ButtonText color="#FFFFFF">Apply Changes</ButtonText>
+          <ButtonText color="#FFFFFF">Apply Filters</ButtonText>
         </ApplyButton>
       </Buttons>
     </FilterConfigDiv>
@@ -106,12 +108,12 @@ export default function FiltersConfig({
 
 const FilterConfigDiv = styled.div<{ isOpen: boolean }>`
   position: absolute;
-  top: ${(props) => (props.isOpen ? '220px' : '-1000px')};
+  top: ${(props) => (props.isOpen ? '212px' : '-1000px')};
   left: 31px;
   z-index: 101;
-  border: 1.05px solid #4b3bff;
+  border: 1.5px solid #4b3bff;
   border-radius: 10px;
-  height: 360px;
+  height: 365px;
   width: 509px;
   padding: 10px 37px 20px;
   background-color: #ffffff;
@@ -135,7 +137,7 @@ const headerText = `
 
 const Black = styled.h2`
   ${headerText}
-  font-weight: 700;
+  font-weight: 500;
   color: #000000;
 `;
 
@@ -145,30 +147,96 @@ const Purple = styled.h2`
   color: #4b3bff;
 `;
 
-interface IBoxes {
+interface IRadioBoxes {
   contentList: string[] | number[];
-  setContents?: React.Dispatch<React.SetStateAction<any>>;
-  justify?: string;
-  margin?: string;
+  setSelectedNumber: React.Dispatch<React.SetStateAction<any>>;
 }
 
-function Boxes({
-  contentList,
-  setContents,
-  justify = 'space-evenly',
-  margin = '5px 0',
-}: IBoxes) {
-  const boxes = contentList.map((content) => (
-    <Box
+function RadioBoxes({ contentList, setSelectedNumber }: IRadioBoxes) {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    const currTextContent = event.currentTarget.textContent;
+    if (currTextContent === 'Any') {
+      setActiveIndex(0);
+      return;
+    }
+    const numTickets = parseInt(currTextContent);
+    if (numTickets >= 9) setActiveIndex(9);
+    else setActiveIndex(numTickets);
+  };
+
+  const boxes = contentList.map((content, idx) => (
+    <RadioBox
       key={content}
       content={content}
-      isActiveInitially={content === 'Any' ? true : false}
-      isClickable={true}
-      setContents={setContents}
-      margin={margin}
+      index={idx}
+      activeIndex={activeIndex}
+      handleClick={handleClick}
+      setSelectedNumber={setSelectedNumber}
     />
   ));
-  return <BoxesDiv justify={justify}>{boxes}</BoxesDiv>;
+  return <BoxesDiv justify="space-between">{boxes}</BoxesDiv>;
+}
+
+interface IChoiceBoxes {
+  contentList: string[] | number[];
+  setContents?: React.Dispatch<React.SetStateAction<any>>;
+}
+
+function ChoiceBoxes({ contentList, setContents }: IChoiceBoxes) {
+  const [activeIndexes, setActiveIndexes] = useState([0]);
+
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    const websiteMap = {
+      Any: 0,
+      Ticketmaster: 1,
+      SeatGeek: 2,
+      StubHub: 3,
+      AXS: 4,
+      VividSeats: 5,
+      TickPick: 6,
+      GameTime: 7,
+      TicketIQ: 8,
+    };
+
+    const currTextContent = event.currentTarget.textContent;
+
+    const index = websiteMap[currTextContent];
+    if (index === 0) {
+      setActiveIndexes([0]);
+      return;
+    } else {
+      setActiveIndexes((activeIndexes) =>
+        activeIndexes.filter((activeIndex) => activeIndex !== 0)
+      );
+    }
+
+    const checkActiveIndexes = (activeIndexes: number[], index: number) => {
+      for (const activeIndex of activeIndexes)
+        if (activeIndex === index) return true;
+      return false;
+    };
+
+    setActiveIndexes((activeIndexes) => {
+      const indexIsActive = checkActiveIndexes(activeIndexes, index);
+      if (indexIsActive)
+        return activeIndexes.filter((activeIndex) => activeIndex !== index);
+      return [...activeIndexes, index];
+    });
+  };
+
+  const boxes = contentList.map((content, idx) => (
+    <ChoiceBox
+      key={content}
+      content={content}
+      index={idx}
+      activeIndexes={activeIndexes}
+      handleClick={handleClick}
+      setContents={setContents}
+    />
+  ));
+  return <BoxesDiv justify="start">{boxes}</BoxesDiv>;
 }
 
 const BoxesDiv = styled.div<{ justify: string }>`

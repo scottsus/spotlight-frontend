@@ -1,7 +1,7 @@
 export class FilterOptions {
   minPrice: number;
   maxPrice: number;
-  numTicketsArr: string[];
+  numTickets: string | number;
   chosenWebsites: string[];
 }
 
