@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, ChangeEvent } from 'react';
 import styled from 'styled-components';
-import Box from '../general/boxes/Box';
+import Box from '../../general/boxes/Box';
 
 interface IRangeSlider {
   min: number;

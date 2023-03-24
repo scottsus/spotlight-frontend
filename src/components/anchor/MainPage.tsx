@@ -5,6 +5,9 @@ import {
   getProperSiteName,
 } from '../../lib/constants/sitenames';
 
+import Header from '../general/Header';
+import Divider from '../general/Divider';
+
 interface IMainPage {
   tagIsOpened: boolean;
   setTagIsOpened: React.Dispatch<React.SetStateAction<boolean>>;
@@ -21,9 +24,8 @@ export default function MainPage({ tagIsOpened, setTagIsOpened }: IMainPage) {
   });
   return (
     <MainPageDiv isVisible={tagIsOpened}>
-      <Logo>spotlight</Logo>
-      <XButton setTagIsOpened={setTagIsOpened} />
-      <Divider />
+      <Header setTagIsOpened={setTagIsOpened} logoMargin="10px 0 0" />
+      <Divider margin="14px 0 18px" />
       <Steps>
         <StepBlock
           backgroundColor="#e7dffe"
@@ -76,21 +78,6 @@ const MainPageDiv = styled.div<{ isVisible: boolean }>`
   filter: drop-shadow(0 0 0.5rem rgba(0, 0, 0, 0.26));
   overflow: hidden;
   visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
-`;
-
-const Logo = styled.h1`
-  font-size: 30px;
-  font-family: Mont;
-  font-weight: 800;
-  color: #4b3bff;
-  letter-spacing: -1.5px;
-  margin: 10px 0 0;
-`;
-
-const Divider = styled.div`
-  height: 1.5px;
-  background-color: #d0d0d0;
-  margin: 14px 0 18px;
 `;
 
 const Steps = styled.div`
@@ -215,37 +202,4 @@ const ButtonText = styled.h3`
   font-family: Manrope;
   font-weight: 500;
   color: #ffffff;
-`;
-
-interface IXButton {
-  setTagIsOpened: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-function XButton({ setTagIsOpened }: IXButton) {
-  return (
-    <XButtonContainer onClick={() => setTagIsOpened(false)}>
-      <Image src={chrome.runtime.getURL('imgs/X Button.svg')} />
-    </XButtonContainer>
-  );
-}
-
-const XButtonContainer = styled.button`
-  position: absolute;
-  top: 4%;
-  right: 3%;
-  border: none;
-  border-radius: 50%;
-  background-color: #ffffff;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  padding: 15px;
-  :hover {
-    background-color: #f1f1f1;
-  }
-`;
-
-const Image = styled.img`
-  width: 20px;
-  height: 20px;
 `;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import TicketInfo from '../../lib/types/ticketInfo';
+import TicketInfo from '../../../lib/types/ticketInfo';
 import TicketBlock from './TicketBlock';
 import OpenTicketBlock from './OpenTicketBlock';
 

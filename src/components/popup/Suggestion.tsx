@@ -1,8 +1,9 @@
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import { faChevronDown } from '@fortawesome/fontawesome-free-solid';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import Divider from '../general/Divider';
 
 interface ISuggestion {
   thumbnailUrl: string;
@@ -308,11 +309,6 @@ const OpenSuggestionBlockDiv = styled.div<IOpenSuggestionBlockDiv>`
   height: ${(props) => props.height}px;
   overflow: ${(props) => props.overflow};
   transition: height 0.2s ease-in-out;
-`;
-
-const Divider = styled.div`
-  height: 2px;
-  background-color: #d9d9d9;
 `;
 
 const TicketsAvailable = styled.h3`

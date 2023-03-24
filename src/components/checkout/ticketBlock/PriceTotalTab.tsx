@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import TicketInfo from '../../lib/types/ticketInfo';
+
+import TicketInfo from '../../../lib/types/ticketInfo';
+import Divider from '../../general/Divider';
 import ItemCost from './ItemCost';
 
 interface IPriceTotalTab {
@@ -43,7 +45,7 @@ export default function PriceTotalTab({ ticket }: IPriceTotalTab) {
       />
       <ItemCost text="Calculated Tax" cost={calculatedTax} />
 
-      <Divider />
+      <Divider margin="12px auto 8px" />
       <ItemCost
         text="Total"
         cost={ticket.priceInfo.totalPrice}
@@ -64,11 +66,4 @@ const CategoryHeader = styled.h3`
   font-weight: 700;
   color: #27292a;
   margin: 2px 0;
-`;
-
-const Divider = styled.div`
-  height: 2px;
-  background-color: #dfe0e0;
-  border-radius: 1px;
-  margin: 12px auto 8px;
 `;
