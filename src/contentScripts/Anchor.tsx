@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import styled from 'styled-components';
 
 import MainPage from '../components/anchor/MainPage';
-import SmallPurpleTag from '../components/SmallPurpleTag';
+import SmallPurpleTag from '../components/anchor/SmallPurpleTag';
 import fonts from '../lib/constants/fonts';
 
 import './globals.css';

@@ -29,7 +29,7 @@ export default function TicketBlock({
         />
       </ArrowButton>
       <Logo
-        src={chrome.runtime.getURL(`imgs/${destTicket.site}.svg`)}
+        src={chrome.runtime.getURL(`imgs/partnerLogos/${destTicket.site}.svg`)}
         alt="Website Logo"
       />
       <Overview

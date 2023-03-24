@@ -291,9 +291,6 @@ function OpenSuggestionBlock({
           ticketHref={ticketHrefs[7]}
           minPrice={minPrices[7]}
         />
-        {/* <NextButton>
-          <RightArrow src={chrome.runtime.getURL('imgs/rightAngleArrow.svg')} />
-        </NextButton> */}
       </Carousell>
     </OpenSuggestionBlockDiv>
   );
