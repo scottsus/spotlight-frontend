@@ -19,12 +19,14 @@ export default function BestDeal({ setTagIsOpened }: IBestDeal) {
       transition={{ duration: 1 }}
     >
       <Header setTagIsOpened={setTagIsOpened} logoMargin="0" />
-      <Divider margin="5px 0 20px" />
+      <Divider margin="7px 0 20px" />
       <Body>
-        <GoldenTicket src={chrome.runtime.getURL(`imgs/golden-ticket.png`)} />
+        <GoldenTicket
+          src={chrome.runtime.getURL(`imgs/checkout/golden-ticket.png`)}
+        />
         <Text>
           <Congrats>Congrats! You already have the</Congrats>
-          <Best>BEST TICKET</Best>
+          <Best>Best Ticket.</Best>
         </Text>
       </Body>
     </BestDealDiv>
@@ -48,7 +50,7 @@ const GoldenTicket = styled.img`
 `;
 
 const Text = styled.div`
-  margin: 10px 0 0 0;
+  margin: 10px 0 0 10px;
   display: flex;
   flex-direction: column;
 `;
@@ -56,8 +58,8 @@ const Text = styled.div`
 const Congrats = styled.h3`
   font-size: 24px;
   font-family: Mont;
-  // TODO: MONT 600
   font-weight: 600;
+  letter-spacing: -1.5px;
 `;
 
 const Best = styled.h2`
@@ -67,4 +69,5 @@ const Best = styled.h2`
   ${gradientText(
     `linear-gradient(180deg, #2ef48a 0%, rgba(20, 170, 89, 0.72) 100%)`
   )}
+  margin: -4px 0 0 -4px;
 `;
