@@ -14,12 +14,14 @@ interface IFilterConfig {
   filterConfigIsOpen: boolean;
   toggle: () => void;
   setFilterOptions: React.Dispatch<React.SetStateAction<FilterOptions>>;
+  setNumFiltersApplied: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export default function FiltersConfig({
   filterConfigIsOpen,
   toggle,
   setFilterOptions,
+  setNumFiltersApplied,
 }: IFilterConfig) {
   const leftArrow = faAngleLeft as IconProp;
 
@@ -51,6 +53,14 @@ export default function FiltersConfig({
       numTickets: selectedNumber,
       chosenWebsites: selectedWebsites,
     });
+
+    let numFiltersApplied = 0;
+    if (minVal !== 0 || maxVal !== 3000) numFiltersApplied++;
+    if (selectedNumber !== `Any`) numFiltersApplied++;
+    if (selectedWebsites.length !== 1 || selectedWebsites[0] !== `Any`)
+      numFiltersApplied++;
+    setNumFiltersApplied(numFiltersApplied);
+
     toggle();
   };
   return (
@@ -123,6 +133,7 @@ const FilterConfigDiv = styled.div<{ isOpen: boolean }>`
 const Scrollable = styled.div`
   height: 270px;
   overflow-y: scroll;
+  padding: 8px 0 15px 0;
 `;
 
 const FilterHeader = styled.div`
@@ -268,7 +279,7 @@ const BackButton = styled.button`
 
 const ApplyButton = styled.button`
   background-color: #4b3bff;
-  padding: 11px 30px;
+  padding: 11px 40px;
   border-radius: 30px;
   :hover {
     background-color: #695cff;

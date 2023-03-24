@@ -24,28 +24,43 @@ export default function Options({
   setSortByOptions,
 }: IOptions) {
   const [filterConfigIsOpen, setFilterConfigIsOpen] = useState(false);
-  const [sortByIsOpen, setsortByIsOpen] = useState(false);
+  const [sortByIsOpen, setSortByIsOpen] = useState(false);
+  const [numFiltersApplied, setNumFiltersApplied] = useState(0);
   const down = faChevronDown as IconProp;
 
   const toggleFiltersConfig = () => {
     setFilterConfigIsOpen((filterConfigIsOpen) => !filterConfigIsOpen);
-    setsortByIsOpen(false);
+    setSortByIsOpen(false);
   };
 
   const toggleSortBy = () => {
-    setsortByIsOpen((sortByIsOpen) => !sortByIsOpen);
+    setSortByIsOpen((sortByIsOpen) => !sortByIsOpen);
     setFilterConfigIsOpen(false);
+  };
+
+  const showNumFiltersApplied = (numFiltersApplied: number) => {
+    if (numFiltersApplied === 0) return '';
+    return `(${numFiltersApplied})`;
+  };
+
+  const offsetSortByChild = (numFiltersApplied: number) => {
+    if (numFiltersApplied === 0) return 130;
+    else if (numFiltersApplied === 1) return 154;
+    return 156;
   };
   return (
     <OptionsDiv isReady={isReady}>
       <Button width="84px" onClick={toggleFiltersConfig}>
         <Image src={chrome.runtime.getURL('imgs/icons/filter.svg')} />
-        <ButtonText>Filters</ButtonText>
+        <ButtonText>
+          Filters {showNumFiltersApplied(numFiltersApplied)}
+        </ButtonText>
       </Button>
       <FiltersConfig
         filterConfigIsOpen={filterConfigIsOpen}
         toggle={toggleFiltersConfig}
         setFilterOptions={setFilterOptions}
+        setNumFiltersApplied={setNumFiltersApplied}
       />
 
       <Button
@@ -71,7 +86,9 @@ export default function Options({
       </Button>
       <SortByConfig
         sortByIsOpen={sortByIsOpen}
+        setSortByIsOpen={setSortByIsOpen}
         setSortByOptions={setSortByOptions}
+        offsetDiv={offsetSortByChild(numFiltersApplied)}
       />
     </OptionsDiv>
   );
