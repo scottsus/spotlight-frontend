@@ -6,8 +6,8 @@ import fonts from '../lib/constants/fonts';
 import processCheckout from '../lib/processCheckout';
 import './globals.css';
 
-import PurpleTag from '../components/PurpleTag';
-import MainPage from '../components/MainPage';
+import PurpleTag from '../components/checkout/PurpleTag';
+import MainPage from '../components/checkout/MainPage';
 import TicketInfo from '../lib/types/ticketInfo';
 
 export default function Checkout() {

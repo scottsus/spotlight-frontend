@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import TicketInfo from '../../lib/types/ticketInfo';
+import TicketInfo from '../../../lib/types/ticketInfo';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faChevronDown } from '@fortawesome/fontawesome-free-solid';
-import { isGA } from '../../lib/constants/classifySeat';
+import { isGA } from '../../../lib/constants/classifySeat';
 
 interface ITicketBlock {
   isOpen: boolean;

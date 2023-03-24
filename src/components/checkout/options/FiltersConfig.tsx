@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import { FilterOptions } from '../../lib/types/options';
-import RadioBox from '../general/boxes/RadioBox';
-import ChoiceBox from '../general/boxes/ChoiceBox';
+import { FilterOptions } from '../../../lib/types/options';
+import RadioBox from '../../general/boxes/RadioBox';
+import ChoiceBox from '../../general/boxes/ChoiceBox';
 import RangeSlider from './RangeSlider';
 
 import { IconProp } from '@fortawesome/fontawesome-svg-core';

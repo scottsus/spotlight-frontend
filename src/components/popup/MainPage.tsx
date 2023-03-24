@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import fonts from '../../lib/constants/fonts';
 import Suggestion from './Suggestion';
+import Logo from '../general/Logo';
+import Divider from '../general/Divider';
 
 export default function MainPage() {
   const [dollarSaved, setDollarSaved] = useState(0);
@@ -21,7 +23,7 @@ export default function MainPage() {
   return (
     <MainPageDiv>
       <style>{fonts}</style>
-      <Logo>spotlight</Logo>
+      <Logo margin="8px auto 0">spotlight</Logo>
       <LifetimeSavings>
         <SavingsProgress
           src={chrome.runtime.getURL(`imgs/partialTicketProgress.png`)}
@@ -37,7 +39,7 @@ export default function MainPage() {
       <Upcoming>
         Upcoming Events near <Location>Los Angeles, CA</Location>
       </Upcoming>
-      <Divider />
+      <Divider margin="10px auto 16px" />
       <SuggestionList>
         <Suggestion
           thumbnailUrl="imgs/lakers-clippers.png"
@@ -127,15 +129,6 @@ const MainPageDiv = styled.div`
   overflow: hidden;
 `;
 
-const Logo = styled.h1`
-  font-size: 30px;
-  font-family: Mont;
-  font-weight: 800;
-  color: #4b3bff;
-  letter-spacing: -1.5px;
-  margin: 8px auto 0;
-`;
-
 const LifetimeSavings = styled.div`
   margin: 22px auto 10px;
   height: 115px;
@@ -185,12 +178,6 @@ const Upcoming = styled.h2`
 
 const Location = styled.span`
   color: #4b3bff;
-`;
-
-const Divider = styled.div`
-  height: 2px;
-  background-color: #dfe0e0;
-  margin: 10px auto 16px;
 `;
 
 const SuggestionList = styled.div`

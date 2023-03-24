@@ -1,10 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-
-import TicketInfo from '../../lib/types/ticketInfo';
-import { getProperSiteName } from '../../lib/constants/sitenames';
-import { seatNumberToAlphabet } from '../../lib/seatConversion';
+import TicketInfo from '../../../lib/types/ticketInfo';
+import Divider from '../../general/Divider';
 
 interface IComparisonTab {
   srcTicket: TicketInfo;
@@ -16,6 +14,7 @@ export default function ComparisonTab({
   destTicket,
 }: IComparisonTab) {
   return (
+    // TODO: SRC AND DEST TICKET
     <ComparisonDiv
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -50,7 +49,7 @@ export default function ComparisonTab({
           <ItemCell align="right">$324.99</ItemCell>
         </ItemRow>
       </ComparisonTable>
-      <Divider />
+      <Divider margin="0" />
       <KeyVal myKey="Savings" value="$106.00" />
     </ComparisonDiv>
   );
@@ -111,14 +110,6 @@ const SmallIcon = styled.img`
   width: 22px;
   height: 22px;
   margin: 0 0 0 5px;
-`;
-
-const Divider = styled.div`
-  height: 1.5px;
-  width: 400px;
-  background-color: #dfe0e0;
-  border-radius: 2px;
-  margin: 0;
 `;
 
 interface IKeyVal {

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { AnimatePresence } from 'framer-motion';
+
+import TicketInfo from '../../../lib/types/ticketInfo';
 import PriceTotal from './PriceTotalTab';
 import PriceComparisonTab from './TicketComparisonTab';
-import TicketInfo from '../../lib/types/ticketInfo';
+import Divider from '../../general/Divider';
 
 interface IOpenTicketBlock {
   isOpen: boolean;
@@ -63,11 +65,6 @@ const OpenTicketBlockDiv = styled.div<IOpenTicketBlockDiv>`
   height: ${(props) => props.height};
   overflow: ${(props) => props.overflow};
   transition: height 0.2s ease-in-out;
-`;
-
-const Divider = styled.div`
-  height: 2px;
-  background-color: #dfe0e0;
 `;
 
 const PurpleBar = styled.div<{ isOnLeft: boolean }>`
