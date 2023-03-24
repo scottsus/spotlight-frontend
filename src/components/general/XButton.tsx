@@ -9,7 +9,7 @@ export default function XButton({ setTagIsOpened }: IXButton) {
   const closeTag = () => setTagIsOpened(false);
   return (
     <XButtonContainer onClick={closeTag}>
-      <Image src={chrome.runtime.getURL('imgs/X Button.svg')} />
+      <Image src={chrome.runtime.getURL('imgs/icons/x-button.svg')} />
     </XButtonContainer>
   );
 }

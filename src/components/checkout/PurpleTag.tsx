@@ -24,9 +24,9 @@ export default function PurpleTag({ tagIsOpened, setTagIsOpened }: IPurpleTag) {
       }}
       onClick={() => setTagIsOpened((tagIsOpened) => !tagIsOpened)}
     >
-      <BaseLayer src={chrome.runtime.getURL('imgs/base-layer.png')} />
+      <BaseLayer src={chrome.runtime.getURL('imgs/general/base-layer.png')} />
       <Dots
-        src={chrome.runtime.getURL('imgs/white-dots.png')}
+        src={chrome.runtime.getURL('imgs/general/white-dots.png')}
         className="dots"
       />
     </PurpleTagDiv>

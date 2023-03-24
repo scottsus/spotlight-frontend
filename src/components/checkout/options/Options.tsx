@@ -39,7 +39,7 @@ export default function Options({
   return (
     <OptionsDiv isReady={isReady}>
       <Button width="84px" onClick={toggleFiltersConfig}>
-        <Image src={chrome.runtime.getURL('imgs/filter.svg')} alt="Filter" />
+        <Image src={chrome.runtime.getURL('imgs/icons/filter.svg')} />
         <ButtonText>Filters</ButtonText>
       </Button>
       <FiltersConfig

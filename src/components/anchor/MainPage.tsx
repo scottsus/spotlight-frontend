@@ -31,7 +31,7 @@ export default function MainPage({ tagIsOpened, setTagIsOpened }: IMainPage) {
           backgroundColor="#e7dffe"
           stepNumber="Step 1:"
           stepDetail={website}
-          stepImageUrl="imgs/step1.png"
+          stepImageUrl="imgs/anchor/step1.png"
           stepImageWidth={100}
           stepImageHeight={90}
           stepImageMargin="0 -10px 10px 0"
@@ -42,7 +42,7 @@ export default function MainPage({ tagIsOpened, setTagIsOpened }: IMainPage) {
           isRightToLeft
           stepNumber="Step 2:"
           stepDetail="View the best deals we find for your seat."
-          stepImageUrl="imgs/step2.png"
+          stepImageUrl="imgs/anchor/step2.png"
           stepImageWidth={118}
           stepImageHeight={70}
           stepImageMargin="0"
@@ -52,7 +52,7 @@ export default function MainPage({ tagIsOpened, setTagIsOpened }: IMainPage) {
           backgroundColor="#e0ffcb"
           stepNumber="Step 3:"
           stepDetail="Save precious time and money."
-          stepImageUrl="imgs/step3.png"
+          stepImageUrl="imgs/anchor/step3.png"
           stepImageWidth={58}
           stepImageHeight={72}
           stepImageMargin="0 10px 0 0"

@@ -26,7 +26,7 @@ export default function MainPage() {
       <Logo margin="8px auto 0">spotlight</Logo>
       <LifetimeSavings>
         <SavingsProgress
-          src={chrome.runtime.getURL(`imgs/partialTicketProgress.png`)}
+          src={chrome.runtime.getURL(`imgs/popup/partialTicketProgress.png`)}
         />
         <SavingsTextBox>
           <SoFar>With Spotlight, you saved...</SoFar>
@@ -42,7 +42,7 @@ export default function MainPage() {
       <Divider margin="10px auto 16px" />
       <SuggestionList>
         <Suggestion
-          thumbnailUrl="imgs/lakers-clippers.png"
+          thumbnailUrl="imgs/popup/lakers-clippers.png"
           performer="LA Lakers vs. LA Clippers"
           venue="Crypto.com Arena"
           date="Apr 5"
@@ -51,7 +51,7 @@ export default function MainPage() {
           minPrices={lakersClippersMinPrices}
         />
         <Suggestion
-          thumbnailUrl="imgs/keshi.png"
+          thumbnailUrl="imgs/popup/keshi.png"
           performer="keshi w/ James Ivy"
           venue="Greek Theater"
           date="Apr 7, 8"
@@ -60,7 +60,7 @@ export default function MainPage() {
           minPrices={keshiMinPrices}
         />
         <Suggestion
-          thumbnailUrl="imgs/dabin.png"
+          thumbnailUrl="imgs/popup/dabin.png"
           performer="Dabin (18+ event)"
           venue="Shrine Expo Hall"
           date="Apr 7, 8"
@@ -69,7 +69,7 @@ export default function MainPage() {
           minPrices={dabinMinPrices}
         />
         <Suggestion
-          thumbnailUrl="imgs/jackson-wang.png"
+          thumbnailUrl="imgs/popup/jackson-wang.png"
           performer="Jackson Wang"
           venue="Shrine Expo Hall"
           date="Apr 26"
@@ -78,7 +78,7 @@ export default function MainPage() {
           minPrices={jacksonWangMinPrices}
         />
         <Suggestion
-          thumbnailUrl="imgs/joji.png"
+          thumbnailUrl="imgs/popup/joji.png"
           performer="Joji Presents Smithereens"
           venue="Kia Forum"
           date="May 13"
@@ -99,19 +99,23 @@ export default function MainPage() {
         </Feedback>
         <Socials>
           <a href="https://www.instagram.com/tryspotlight" target="_blank">
-            <SocialIcon src={chrome.runtime.getURL(`imgs/instagram.svg`)} />
+            <SocialIcon
+              src={chrome.runtime.getURL(`imgs/icons/instagram.svg`)}
+            />
           </a>
           <a href="https://twitter.com/spotlightxyz" target="_blank">
-            <SocialIcon src={chrome.runtime.getURL(`imgs/twitter.svg`)} />
+            <SocialIcon src={chrome.runtime.getURL(`imgs/icons/twitter.svg`)} />
           </a>
           <a
             href="https://www.linkedin.com/company/tryspotlight/"
             target="_blank"
           >
-            <SocialIcon src={chrome.runtime.getURL(`imgs/linkedin.svg`)} />
+            <SocialIcon
+              src={chrome.runtime.getURL(`imgs/icons/linkedin.svg`)}
+            />
           </a>
           <a href="https://www.tryspotlight.xyz/" target="_blank">
-            <SocialIcon src={chrome.runtime.getURL(`imgs/landing.svg`)} />
+            <SocialIcon src={chrome.runtime.getURL(`imgs/icons/landing.svg`)} />
           </a>
         </Socials>
       </Footer>

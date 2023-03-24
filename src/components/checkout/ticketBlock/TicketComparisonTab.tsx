@@ -2,7 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import TicketInfo from '../../../lib/types/ticketInfo';
+import { getProperSiteName } from '../../../lib/constants/sitenames';
 import Divider from '../../general/Divider';
+import { isGA } from '../../../lib/constants/classifySeat';
 
 interface IComparisonTab {
   srcTicket: TicketInfo;
@@ -13,8 +15,15 @@ export default function ComparisonTab({
   srcTicket,
   destTicket,
 }: IComparisonTab) {
+  const srcSection = isGA(srcTicket.seatInfo.section)
+    ? `GA`
+    : srcTicket.seatInfo.section;
+  const destSection = isGA(destTicket.seatInfo.section)
+    ? `GA`
+    : destTicket.seatInfo.section;
+  const totalSavings =
+    srcTicket.priceInfo.totalPrice - destTicket.priceInfo.totalPrice;
   return (
-    // TODO: SRC AND DEST TICKET
     <ComparisonDiv
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -29,28 +38,34 @@ export default function ComparisonTab({
           <HeaderCell align="right">Price</HeaderCell>
         </HeaderRow>
         <ItemRow>
-          <ItemCell align="left">Ticketmaster</ItemCell>
-          <ItemCell align="right">106</ItemCell>
-          <ItemCell align="right">17</ItemCell>
-          <ItemCell align="right">$430.99</ItemCell>
+          <ItemCell align="left">{getProperSiteName(srcTicket.site)}</ItemCell>
+          <ItemCell align="right">{srcSection}</ItemCell>
+          <ItemCell align="right">{srcTicket.seatInfo.row}</ItemCell>
+          <ItemCell align="right">
+            ${srcTicket.priceInfo.totalPrice.toFixed(2)}
+          </ItemCell>
         </ItemRow>
         <ItemRow>
           <ItemCell align="left">
             <SpotlightChoice>
-              SeatGeek
+              {getProperSiteName(destTicket.site)}
               <SmallIcon
-                src={chrome.runtime.getURL(`imgs/small-icon.svg`)}
+                src={chrome.runtime.getURL(
+                  `imgs/icons/small-spotlight-icon.svg`
+                )}
                 className="smallIcon"
               />
             </SpotlightChoice>
           </ItemCell>
-          <ItemCell align="right">106</ItemCell>
-          <ItemCell align="right">12</ItemCell>
-          <ItemCell align="right">$324.99</ItemCell>
+          <ItemCell align="right">{destSection}</ItemCell>
+          <ItemCell align="right">{destTicket.seatInfo.row}</ItemCell>
+          <ItemCell align="right">
+            ${destTicket.priceInfo.totalPrice.toFixed(2)}
+          </ItemCell>
         </ItemRow>
       </ComparisonTable>
       <Divider margin="0" />
-      <KeyVal myKey="Savings" value="$106.00" />
+      <KeyVal myKey="Savings" value={totalSavings.toFixed(2)} />
     </ComparisonDiv>
   );
 }
@@ -124,7 +139,7 @@ function KeyVal({ myKey, value }: IKeyVal) {
         {myKey}
       </Item>
       <Item textAlign="right" color="#4b3bff" width={40} isBold>
-        {value}
+        ${value}
       </Item>
     </KeyValDiv>
   );

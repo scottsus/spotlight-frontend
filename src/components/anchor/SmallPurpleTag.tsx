@@ -67,11 +67,11 @@ export default function SmallPurpleTag({
         onClick={onClick}
       >
         <BaseLayer
-          src={chrome.runtime.getURL('imgs/small-base-layer.png')}
+          src={chrome.runtime.getURL('imgs/general/small-base-layer.png')}
           draggable={false}
         />
         <Dots
-          src={chrome.runtime.getURL('imgs/small-text.svg')}
+          src={chrome.runtime.getURL('imgs/general/small-spotlight.svg')}
           className="smallText"
           draggable={false}
         />
