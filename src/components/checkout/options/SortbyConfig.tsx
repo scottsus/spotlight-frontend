@@ -4,29 +4,47 @@ import { SortByOptions } from '../../../lib/types/options';
 
 interface ISortBy {
   sortByIsOpen: boolean;
+  setSortByIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setSortByOptions: React.Dispatch<React.SetStateAction<SortByOptions>>;
+  offsetDiv: number;
 }
 
 export default function SortByConfig({
   sortByIsOpen,
+  setSortByIsOpen,
   setSortByOptions,
+  offsetDiv,
 }: ISortBy) {
+  const closeSortBy = () => setSortByIsOpen(false);
   return (
-    <SortByDiv isOpen={sortByIsOpen}>
+    <SortByDiv isOpen={sortByIsOpen} offsetDiv={offsetDiv}>
       {/* TODO: SORTING USING OTHER THINGS
           <SortbyItem text="Trending" setSortByOptions={setSortByOptions} />
           <SortbyItem text="Recommended" setSortByOptions={setSortByOptions} />
           <SortbyItem text="Section" setSortByOptions={setSortByOptions} /> */}
-      <SortbyItem text="Price: Low-High" setSortByOptions={setSortByOptions} />
-      <SortbyItem text="Price: High-Low" setSortByOptions={setSortByOptions} />
+      <SortbyItem
+        text="Price: Low-High"
+        setSortByOptions={setSortByOptions}
+        closeSortBy={closeSortBy}
+      />
+      <SortbyItem
+        text="Price: High-Low"
+        setSortByOptions={setSortByOptions}
+        closeSortBy={closeSortBy}
+      />
     </SortByDiv>
   );
 }
 
-const SortByDiv = styled.div<{ isOpen: boolean }>`
+interface ISortByDiv {
+  isOpen: boolean;
+  offsetDiv: number;
+}
+
+const SortByDiv = styled.div<ISortByDiv>`
   position: absolute;
-  top: ${(props) => (props.isOpen ? '212px' : '-1000px')};
-  left: 130px;
+  top: ${(props) => (props.isOpen ? 212 : -1000)}px;
+  left: ${(props) => props.offsetDiv}px;
   border: 1.5px solid #4b3bff;
   border-radius: 5px;
   padding: 4px 10px;
@@ -37,13 +55,15 @@ const SortByDiv = styled.div<{ isOpen: boolean }>`
 
 interface ISortByItem {
   text: string;
+  closeSortBy: () => void;
   setSortByOptions: React.Dispatch<React.SetStateAction<SortByOptions>>;
 }
 
-function SortbyItem({ text, setSortByOptions }: ISortByItem) {
+function SortbyItem({ text, closeSortBy, setSortByOptions }: ISortByItem) {
   const saveSortByOption = () => {
     if (text === 'Price: High-Low') setSortByOptions({ isAscending: false });
     else setSortByOptions({ isAscending: true });
+    closeSortBy();
   };
   return (
     <SortByItemDiv onClick={saveSortByOption}>
