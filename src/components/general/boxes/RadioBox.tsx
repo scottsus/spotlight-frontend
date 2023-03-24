@@ -26,6 +26,7 @@ export default function RadioBox({
 
   return (
     <BoxDiv
+      isClickable
       isActive={index === activeIndex}
       width={39}
       margin="5px 0"

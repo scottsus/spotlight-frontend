@@ -115,13 +115,13 @@ const FilterConfigDiv = styled.div<{ isOpen: boolean }>`
   border-radius: 10px;
   height: 365px;
   width: 509px;
-  padding: 10px 37px 20px;
+  padding: 10px 37px;
   background-color: #ffffff;
   opacity: ${(props) => (props.isOpen ? 1 : 0)};
 `;
 
 const Scrollable = styled.div`
-  height: 250px;
+  height: 270px;
   overflow-y: scroll;
 `;
 
@@ -143,7 +143,7 @@ const Black = styled.h2`
 
 const Purple = styled.h2`
   ${headerText}
-  font-weight: 400;
+  font-weight: 500;
   color: #4b3bff;
 `;
 

@@ -55,6 +55,7 @@ export default function Box({
 
   return (
     <BoxDiv
+      isClickable
       isActive={isActive(index)}
       margin="2px"
       padding="5px 10.4687px"

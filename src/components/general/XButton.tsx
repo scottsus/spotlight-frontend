@@ -14,12 +14,15 @@ export default function XButton({ setTagIsOpened }: IXButton) {
   );
 }
 
+const HOVER_OFFSET = 11;
+
 const XButtonContainer = styled.button`
+  margin-right: -${HOVER_OFFSET}px;
   border-radius: 50%;
   background-color: #ffffff;
   display: flex;
   align-items: center;
-  padding: 15px;
+  padding: ${HOVER_OFFSET}px;
   :hover {
     background-color: #f1f1f1;
   }
