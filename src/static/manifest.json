@@ -22,7 +22,14 @@
         "*://www.stubhub.com/",
         "*://www.ticketmaster.com/",
         "*://www.tickpick.com/",
-        "*://www.vividseats.com/"
+        "*://www.vividseats.com/",
+
+        "*://seatgeek.com/*-tickets/*",
+        "*://www.stubhub.com/*/event/*",
+        "*://www.ticketmaster.com/event/*",
+        "*://www.ticketmaster.com/*/event/*",
+        "*://www.tickpick.com/buy*/*",
+        "*://www.vividseats.com/*/production/*"
       ],
       "js": ["Anchor.js"]
     },
