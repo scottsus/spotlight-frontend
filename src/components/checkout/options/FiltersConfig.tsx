@@ -104,9 +104,10 @@ export default function FiltersConfig({
 
       <Buttons>
         <BackButton onClick={toggle}>
-          <ButtonText color="#27292a">
-            <FontAwesomeIcon icon={leftArrow} /> &thinsp; Back to Listings
-          </ButtonText>
+          <LeftArrow
+            src={chrome.runtime.getURL(`imgs/icons/left-angle-arrow.svg`)}
+          />
+          <ButtonText color="#27292a">Back to Listings</ButtonText>
         </BackButton>
         <ApplyButton onClick={saveFilterOptions}>
           <ButtonText color="#FFFFFF">Apply Filters</ButtonText>
@@ -267,23 +268,33 @@ const BackButton = styled.button`
   background-color: transparent;
   padding: 11px 0;
   border-radius: 20px;
-
-  // TODO
-  p {
-    :hover {
+  display: flex;
+  align-items: center;
+  :hover {
+    p {
       color: grey;
-      transition: 0.2s ease;
+      transition: color 0.2s ease-in-out;
+    }
+    img {
+      opacity: 0.6;
+      transition: opacity 0.2s ease-in-out;
     }
   }
 `;
 
 const ApplyButton = styled.button`
   background-color: #4b3bff;
-  padding: 11px 40px;
+  padding: 11px 36px;
   border-radius: 30px;
   :hover {
     background-color: #695cff;
   }
+`;
+
+const LeftArrow = styled.img`
+  width: 8px;
+  height: 14px;
+  margin: 1px 7px 0 0;
 `;
 
 const ButtonText = styled.p<{ color: string }>`

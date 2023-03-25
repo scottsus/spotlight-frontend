@@ -7,6 +7,8 @@ import {
 
 import Header from '../general/Header';
 import Divider from '../general/Divider';
+import Draggable from 'react-draggable';
+import DraggableButton from '../general/DraggableButton';
 
 interface IMainPage {
   tagIsOpened: boolean;
@@ -23,52 +25,54 @@ export default function MainPage({ tagIsOpened, setTagIsOpened }: IMainPage) {
     setWebsite(`Peruse through ${getProperSiteName(siteName)}.`);
   });
   return (
-    <MainPageDiv isVisible={tagIsOpened}>
-      <Header setTagIsOpened={setTagIsOpened} logoMargin="10px 0 0" />
-      <Divider margin="14px 0 18px" />
-      <Steps>
-        <StepBlock
-          backgroundColor="#e7dffe"
-          stepNumber="Step 1:"
-          stepDetail={website}
-          stepImageUrl="imgs/anchor/step1.png"
-          stepImageWidth={100}
-          stepImageHeight={90}
-          stepImageMargin="0 -10px 10px 0"
-        />
+    <Draggable>
+      <MainPageDiv isVisible={tagIsOpened}>
+        <Header setTagIsOpened={setTagIsOpened} logoMargin="10px 0 0" />
+        <Divider margin="14px 0 18px" />
+        <Steps>
+          <StepBlock
+            backgroundColor="#e7dffe"
+            stepNumber="Step 1:"
+            stepDetail={website}
+            stepImageUrl="imgs/anchor/step1.png"
+            stepImageWidth={100}
+            stepImageHeight={90}
+            stepImageMargin="0 -10px 10px 0"
+          />
 
-        <StepBlock
-          backgroundColor="#dcecff"
-          isRightToLeft
-          stepNumber="Step 2:"
-          stepDetail="View the best deals we find for your seat."
-          stepImageUrl="imgs/anchor/step2.png"
-          stepImageWidth={118}
-          stepImageHeight={70}
-          stepImageMargin="0"
-        />
+          <StepBlock
+            backgroundColor="#dcecff"
+            isRightToLeft
+            stepNumber="Step 2:"
+            stepDetail="View the best deals we find for your seat."
+            stepImageUrl="imgs/anchor/step2.png"
+            stepImageWidth={118}
+            stepImageHeight={70}
+            stepImageMargin="0"
+          />
 
-        <StepBlock
-          backgroundColor="#e0ffcb"
-          stepNumber="Step 3:"
-          stepDetail="Save precious time and money."
-          stepImageUrl="imgs/anchor/step3.png"
-          stepImageWidth={58}
-          stepImageHeight={72}
-          stepImageMargin="0 10px 0 0"
-        />
-      </Steps>
-      <SeeYouButton onClick={closeTag}>
-        <ButtonText>See you at checkout!</ButtonText>
-      </SeeYouButton>
-    </MainPageDiv>
+          <StepBlock
+            backgroundColor="#e0ffcb"
+            stepNumber="Step 3:"
+            stepDetail="Save precious time and money."
+            stepImageUrl="imgs/anchor/step3.png"
+            stepImageWidth={58}
+            stepImageHeight={72}
+            stepImageMargin="0 10px 0 0"
+          />
+        </Steps>
+        <SeeYouButton onClick={closeTag}>
+          <ButtonText>See you at checkout!</ButtonText>
+        </SeeYouButton>
+      </MainPageDiv>
+    </Draggable>
   );
 }
 
 const MainPageDiv = styled.div<{ isVisible: boolean }>`
   position: absolute;
   top: 70px;
-  right: 10px;
+  right: 25px;
   width: 480px;
   height: 540px;
   border-radius: 10.5px;
@@ -187,7 +191,7 @@ const StepImage = styled.img<IStepImage>`
 
 const SeeYouButton = styled.button`
   height: 46px;
-  padding: 0 40px;
+  padding: 0 30px;
   background-color: #4b3bff;
   border-radius: 52px;
   margin: 20px auto 0;
