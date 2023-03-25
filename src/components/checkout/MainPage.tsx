@@ -14,6 +14,7 @@ import Checking from './loading/Checking';
 import Progress from './loading/Progress';
 import Skeletons from './loading/Skeletons';
 import BestDeal from './loading/BestDeal';
+import Draggable from 'react-draggable';
 
 interface IAppBox {
   tagIsOpened: boolean;
@@ -44,48 +45,50 @@ export default function AppBox({
     }
   }, [isDoneWithProgressBar, hasOneGoodResult]);
   return (
-    <AppBoxDiv isVisible={tagIsOpened} height={height}>
-      {!isBestDeal ? (
-        <>
-          <Header setTagIsOpened={setTagIsOpened} logoMargin="8px 0 0" />
+    <Draggable>
+      <AppBoxDiv isVisible={tagIsOpened} height={height}>
+        {!isBestDeal ? (
+          <>
+            <Header setTagIsOpened={setTagIsOpened} logoMargin="8px 0 0" />
 
-          {srcTicketInfo && <EventTitle ticket={srcTicketInfo} />}
+            {srcTicketInfo && <EventTitle ticket={srcTicketInfo} />}
 
-          <Divider margin="15px auto -3px" />
+            <Divider margin="15px auto -3px" />
 
-          <Progress
-            isDoneWithProgressBar={isDoneWithProgressBar}
-            setIsDoneWithProgressBar={setIsDoneWithProgressBar}
-            hasProcessedAll={hasProcessedAll}
-          />
-
-          {hasProcessedAll && hasOneGoodResult && (
-            <Options
-              isReady={isDoneWithProgressBar && hasOneGoodResult}
-              sortByOptions={sortByOptions}
-              setFilterOptions={setFilterOptions}
-              setSortByOptions={setSortByOptions}
+            <Progress
+              isDoneWithProgressBar={isDoneWithProgressBar}
+              setIsDoneWithProgressBar={setIsDoneWithProgressBar}
+              hasProcessedAll={hasProcessedAll}
             />
-          )}
 
-          {!hasProcessedAll && <Checking />}
+            {hasProcessedAll && hasOneGoodResult && (
+              <Options
+                isReady={isDoneWithProgressBar && hasOneGoodResult}
+                sortByOptions={sortByOptions}
+                setFilterOptions={setFilterOptions}
+                setSortByOptions={setSortByOptions}
+              />
+            )}
 
-          {!hasProcessedAll && !hasOneGoodResult && <Skeletons />}
+            {!hasProcessedAll && <Checking />}
 
-          <ResultsList
-            srcTicket={srcTicketInfo}
-            destTickets={destTickets}
-            options={{
-              filterOptions: filterOptions,
-              sortByOptions: sortByOptions,
-            }}
-            hasProcessedAll={hasProcessedAll}
-          />
-        </>
-      ) : (
-        <BestDeal setTagIsOpened={setTagIsOpened} />
-      )}
-    </AppBoxDiv>
+            {!hasProcessedAll && !hasOneGoodResult && <Skeletons />}
+
+            <ResultsList
+              srcTicket={srcTicketInfo}
+              destTickets={destTickets}
+              options={{
+                filterOptions: filterOptions,
+                sortByOptions: sortByOptions,
+              }}
+              hasProcessedAll={hasProcessedAll}
+            />
+          </>
+        ) : (
+          <BestDeal setTagIsOpened={setTagIsOpened} />
+        )}
+      </AppBoxDiv>
+    </Draggable>
   );
 }
 

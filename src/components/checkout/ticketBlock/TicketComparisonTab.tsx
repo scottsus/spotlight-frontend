@@ -21,6 +21,10 @@ export default function ComparisonTab({
   const destSection = isGA(destTicket.seatInfo.section)
     ? `GA`
     : destTicket.seatInfo.section;
+
+  const srcRow = srcSection === `GA` ? `-` : srcTicket.seatInfo.row;
+  const destRow = destSection === `GA` ? `-` : destTicket.seatInfo.row;
+
   const totalSavings =
     srcTicket.priceInfo.totalPrice - destTicket.priceInfo.totalPrice;
   return (
@@ -40,7 +44,7 @@ export default function ComparisonTab({
         <ItemRow>
           <ItemCell align="left">{getProperSiteName(srcTicket.site)}</ItemCell>
           <ItemCell align="right">{srcSection}</ItemCell>
-          <ItemCell align="right">{srcTicket.seatInfo.row}</ItemCell>
+          <ItemCell align="right">{srcRow}</ItemCell>
           <ItemCell align="right">
             ${srcTicket.priceInfo.totalPrice.toFixed(2)}
           </ItemCell>
@@ -58,13 +62,13 @@ export default function ComparisonTab({
             </SpotlightChoice>
           </ItemCell>
           <ItemCell align="right">{destSection}</ItemCell>
-          <ItemCell align="right">{destTicket.seatInfo.row}</ItemCell>
+          <ItemCell align="right">{destRow}</ItemCell>
           <ItemCell align="right">
             ${destTicket.priceInfo.totalPrice.toFixed(2)}
           </ItemCell>
         </ItemRow>
       </ComparisonTable>
-      <Divider margin="0" />
+      <Divider margin="0" width="400px" />
       <KeyVal myKey="Savings" value={totalSavings.toFixed(2)} />
     </ComparisonDiv>
   );

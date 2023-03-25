@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import DraggableButton from './DraggableButton';
 import XButton from './XButton';
 
 interface IHeader {
