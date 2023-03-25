@@ -76,7 +76,7 @@ const setReqHeaders = (srcTicketInfo: TicketInfo) => {
     // stadium: srcTicketInfo.venueInfo.stadium,
     // city: srcTicketInfo.venueInfo.city,
     // state: srcTicketInfo.venueInfo.state,
-    isTestMode: 'isTestMode',
+    // isTestMode: 'isTestMode',
   };
 
   return reqHeaders;

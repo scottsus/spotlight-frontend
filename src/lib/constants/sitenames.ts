@@ -30,6 +30,6 @@ export const getNameFromURL = (url: string) => {
 export const getProperSiteName = (siteName: string) =>
   properSiteNamesDict[siteName];
 
-export const NUM_FUNCTIONAL_SITES = siteNames.length - 3;
+export const NUM_FUNCTIONAL_SITES = siteNames.length - 1;
 
 export default siteNames;
