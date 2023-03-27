@@ -22,50 +22,48 @@ export default function MainPage({ tagIsOpened, setTagIsOpened }: IMainPage) {
   };
   useEffect(() => {
     const siteName = getNameFromURL(document.URL);
-    setWebsite(`Peruse through ${getProperSiteName(siteName)}.`);
+    setWebsite(`Browse through ${getProperSiteName(siteName)}.`);
   });
   return (
-    <Draggable>
-      <MainPageDiv isVisible={tagIsOpened}>
-        <Header setTagIsOpened={setTagIsOpened} logoMargin="10px 0 0" />
-        <Divider margin="14px 0 18px" />
-        <Steps>
-          <StepBlock
-            backgroundColor="#e7dffe"
-            stepNumber="Step 1:"
-            stepDetail={website}
-            stepImageUrl="imgs/anchor/step1.png"
-            stepImageWidth={100}
-            stepImageHeight={90}
-            stepImageMargin="0 -10px 10px 0"
-          />
+    <MainPageDiv isVisible={tagIsOpened}>
+      <Header setTagIsOpened={setTagIsOpened} logoMargin="10px 0 0" />
+      <Divider margin="14px 0 18px" />
+      <Steps>
+        <StepBlock
+          backgroundColor="#e7dffe"
+          stepNumber="Step 1:"
+          stepDetail={website}
+          stepImageUrl="imgs/anchor/step1.png"
+          stepImageWidth={110}
+          stepImageHeight={90}
+          stepImageMargin="0 -30px 18px 0"
+        />
 
-          <StepBlock
-            backgroundColor="#dcecff"
-            isRightToLeft
-            stepNumber="Step 2:"
-            stepDetail="View the best deals we find for your seat."
-            stepImageUrl="imgs/anchor/step2.png"
-            stepImageWidth={118}
-            stepImageHeight={70}
-            stepImageMargin="0"
-          />
+        <StepBlock
+          backgroundColor="#dcecff"
+          isRightToLeft
+          stepNumber="Step 2:"
+          stepDetail="We'll check for a cheaper ticket + better seat."
+          stepImageUrl="imgs/anchor/step2.png"
+          stepImageWidth={130}
+          stepImageHeight={80}
+          stepImageMargin="5px 0 0 0"
+        />
 
-          <StepBlock
-            backgroundColor="#e0ffcb"
-            stepNumber="Step 3:"
-            stepDetail="Save precious time and money."
-            stepImageUrl="imgs/anchor/step3.png"
-            stepImageWidth={58}
-            stepImageHeight={72}
-            stepImageMargin="0 10px 0 0"
-          />
-        </Steps>
-        <SeeYouButton onClick={closeTag}>
-          <ButtonText>See you at checkout!</ButtonText>
-        </SeeYouButton>
-      </MainPageDiv>
-    </Draggable>
+        <StepBlock
+          backgroundColor="#e0ffcb"
+          stepNumber="Step 3:"
+          stepDetail="Save precious time and money."
+          stepImageUrl="imgs/anchor/step3.png"
+          stepImageWidth={58}
+          stepImageHeight={72}
+          stepImageMargin="0 10px 0 0"
+        />
+      </Steps>
+      <SeeYouButton onClick={closeTag}>
+        <ButtonText>See you at checkout!</ButtonText>
+      </SeeYouButton>
+    </MainPageDiv>
   );
 }
 
@@ -131,6 +129,7 @@ function StepBlock({
             src={chrome.runtime.getURL(stepImageUrl)}
             width={stepImageWidth}
             height={stepImageHeight}
+            margin={stepImageMargin}
           />
           <TextBlock style={{ margin: '0 0 0 30px' }}>
             <StepNumber>{stepNumber}</StepNumber>

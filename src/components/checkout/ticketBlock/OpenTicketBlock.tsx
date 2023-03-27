@@ -93,7 +93,7 @@ const Header = styled.h2<{ isActive: boolean }>`
   color: ${(props) => (props.isActive ? '#4b3bff' : '#96979c')};
   margin: 0;
   :hover {
-    color: #695cff;
+    // color: #695cff;
   }
 `;
 

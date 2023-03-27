@@ -45,50 +45,48 @@ export default function AppBox({
     }
   }, [isDoneWithProgressBar, hasOneGoodResult]);
   return (
-    <Draggable>
-      <AppBoxDiv isVisible={tagIsOpened} height={height}>
-        {!isBestDeal ? (
-          <>
-            <Header setTagIsOpened={setTagIsOpened} logoMargin="8px 0 0" />
+    <AppBoxDiv isVisible={tagIsOpened} height={height}>
+      {!isBestDeal ? (
+        <>
+          <Header setTagIsOpened={setTagIsOpened} logoMargin="8px 0 0" />
 
-            {srcTicketInfo && <EventTitle ticket={srcTicketInfo} />}
+          {srcTicketInfo && <EventTitle ticket={srcTicketInfo} />}
 
-            <Divider margin="15px auto -3px" />
+          <Divider margin="15px auto -3px" />
 
-            <Progress
-              isDoneWithProgressBar={isDoneWithProgressBar}
-              setIsDoneWithProgressBar={setIsDoneWithProgressBar}
-              hasProcessedAll={hasProcessedAll}
+          <Progress
+            isDoneWithProgressBar={isDoneWithProgressBar}
+            setIsDoneWithProgressBar={setIsDoneWithProgressBar}
+            hasProcessedAll={hasProcessedAll}
+          />
+
+          {hasProcessedAll && hasOneGoodResult && (
+            <Options
+              isReady={isDoneWithProgressBar && hasOneGoodResult}
+              sortByOptions={sortByOptions}
+              setFilterOptions={setFilterOptions}
+              setSortByOptions={setSortByOptions}
             />
+          )}
 
-            {hasProcessedAll && hasOneGoodResult && (
-              <Options
-                isReady={isDoneWithProgressBar && hasOneGoodResult}
-                sortByOptions={sortByOptions}
-                setFilterOptions={setFilterOptions}
-                setSortByOptions={setSortByOptions}
-              />
-            )}
+          {!hasProcessedAll && <Checking />}
 
-            {!hasProcessedAll && <Checking />}
+          {!hasProcessedAll && !hasOneGoodResult && <Skeletons />}
 
-            {!hasProcessedAll && !hasOneGoodResult && <Skeletons />}
-
-            <ResultsList
-              srcTicket={srcTicketInfo}
-              destTickets={destTickets}
-              options={{
-                filterOptions: filterOptions,
-                sortByOptions: sortByOptions,
-              }}
-              hasProcessedAll={hasProcessedAll}
-            />
-          </>
-        ) : (
-          <BestDeal setTagIsOpened={setTagIsOpened} />
-        )}
-      </AppBoxDiv>
-    </Draggable>
+          <ResultsList
+            srcTicket={srcTicketInfo}
+            destTickets={destTickets}
+            options={{
+              filterOptions: filterOptions,
+              sortByOptions: sortByOptions,
+            }}
+            hasProcessedAll={hasProcessedAll}
+          />
+        </>
+      ) : (
+        <BestDeal setTagIsOpened={setTagIsOpened} />
+      )}
+    </AppBoxDiv>
   );
 }
 

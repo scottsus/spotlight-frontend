@@ -45,7 +45,7 @@ export default function SmallPurpleTag({
     // resetY().catch((err) => console.log(err));
 
     const timeoutId = setTimeout(() => {
-      setRight(-69);
+      setRight(-50);
     }, 1000);
 
     getY()
@@ -62,19 +62,21 @@ export default function SmallPurpleTag({
         right={right}
         isVisible={!tagIsOpened}
         whileHover={{
-          x: '-6px',
+          x: '-15px',
         }}
         onClick={onClick}
       >
-        <BaseLayer
-          src={chrome.runtime.getURL('imgs/general/small-base-layer.png')}
-          draggable={false}
-        />
-        <Dots
-          src={chrome.runtime.getURL('imgs/general/small-spotlight.svg')}
+        <SmallText
+          src={chrome.runtime.getURL(`imgs/general/small-spotlight.svg`)}
           className="smallText"
           draggable={false}
         />
+        <SecondLayer>
+          <Dots
+            src={chrome.runtime.getURL(`imgs/general/6-dots.svg`)}
+            draggable={false}
+          />
+        </SecondLayer>
       </SmallPurpleTagDiv>
     </Draggable>
   );
@@ -96,8 +98,13 @@ const SmallPurpleTagDiv = styled(motion.div)<ISmallPurpleTagDiv>`
   position: absolute;
   top: ${(props) => restrictBounds(props.top)}px;
   right: ${(props) => props.right}px;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(171.65deg, #7f33e8 -21.11%, #4b36e3 78.58%);
+  border-radius: 7px 0px 0px 7px;
   cursor: pointer;
   z-index: 100;
+
   visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
   transition: right 0.8s ease-in-out;
   filter: drop-shadow(0px 0px 13px rgba(51, 51, 51, 0.25));
@@ -109,15 +116,32 @@ const SmallPurpleTagDiv = styled(motion.div)<ISmallPurpleTagDiv>`
   }
 `;
 
-const BaseLayer = styled.img`
-  width: 80px;
+const SmallText = styled.img`
+  position: absolute;
+  top: 10.5px;
+  left: 5px;
+  width: 16px;
+  height: 60px;
+`;
+
+const SecondLayer = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px;
   height: 80px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px 0px 0px 4px;
+  display: flex;
+  align-items: center;
+  :hover {
+    background: rgba(255, 255, 255, 0.3);
+    transition: background 0.2s ease-in-out;
+  }
 `;
 
 const Dots = styled.img`
-  position: relative;
-  top: -10px;
-  left: -73.5px;
-  width: 16px;
-  height: 60px;
+  width: 8px;
+  height: 16px;
+  margin-left: 4px;
 `;

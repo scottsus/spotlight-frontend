@@ -109,7 +109,7 @@ const SuggestionBlockDiv = styled.div`
   align-items: center;
   cursor: pointer;
   :hover {
-    background-color: #ebe9ff;
+    background-color: #f4f3ff;
   }
 `;
 
@@ -212,36 +212,6 @@ function OpenSuggestionBlock({
       </TicketsAvailable>
       <Carousell>
         <WebsiteButton
-          logoUrl="imgs/websiteButtons/stubhub.png"
-          logoWidth={68}
-          logoHeight={32}
-          backgroundColor="#3f1d75"
-          hoverColor="#2D1356"
-          startingPrice={68}
-          ticketHref={ticketHrefs[0]}
-          minPrice={minPrices[0]}
-        />
-        <WebsiteButton
-          logoUrl="imgs/websiteButtons/gametime.png"
-          logoWidth={72}
-          logoHeight={13}
-          backgroundColor="#19ce85"
-          hoverColor="#11AF6F"
-          startingPrice={150}
-          ticketHref={ticketHrefs[1]}
-          minPrice={minPrices[1]}
-        />
-        <WebsiteButton
-          logoUrl="imgs/websiteButtons/seatgeek.png"
-          logoWidth={38}
-          logoHeight={27}
-          backgroundColor="#ff5b49"
-          hoverColor="#C33C2D"
-          startingPrice={102}
-          ticketHref={ticketHrefs[2]}
-          minPrice={minPrices[2]}
-        />
-        <WebsiteButton
           logoUrl="imgs/websiteButtons/ticketmaster.png"
           logoWidth={90}
           logoHeight={13}
@@ -252,14 +222,14 @@ function OpenSuggestionBlock({
           minPrice={minPrices[3]}
         />
         <WebsiteButton
-          logoUrl="imgs/websiteButtons/tickpick.png"
-          logoWidth={80}
-          logoHeight={17}
-          backgroundColor="#2E90FF"
-          hoverColor="#2470C6"
+          logoUrl="imgs/websiteButtons/axs.png"
+          logoWidth={47}
+          logoHeight={20}
+          backgroundColor="#0855A2"
+          hoverColor="#0B4580"
           startingPrice={102}
-          ticketHref={ticketHrefs[4]}
-          minPrice={minPrices[4]}
+          ticketHref={ticketHrefs[6]}
+          minPrice={minPrices[6]}
         />
         <WebsiteButton
           logoUrl="imgs/websiteButtons/vividseats.png"
@@ -272,15 +242,46 @@ function OpenSuggestionBlock({
           minPrice={minPrices[5]}
         />
         <WebsiteButton
-          logoUrl="imgs/websiteButtons/axs.png"
-          logoWidth={47}
-          logoHeight={20}
-          backgroundColor="#0855A2"
-          hoverColor="#0B4580"
-          startingPrice={102}
-          ticketHref={ticketHrefs[6]}
-          minPrice={minPrices[6]}
+          logoUrl="imgs/websiteButtons/stubhub.png"
+          logoWidth={68}
+          logoHeight={32}
+          backgroundColor="#3f1d75"
+          hoverColor="#2D1553"
+          startingPrice={68}
+          ticketHref={ticketHrefs[0]}
+          minPrice={minPrices[0]}
         />
+        <WebsiteButton
+          logoUrl="imgs/websiteButtons/seatgeek.png"
+          logoWidth={38}
+          logoHeight={27}
+          backgroundColor="#ff5b49"
+          hoverColor="#DF4939"
+          startingPrice={102}
+          ticketHref={ticketHrefs[2]}
+          minPrice={minPrices[2]}
+        />
+        <WebsiteButton
+          logoUrl="imgs/websiteButtons/gametime.png"
+          logoWidth={72}
+          logoHeight={13}
+          backgroundColor="#19ce85"
+          hoverColor="#12B070"
+          startingPrice={150}
+          ticketHref={ticketHrefs[1]}
+          minPrice={minPrices[1]}
+        />
+        <WebsiteButton
+          logoUrl="imgs/websiteButtons/tickpick.png"
+          logoWidth={80}
+          logoHeight={17}
+          backgroundColor="#2E90FF"
+          hoverColor="#2470C6"
+          startingPrice={102}
+          ticketHref={ticketHrefs[4]}
+          minPrice={minPrices[4]}
+        />
+
         <WebsiteButton
           logoUrl="imgs/websiteButtons/ticketiq.png"
           logoWidth={68}

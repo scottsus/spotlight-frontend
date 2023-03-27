@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "Spotlight",
-  "description": "Aggregating stadium tickets across your favorite ticket platforms",
+  "name": "Spotlight: Ticket Price Comparison",
+  "description": "The best event tickets, every single time.",
   "version": "1.1.0",
   "icons": {
     "16": "spotlight.png",
@@ -18,14 +18,19 @@
   "content_scripts": [
     {
       "matches": [
+        "*://www.axs.com/",
         "*://seatgeek.com/",
         "*://www.stubhub.com/",
+        "*://gametime.co/",
+        "*://www.ticketiq.com/",
         "*://www.ticketmaster.com/",
         "*://www.tickpick.com/",
         "*://www.vividseats.com/",
 
+        "*://www.axs.com/events/*",
         "*://seatgeek.com/*-tickets/*",
         "*://www.stubhub.com/*/event/*",
+        "*://www.ticketiq.com/buy-*",
         "*://www.ticketmaster.com/event/*",
         "*://www.ticketmaster.com/*/event/*",
         "*://www.tickpick.com/buy*/*",

@@ -53,7 +53,7 @@ const TicketBlockDiv = styled.div`
   align-items: center;
   cursor: pointer;
   :hover {
-    background-color: #ebe9ff;
+    background-color: #f4f3ff;
   }
 `;
 
