@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Spotlight: Ticket Price Comparison",
   "description": "The best event tickets, every single time.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "icons": {
     "16": "spotlight.png",
     "48": "spotlight.png",
